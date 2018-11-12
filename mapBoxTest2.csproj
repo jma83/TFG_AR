@@ -865,6 +865,9 @@
     <Compile Include="Assets\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\World\UIManager.cs" />
+    <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
+    <Compile Include="Assets\Utilities\ARGameConstants.cs" />
+    <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\DroidFactory.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
   </ItemGroup>
