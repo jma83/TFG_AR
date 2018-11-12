@@ -862,8 +862,11 @@
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\ARUserAnchor.cs" />
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\UnityARSessionNativeInterface.cs" />
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
+    <Compile Include="Assets\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\World\UIManager.cs" />
+    <Compile Include="Assets\Utilities\DroidFactory.cs" />
+    <Compile Include="Assets\Utilities\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Materials\AREdgeDetectionBackground.shader" />

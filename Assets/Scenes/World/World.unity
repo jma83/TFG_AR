@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43632972, g: 0.47471184, b: 0.5147129, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -372,7 +372,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -405,13 +405,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 170076733}
-  m_LocalRotation: {x: 0.084186025, y: -0.25783414, z: 0.022557573, w: 0.9622502}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 25.7, z: -11.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 10, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &204525708
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,15 +510,15 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 9faae94b9d4e149c9ac9260d90ba1dfc, type: 2}
     - target: {fileID: 400190, guid: 12305b5a07deb4a7c9df937e40395def, type: 3}
       propertyPath: m_LocalScale.x
-      value: 14
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 400190, guid: 12305b5a07deb4a7c9df937e40395def, type: 3}
       propertyPath: m_LocalScale.y
-      value: 14
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 400190, guid: 12305b5a07deb4a7c9df937e40395def, type: 3}
       propertyPath: m_LocalScale.z
-      value: 14
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 100190, guid: 12305b5a07deb4a7c9df937e40395def, type: 3}
       propertyPath: m_Name
@@ -725,7 +725,7 @@ MonoBehaviour:
   _subtractUserHeading: 0
   _rotationFollowFactor: 2
   _rotateZ: 0
-  _useNegativeAngle: 0
+  _useNegativeAngle: 1
   _useTransformLocationProvider: 0
 --- !u!114 &528008491
 MonoBehaviour:
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xp: 0
-  requireXp: 100
+  requiredXp: 100
   levelBase: 100
   droids: []
 --- !u!1 &534669902
@@ -763,6 +763,7 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -824,12 +825,19 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.44314942, y: 0, z: 0, w: 0.8964478}
-  m_LocalPosition: {x: 0, y: 0.95, z: -0.65}
+  m_LocalPosition: {x: 0, y: 1.08, z: -0.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 528008489}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 52.61, y: 0, z: 0}
+--- !u!124 &534669906
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
 --- !u!1 &612976289
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +904,7 @@ MonoBehaviour:
         isActive: 1
         layerSource:
           Name: Streets
-          Id: mapbox://styles/xivi14/cjo3cmnn249fm2snnrjh28u4i
+          Id: mapbox://styles/xivi14/cjod9uoat09ag2rqsr14hl3e1
           Modified: 
           UserName: 
       rasterOptions:
