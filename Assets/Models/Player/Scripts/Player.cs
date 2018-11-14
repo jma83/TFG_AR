@@ -26,6 +26,11 @@ public class Player : MonoBehaviour {
     {
         get { return droids; }
     }
+
+    public int Lvl
+    {
+        get{ return lvl; }
+    }
     private void Start () {
         InitLevelData();
 	}

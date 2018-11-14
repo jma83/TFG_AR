@@ -869,6 +869,7 @@
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\DroidFactory.cs" />
+    <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>

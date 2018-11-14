@@ -17,13 +17,19 @@ public class UIManager : MonoBehaviour {
         Assert.IsNotNull(menu);
     }
 
-    public void updateLevel(int level) {
-        levelText.text = level.ToString();
+    private void Update()
+    {
+        updateLevel();
+        updateXP();
     }
 
-    public void updateXP(int currentXP, int requiredXP)
+    public void updateLevel() {
+        levelText.text = GameManager.Instance.CurrentPlayer.Lvl.ToString();
+    }
+
+    public void updateXP()
     {
-        xpText.text = currentXP.ToString() + " / " + requiredXP.ToString();
+        xpText.text = GameManager.Instance.CurrentPlayer.Xp + " / " + GameManager.Instance.CurrentPlayer.RequiredXp;
 
     }
 
