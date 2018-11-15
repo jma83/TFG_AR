@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
     private void Start () {
         InitLevelData();
 	}
-    public void addXp(int xp)
+    public void AddXp(int xp)
     {
         this.xp = Mathf.Max(0,xp);
     }
