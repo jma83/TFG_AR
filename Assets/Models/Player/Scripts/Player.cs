@@ -36,7 +36,11 @@ public class Player : MonoBehaviour {
 	}
     public void AddXp(int xp)
     {
-        this.xp = Mathf.Max(0,xp);
+        this.xp += Mathf.Max(0,xp);
+        if (this.xp >= 100){
+            this.xp = 0;
+            lvl++;
+        }
     }
     public void Adddroid(GameObject droid)
     {
