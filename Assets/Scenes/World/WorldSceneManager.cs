@@ -8,7 +8,7 @@ public class WorldSceneManager : ARGameSceneManager {
     // Use this for initialization
     void Start()
     {
-
+        Screen.orientation = ScreenOrientation.Portrait;
     }
 
     // Update is called once per frame

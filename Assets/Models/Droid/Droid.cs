@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class Droid : MonoBehaviour {
 
@@ -61,6 +62,7 @@ public class Droid : MonoBehaviour {
             if (scenemanager1.gameObject.activeSelf)
             {
                 scenemanager1.droidTapped(this.gameObject);
+                SceneManager.LoadScene("FightScene");
             }
         }
     }

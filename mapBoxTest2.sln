@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapBoxTest2", "mapBoxTest2.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TextMeshPro", "Unity.TextMeshPro.csproj", "{07A21C90-D344-AE1A-8456-9910C203B41A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapBoxTest2.Plugins", "mapBoxTest2.Plugins.csproj", "{3D21477C-96C5-37CE-DED1-624EC74EC73A}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapBoxTest2.Editor", "mapBoxTest2.Editor.csproj", "{EEF93AC7-F915-D26B-82BA-1502ECBC6B06}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.PackageManagerUI.Editor", "Unity.PackageManagerUI.Editor.csproj", "{6877705C-FBD9-0C4F-5AFB-6FB431E5D39D}"
@@ -27,6 +29,10 @@ Global
 		{07A21C90-D344-AE1A-8456-9910C203B41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07A21C90-D344-AE1A-8456-9910C203B41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07A21C90-D344-AE1A-8456-9910C203B41A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D21477C-96C5-37CE-DED1-624EC74EC73A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D21477C-96C5-37CE-DED1-624EC74EC73A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D21477C-96C5-37CE-DED1-624EC74EC73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D21477C-96C5-37CE-DED1-624EC74EC73A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEF93AC7-F915-D26B-82BA-1502ECBC6B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEF93AC7-F915-D26B-82BA-1502ECBC6B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEF93AC7-F915-D26B-82BA-1502ECBC6B06}.Release|Any CPU.ActiveCfg = Release|Any CPU

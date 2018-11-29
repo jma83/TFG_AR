@@ -965,7 +965,7 @@ MonoBehaviour:
         colliderOptions:
           colliderType: 0
         materialOptions:
-          style: 1
+          style: 4
           texturingType: 0
           materials:
           - Materials:
