@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 public class webCamScript : MonoBehaviour
 {
 
     public GameObject webCameraPlane;
-    public Button fireButton;
-    private float targetTime = 0.0f;
+    //public Button fireButton;
+    //private float targetTime = 0.0f;
 
     // Use this for initialization
     void Start()
     {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        
         if (Application.isMobilePlatform)
         {
             GameObject cameraParent = new GameObject("camParent");
@@ -23,20 +23,17 @@ public class webCamScript : MonoBehaviour
 
         Input.gyro.enabled = true;
         
-        fireButton.onClick.AddListener(OnButtonDown);
+        //fireButton.onClick.AddListener(OnButtonDown);
             
 
         WebCamTexture webCameraTexture = new WebCamTexture();
         webCameraPlane.GetComponent<MeshRenderer>().material.mainTexture = webCameraTexture;
         webCameraTexture.Play();
 
-
-
-
     }
 
 
-    void OnButtonDown()
+    /*void OnButtonDown()
     {        
         if (targetTime < 1)
         {
@@ -51,14 +48,14 @@ public class webCamScript : MonoBehaviour
             targetTime = 2.0f;
         }
 
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
-        if (targetTime >= 0)
-        targetTime -= Time.deltaTime;
-        print(targetTime);
+        //if (targetTime >= 0)
+        //targetTime -= Time.deltaTime;
+        //print(targetTime);
 
         Quaternion cameraRotation = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y, -Input.gyro.attitude.z, -Input.gyro.attitude.w);
         this.transform.localRotation = cameraRotation;

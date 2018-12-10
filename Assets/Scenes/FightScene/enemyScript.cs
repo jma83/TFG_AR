@@ -5,12 +5,12 @@ using UnityEngine;
 public class enemyScript : MonoBehaviour
 {
 
-
+    private int numEnemies;
 
     // Use this for initialization
     void Start()
     {
-
+        numEnemies = GameObject.FindGameObjectsWithTag("Player").Length;
         StartCoroutine("Move");
     }
 
@@ -19,6 +19,16 @@ public class enemyScript : MonoBehaviour
     {
 
         transform.Translate(Vector3.forward * 3f * Time.deltaTime);
+    }
+
+    public int getNumEnemies()
+    {
+        return numEnemies; 
+    }
+
+    public void setNumEnemies(int i)
+    {
+        numEnemies = i;
     }
 
     IEnumerator Move()

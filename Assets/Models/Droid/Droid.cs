@@ -62,7 +62,7 @@ public class Droid : MonoBehaviour {
             if (scenemanager1.gameObject.activeSelf)
             {
                 scenemanager1.droidTapped(this.gameObject);
-                SceneManager.LoadScene("FightScene");
+                //SceneManager.LoadScene("FightScene");
             }
         }
     }

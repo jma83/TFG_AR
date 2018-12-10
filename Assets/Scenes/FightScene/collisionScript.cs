@@ -19,7 +19,6 @@ public class collisionScript : MonoBehaviour
     //for this to work both need colliders, one must have rigid body (spaceship) the other must have is trigger checked.
     void OnTriggerEnter(Collider col)
     {
-
         if (col.gameObject.tag != "bullet")
         {
             GameObject explosion = Instantiate(Resources.Load("FightScene/FlareMobile", typeof(GameObject))) as GameObject;
@@ -32,11 +31,11 @@ public class collisionScript : MonoBehaviour
 
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
-
-            GameObject enemy = Instantiate(Resources.Load("FightScene/enemy1", typeof(GameObject))) as GameObject;
+            FightSceneManager.Instance.droidTapped(null);
+            /*GameObject enemy = Instantiate(Resources.Load("FightScene/enemy1", typeof(GameObject))) as GameObject;
             GameObject enemy1 = Instantiate(Resources.Load("FightScene/enemy2", typeof(GameObject))) as GameObject;
             GameObject enemy2 = Instantiate(Resources.Load("FightScene/enemy3", typeof(GameObject))) as GameObject;
-            GameObject enemy3 = Instantiate(Resources.Load("FightScene/enemy4", typeof(GameObject))) as GameObject;
+            GameObject enemy3 = Instantiate(Resources.Load("FightScene/enemy4", typeof(GameObject))) as GameObject;*/
 
         }
         

@@ -870,8 +870,11 @@
     <Compile Include="Assets\Models\Field Objects\POI XP Bonus\FloatAndRotate.cs" />
     <Compile Include="Assets\Models\Field Objects\POI XP Bonus\XPBonus.cs" />
     <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Scenes\FightScene\bulletScript.cs" />
     <Compile Include="Assets\Scenes\FightScene\collisionScript.cs" />
     <Compile Include="Assets\Scenes\FightScene\enemyScript.cs" />
+    <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\playerScript.cs" />
     <Compile Include="Assets\Scenes\FightScene\webCamScript.cs" />
     <Compile Include="Assets\Scenes\World\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
@@ -881,6 +884,7 @@
     <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
+    <Compile Include="Assets\walkAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Materials\AREdgeDetectionBackground.shader" />
