@@ -9,7 +9,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private int levelBase = 100;
     [SerializeField] private List<GameObject> droids = new List<GameObject>();
     [SerializeField] private Animation walk;
-    private int lvl = 1;
+    private int lvl = 0;
+    private int total_xp = 0;
 
     public int Xp
     {
@@ -33,24 +34,29 @@ public class Player : MonoBehaviour {
         get{ return lvl; }
     }
     private void Start () {
-        InitLevelData();
+        InitLevelData(0);
 	}
     public void AddXp(int xp)
     {
-        this.xp += Mathf.Max(0,xp);
-        if (this.xp >= 100){
-            this.xp = 0;
-            lvl++;
+        int value= Mathf.Max(0, xp); 
+        int diff = 0;
+        this.xp += value;
+        total_xp += value;
+        if (this.xp >= requiredXp)
+        {
+            diff = this.xp - requiredXp;
+            InitLevelData(diff);
         }
     }
     public void Adddroid(GameObject droid)
     {
         droids.Add(droid);
     }
-    private void InitLevelData()
+    private void InitLevelData(int diff)
     {
-        lvl = (xp / levelBase) + 1;
+        lvl++;
         requiredXp = levelBase * lvl;
+        xp = diff;
     }
 
     private void Update()

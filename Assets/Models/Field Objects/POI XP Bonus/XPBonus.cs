@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XPBonus : MonoBehaviour {
 
-    [SerializeField] private int bonus = 10;
+    private int bonus = 40;
 
     private void OnMouseDown()
     {
