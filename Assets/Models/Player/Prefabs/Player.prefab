@@ -2897,7 +2897,7 @@ Animator:
   m_GameObject: {fileID: 1457612902752482}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 12305b5a07deb4a7c9df937e40395def, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1856e16a0bb9841098813443d55b56de, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2977,6 +2977,7 @@ MonoBehaviour:
   requiredXp: 100
   levelBase: 100
   droids: []
+  walk: {fileID: 0}
 --- !u!124 &124284674825819388
 Behaviour:
   m_ObjectHideFlags: 1

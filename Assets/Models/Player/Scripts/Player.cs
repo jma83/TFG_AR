@@ -8,7 +8,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private int requiredXp = 100;
     [SerializeField] private int levelBase = 100;
     [SerializeField] private List<GameObject> droids = new List<GameObject>();
-    [SerializeField] private Animation walk;
+    private Animator walk;
+    private Vector3 temp_pos;
     private int lvl = 0;
     private int total_xp = 0;
 
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour {
         get{ return lvl; }
     }
     private void Start () {
+        walk = this.GetComponent(typeof(Animator)) as Animator;
+        temp_pos = this.transform.position;
         InitLevelData(0);
 	}
     public void AddXp(int xp)
@@ -65,15 +68,17 @@ public class Player : MonoBehaviour {
     }
     void Walk()
     {
+
         if (transform.hasChanged)
         {
-            walk.Play();
+            walk.SetBool("walk", true);
             StartCoroutine(Wait());
         }
-        else if (!transform.hasChanged)
+        else
         {
-            walk.Stop();
+            walk.SetBool("walk", false);
         }
+        temp_pos = this.transform.position;
     }
 
     IEnumerator Wait()
