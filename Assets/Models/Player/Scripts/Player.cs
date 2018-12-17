@@ -12,7 +12,26 @@ public class Player : MonoBehaviour {
     private Vector3 temp_pos;
     private int lvl = 0;
     private int total_xp = 0;
+    private int hp = 100;
+    private int maxHp = 100;
+    private int minHp = 0;
+    private float captureRange = 0.5f;
+    private GameObject[] near_entities;
 
+
+    public GameObject[] NearEntities
+    {
+        get { return near_entities;  }
+        set { near_entities=value; }
+    }
+    public int Hp
+    {
+        get { return hp; }
+    }
+    public float CaptureRange
+    {
+        get { return captureRange; }
+    }
     public int Xp
     {
         get { return xp; }
@@ -61,12 +80,25 @@ public class Player : MonoBehaviour {
         requiredXp = levelBase * lvl;
         xp = diff;
     }
-
+    public void addHp(int diff)
+    {
+        if (hp < maxHp)
+            hp += diff;
+        if (hp > maxHp)
+            hp = maxHp;
+    }
+    public void substractHp(int diff)
+    {
+        if (hp > minHp)
+            hp -= diff;
+        if (hp < minHp)
+            hp = minHp;
+    }
     private void Update()
     {
         Walk();
     }
-    void Walk()
+    public void Walk()
     {
 
         if (transform.hasChanged)

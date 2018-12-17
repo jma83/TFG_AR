@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 82662985822761778}
   m_Layer: 0
   m_Name: droid2
-  m_TagString: Untagged
+  m_TagString: droid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

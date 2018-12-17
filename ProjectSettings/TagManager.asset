@@ -6,6 +6,8 @@ TagManager:
   tags:
   - bullet
   - camera
+  - player_range
+  - droid
   layers:
   - Default
   - TransparentFX

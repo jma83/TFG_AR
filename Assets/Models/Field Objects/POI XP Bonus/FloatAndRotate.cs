@@ -12,14 +12,21 @@ public class FloatAndRotate : MonoBehaviour {
 
     void Start()
     {
-        startPos = transform.position;    
+        startPos = transform.position;
     }
 
     // Update is called once per frame
     void Update () {
-        transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
-        Vector3 tempPos = startPos;
-        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * floatFrequency) * floatAmplitude;
-        transform.position = tempPos;
+        if (gameObject !=null && transform != null)
+        {
+            transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
+            Vector3 tempPos = startPos;
+            tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * floatFrequency) * floatAmplitude;
+            transform.position = tempPos;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 	}
 }

@@ -331,6 +331,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CameraMovement.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -869,6 +870,7 @@
     <Compile Include="Assets\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Models\Field Objects\POI XP Bonus\FloatAndRotate.cs" />
     <Compile Include="Assets\Models\Field Objects\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\FightScene\bulletScript.cs" />
     <Compile Include="Assets\Scenes\FightScene\collisionScript.cs" />
@@ -884,7 +886,6 @@
     <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
-    <Compile Include="Assets\walkAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Materials\AREdgeDetectionBackground.shader" />
