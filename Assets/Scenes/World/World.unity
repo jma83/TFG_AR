@@ -2321,7 +2321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm_obj: {fileID: 707507772}
-  player1: {fileID: 2082388630}
 --- !u!1 &1156479005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,11 +3342,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 210, y: 25}
   m_Pivot: {x: 0, y: 0.5}
---- !u!1 &2082388630 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1457612902752482, guid: 8d7b068c721ff3041acd8b65bf827a86,
-    type: 2}
-  m_PrefabInternal: {fileID: 208558641}
 --- !u!1 &2087820236
 GameObject:
   m_ObjectHideFlags: 0
