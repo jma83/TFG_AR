@@ -331,7 +331,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CameraMovement.cs" />
+    <Compile Include="Assets\FreeCameraMovement.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -882,6 +882,7 @@
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
+    <Compile Include="Assets\Utilities\CameraMovement.cs" />
     <Compile Include="Assets\Utilities\DroidFactory.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
