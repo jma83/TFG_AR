@@ -1,23 +1,21 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XPBonus : MonoBehaviour {
+public class XPBonus : MapEntity {
 
     private int bonus = 40;
     [SerializeField] private float rotateSpeed = 50f;
     [SerializeField] private float floatAmplitude = 1f;
     [SerializeField] private float floatFrequency = 1f;
 
-    private Vector3 startPos;
+    private Vector3 startPos;   
     Renderer rend;
 
     void Start()
     {
         startPos = transform.position;
         rend = GetComponent<Renderer>();
-
-        //DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -38,9 +36,11 @@ public class XPBonus : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        GameManager.Instance.CurrentPlayer.AddXp(bonus);
-        this.enabled = false;
-        rend.enabled = false;
-
+        if (captureRange)
+        {
+            GameManager.Instance.CurrentPlayer.AddXp(bonus);
+            this.enabled = false;
+            rend.enabled = false;
+        }
     }
 }

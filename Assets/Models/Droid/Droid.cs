@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
-public class Droid : MonoBehaviour {
+public class Droid : MapEntity {
 
     [SerializeField] private float spawnRate = 0.10f;
     //[SerializeField] private float catchRate = 0.10f;
@@ -56,12 +56,15 @@ public class Droid : MonoBehaviour {
     {
         ARGameSceneManager[] managers = FindObjectsOfType<ARGameSceneManager>();
 
-        audioSource.PlayOneShot(enemySound);
         foreach (ARGameSceneManager scenemanager1 in managers)
         {
             if (scenemanager1.gameObject.activeSelf)
             {
-                scenemanager1.droidTapped(this.gameObject);
+                if (captureRange)
+                {
+                    audioSource.PlayOneShot(enemySound);
+                    scenemanager1.droidTapped(this.gameObject);
+                }
                 //SceneManager.LoadScene("FightScene");
             }
         }

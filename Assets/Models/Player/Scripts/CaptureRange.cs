@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,20 +41,30 @@ public class CaptureRange : MonoBehaviour {
     //collision manager
     public void OnTriggerEnter(Collider col)
     {
+        //print(droids.Length);
         if (col.gameObject.tag == "droid")
         {
-            print("droiddeeee");
-            foreach (GameObject gm_obj in GameManager.Instance.CurrentPlayer.NearEntities)
-            {
-                if (gm_obj!= col.gameObject)
-                {
+            Droid[] droids = FindObjectsOfType<Droid>();
 
+            foreach (Droid d in droids)
+            {
+                if (d.gameObject == col.gameObject)
+                {
+                    d.setCaptureRange(true);
                 }
             }
         }
-        else
+        else if (col.gameObject.tag == "item")
         {
+            XPBonus[] item = FindObjectsOfType<XPBonus>();
 
+            foreach (XPBonus xp in item)
+            {
+                if (xp.gameObject == col.gameObject)
+                {
+                    xp.setCaptureRange(true);
+                }
+            }
         }
     }
 }
