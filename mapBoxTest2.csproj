@@ -868,8 +868,8 @@
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\UnityARSessionNativeInterface.cs" />
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
     <Compile Include="Assets\Models\Droid\Droid.cs" />
-    <Compile Include="Assets\Models\Field Objects\POI XP Bonus\FloatAndRotate.cs" />
     <Compile Include="Assets\Models\Field Objects\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Models\MapEntity.cs" />
     <Compile Include="Assets\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\FightScene\bulletScript.cs" />
