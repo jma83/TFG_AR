@@ -12,7 +12,7 @@ public class playerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        bullet = new bulletScript();
+        bullet = gameObject.AddComponent(typeof(bulletScript)) as bulletScript;
         fireButton.onClick.AddListener(Attack);
         targetTime = 0.0f;
     }
