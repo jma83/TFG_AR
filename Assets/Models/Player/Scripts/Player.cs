@@ -16,14 +16,9 @@ public class Player : MonoBehaviour {
     private int maxHp = 100;
     private int minHp = 0;
     private float captureRange = 0.5f;
-    private GameObject[] near_entities;
+    protected float targetTime =0;
 
 
-    public GameObject[] NearEntities
-    {
-        get { return near_entities;  }
-        set { near_entities=value; }
-    }
     public int Hp
     {
         get { return hp; }
@@ -55,7 +50,7 @@ public class Player : MonoBehaviour {
     }
     private void Start () {
         walk = this.GetComponent(typeof(Animator)) as Animator;
-        temp_pos = this.transform.position;
+        temp_pos = Vector3.zero;
         InitLevelData(0);
 	}
     public void AddXp(int xp)
@@ -94,14 +89,27 @@ public class Player : MonoBehaviour {
         if (hp < minHp)
             hp = minHp;
     }
+
     private void Update()
     {
         Walk();
+        
+    }
+
+    public void playerTimer()
+    {
+        if (targetTime > 0)
+            targetTime -= Time.deltaTime;
+        if (targetTime <= 0)
+        {
+            temp_pos = transform.localPosition;
+            targetTime = 1;
+        }
     }
     public void Walk()
     {
-
-        if (transform.hasChanged)
+        
+        if (temp_pos != transform.localPosition)
         {
             walk.SetBool("walk", true);
             StartCoroutine(Wait());
@@ -110,7 +118,7 @@ public class Player : MonoBehaviour {
         {
             walk.SetBool("walk", false);
         }
-        temp_pos = this.transform.position;
+        
     }
 
     IEnumerator Wait()

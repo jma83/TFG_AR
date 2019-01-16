@@ -1718,7 +1718,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1994053435048394, guid: 03b35b9f23c20854a98bcc49690d8965, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 135461854556549134, guid: 03b35b9f23c20854a98bcc49690d8965,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b35b9f23c20854a98bcc49690d8965, type: 2}
@@ -2636,12 +2641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b73d0334eb0dc4794996ed031366b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstPoint: {x: 0, y: 0, z: 0}
-  SecondPoint: {x: 0, y: 0, z: 0}
-  xAngle: 0
-  yAngle: 0
-  xAngleTemp: 0
-  yAngleTemp: 0
 --- !u!1 &711564876
 GameObject:
   m_ObjectHideFlags: 0
