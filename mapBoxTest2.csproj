@@ -877,6 +877,7 @@
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\playerScript.cs" />
     <Compile Include="Assets\Scenes\FightScene\webCamScript.cs" />
+    <Compile Include="Assets\Scenes\World\Inventory.cs" />
     <Compile Include="Assets\Scenes\World\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
