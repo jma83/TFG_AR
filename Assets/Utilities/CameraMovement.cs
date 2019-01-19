@@ -7,17 +7,10 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private GameObject gm_obj;
     private Player player1;
-    private Transform t;
     private bool parentPlayer = true;
-    private Vector3 offset;
     private Vector3 defaultCameraPos;
     private Quaternion defaultCameraRot;
-    Vector3 FirstPoint;
-    Vector3 SecondPoint;
-    float xAngle = 0;
-    float yAngle = 0;
-    float xAngleTemp;
-    float yAngleTemp;
+
     private Transform target;
     public Vector3 targetOffset;
     public float distanceI = 0.0f;
@@ -58,8 +51,6 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         player1 = GameManager.Instance.CurrentPlayer;
-        t = player1.gameObject.transform;
-        offset = transform.position - player1.transform.position;
         gm_obj.transform.position = player1.transform.position;
         defaultCameraPos = transform.localPosition;
         defaultCameraRot = transform.localRotation;
@@ -90,43 +81,6 @@ public class CameraMovement : MonoBehaviour
     void LateUpdate()
     {
 
-        /*if (parentPlayer == false)
-        {
-            
-            //transform.LookAt(player1.gameObject.transform);
-            
-
-            if (Input.touchCount > 0)
-            {
-                //print("hola");
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
-                {
-                    FirstPoint = Input.GetTouch(0).position;
-                    xAngleTemp = xAngle;
-                    yAngleTemp = yAngle;
-                    //print("hola2");
-                }
-                if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                {
-                    SecondPoint = Input.GetTouch(0).position;
-                    xAngle = xAngleTemp + (SecondPoint.x - FirstPoint.x) * 180 / Screen.width;
-                    yAngle = yAngleTemp + (SecondPoint.y - FirstPoint.y) * 90 / Screen.height;
-
-                    Vector3 tmp;
-                    tmp.x = (Mathf.Cos(xAngle * (Mathf.PI / 180)) * Mathf.Sin(yAngle * (Mathf.PI / 180)) * offset.x + player1.transform.position.x);
-                    tmp.z = (Mathf.Sin(xAngle * (Mathf.PI / 180)) * Mathf.Sin(yAngle * (Mathf.PI / 180)) * offset.z + player1.transform.position.z);
-                    tmp.y = Mathf.Sin(yAngle * (Mathf.PI / 180)) * offset.y + player1.transform.position.y;
-                    transform.position = Vector3.Slerp(transform.position, tmp, 1 * Time.deltaTime);
-                    //print("hola3");
-                }
-            }
-            else
-            {
-                gm_obj.transform.position = player1.transform.position + offset;
-            }
-            transform.LookAt(player1.gameObject.transform);
-
-        }*/
 
         if (Input.touchCount == 2)
         {

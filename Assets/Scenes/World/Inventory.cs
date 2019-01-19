@@ -2,26 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : Singleton <Inventory> {
 
-    [SerializeField] private GameObject slotContainer;
+    private List<Item> items = new List<Item>();
+    private int space = 26;
 
-    private bool inventoyEnabled;
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallback;
+    public bool modified = false;
 
-    private int allSlots;
-    private int enabledSlots;
-    private GameObject[] slot;
-
-    
-
-    public void Start()
+    public bool AddItem(Item item)
     {
-        allSlots = 24;
-        slot = new GameObject[allSlots];
-        for (int i = 0; i < allSlots; i++)
+        if (space > items.Count)
         {
-            slot[i] = slotContainer.transform.GetChild(i).gameObject;
+            items.Add(item);
+            modified = true;
+
+            if (onItemChangedCallback != null)
+            {
+                Debug.Log("Inventory = onItemChangedCallback");
+                onItemChangedCallback.Invoke();
+            }
+            return true;
         }
+        else
+        {
+            print("Your inventory is full!");
+        }
+        return false;
+    }
+
+    public void RemoveItem(Item item)
+    {
+        modified = true;
+        items.Remove(item);
+    }
+
+    public List<Item> getItems()
+    {
+        return items;
     }
 
 }

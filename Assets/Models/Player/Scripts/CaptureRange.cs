@@ -67,4 +67,14 @@ public class CaptureRange : MonoBehaviour {
             }
         }
     }
+
+    public void DisbleCaptureRange(bool b)
+    {
+        MapEntity[] mapEntities = FindObjectsOfType<MapEntity>();
+
+        foreach (MapEntity m in mapEntities)
+        {
+            m.setCaptureRange(b);        
+        }
+    }
 }

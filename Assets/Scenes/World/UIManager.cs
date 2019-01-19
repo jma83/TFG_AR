@@ -15,15 +15,14 @@ public class UIManager : MonoBehaviour {
     private Button[] menu_sections;
     [SerializeField] private AudioClip menuButtonSound;
     [SerializeField] private GameObject inventory;
+    [SerializeField] private Toggle toggle;
 
     private AudioSource audioSource;
     private int menuSectionCont=3;
-    private bool check = false;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-
         Assert.IsNotNull(hpText);
         Assert.IsNotNull(xpText);
         Assert.IsNotNull(levelText);
@@ -44,7 +43,6 @@ public class UIManager : MonoBehaviour {
         updateLevel();
         updateXP();
         updateHP();
-        check = false;
         //menu_sections[0].onClick.AddListener(toggleInventory);
         //menu_sections[0].onClick.AddListener(toggleMenu);
     }
@@ -84,8 +82,11 @@ public class UIManager : MonoBehaviour {
     {
 
         inventory.SetActive(!inventory.activeSelf);
-        check = true;
     }
+    public void toggleCapture()
+    {
+        GameManager.Instance.CurrentPlayer.captureRangeObj.DisbleCaptureRange(!toggle.isOn);
 
+    }
 
 }

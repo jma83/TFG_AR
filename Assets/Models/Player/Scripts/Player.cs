@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     private int minHp = 0;
     private float captureRange = 0.5f;
     protected float targetTime =0;
+    public CaptureRange captureRangeObj;
 
 
     public int Hp
