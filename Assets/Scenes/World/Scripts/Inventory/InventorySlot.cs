@@ -7,6 +7,7 @@ public class InventorySlot : MonoBehaviour {
 
 
     Item item;
+    Equipment equipment;
     [SerializeField] Image icon;
 
 
@@ -17,7 +18,15 @@ public class InventorySlot : MonoBehaviour {
         icon.enabled = true;
         icon.gameObject.SetActive(icon.enabled);
     }
-	
+
+    public void AddEquipment(Equipment i)
+    {
+        equipment = i;
+        icon.sprite = equipment.icon;
+        icon.enabled = true;
+        icon.gameObject.SetActive(icon.enabled);
+    }
+
     public void ClearSlot()
     {
         item = null;

@@ -24,7 +24,7 @@ public class Droid : MapEntity {
     }
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     public float SpawnRate

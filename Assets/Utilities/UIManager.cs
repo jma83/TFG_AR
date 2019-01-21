@@ -15,27 +15,36 @@ public class UIManager : MonoBehaviour {
     private Button[] menu_sections;
     [SerializeField] private AudioClip menuButtonSound;
     [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject slotContainer;
     [SerializeField] private Toggle toggle;
-
+    [SerializeField] private Toggle armas;
+    [SerializeField] private Toggle objetos;
+    private InventoryUI InvUI;
+    private Inventory Inv;
+    private int switchInventory = 0;
     private AudioSource audioSource;
     private int menuSectionCont=3;
 
-    private void Awake()
+    private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        Inv = Inventory.Instance;
+        inventory.SetActive(true);
+        InvUI = slotContainer.GetComponent<InventoryUI>();
+        InvUI.Start();
+        inventory.SetActive(false);
+
+
+    }
+
+    private void Awake()
+    {
         Assert.IsNotNull(hpText);
         Assert.IsNotNull(xpText);
         Assert.IsNotNull(levelText);
         Assert.IsNotNull(menu);
         Assert.IsNotNull(menuButtonSound);
 
-        menuSectionCont = menu.transform.childCount;
-        menu_sections = new Button[menuSectionCont];
-
-        for (int i = 0; i < menuSectionCont; i++)
-        {
-            menu_sections[i] = menu.transform.GetChild(i).gameObject.GetComponent<Button>();
-        }
     }
 
     private void Update()
@@ -43,8 +52,8 @@ public class UIManager : MonoBehaviour {
         updateLevel();
         updateXP();
         updateHP();
-        //menu_sections[0].onClick.AddListener(toggleInventory);
-        //menu_sections[0].onClick.AddListener(toggleMenu);
+        if (Inv.modified == true && InvUI!=null) InvUI.UpdateUI();
+        
     }
 
     public void updateLevel() {
@@ -80,8 +89,12 @@ public class UIManager : MonoBehaviour {
     }
     private void toggleInventory()
     {
-
         inventory.SetActive(!inventory.activeSelf);
+        objetos.GetComponentInChildren<Image>().enabled = false;
+        armas.GetComponentInChildren<Image>().enabled = true;
+        InvUI.SwitchUI(0);
+
+
     }
     public void toggleCapture()
     {
@@ -89,4 +102,24 @@ public class UIManager : MonoBehaviour {
 
     }
 
+    public void InventorySectionClick(int b)
+    {
+        if (b == 2)
+        {
+            objetos.GetComponentInChildren<Image>().enabled = true;
+            armas.GetComponentInChildren<Image>().enabled = false;
+
+
+        }
+        else
+        {
+            objetos.GetComponentInChildren<Image>().enabled = true;
+            armas.GetComponentInChildren<Image>().enabled = false;
+
+        }
+
+        InvUI.SwitchUI(b);
+    }
+
+     
 }

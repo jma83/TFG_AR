@@ -5,10 +5,13 @@ using UnityEngine;
 public class Inventory : Singleton <Inventory> {
 
     private List<Item> items = new List<Item>();
+    private List<Equipment> equipment = new List<Equipment>();
     private int space = 26;
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
+    public delegate void OnEquipChanged();
+    public OnEquipChanged onEquipChangedCallback;
     public bool modified = false;
 
     public bool AddItem(Item item)
@@ -27,7 +30,27 @@ public class Inventory : Singleton <Inventory> {
         }
         else
         {
-            print("Your inventory is full!");
+            Debug.Log("Your inventory is full!");
+        }
+        return false;
+    }
+    public bool AddEquipment(Equipment equip)
+    {
+        if (space > equipment.Count)
+        {
+            equipment.Add(equip);
+            modified = true;
+
+            if (onEquipChangedCallback != null)
+            {
+                Debug.Log("Inventory = onEquipChangedCallback");
+                onEquipChangedCallback.Invoke();
+            }
+            return true;
+        }
+        else
+        {
+            Debug.Log("Your inventory is full!");
         }
         return false;
     }
@@ -43,4 +66,8 @@ public class Inventory : Singleton <Inventory> {
         return items;
     }
 
+    public List<Equipment> getEquipment()
+    {
+        return equipment;
+    }
 }

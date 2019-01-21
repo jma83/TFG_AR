@@ -5,9 +5,10 @@ using UnityEngine;
 public class ItemPickup : MapEntity {
 
     [SerializeField] Item item;
+    [SerializeField] Equipment equip;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -24,7 +25,12 @@ public class ItemPickup : MapEntity {
     {
         Debug.Log("PickUp");
         PickUpObj();
-        return Inventory.Instance.AddItem(item);
+        if (item != null)
+            return Inventory.Instance.AddItem(item);
+        else if (equip != null)
+            return Inventory.Instance.AddEquipment(equip);
+
+        return false;
     }
     protected virtual void PickUpObj()
     {
