@@ -35,7 +35,7 @@ public class XPBonus : ItemPickup {
         }
     }
 
-    protected override void PickUpObj()
+    protected override void PickUPAction()
     {
         if (captureRange)
         {

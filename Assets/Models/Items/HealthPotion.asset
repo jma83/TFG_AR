@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1d3c149bd530249824734547ae8e7b, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  name: New Item
+  name: Health
   icon: {fileID: 21300000, guid: 1cb8c49a4b4e2cc46b11eb152e838c3f, type: 3}
   isDefaultItem: 0

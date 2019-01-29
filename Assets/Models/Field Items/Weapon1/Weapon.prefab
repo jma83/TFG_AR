@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 23393661215621484}
   - component: {fileID: 102184733930975362}
   - component: {fileID: 65763346394892142}
-  - component: {fileID: 114198616852124274}
+  - component: {fileID: 114108827151610960}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: item
@@ -111,7 +111,7 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294129146
---- !u!114 &114198616852124274
+--- !u!114 &114108827151610960
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1263045041378176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5a0a50286c20a4e8119aa5d8de7135, type: 3}
+  m_Script: {fileID: 11500000, guid: 655e7be03d0bd374d9361c416793affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   equip: {fileID: 11400000, guid: bff1d655e6c986749b4468d53dc8b155, type: 2}
+  insertInventory: 1

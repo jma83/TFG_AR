@@ -870,6 +870,7 @@
     <Compile Include="Assets\Models\Equipment\Equipment.cs" />
     <Compile Include="Assets\Models\Field Items\ItemPickup.cs" />
     <Compile Include="Assets\Models\Field Items\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Models\Items\HealthPotion.cs" />
     <Compile Include="Assets\Models\Items\Item.cs" />
     <Compile Include="Assets\Models\MapEntity.cs" />
     <Compile Include="Assets\Models\Player\Scripts\CaptureRange.cs" />

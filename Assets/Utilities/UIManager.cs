@@ -98,7 +98,7 @@ public class UIManager : MonoBehaviour {
     }
     public void toggleCapture()
     {
-        GameManager.Instance.CurrentPlayer.captureRangeObj.DisbleCaptureRange(!toggle.isOn);
+        GameManager.Instance.CurrentPlayer.captureRangeObj.SetEntitiesCaptureRange(!toggle.isOn);
 
     }
 

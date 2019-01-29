@@ -50,31 +50,31 @@ public class CaptureRange : MonoBehaviour {
             {
                 if (d.gameObject == col.gameObject)
                 {
-                    d.setCaptureRange(true);
+                    d.SetCaptureRange(true);
                 }
             }
         }
         else if (col.gameObject.tag == "item")
         {
-            XPBonus[] item = FindObjectsOfType<XPBonus>();
+            ItemPickup[] item = FindObjectsOfType<ItemPickup>();
 
-            foreach (XPBonus xp in item)
+            foreach (ItemPickup i in item)
             {
-                if (xp.gameObject == col.gameObject)
+                if (i.gameObject == col.gameObject)
                 {
-                    xp.setCaptureRange(true);
+                    i.SetCaptureRange(true);
                 }
             }
         }
     }
 
-    public void DisbleCaptureRange(bool b)
+    public void SetEntitiesCaptureRange(bool b)
     {
         MapEntity[] mapEntities = FindObjectsOfType<MapEntity>();
 
         foreach (MapEntity m in mapEntities)
         {
-            m.setCaptureRange(b);        
+            m.SetFixedCaptureRange(b);        
         }
     }
 }

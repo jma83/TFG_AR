@@ -6,6 +6,7 @@ public class ItemPickup : MapEntity {
 
     [SerializeField] Item item;
     [SerializeField] Equipment equip;
+    [SerializeField] bool insertInventory; 
 
     // Use this for initialization
     void Start () {
@@ -14,25 +15,39 @@ public class ItemPickup : MapEntity {
 	
     private void OnMouseDown()
     {
+        Debug.Log("OnMouseDown");
+
         if (captureRange)
-        {          
-            if (PickUp() && gameObject.name != "XpBonus")
-                Destroy(gameObject);
+        {
+            Debug.Log("Capture range TRUE");
+
+
+            if (PickUp() && insertInventory)
+                Destroy(gameObject);           
+            else           
+                PickUPAction();
+
+        }
+        else
+        {
+            Debug.Log("Capture range false");
+
         }
     }
 
     private bool PickUp()
     {
         Debug.Log("PickUp");
-        PickUpObj();
+
         if (item != null)
             return Inventory.Instance.AddItem(item);
         else if (equip != null)
             return Inventory.Instance.AddEquipment(equip);
+        
 
         return false;
     }
-    protected virtual void PickUpObj()
+    protected virtual void PickUPAction()
     {
         //Implemented in the children
     }

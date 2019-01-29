@@ -37,6 +37,12 @@ public class InventorySlot : MonoBehaviour {
 
     }
 
+    public void UseItem()
+    {
+        item.Use();
+        Inventory.Instance.RemoveItem(item);
+    }
+
     public void EnableDelete()
     {
         //object selected to be deleted, show delete icon before it
