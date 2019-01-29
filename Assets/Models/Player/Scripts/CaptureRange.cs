@@ -6,30 +6,38 @@ public class CaptureRange : MonoBehaviour {
     private bool dir = true;
     private const float factor = 0.004f;
     private float range=0;
+    private Player player;
+    private Vector3 auxVec;
     // Use this for initialization
     void Start () {
-		
-	}
+        player = GameManager.Instance.CurrentPlayer;
+        auxVec = new Vector3();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         float aux = 0;
 
-        if (GameManager.Instance.CurrentPlayer.CaptureRange != range)
-            range = GameManager.Instance.CurrentPlayer.CaptureRange;
-
+        if (player.CaptureRange != range)
+            range = player.CaptureRange;
 
         if (dir)
-            aux = transform.localScale.x - factor;
+            auxVec.Set(-range, transform.localScale.y, -range); //aux = transform.localScale.x - factor;   
         else
-            aux = transform.localScale.x + factor;
+            auxVec.Set(range, transform.localScale.y, range); //aux = transform.localScale.x + factor;
 
-        if (transform.localScale.x <= -0.5)
+
+        
+
+
+        if (transform.localScale.x <= -(range-0.05f))
             dir = false;
-        if (transform.localScale.x >= 0.5)
+        if (transform.localScale.x >= (range-0.05f))
             dir = true;
 
-        transform.localScale = new Vector3(aux, transform.localScale.y, aux);
+        transform.localScale = Vector3.Lerp(transform.localScale, auxVec, Time.deltaTime);
+        //Debug.Log("dir: " + dir + " localscale.x: " +transform.localScale.x + " range: "+ range);
+        //transform.localScale = new Vector3(aux, transform.localScale.y, aux);
         //Wait();
     }
 

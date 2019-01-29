@@ -89,10 +89,12 @@ public class UIManager : MonoBehaviour {
     }
     private void toggleInventory()
     {
+        
         inventory.SetActive(!inventory.activeSelf);
-        objetos.GetComponentInChildren<Image>().enabled = false;
-        armas.GetComponentInChildren<Image>().enabled = true;
-        InvUI.SwitchUI(0);
+        if (objetos.GetComponentInChildren<Image>().enabled)
+            InvUI.SwitchUI(2);
+        else
+            InvUI.SwitchUI(0);
 
 
     }
@@ -113,8 +115,8 @@ public class UIManager : MonoBehaviour {
         }
         else
         {
-            objetos.GetComponentInChildren<Image>().enabled = true;
-            armas.GetComponentInChildren<Image>().enabled = false;
+            objetos.GetComponentInChildren<Image>().enabled = false;
+            armas.GetComponentInChildren<Image>().enabled = true;
 
         }
 

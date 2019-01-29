@@ -122,6 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655e7be03d0bd374d9361c416793affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4068ea1bc44519c458cd8041c47d1069, type: 2}
+  item: {fileID: 11400000, guid: ea1dd3e0f0df24e4f9d410e9e5644253, type: 2}
   equip: {fileID: 0}
   insertInventory: 1

@@ -54,6 +54,15 @@ public class Player : MonoBehaviour {
         temp_pos = Vector3.zero;
         InitLevelData(0);
 	}
+
+    public void SetMaxCaptureRange(float f)
+    {
+        if (f <= 2.0f && f > 0f)
+            captureRange = f;
+        else
+            captureRange = 0.5f;
+    }
+
     public void AddXp(int xp)
     {
         int value= Mathf.Max(0, xp); 

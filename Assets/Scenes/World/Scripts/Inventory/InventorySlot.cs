@@ -9,14 +9,23 @@ public class InventorySlot : MonoBehaviour {
     Item item;
     Equipment equipment;
     [SerializeField] Image icon;
-
+    [SerializeField] Text txt;
 
     public void AddItem(Item i)
     {
         item = i;
         icon.sprite = item.icon;
-        icon.enabled = true;
+        icon.enabled = true;       
         icon.gameObject.SetActive(icon.enabled);
+        if (txt != null)
+        {
+            if (item.GetRand() != 0)
+            {
+                txt.enabled = true;
+                txt.text = item.GetRand().ToString() + " HP";
+                txt.gameObject.SetActive(txt.enabled);
+            }
+        }
     }
 
     public void AddEquipment(Equipment i)
@@ -30,7 +39,12 @@ public class InventorySlot : MonoBehaviour {
     public void ClearSlot()
     {
         item = null;
-
+        if (txt != null)
+        {
+            txt.text = null;
+            txt.enabled = false;
+            txt.gameObject.SetActive(txt.enabled);
+        }
         icon.sprite = null;
         icon.enabled = false;
         icon.gameObject.SetActive(icon.enabled);
@@ -39,8 +53,11 @@ public class InventorySlot : MonoBehaviour {
 
     public void UseItem()
     {
-        item.Use();
-        Inventory.Instance.RemoveItem(item);
+        if (item != null)
+        {
+            item.Use();
+            Inventory.Instance.RemoveItem(item);
+        }
     }
 
     public void EnableDelete()
