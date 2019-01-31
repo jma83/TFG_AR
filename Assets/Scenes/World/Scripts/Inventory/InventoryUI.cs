@@ -53,6 +53,7 @@ public class InventoryUI : MonoBehaviour
 
         for (int i = 0; i < slots.Length; i++)
         {
+            slots[i].ClearText();
             if (i< inv.getItems().Count) { 
                 slots[i].AddItem(inv.getItems()[i]);
             }else{

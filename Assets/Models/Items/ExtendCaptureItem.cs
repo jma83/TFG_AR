@@ -9,17 +9,16 @@ public class ExtendCaptureItem : Item {
 
     private float defaultTime = 10f;
     private float targetTime;
-    private bool extendRange;
+
 	// Use this for initialization
 	void Start () {
         name = "Extend Capture Range";
         targetTime = 0;
-        extendRange = false;
     }
 
     // Update is called once per frame
-    void Update() {
-        if (extendRange)
+    public override void Update() {
+        if (active)
         {
             if (targetTime > 0)
             {
@@ -27,19 +26,27 @@ public class ExtendCaptureItem : Item {
             }
             else
             {
-                extendRange = false;
                 GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(0f);
+                active = false;
+
             }
         }
-        Debug.Log("targetTime: " + targetTime + " extendRange: "+ extendRange);
+        //Debug.Log("targetTime: " + targetTime + " extendRange: "+ active);
 
 
     }
+
+    public override void SetRand()
+    {
+        rand = 0;
+    }
+
     public override void Use()
     {
         GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(1.0f);
         targetTime = defaultTime;
-        extendRange = true;
+        active = true;
+        ItemsManager.Instance.items.Add(this);
     }
 
 

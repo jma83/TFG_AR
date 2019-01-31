@@ -40,9 +40,13 @@ public class ItemPickup : MapEntity {
         Debug.Log("PickUp");
 
         if (item != null)
+        {
             return Inventory.Instance.AddItem(item);
+        }
         else if (equip != null)
+        {
             return Inventory.Instance.AddEquipment(equip);
+        }
         
 
         return false;
