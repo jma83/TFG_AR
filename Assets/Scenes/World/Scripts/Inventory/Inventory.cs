@@ -14,11 +14,13 @@ public class Inventory : Singleton <Inventory> {
     public OnEquipChanged onEquipChangedCallback;
     public bool modified = false;
 
+
     public bool AddItem(Item item)
     {
         if (space > items.Count)
         {
-            items.Add(item);
+
+            items.Add(item); 
             modified = true;
 
             if (onItemChangedCallback != null)
@@ -60,6 +62,7 @@ public class Inventory : Singleton <Inventory> {
         modified = true;
         items.Remove(item);
     }
+
 
     public List<Item> getItems()
     {

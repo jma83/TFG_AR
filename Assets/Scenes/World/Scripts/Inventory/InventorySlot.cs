@@ -14,9 +14,13 @@ public class InventorySlot : MonoBehaviour {
     public void AddItem(Item i)
     {
         item = i;
+        item.SetRand();
+
+
         icon.sprite = item.icon;
         icon.enabled = true;       
         icon.gameObject.SetActive(icon.enabled);
+
         if (txt != null)
         {
             if (item.GetRand() != 0)
@@ -39,12 +43,12 @@ public class InventorySlot : MonoBehaviour {
     public void ClearSlot()
     {
         item = null;
-        if (txt != null)
-        {
-            txt.text = null;
-            txt.enabled = false;
-            txt.gameObject.SetActive(txt.enabled);
-        }
+
+
+        txt.text = "";
+        txt.enabled = false;
+        txt.gameObject.SetActive(txt.enabled);
+        
         icon.sprite = null;
         icon.enabled = false;
         icon.gameObject.SetActive(icon.enabled);
@@ -60,9 +64,11 @@ public class InventorySlot : MonoBehaviour {
         }
     }
 
-    public void EnableDelete()
+    public void ClearText()
     {
-        //object selected to be deleted, show delete icon before it
+        txt.text = "";
+        txt.enabled = false;
+        txt.gameObject.SetActive(txt.enabled);
     }
 
     public void OnRemoveButton()

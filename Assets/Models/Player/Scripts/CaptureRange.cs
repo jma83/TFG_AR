@@ -16,7 +16,7 @@ public class CaptureRange : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float aux = 0;
+        //float aux = 0;
 
         if (player.CaptureRange != range)
             range = player.CaptureRange;

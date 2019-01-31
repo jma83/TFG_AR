@@ -9,13 +9,30 @@ public class Item : ScriptableObject {
     public Sprite icon = null;
     public bool isDefaultItem = false;
     protected int rand=0;
+    protected bool active=false;
 
     public virtual void Use()
     {
         //Use item
     }
-    public float GetRand()
+
+    public virtual void Update()
+    {
+        //Update item
+    }
+
+    public virtual void SetRand()
+    {
+
+    }
+
+    public int GetRand()
     {
         return rand;
+    }
+
+    public bool GetActive()
+    {
+        return active;
     }
 }
