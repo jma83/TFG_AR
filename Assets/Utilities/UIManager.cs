@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour {
     {
         
         inventory.SetActive(!inventory.activeSelf);
-        if (objetos.GetComponentInChildren<Image>().enabled)
+        if (objetos.isOn)
             InvUI.SwitchUI(2);
         else
             InvUI.SwitchUI(0);

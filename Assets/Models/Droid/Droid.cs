@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class Droid : MapEntity {
@@ -54,18 +55,21 @@ public class Droid : MapEntity {
 
     private void OnMouseDown()
     {
-        ARGameSceneManager[] managers = FindObjectsOfType<ARGameSceneManager>();
-
-        foreach (ARGameSceneManager scenemanager1 in managers)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            if (scenemanager1.gameObject.activeSelf)
+            ARGameSceneManager[] managers = FindObjectsOfType<ARGameSceneManager>();
+
+            foreach (ARGameSceneManager scenemanager1 in managers)
             {
-                if (captureRange)
+                if (scenemanager1.gameObject.activeSelf)
                 {
-                    audioSource.PlayOneShot(enemySound);
-                    scenemanager1.droidTapped(this.gameObject);
+                    if (captureRange)
+                    {
+                        audioSource.PlayOneShot(enemySound);
+                        scenemanager1.droidTapped(this.gameObject);
+                    }
+                    //SceneManager.LoadScene("FightScene");
                 }
-                //SceneManager.LoadScene("FightScene");
             }
         }
     }

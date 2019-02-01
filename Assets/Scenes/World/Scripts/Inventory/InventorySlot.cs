@@ -10,6 +10,7 @@ public class InventorySlot : MonoBehaviour {
     Equipment equipment;
     [SerializeField] Image icon;
     [SerializeField] Text txt;
+    [SerializeField] Image deleteIcon;
 
     public void AddItem(Item i)
     {
@@ -55,9 +56,21 @@ public class InventorySlot : MonoBehaviour {
 
     }
 
+    public void ShowDeleteButton()
+    {
+        deleteIcon.enabled = true;
+        deleteIcon.gameObject.SetActive(deleteIcon.enabled);
+    }
+
+    public void HideDeleteButton()
+    {
+        deleteIcon.enabled = false;
+        deleteIcon.gameObject.SetActive(deleteIcon.enabled);
+    }
+
     public void UseItem()
     {
-        if (item != null)
+        if (item != null && deleteIcon.enabled==false)
         {
             item.Use();
             Inventory.Instance.RemoveItem(item);
@@ -73,6 +86,8 @@ public class InventorySlot : MonoBehaviour {
 
     public void OnRemoveButton()
     {
+        HideDeleteButton();
+        //ClearSlot();       
         Inventory.Instance.RemoveItem(item);
     }
 }

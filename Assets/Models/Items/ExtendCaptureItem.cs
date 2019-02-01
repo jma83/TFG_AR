@@ -31,7 +31,7 @@ public class ExtendCaptureItem : Item {
 
             }
         }
-        //Debug.Log("targetTime: " + targetTime + " extendRange: "+ active);
+        Debug.Log("targetTime: " + targetTime + " extendRange: "+ active);
 
 
     }

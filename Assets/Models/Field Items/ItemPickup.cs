@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ItemPickup : MapEntity {
 
@@ -15,23 +16,27 @@ public class ItemPickup : MapEntity {
 	
     private void OnMouseDown()
     {
-        Debug.Log("OnMouseDown");
-
-        if (captureRange)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("Capture range TRUE");
+
+            Debug.Log("OnMouseDown");
+
+            if (captureRange)
+            {
+                Debug.Log("Capture range TRUE");
 
 
-            if (PickUp() && insertInventory)
-                Destroy(gameObject);           
-            else           
-                PickUPAction();
+                if (PickUp() && insertInventory)
+                    Destroy(gameObject);
+                else
+                    PickUPAction();
 
-        }
-        else
-        {
-            Debug.Log("Capture range false");
+            }
+            else
+            {
+                Debug.Log("Capture range false");
 
+            }
         }
     }
 

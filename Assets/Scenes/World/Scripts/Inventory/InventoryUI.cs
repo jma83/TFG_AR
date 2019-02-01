@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -11,24 +12,27 @@ public class InventoryUI : MonoBehaviour
     private int enabledSlots;
     private InventorySlot[] slots;
     private Inventory inv;
+    [SerializeField] Toggle deleteImage;
     private int checkSwitch;
-
-
+    private bool checkSwitchDelete;
 
     public void Start()
     {
         inv = Inventory.Instance;
         inv.onItemChangedCallback += UpdateUI;
         checkSwitch = 0;
+        checkSwitchDelete = false;
         slots = transform.GetComponentsInChildren<InventorySlot>();
     }
 
     public void SwitchUI(int b)    //b == 0 || b== 1 -> equipment ;; b == 2 -> item ;; 
     {
 
-
+        turnOffDeleteImage();
         if (checkSwitch != b || b==0)
         {
+            //SwitchDeleteButtons();
+            UpdateDeleteButtons();
             checkSwitch = b;
             int size = 0;
             ClearSlots();
@@ -50,7 +54,6 @@ public class InventoryUI : MonoBehaviour
     }
     public void UpdateUI()
     {
-
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].ClearText();
@@ -61,6 +64,8 @@ public class InventoryUI : MonoBehaviour
             }
         }
         inv.modified = false;
+        UpdateDeleteButtons();
+
     }
 
     public void ClearSlots()
@@ -69,6 +74,49 @@ public class InventoryUI : MonoBehaviour
         {
             slots[i].ClearSlot();
         }
+    }
+
+    public void SwitchDeleteButtons()
+    {
+        checkSwitchDelete = !checkSwitchDelete;
+
+        UpdateDeleteButtons();
+
+
+    }
+
+    public void UpdateDeleteButtons()
+    {
+        if (checkSwitch == 2)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+
+                if (checkSwitchDelete && i < inv.getItems().Count)
+                    slots[i].ShowDeleteButton();
+                else
+                    slots[i].HideDeleteButton();
+
+                
+            }
+        }
+        else
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                
+                if (checkSwitchDelete && i < inv.getEquipment().Count)
+                    slots[i].ShowDeleteButton();
+                else
+                    slots[i].HideDeleteButton();
+                
+            }
+        }
+    }
+
+    public void turnOffDeleteImage()
+    {
+        deleteImage.isOn = false;
     }
     public int getCheckSwitch()
     {
