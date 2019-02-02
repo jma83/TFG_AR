@@ -18,6 +18,8 @@ public class Player : MonoBehaviour {
     private float captureRange = 0.5f;
     protected float targetTime =0;
     public CaptureRange captureRangeObj;
+    private int xp_multiplier = 1;
+
 
 
     public int Hp
@@ -67,13 +69,18 @@ public class Player : MonoBehaviour {
     {
         int value= Mathf.Max(0, xp); 
         int diff = 0;
-        this.xp += value;
+        this.xp += value* xp_multiplier;
         total_xp += value;
         if (this.xp >= requiredXp)
         {
             diff = this.xp - requiredXp;
             InitLevelData(diff);
         }
+    }
+
+    public void SetXpMultiplier(int x)
+    {
+        xp_multiplier = x;
     }
     public void Adddroid(GameObject droid)
     {
@@ -84,6 +91,8 @@ public class Player : MonoBehaviour {
         lvl++;
         requiredXp = levelBase * lvl;
         xp = diff;
+        if (lvl != 1)
+            WindowAlert.Instance.CreateInfoWindow("SUBES DE NIVEL!\n Nivel " + lvl,true);
     }
     public void addHp(int diff)
     {
@@ -119,7 +128,7 @@ public class Player : MonoBehaviour {
     public void Walk()
     {
         
-        if (temp_pos != transform.localPosition)
+        if (transform.hasChanged) //if (temp_pos != transform.localPosition)
         {
             walk.SetBool("walk", true);
             StartCoroutine(Wait());

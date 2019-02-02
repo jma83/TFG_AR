@@ -896,6 +896,7 @@
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
     <Compile Include="Assets\Utilities\UIManager.cs" />
+    <Compile Include="Assets\Utilities\WindowAlert.cs" />
     <Compile Include="Assets\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

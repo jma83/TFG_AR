@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class DroidFactory : Singleton<DroidFactory> {
+public class DroidFactory : MonoBehaviour {
 
     [SerializeField] private Droid[] availableDroids;
     [SerializeField] private Player player;

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: HealthItem
   m_EditorClassIdentifier: 
   name: New Item
-  icon: {fileID: 21300000, guid: 1cb8c49a4b4e2cc46b11eb152e838c3f, type: 3}
+  icon: {fileID: 21300000, guid: f6fd1323d46e5b84192508f73eec2566, type: 3}
   isDefaultItem: 0

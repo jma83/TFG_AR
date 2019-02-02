@@ -46,7 +46,7 @@ public class ExtendCaptureItem : Item {
         GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(1.0f);
         targetTime = defaultTime;
         active = true;
-        ItemsManager.Instance.items.Add(this);
+        ItemsManager.Instance.AddItem(this);
     }
 
 

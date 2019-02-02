@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d8e28e67a0d274384ef4a67c9c2d03, type: 3}
   m_Name: XPMultiplierItem
   m_EditorClassIdentifier: 
-  name: New Item
-  icon: {fileID: 0}
+  name: DoubleXP
+  icon: {fileID: 21300000, guid: 657685c49eeaf444ea6ab17edc0acec6, type: 3}
   isDefaultItem: 0
