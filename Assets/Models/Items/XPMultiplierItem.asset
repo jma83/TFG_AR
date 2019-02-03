@@ -14,3 +14,4 @@ MonoBehaviour:
   name: DoubleXP
   icon: {fileID: 21300000, guid: 657685c49eeaf444ea6ab17edc0acec6, type: 3}
   isDefaultItem: 0
+  defaultTime: 7

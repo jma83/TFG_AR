@@ -6,21 +6,15 @@ using UnityEngine;
 
 public class HealthItem : Item {
 
+    [SerializeField] private int randValue;
 	// Use this for initialization
-	void Start () {
+	public  void Start () {
         name = "HealthItem";
-    }
-    public override void Update()
-    {
-        if (active)
-        {
-            
-        }
     }
 
     public override void SetRand()
     {
-        rand = 20;//Random.Range(5, 30);
+        rand = randValue;//Random.Range(5, 30);
     }
 
     public override void Use()

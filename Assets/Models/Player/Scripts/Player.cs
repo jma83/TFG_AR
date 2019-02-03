@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
         int value= Mathf.Max(0, xp); 
         int diff = 0;
         this.xp += value* xp_multiplier;
-        total_xp += value;
+        total_xp += value* xp_multiplier;
         if (this.xp >= requiredXp)
         {
             diff = this.xp - requiredXp;

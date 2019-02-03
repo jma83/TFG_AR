@@ -7,17 +7,19 @@ using UnityEngine;
 
 public class ExtendCaptureItem : Item {
 
-    private float defaultTime = 10f;
+    [SerializeField] private float defaultTime;
     private float targetTime;
+    private bool active = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    public  void Start () {
         name = "Extend Capture Range";
         targetTime = 0;
+        defaultTime = 15;
     }
-
-    // Update is called once per frame
-    public override void Update() {
+     
+    public override void Update()
+    {
         if (active)
         {
             if (targetTime > 0)
@@ -26,19 +28,22 @@ public class ExtendCaptureItem : Item {
             }
             else
             {
-                GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(0f);
+                RestoreAction();
                 active = false;
 
             }
+            //Debug.Log("Capture Range. Target: " + targetTime + "/"+ defaultTime);
         }
-        Debug.Log("targetTime: " + targetTime + " extendRange: "+ active);
-
-
     }
 
     public override void SetRand()
     {
         rand = 0;
+    }
+
+    public override void RestoreAction()
+    {
+        GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(-1);
     }
 
     public override void Use()
@@ -49,5 +54,8 @@ public class ExtendCaptureItem : Item {
         ItemsManager.Instance.AddItem(this);
     }
 
-
+    public override bool GetActive()
+    {
+        return active;
+    }
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName ="Inventory/Item")]
-public class Item : ScriptableObject {
+abstract public class Item : ScriptableObject {
 
     new public string name = "New Item";
     public Sprite icon = null;
     public bool isDefaultItem = false;
     protected int rand=0;
-    protected bool active=false;
+
 
     public virtual void Use()
     {
@@ -18,7 +18,12 @@ public class Item : ScriptableObject {
 
     public virtual void Update()
     {
-        //Update item
+
+    }
+
+    public virtual void RestoreAction()
+    {
+        //action after update
     }
 
     public virtual void SetRand()
@@ -26,13 +31,14 @@ public class Item : ScriptableObject {
 
     }
 
-    public int GetRand()
+    public virtual int GetRand()
     {
         return rand;
+
     }
 
-    public bool GetActive()
+    public virtual bool GetActive()
     {
-        return active;
+        return false;
     }
 }

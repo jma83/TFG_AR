@@ -870,6 +870,7 @@
     <Compile Include="Assets\Models\Equipment\Equipment.cs" />
     <Compile Include="Assets\Models\Field Items\ItemPickup.cs" />
     <Compile Include="Assets\Models\Field Items\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Models\Items\BigHealthItem.cs" />
     <Compile Include="Assets\Models\Items\ExtendCaptureItem.cs" />
     <Compile Include="Assets\Models\Items\HealthItem.cs" />
     <Compile Include="Assets\Models\Items\Item.cs" />

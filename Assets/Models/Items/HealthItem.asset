@@ -14,3 +14,4 @@ MonoBehaviour:
   name: New Item
   icon: {fileID: 21300000, guid: f6fd1323d46e5b84192508f73eec2566, type: 3}
   isDefaultItem: 0
+  randValue: 20

@@ -10,17 +10,12 @@ public class ItemsManager : Singleton<ItemsManager>
     [SerializeField] GameObject activeObjects;
     private List<Image> imgs;
     private int maxSizeActive;
+    private float targetTime;
 
     // Use this for initialization
     void Start () {
         items = new List<Item>();
         
-        imgs = new List<Image>();
-        for (int i = 0; i < maxSizeActive; i++)
-        {
-            imgs.Add(activeObjects.GetComponentsInChildren<Image>()[i]);
-
-        }
         maxSizeActive = 3;
     }
 	
@@ -29,26 +24,35 @@ public class ItemsManager : Singleton<ItemsManager>
         if (items.Count > 0)
         {
             activeObjects.SetActive(true);
-            
+
 
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i].GetActive())
                 {
                     items[i].Update();
+                    //Debug.Log("Items Activos: " + items.Count);
 
                 }
                 else
                 {
                     deleteImages(items[i].icon);
                     items.Remove(items[i]);
+                    if (items.Count == 0) targetTime = 1;
                 }
 
             }
         }
         else
         {
-            activeObjects.SetActive(false);
+            if (targetTime > 0)
+            {
+                targetTime -= Time.deltaTime;
+            }
+            else
+            {
+                activeObjects.SetActive(false);
+            }
         }
     }
     
@@ -82,12 +86,14 @@ public class ItemsManager : Singleton<ItemsManager>
 
         for (int i = 0; i < maxSizeActive; i++)
         {
-            if (activeObjects.GetComponentsInChildren<Image>().Length>i)
-            if (activeObjects.GetComponentsInChildren<Image>()[i] == spr)
+            if (activeObjects.GetComponentsInChildren<Image>().Length > i)
             {
-                activeObjects.GetComponentsInChildren<Image>()[i].sprite = null;
-                activeObjects.GetComponentsInChildren<Image>()[i].enabled = false;
-                break;
+                if (activeObjects.GetComponentsInChildren<Image>()[i].sprite == spr)
+                {
+                    activeObjects.GetComponentsInChildren<Image>()[i].sprite = null;
+                    activeObjects.GetComponentsInChildren<Image>()[i].enabled = false;
+                    break;
+                }
             }
         }
     }
