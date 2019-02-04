@@ -37,7 +37,7 @@ public class XPBonus : ItemPickup {
 
     protected override void PickUPAction()
     {
-        if (captureRange)
+        if (captureRange && this.enabled==true && rend.enabled==true)
         {
             GameManager.Instance.CurrentPlayer.AddXp(bonus);
             this.enabled = false;
