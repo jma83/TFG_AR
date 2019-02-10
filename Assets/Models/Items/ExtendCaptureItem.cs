@@ -1,40 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/ExtendCaptureItem")]
+//[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/ExtendCaptureItem")]
 
 public class ExtendCaptureItem : Item {
 
-    [SerializeField] private float defaultTime;
-    private float targetTime;
-    private bool active = false;
 
     // Use this for initialization
     public  void Start () {
-        name = "Extend Capture Range";
+        name = "ExtendCaptureItem";
         targetTime = 0;
         defaultTime = 15;
+       // icon = Resources.Load<Sprite>("Items/iconfinder_Spell_Scroll");
+        
     }
      
-    public override void Update()
-    {
-        if (active)
-        {
-            if (targetTime > 0)
-            {
-                targetTime -= Time.deltaTime;
-            }
-            else
-            {
-                RestoreAction();
-                active = false;
 
-            }
-            //Debug.Log("Capture Range. Target: " + targetTime + "/"+ defaultTime);
-        }
-    }
 
     public override void SetRand()
     {
@@ -54,8 +37,4 @@ public class ExtendCaptureItem : Item {
         ItemsManager.Instance.AddItem(this);
     }
 
-    public override bool GetActive()
-    {
-        return active;
-    }
 }

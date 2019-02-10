@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +11,12 @@ public class ItemsManager : Singleton<ItemsManager>
     private List<Image> imgs;
     private int maxSizeActive;
     private float targetTime;
+    private int id;
 
     // Use this for initialization
     void Start () {
         items = new List<Item>();
-        
+        id = -1;
         maxSizeActive = 3;
     }
 	
@@ -96,6 +97,12 @@ public class ItemsManager : Singleton<ItemsManager>
                 }
             }
         }
+    }
+
+    public int GetNewID()
+    {
+        id++;
+        return id;
     }
 }
 

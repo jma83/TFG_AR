@@ -1,24 +1,46 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName ="Inventory/Item")]
-abstract public class Item : ScriptableObject {
+//[CreateAssetMenu(fileName = "New Item", menuName ="Inventory/Item")]
+public class Item : MonoBehaviour {
 
-    new public string name = "New Item";
+    protected int id;
     public Sprite icon = null;
-    public bool isDefaultItem = false;
+    protected bool isDefaultItem = false;
     protected int rand=0;
+    protected float defaultTime;
+    protected float targetTime;
+    protected bool active = false;
+    private ItemsManager itemManager;
 
+    private void Start()
+    {
+        itemManager = ItemsManager.Instance;
+        id = itemManager.GetNewID();
+
+    }
+
+    public void Update()
+    {
+        if (active)
+        {
+            if (targetTime > 0)
+            {
+                targetTime -= Time.deltaTime;
+            }
+            else
+            {
+                RestoreAction();
+                active = false;
+
+            }
+        }
+    }
 
     public virtual void Use()
     {
         //Use item
-    }
-
-    public virtual void Update()
-    {
-
     }
 
     public virtual void RestoreAction()
@@ -28,17 +50,22 @@ abstract public class Item : ScriptableObject {
 
     public virtual void SetRand()
     {
-
+        //set rand depending the obj
     }
 
-    public virtual int GetRand()
+    public int GetRand()
     {
         return rand;
 
     }
 
-    public virtual bool GetActive()
+    public bool GetActive()
     {
-        return false;
+        return active;
+    }
+
+    public int GetID()
+    {
+        return id;
     }
 }

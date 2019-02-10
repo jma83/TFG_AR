@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FreeCameraMovement.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -598,25 +597,40 @@
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\UnityARSessionNativeInterface.cs" />
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
     <Compile Include="Assets\Models\Droid\Droid.cs" />
-    <Compile Include="Assets\Models\Field Objects\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Models\Equipment\Equipment.cs" />
+    <Compile Include="Assets\Models\Items\BigHealthItem.cs" />
+    <Compile Include="Assets\Models\Items\ExtendCaptureItem.cs" />
+    <Compile Include="Assets\Models\Items\Field Items\ItemPickup.cs" />
+    <Compile Include="Assets\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Models\Items\HealthItem.cs" />
+    <Compile Include="Assets\Models\Items\Item.cs" />
+    <Compile Include="Assets\Models\Items\ItemsManager.cs" />
+    <Compile Include="Assets\Models\Items\XPMultiplierItem.cs" />
     <Compile Include="Assets\Models\MapEntity.cs" />
     <Compile Include="Assets\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
-    <Compile Include="Assets\Scenes\FightScene\bulletScript.cs" />
-    <Compile Include="Assets\Scenes\FightScene\collisionScript.cs" />
-    <Compile Include="Assets\Scenes\FightScene\enemyScript.cs" />
+    <Compile Include="Assets\RPGPackFree\Scripts\BowString.cs" />
+    <Compile Include="Assets\RPGPackFree\Scripts\OpenChest.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
-    <Compile Include="Assets\Scenes\FightScene\playerScript.cs" />
-    <Compile Include="Assets\Scenes\FightScene\webCamScript.cs" />
-    <Compile Include="Assets\Scenes\World\UIManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\bulletScript.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\collisionScript.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\enemyScript.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\playerScript.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\webCamScript.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\DroidFactory.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventorySlot.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventoryUI.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
-    <Compile Include="Assets\Utilities\CameraMovement.cs" />
-    <Compile Include="Assets\Utilities\DroidFactory.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
+    <Compile Include="Assets\Utilities\UIManager.cs" />
+    <Compile Include="Assets\Utilities\WindowAlert.cs" />
+    <Compile Include="Assets\Weapon.cs" />
     <None Include="Assets\MapBoxSDK\MapBox\Unity\Location\ExampleGpsTraces\LocationProviderAndroidNative.txt" />
     <None Include="Assets\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\MobileOcclusion.shader" />
     <None Include="Assets\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\InstancedSurfaceShader.shader" />

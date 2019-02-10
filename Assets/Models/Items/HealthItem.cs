@@ -1,20 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/HealthItem")]
+//[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/HealthItem")]
 
 public class HealthItem : Item {
 
-    [SerializeField] private int randValue;
 	// Use this for initialization
-	public  void Start () {
+	public virtual void Start () {
         name = "HealthItem";
+        rand = Random.Range(5, 30);
+       // icon = Resources.Load<Sprite>("Items/small-potion");
+
     }
 
     public override void SetRand()
     {
-        rand = randValue;//Random.Range(5, 30);
+        rand = Random.Range(5, 30);
+
     }
 
     public override void Use()

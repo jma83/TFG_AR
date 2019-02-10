@@ -15,7 +15,7 @@ public class InventorySlot : MonoBehaviour {
     public void AddItem(Item i)
     {
         item = i;
-        item.SetRand();
+        //item.SetRand();
 
 
         icon.sprite = item.icon;

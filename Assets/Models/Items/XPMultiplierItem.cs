@@ -1,39 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/XPMultiplierItem")]
+//[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/XPMultiplierItem")]
 
 public class XPMultiplierItem : Item {
 
-    [SerializeField] private float defaultTime;
-    private float targetTime;
-    private bool active = false;
+    int multiplier;
 
     // Use this for initialization
     public void Start () {
-        name = "XP Multiplier Item";
+        name = "XPMultiplierItem";
+        //icon = Resources.Load<Sprite>("Items/double_xp2");
+
         defaultTime = 7;
+        multiplier = 2;
     }
-    public override void Update()
-    {
-        if (active)
-        {
-            if (targetTime > 0)
-            {
-                targetTime -= Time.deltaTime;
-            }
-            else
-            {
-                RestoreAction();
-                active = false;
-
-            }
-            //Debug.Log("Multipl XP. Target: " + targetTime + "/" + defaultTime);
-
-        }
-    }
+    
 
     public override void RestoreAction()
     {
@@ -42,14 +26,10 @@ public class XPMultiplierItem : Item {
 
     public override void Use()
     {
-        GameManager.Instance.CurrentPlayer.SetXpMultiplier(2);
+        GameManager.Instance.CurrentPlayer.SetXpMultiplier(multiplier);
         targetTime = defaultTime;
         active = true;
         ItemsManager.Instance.AddItem(this);
     }
 
-    public override bool GetActive()
-    {
-        return active;
-    }
 }

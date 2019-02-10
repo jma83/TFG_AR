@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private int levelBase = 100;
     [SerializeField] private List<GameObject> droids = new List<GameObject>();
     private Animator walk;
-    private Vector3 temp_pos;
+    //private Vector3 temp_pos;
     private int lvl = 0;
     private int total_xp = 0;
     private int hp = 100;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
     }
     private void Start () {
         walk = this.GetComponent(typeof(Animator)) as Animator;
-        temp_pos = Vector3.zero;
+        //temp_pos = Vector3.zero;
         InitLevelData(0);
 	}
 
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour {
             targetTime -= Time.deltaTime;
         if (targetTime <= 0)
         {
-            temp_pos = transform.localPosition;
+            //temp_pos = transform.localPosition;
             targetTime = 1;
         }
     }

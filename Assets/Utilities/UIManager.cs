@@ -21,9 +21,9 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private Toggle objetos;
     private InventoryUI InvUI;
     private Inventory Inv;
-    private int switchInventory = 0;
+    //private int switchInventory = 0;
     private AudioSource audioSource;
-    private int menuSectionCont=3;
+    //private int menuSectionCont=3;
 
     private void Start()
     {
