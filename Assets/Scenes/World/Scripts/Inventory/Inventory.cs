@@ -6,6 +6,7 @@ public class Inventory : Singleton <Inventory> {
 
     private List<Item> items = new List<Item>();
     private List<Equipment> equipment = new List<Equipment>();
+    private Equipment e_selected;
     private int space = 26;
 
     public delegate void OnItemChanged();
@@ -57,19 +58,55 @@ public class Inventory : Singleton <Inventory> {
         return false;
     }
 
+    public bool SelectEquipment(Equipment equip)
+    {
+        if (equip != null)
+        {
+            modified = true;
+
+            if (equip == e_selected) { e_selected = null;  return false; }
+
+            if (e_selected == null)
+            {
+                e_selected = equip;
+            }
+            else
+            {
+                int index = equipment.IndexOf(equip);
+                Equipment eq = equipment[index];
+                equipment[index] = equipment[0];
+                equipment[0] = eq;
+            }
+
+
+            if (onEquipChangedCallback != null)
+            {
+                Debug.Log("Inventory = onEquipChangedCallback");
+                onEquipChangedCallback.Invoke();
+            }
+
+            return true;
+        }
+        return false;
+    }
+
     public void RemoveItem(Item item)
     {
         modified = true;
         items.Remove(item);
     }
 
+    public Equipment GetCurrentEquipment()
+    {
+        return e_selected;
+    }
 
     public List<Item> getItems()
     {
         return items;
     }
 
-    public List<Equipment> getEquipment()
+    public List<Equipment> getEquipments()
     {
         return equipment;
     }

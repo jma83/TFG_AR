@@ -8,14 +8,20 @@ public class InventorySlot : MonoBehaviour {
 
     Item item;
     Equipment equipment;
+    Inventory inv;
     [SerializeField] Image icon;
     [SerializeField] Text txt;
     [SerializeField] Image deleteIcon;
 
+    private void Start()
+    {
+        inv = Inventory.Instance;
+    }
+
     public void AddItem(Item i)
     {
         item = i;
-        //item.SetRand();
+        item.SetRand();
 
 
         icon.sprite = item.icon;
@@ -73,21 +79,39 @@ public class InventorySlot : MonoBehaviour {
         if (item != null && deleteIcon.enabled==false)
         {
             item.Use();
-            Inventory.Instance.RemoveItem(item);
+            inv.RemoveItem(item);
+        }else if (equipment != null && deleteIcon.enabled == false)
+        {
+            //equipment.Activate();
+
+            if (!inv.SelectEquipment(equipment))
+                EquipmentSelectedColor(false);
+            
         }
     }
 
+    public void EquipmentSelectedColor(bool b)
+    {
+        if (b)
+            gameObject.GetComponentInChildren<Image>().color = new Color32(105, 194, 225, 200);   //selected
+        else
+            gameObject.GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 200);   //default
+
+
+    }
     public void ClearText()
     {
         txt.text = "";
         txt.enabled = false;
         txt.gameObject.SetActive(txt.enabled);
+        EquipmentSelectedColor(false);
+
     }
 
     public void OnRemoveButton()
     {
         HideDeleteButton();
         //ClearSlot();       
-        Inventory.Instance.RemoveItem(item);
+        inv.RemoveItem(item);
     }
 }

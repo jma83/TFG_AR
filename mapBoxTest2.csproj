@@ -868,10 +868,10 @@
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
     <Compile Include="Assets\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Models\Equipment\Equipment.cs" />
-    <Compile Include="Assets\Models\Field Items\ItemPickup.cs" />
-    <Compile Include="Assets\Models\Field Items\POI XP Bonus\XPBonus.cs" />
     <Compile Include="Assets\Models\Items\BigHealthItem.cs" />
     <Compile Include="Assets\Models\Items\ExtendCaptureItem.cs" />
+    <Compile Include="Assets\Models\Items\Field Items\ItemPickup.cs" />
+    <Compile Include="Assets\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
     <Compile Include="Assets\Models\Items\HealthItem.cs" />
     <Compile Include="Assets\Models\Items\Item.cs" />
     <Compile Include="Assets\Models\Items\ItemsManager.cs" />

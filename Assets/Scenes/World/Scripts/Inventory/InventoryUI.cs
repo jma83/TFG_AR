@@ -31,40 +31,44 @@ public class InventoryUI : MonoBehaviour
         turnOffDeleteImage();
         if (checkSwitch != b || b==0)
         {
-            //SwitchDeleteButtons();
-            UpdateDeleteButtons();
             checkSwitch = b;
-            int size = 0;
-            ClearSlots();
-            if (b==2) size = inv.getItems().Count;
-            else size = inv.getEquipment().Count; 
 
-            for (int i = 0; i < slots.Length; i++)
-            {
-                if (i < size)
-                {
-                    if (b==2)
-                        slots[i].AddItem(inv.getItems()[i]);
-                    else
-                        slots[i].AddEquipment(inv.getEquipment()[i]);
+            UpdateUI();
 
-                }
-            }
+
         }
     }
     public void UpdateUI()
     {
+        ClearSlots();
+        UpdateDeleteButtons();
+
+        int size = 0;
+        if (checkSwitch == 2) size = inv.getItems().Count;
+        else size = inv.getEquipments().Count;
+
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].ClearText();
-            if (i< inv.getItems().Count) { 
-                slots[i].AddItem(inv.getItems()[i]);
-            }else{
-                slots[i].ClearSlot();
+            if (i < size)
+            {
+                if (checkSwitch == 2)
+                {
+                    slots[i].AddItem(inv.getItems()[i]);
+                    if (i == 0)
+                        slots[i].EquipmentSelectedColor(false);
+
+                }
+                else
+                {
+                    slots[i].AddEquipment(inv.getEquipments()[i]);
+                    if (i == 0)
+                        if (inv.getEquipments()[i] == inv.GetCurrentEquipment())
+                            slots[i].EquipmentSelectedColor(true);
+
+                }
             }
         }
         inv.modified = false;
-        UpdateDeleteButtons();
 
     }
 
@@ -105,7 +109,7 @@ public class InventoryUI : MonoBehaviour
             for (int i = 0; i < slots.Length; i++)
             {
                 
-                if (checkSwitchDelete && i < inv.getEquipment().Count)
+                if (checkSwitchDelete && i < inv.getEquipments().Count)
                     slots[i].ShowDeleteButton();
                 else
                     slots[i].HideDeleteButton();

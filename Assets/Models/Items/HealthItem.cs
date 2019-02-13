@@ -9,14 +9,14 @@ public class HealthItem : Item {
 	// Use this for initialization
 	public virtual void Start () {
         name = "HealthItem";
-        rand = Random.Range(5, 30);
+        //rand = Random.Range(5, 30);
        // icon = Resources.Load<Sprite>("Items/small-potion");
 
     }
 
     public override void SetRand()
     {
-        rand = Random.Range(5, 30);
+        rand = 30; //rand = Random.Range(5, 30);
 
     }
 
