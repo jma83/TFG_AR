@@ -7,7 +7,7 @@ using UnityEngine;
 public class HealthItem : Item {
 
 	// Use this for initialization
-	public virtual void Start () {
+	public override void Start () {
         name = "HealthItem";
         //rand = Random.Range(5, 30);
        // icon = Resources.Load<Sprite>("Items/small-potion");
@@ -16,13 +16,13 @@ public class HealthItem : Item {
 
     public override void SetRand()
     {
-        rand = 30; //rand = Random.Range(5, 30);
+        rand = Random.Range(5, 30);
 
     }
 
     public override void Use()
     {       
         GameManager.Instance.CurrentPlayer.addHp(rand);
-            
+        this.DeleteObject();
     }
 }

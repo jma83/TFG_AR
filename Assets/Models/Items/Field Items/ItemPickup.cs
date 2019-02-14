@@ -8,7 +8,7 @@ public enum TypeObj : int { Health, BigHealth, XPMultiplier, ExtendCapture };
 
 public class ItemPickup : MapEntity {
 
-    [SerializeField] private Item item;
+    /*[SerializeField] */private Item item;
     [SerializeField] TypeObj type;
     [SerializeField] Equipment equip;
     [SerializeField] bool insertInventory; 
@@ -16,21 +16,22 @@ public class ItemPickup : MapEntity {
     // Use this for initialization
     void Start () {
 
-        /*switch (type)
+        switch (type)
         {
             case TypeObj.Health:
-                item = new HealthItem();
+                item = gameObject.GetComponent<HealthItem>();
                 break;
             case TypeObj.BigHealth:
-                item = new BigHealthItem();
+                item = gameObject.GetComponent<BigHealthItem>();
                 break;
             case TypeObj.ExtendCapture:
-                item = new ExtendCaptureItem();
+                item = gameObject.GetComponent<ExtendCaptureItem>();
                 break;
             case TypeObj.XPMultiplier:
-                item = new XPMultiplierItem();
+                item = gameObject.GetComponent<XPMultiplierItem>();
                 break;
-        }*/
+        }
+        item.Start();
 
     }
 	
@@ -47,7 +48,7 @@ public class ItemPickup : MapEntity {
 
 
                 if (PickUp() && insertInventory)
-                    Destroy(gameObject);
+                    item.DisableComponents();
                 else
                     PickUPAction();
 
@@ -62,6 +63,9 @@ public class ItemPickup : MapEntity {
 
     private bool PickUp()
     {
+        
+        item.SetRand();
+
         Debug.Log("PickUp");
 
         if (item != null)

@@ -19,7 +19,7 @@ public class BigHealthItem : HealthItem {
 
     public override void SetRand()
     {
-        rand = 60; //rand = Random.Range(40, 60);
+        rand = Random.Range(40, 60);
 
     }
 }

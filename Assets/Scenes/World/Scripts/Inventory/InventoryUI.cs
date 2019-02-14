@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +29,7 @@ public class InventoryUI : MonoBehaviour
     {
 
         turnOffDeleteImage();
-        if (checkSwitch != b || b==0)
+        if (checkSwitch != b || b == 0)
         {
             checkSwitch = b;
 
@@ -43,9 +43,17 @@ public class InventoryUI : MonoBehaviour
         ClearSlots();
         UpdateDeleteButtons();
 
+
         int size = 0;
-        if (checkSwitch == 2) size = inv.getItems().Count;
-        else size = inv.getEquipments().Count;
+        if (checkSwitch == 2) {
+            size = inv.getItems().Count;
+            slots[0].EquipmentSelectedColor(false);
+        }
+        else
+        {
+            size = inv.getEquipments().Count;
+        }
+        Debug.Log("checkSwitch: " + checkSwitch + " size: " + size);
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -54,17 +62,21 @@ public class InventoryUI : MonoBehaviour
                 if (checkSwitch == 2)
                 {
                     slots[i].AddItem(inv.getItems()[i]);
-                    if (i == 0)
-                        slots[i].EquipmentSelectedColor(false);
+                    
 
                 }
                 else
                 {
                     slots[i].AddEquipment(inv.getEquipments()[i]);
-                    if (i == 0)
-                        if (inv.getEquipments()[i] == inv.GetCurrentEquipment())
-                            slots[i].EquipmentSelectedColor(true);
-
+                    if (i==0)
+                    if (inv.getEquipments()[i] == inv.GetCurrentEquipment())
+                    {
+                        slots[i].EquipmentSelectedColor(true);
+                    }
+                    else
+                    {
+                        slots[i].EquipmentSelectedColor(false);
+                    }
                 }
             }
         }

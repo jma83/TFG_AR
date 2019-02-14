@@ -66,9 +66,11 @@ public class Inventory : Singleton <Inventory> {
 
             if (equip == e_selected) { e_selected = null;  return false; }
 
+            e_selected = equip;
+
             if (e_selected == null)
             {
-                e_selected = equip;
+                Debug.Log("assign equipment 1st: " + equipment[0].name);
             }
             else
             {
@@ -76,6 +78,8 @@ public class Inventory : Singleton <Inventory> {
                 Equipment eq = equipment[index];
                 equipment[index] = equipment[0];
                 equipment[0] = eq;
+
+                Debug.Log("equipment 1st: " + equipment[0].name);
             }
 
 
@@ -87,6 +91,9 @@ public class Inventory : Singleton <Inventory> {
 
             return true;
         }
+
+        Debug.Log("equip is null");
+
         return false;
     }
 

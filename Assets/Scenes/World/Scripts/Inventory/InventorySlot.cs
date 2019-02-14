@@ -21,7 +21,6 @@ public class InventorySlot : MonoBehaviour {
     public void AddItem(Item i)
     {
         item = i;
-        item.SetRand();
 
 
         icon.sprite = item.icon;
@@ -50,7 +49,7 @@ public class InventorySlot : MonoBehaviour {
     public void ClearSlot()
     {
         item = null;
-
+        equipment = null;
 
         txt.text = "";
         txt.enabled = false;
@@ -83,10 +82,9 @@ public class InventorySlot : MonoBehaviour {
         }else if (equipment != null && deleteIcon.enabled == false)
         {
             //equipment.Activate();
+            Debug.Log("trying to equip: "+equipment.name);
+            inv.SelectEquipment(equipment);
 
-            if (!inv.SelectEquipment(equipment))
-                EquipmentSelectedColor(false);
-            
         }
     }
 

@@ -38,7 +38,9 @@ public class ItemsManager : Singleton<ItemsManager>
                 else
                 {
                     deleteImages(items[i].icon);
+                    Item item_aux = items[i];
                     items.Remove(items[i]);
+                    item_aux.DeleteObject();
                     if (items.Count == 0) targetTime = 1;
                 }
 

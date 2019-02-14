@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23453261049972904}
   - component: {fileID: 114813772891203262}
   - component: {fileID: 65616189449955138}
+  - component: {fileID: 114395646289868646}
   m_Layer: 0
   m_Name: LifePot
   m_TagString: item
@@ -99,6 +100,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.3, z: 0.25}
   m_Center: {x: 0.000000007450581, y: 0.05937615, z: 0}
+--- !u!114 &114395646289868646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509075232869486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651250e68f17e0b4e90150522f8dd730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: cfdc311cd6e247c4c8171e94630b796d, type: 3}
 --- !u!114 &114813772891203262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655e7be03d0bd374d9361c416793affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 386b1fad9fff6dd40a603b6a9f41e91a, type: 2}
   type: 1
   equip: {fileID: 0}
   insertInventory: 1

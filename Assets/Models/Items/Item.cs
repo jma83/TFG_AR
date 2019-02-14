@@ -14,7 +14,7 @@ public class Item : MonoBehaviour {
     protected bool active = false;
     private ItemsManager itemManager;
 
-    private void Start()
+    public virtual void Start()
     {
         itemManager = ItemsManager.Instance;
         id = itemManager.GetNewID();
@@ -67,5 +67,17 @@ public class Item : MonoBehaviour {
     public int GetID()
     {
         return id;
+    }
+
+    public void DisableComponents()
+    {
+        gameObject.GetComponent<ItemPickup>().enabled=false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void DeleteObject()
+    {
+        Destroy(gameObject);
     }
 }

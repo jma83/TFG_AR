@@ -6,7 +6,7 @@ using UnityEngine;
 public class Equipment : ScriptableObject
 {
 
-    new public string name = "New Equipment";
+    new public string name;
     public Sprite icon = null;
     public bool isDefaultEquipment = false;
     public int type = 0;
