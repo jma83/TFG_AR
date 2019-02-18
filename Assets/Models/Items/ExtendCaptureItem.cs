@@ -13,7 +13,7 @@ public class ExtendCaptureItem : Item {
         name = "ExtendCaptureItem";
         targetTime = 0;
         defaultTime = 15;
-       // icon = Resources.Load<Sprite>("Items/iconfinder_Spell_Scroll");
+        icon = Resources.Load<Sprite>("Items/iconfinder_Spell_Scroll");
         
     }
      

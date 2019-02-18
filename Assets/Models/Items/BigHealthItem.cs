@@ -8,7 +8,7 @@ public class BigHealthItem : HealthItem {
 
     public override void Start()
     {
-       // icon = Resources.Load<Sprite>("Items/big-potion");
+        icon = Resources.Load<Sprite>("Items/big-potion");
         //rand = Random.Range(40, 60);
 
     }

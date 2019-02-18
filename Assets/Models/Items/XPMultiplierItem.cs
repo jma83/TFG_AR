@@ -12,7 +12,7 @@ public class XPMultiplierItem : Item {
     // Use this for initialization
     public void Start () {
         name = "XPMultiplierItem";
-        //icon = Resources.Load<Sprite>("Items/double_xp2");
+        icon = Resources.Load<Sprite>("Items/double_xp2");
 
         defaultTime = 7;
         multiplier = 2;

@@ -17,7 +17,7 @@ public class Item : MonoBehaviour {
     public virtual void Start()
     {
         itemManager = ItemsManager.Instance;
-        id = itemManager.GetNewID();
+        id = itemManager.GetNewItemID();
 
     }
 

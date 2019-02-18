@@ -10,7 +10,7 @@ public class HealthItem : Item {
 	public override void Start () {
         name = "HealthItem";
         //rand = Random.Range(5, 30);
-       // icon = Resources.Load<Sprite>("Items/small-potion");
+        icon = Resources.Load<Sprite>("Items/small-potion");
 
     }
 

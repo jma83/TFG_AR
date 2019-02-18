@@ -31,7 +31,16 @@ public class ItemPickup : MapEntity {
                 item = gameObject.GetComponent<XPMultiplierItem>();
                 break;
         }
-        item.Start();
+        if (item != null)
+        {
+            item.Start();
+        }
+        else
+        {
+            equip = gameObject.GetComponent<Equipment>();
+            equip.Start();
+        }
+
 
     }
 	
@@ -48,7 +57,10 @@ public class ItemPickup : MapEntity {
 
 
                 if (PickUp() && insertInventory)
-                    item.DisableComponents();
+                    if (item != null)
+                        item.DisableComponents();
+                    else
+                        equip.DisableComponents();
                 else
                     PickUPAction();
 
@@ -63,8 +75,8 @@ public class ItemPickup : MapEntity {
 
     private bool PickUp()
     {
-        
-        item.SetRand();
+        if (item != null)
+            item.SetRand();
 
         Debug.Log("PickUp");
 

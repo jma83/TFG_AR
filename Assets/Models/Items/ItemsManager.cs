@@ -11,12 +11,13 @@ public class ItemsManager : Singleton<ItemsManager>
     private List<Image> imgs;
     private int maxSizeActive;
     private float targetTime;
-    private int id;
+    private int id_item;
+    private int id_equipment;
 
     // Use this for initialization
     void Start () {
         items = new List<Item>();
-        id = -1;
+        id_item = -1;
         maxSizeActive = 3;
     }
 	
@@ -101,10 +102,16 @@ public class ItemsManager : Singleton<ItemsManager>
         }
     }
 
-    public int GetNewID()
+    public int GetNewItemID()
     {
-        id++;
-        return id;
+        id_item++;
+        return id_item;
+    }
+
+    public int GetNewEquipID()
+    {
+        id_equipment++;
+        return id_equipment;
     }
 }
 

@@ -10,8 +10,11 @@ public class InventorySlot : MonoBehaviour {
     Equipment equipment;
     Inventory inv;
     [SerializeField] Image icon;
+    [SerializeField] Image powerIcon;
     [SerializeField] Text txt;
+    [SerializeField] Text txt2;
     [SerializeField] Image deleteIcon;
+    [SerializeField] GameObject hp;
 
     private void Start()
     {
@@ -44,6 +47,14 @@ public class InventorySlot : MonoBehaviour {
         icon.sprite = equipment.icon;
         icon.enabled = true;
         icon.gameObject.SetActive(icon.enabled);
+        powerIcon.sprite = Resources.Load<Sprite>(equipment.GetEquipmentQuality());
+        powerIcon.enabled = true;
+        powerIcon.gameObject.SetActive(powerIcon.enabled);
+
+        txt2.text = equipment.GetTotalPower().ToString();
+        txt2.enabled = true;
+        txt2.gameObject.SetActive(txt2.enabled);
+        hp.SetActive(true);
     }
 
     public void ClearSlot()
@@ -51,13 +62,17 @@ public class InventorySlot : MonoBehaviour {
         item = null;
         equipment = null;
 
-        txt.text = "";
-        txt.enabled = false;
+        hp.SetActive(false);
+
+        txt2.text = txt.text = "";
+        txt2.enabled = txt.enabled = false;
         txt.gameObject.SetActive(txt.enabled);
-        
-        icon.sprite = null;
-        icon.enabled = false;
+        txt2.gameObject.SetActive(txt2.enabled);
+
+        powerIcon.sprite=icon.sprite = null;
+        powerIcon.enabled = icon.enabled = false;
         icon.gameObject.SetActive(icon.enabled);
+        powerIcon.gameObject.SetActive(powerIcon.enabled);
 
     }
 
