@@ -103,6 +103,12 @@ public class Inventory : Singleton <Inventory> {
         items.Remove(item);
     }
 
+    public void RemoveEquip(Equipment eq)
+    {
+        modified = true;
+        equipment.Remove(eq);
+    }
+
     public Equipment GetCurrentEquipment()
     {
         return e_selected;

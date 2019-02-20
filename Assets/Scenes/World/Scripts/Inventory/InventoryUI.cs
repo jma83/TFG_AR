@@ -13,15 +13,17 @@ public class InventoryUI : MonoBehaviour
     private InventorySlot[] slots;
     private Inventory inv;
     [SerializeField] Toggle deleteImage;
+    [SerializeField] Toggle infoImage;
     private int checkSwitch;
     private bool checkSwitchDelete;
+    private bool checkSwitchInfo;
 
     public void Start()
     {
         inv = Inventory.Instance;
         inv.onItemChangedCallback += UpdateUI;
         checkSwitch = 0;
-        checkSwitchDelete = false;
+        checkSwitchInfo=checkSwitchDelete = false;
         slots = transform.GetComponentsInChildren<InventorySlot>();
     }
 
@@ -29,6 +31,7 @@ public class InventoryUI : MonoBehaviour
     {
 
         turnOffDeleteImage();
+        turnOffInfoImage();
         if (checkSwitch != b || b == 0)
         {
             checkSwitch = b;
@@ -42,6 +45,7 @@ public class InventoryUI : MonoBehaviour
     {
         ClearSlots();
         UpdateDeleteButtons();
+        UpdateInfoButtons();
 
 
         int size = 0;
@@ -92,12 +96,21 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void SwitchDeleteButtons()
+    public void SwitchButtons(int i)
     {
-        checkSwitchDelete = !checkSwitchDelete;
 
-        UpdateDeleteButtons();
+        if (i == 0)
+        {
+            checkSwitchDelete = !checkSwitchDelete;
 
+            UpdateDeleteButtons();
+        }
+        else
+        {
+            checkSwitchInfo = !checkSwitchInfo;
+
+            UpdateInfoButtons();
+        }
 
     }
 
@@ -133,6 +146,40 @@ public class InventoryUI : MonoBehaviour
     public void turnOffDeleteImage()
     {
         deleteImage.isOn = false;
+    }
+
+    public void UpdateInfoButtons()
+    {
+        if (checkSwitch == 2)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+
+                if (checkSwitchInfo && i < inv.getItems().Count)
+                    slots[i].ShowInfoButton();
+                else
+                    slots[i].HideInfoButton();
+
+
+            }
+        }
+        else
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+
+                if (checkSwitchInfo && i < inv.getEquipments().Count)
+                    slots[i].ShowInfoButton();
+                else
+                    slots[i].HideInfoButton();
+
+            }
+        }
+    }
+
+    public void turnOffInfoImage()
+    {
+        infoImage.isOn = false;
     }
     public int getCheckSwitch()
     {

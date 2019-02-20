@@ -14,6 +14,7 @@ public class InventorySlot : MonoBehaviour {
     [SerializeField] Text txt;
     [SerializeField] Text txt2;
     [SerializeField] Image deleteIcon;
+    [SerializeField] Image infoIcon;
     [SerializeField] GameObject hp;
 
     private void Start()
@@ -78,23 +79,39 @@ public class InventorySlot : MonoBehaviour {
 
     public void ShowDeleteButton()
     {
+        hp.gameObject.transform.position.Set(-25.6f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
         deleteIcon.enabled = true;
         deleteIcon.gameObject.SetActive(deleteIcon.enabled);
     }
 
     public void HideDeleteButton()
     {
+        hp.gameObject.transform.position.Set(-11f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
         deleteIcon.enabled = false;
         deleteIcon.gameObject.SetActive(deleteIcon.enabled);
     }
 
+    public void ShowInfoButton()
+    {
+        hp.gameObject.transform.position.Set(-25.6f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
+        infoIcon.enabled = true;
+        infoIcon.gameObject.SetActive(infoIcon.enabled);
+    }
+
+    public void HideInfoButton()
+    {
+        hp.gameObject.transform.position.Set(-11f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
+        infoIcon.enabled = false;
+        infoIcon.gameObject.SetActive(infoIcon.enabled);
+    }
+
     public void UseItem()
     {
-        if (item != null && deleteIcon.enabled==false)
+        if (item != null && deleteIcon.enabled==false && infoIcon.enabled == false)
         {
             item.Use();
             inv.RemoveItem(item);
-        }else if (equipment != null && deleteIcon.enabled == false)
+        }else if (equipment != null && deleteIcon.enabled == false && infoIcon.enabled == false)
         {
             //equipment.Activate();
             Debug.Log("trying to equip: "+equipment.name);
@@ -114,9 +131,10 @@ public class InventorySlot : MonoBehaviour {
     }
     public void ClearText()
     {
-        txt.text = "";
-        txt.enabled = false;
+        txt2.text = txt.text = "";
+        txt2.enabled = txt.enabled = false;
         txt.gameObject.SetActive(txt.enabled);
+        txt2.gameObject.SetActive(txt2.enabled);
         EquipmentSelectedColor(false);
 
     }
@@ -125,6 +143,10 @@ public class InventorySlot : MonoBehaviour {
     {
         HideDeleteButton();
         //ClearSlot();       
-        inv.RemoveItem(item);
+        if (item!=null)
+            inv.RemoveItem(item);
+
+        if (equipment!=null)
+            inv.RemoveEquip(equipment);
     }
 }

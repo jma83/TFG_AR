@@ -143,7 +143,7 @@ public class Equipment : MonoBehaviour
         else if (r >= aux*4)
         {
             type = EquipmentType.Ofensive;
-            icon = Resources.Load<Sprite>("Equipment/Sword-icon");
+            icon = Resources.Load<Sprite>("Equipment/sword-icon");
 
         }
 
