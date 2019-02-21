@@ -16,10 +16,19 @@ public class InventorySlot : MonoBehaviour {
     [SerializeField] Image deleteIcon;
     [SerializeField] Image infoIcon;
     [SerializeField] GameObject hp;
+    private Vector3 v1;
+    private Vector3 v2;
 
     private void Start()
     {
         inv = Inventory.Instance;
+        
+    }
+
+    private void Awake()
+    {
+        v1 = new Vector3(-11f, hp.gameObject.transform.localPosition.y, hp.gameObject.transform.localPosition.z);
+        v2 = new Vector3(-25.6f, hp.gameObject.transform.localPosition.y, hp.gameObject.transform.localPosition.z);
     }
 
     public void AddItem(Item i)
@@ -79,28 +88,28 @@ public class InventorySlot : MonoBehaviour {
 
     public void ShowDeleteButton()
     {
-        hp.gameObject.transform.position.Set(-25.6f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
+        hp.gameObject.transform.localPosition = v2;
         deleteIcon.enabled = true;
         deleteIcon.gameObject.SetActive(deleteIcon.enabled);
     }
 
     public void HideDeleteButton()
     {
-        hp.gameObject.transform.position.Set(-11f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
+        hp.gameObject.transform.localPosition = v1;
         deleteIcon.enabled = false;
         deleteIcon.gameObject.SetActive(deleteIcon.enabled);
     }
 
     public void ShowInfoButton()
     {
-        hp.gameObject.transform.position.Set(-25.6f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
+        hp.gameObject.transform.localPosition = v2;
         infoIcon.enabled = true;
         infoIcon.gameObject.SetActive(infoIcon.enabled);
     }
 
     public void HideInfoButton()
     {
-        hp.gameObject.transform.position.Set(-11f, hp.gameObject.transform.position.y, hp.gameObject.transform.position.z);
+        hp.gameObject.transform.localPosition = v1;
         infoIcon.enabled = false;
         infoIcon.gameObject.SetActive(infoIcon.enabled);
     }
