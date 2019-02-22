@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -140,7 +140,7 @@ public class Equipment : MonoBehaviour
             icon = Resources.Load<Sprite>("Equipment/armor");
 
         }
-        else if (r >= aux*4)
+        else if (r >= aux*3)
         {
             type = EquipmentType.Ofensive;
             icon = Resources.Load<Sprite>("Equipment/sword-icon");
@@ -173,9 +173,9 @@ public class Equipment : MonoBehaviour
         }
     }
 
-    public void SetBonusRate()
+    public void SetBonusRate(int b)
     {
-
+        bonusRate = b;
     }
 
     public void SetActive(bool b)
@@ -192,6 +192,25 @@ public class Equipment : MonoBehaviour
         durability = d;
     }
 
+    public void AddDurability(int d)
+    {
+        if (durability + d > 100)
+            durability = 100;
+        else if (d + durability < 0)
+            durability = 0;
+        else 
+            durability = durability + d;
+    }
+
+    public void DecreaseDurability(int d)
+    {
+        if (durability - d > 100)
+            durability = 100;
+        else if (durability-d < 0)
+            durability = 0;
+        else
+            durability= durability - d;
+    }
     public int GetDurability()
     {
         return durability;
@@ -250,5 +269,10 @@ public class Equipment : MonoBehaviour
         gameObject.GetComponent<ItemPickup>().enabled = false;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void DeleteObject()
+    {
+        Destroy(gameObject);
     }
 }

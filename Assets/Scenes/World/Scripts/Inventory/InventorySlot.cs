@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +16,8 @@ public class InventorySlot : MonoBehaviour {
     [SerializeField] Image deleteIcon;
     [SerializeField] Image infoIcon;
     [SerializeField] GameObject hp;
+    [SerializeField] Image hp_image;
+    [SerializeField] Text hp_text;
     private Vector3 v1;
     private Vector3 v2;
 
@@ -65,6 +67,7 @@ public class InventorySlot : MonoBehaviour {
         txt2.enabled = true;
         txt2.gameObject.SetActive(txt2.enabled);
         hp.SetActive(true);
+        updateHP();
     }
 
     public void ClearSlot()
@@ -148,6 +151,15 @@ public class InventorySlot : MonoBehaviour {
 
     }
 
+    public void updateHP()
+    {
+        Debug.Log(equipment.GetDurability());
+        float f = equipment.GetDurability() / 100f;
+        hp_text.text = equipment.GetDurability().ToString() + "%";
+
+        hp_image.transform.localScale = new Vector3(f, 1, 1);
+    }
+
     public void OnRemoveButton()
     {
         HideDeleteButton();
@@ -155,7 +167,10 @@ public class InventorySlot : MonoBehaviour {
         if (item!=null)
             inv.RemoveItem(item);
 
-        if (equipment!=null)
+        if (equipment != null)
+        {
             inv.RemoveEquip(equipment);
+            equipment.DeleteObject();
+        }
     }
 }
