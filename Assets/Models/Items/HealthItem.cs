@@ -9,6 +9,7 @@ public class HealthItem : Item {
 	// Use this for initialization
 	public override void Start () {
         name = "HealthItem";
+        type = 0;
         //rand = Random.Range(5, 30);
         icon = Resources.Load<Sprite>("Items/small-potion");
 

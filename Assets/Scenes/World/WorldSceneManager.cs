@@ -17,10 +17,12 @@ public class WorldSceneManager : ARGameSceneManager {
 
     }
 
-    public override void droidTapped(GameObject droid)
+    public override void ChangeScene(GameObject droid)
     {
         List<GameObject> list = new List<GameObject>();
         list.Add(droid);
+
+        GameManager.Instance.Save();
         SceneChangeManager.Instance.GoToScene(ARGameConstants.SCENE_COMBAT, list);
     }
 

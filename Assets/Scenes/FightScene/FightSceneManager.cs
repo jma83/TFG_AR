@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FightSceneManager : ARGameSceneManager {
     
@@ -15,10 +16,12 @@ public class FightSceneManager : ARGameSceneManager {
 		
 	}
 
-    public override void droidTapped(GameObject droid)
+    public override void ChangeScene(GameObject droid)
     {
+
         List<GameObject> list = new List<GameObject>();
         list.Add(droid);
+        list = null;
         SceneChangeManager.Instance.GoToScene(ARGameConstants.SCENE_WORLD, list);
     }
 

@@ -9,12 +9,12 @@ public class ExtendCaptureItem : Item {
 
 
     // Use this for initialization
-    public  void Start () {
+    public override void Start () {
         name = "ExtendCaptureItem";
         targetTime = 0;
         defaultTime = 15;
         icon = Resources.Load<Sprite>("Items/iconfinder_Spell_Scroll");
-        
+        type = 2;
     }
      
 

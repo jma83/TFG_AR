@@ -10,7 +10,7 @@ public class BigHealthItem : HealthItem {
     {
         icon = Resources.Load<Sprite>("Items/big-potion");
         //rand = Random.Range(40, 60);
-
+        type = 1;
     }
     public override void RestoreAction()
     {

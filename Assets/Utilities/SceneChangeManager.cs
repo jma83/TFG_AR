@@ -21,10 +21,18 @@ public class SceneChangeManager : Singleton<SceneChangeManager> {
         };
 
         Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
-        foreach (GameObject obj in objectsToMove)
+        if (objectsToMove != null)
         {
-            SceneManager.MoveGameObjectToScene(obj,sceneToLoad);
+            foreach (GameObject obj in objectsToMove)
+            {
+                SceneManager.MoveGameObjectToScene(obj, sceneToLoad);
+            }
         }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+
         yield return null;
     }
 

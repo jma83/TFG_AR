@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //[CreateAssetMenu(fileName = "New Item", menuName ="Inventory/Item")]
-public class Item : MonoBehaviour {
+public class Item : InventoryEntity{
 
-    protected int id;
-    public Sprite icon = null;
-    protected bool isDefaultItem = false;
+
+    protected int type = -1;    // 0 == health ; 1 == bighealth ; 2 == extend ; 3 == xpmultiplier
     protected int rand=0;
-    protected float defaultTime;
-    protected float targetTime;
-    protected bool active = false;
-    private ItemsManager itemManager;
+    protected ItemsManager itemManager;
 
     public virtual void Start()
     {
         itemManager = ItemsManager.Instance;
+
         id = itemManager.GetNewItemID();
 
     }
@@ -59,25 +56,10 @@ public class Item : MonoBehaviour {
 
     }
 
-    public bool GetActive()
+    public int GetItemType()
     {
-        return active;
+        return type;
     }
 
-    public int GetID()
-    {
-        return id;
-    }
-
-    public void DisableComponents()
-    {
-        gameObject.GetComponent<ItemPickup>().enabled=false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-    }
-
-    public void DeleteObject()
-    {
-        Destroy(gameObject);
-    }
+    
 }

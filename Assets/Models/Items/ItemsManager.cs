@@ -23,39 +23,44 @@ public class ItemsManager : Singleton<ItemsManager>
 	
 	// Update is called once per frame
 	void Update () {
-        if (items.Count > 0)
+
+        if (activeObjects != null)
         {
-            activeObjects.SetActive(true);
 
-
-            for (int i = 0; i < items.Count; i++)
+            if (items.Count > 0)
             {
-                if (items[i].GetActive())
+                activeObjects.SetActive(true);
+
+
+                for (int i = 0; i < items.Count; i++)
                 {
-                    items[i].Update();
-                    //Debug.Log("Items Activos: " + items.Count);
+                    if (items[i].GetActive())
+                    {
+                        items[i].Update();
+                        //Debug.Log("Items Activos: " + items.Count);
+
+                    }
+                    else
+                    {
+                        deleteImages(items[i].icon);
+                        Item item_aux = items[i];
+                        items.Remove(items[i]);
+                        item_aux.DeleteObject();
+                        if (items.Count == 0) targetTime = 1;
+                    }
 
                 }
-                else
-                {
-                    deleteImages(items[i].icon);
-                    Item item_aux = items[i];
-                    items.Remove(items[i]);
-                    item_aux.DeleteObject();
-                    if (items.Count == 0) targetTime = 1;
-                }
-
-            }
-        }
-        else
-        {
-            if (targetTime > 0)
-            {
-                targetTime -= Time.deltaTime;
             }
             else
             {
-                activeObjects.SetActive(false);
+                if (targetTime > 0)
+                {
+                    targetTime -= Time.deltaTime;
+                }
+                else
+                {
+                    activeObjects.SetActive(false);
+                }
             }
         }
     }

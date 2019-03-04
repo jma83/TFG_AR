@@ -97,6 +97,52 @@ public class Inventory : Singleton <Inventory> {
         return false;
     }
 
+    public bool SelectEquipmentID(int equip_id)
+    {
+        if (equip_id >= 0)
+        {
+            modified = true;
+
+            if (equip_id == e_selected.GetID()) { e_selected = null; return false; }
+
+            for (int j = 0; j < equipment.Count; j++)
+            {
+                if (equipment[j].GetID() == equip_id)
+                {
+                    e_selected = equipment[j];
+                    break;
+                }
+            }
+
+            if (e_selected == null)
+            {
+                Debug.Log("assign equipment 1st: " + equipment[0].name);
+            }
+            else
+            {
+                int index = equipment.IndexOf(e_selected);
+                Equipment eq = equipment[index];
+                equipment[index] = equipment[0];
+                equipment[0] = eq;
+
+                Debug.Log("equipment 1st: " + equipment[0].name);
+            }
+
+
+            if (onEquipChangedCallback != null)
+            {
+                Debug.Log("Inventory = onEquipChangedCallback");
+                onEquipChangedCallback.Invoke();
+            }
+
+            return true;
+        }
+
+        Debug.Log("equip is null");
+
+        return false;
+    }
+
     public void RemoveItem(Item item)
     {
         modified = true;
@@ -112,6 +158,29 @@ public class Inventory : Singleton <Inventory> {
     public Equipment GetCurrentEquipment()
     {
         return e_selected;
+    }
+
+    public int GetCurrentEquipmentID()
+    {
+        if (e_selected != null)
+            return e_selected.GetID();
+        else
+            return -1;
+    }
+
+    public void SetItems(List<Item> i)
+    {
+        items = i;
+    }
+
+    public void SetEquipments(List<Equipment> e)
+    {
+        equipment = e;
+    }
+
+    public void SetSpace(int s)
+    {
+        space = s;
     }
 
     public List<Item> getItems()

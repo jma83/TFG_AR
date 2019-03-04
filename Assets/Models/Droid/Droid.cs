@@ -66,7 +66,7 @@ public class Droid : MapEntity {
                     if (captureRange)
                     {
                         audioSource.PlayOneShot(enemySound);
-                        scenemanager1.droidTapped(this.gameObject);
+                        scenemanager1.ChangeScene(this.gameObject);
                     }
                     //SceneManager.LoadScene("FightScene");
                 }

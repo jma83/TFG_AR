@@ -868,6 +868,7 @@
     <Compile Include="Assets\MapBoxSDK\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
     <Compile Include="Assets\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Models\Equipment\Equipment.cs" />
+    <Compile Include="Assets\Models\InventoryEntity.cs" />
     <Compile Include="Assets\Models\Items\BigHealthItem.cs" />
     <Compile Include="Assets\Models\Items\ExtendCaptureItem.cs" />
     <Compile Include="Assets\Models\Items\Field Items\ItemPickup.cs" />
@@ -893,6 +894,7 @@
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventoryUI.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
+    <Compile Include="Assets\uiloader.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />

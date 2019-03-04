@@ -4,11 +4,8 @@ using UnityEngine;
 
 public enum EquipmentQuality : int { Basic, Rare, Epic, Legend };
 public enum EquipmentType : int { Defensive, Ofensive, Balanced, Fast };
-public class Equipment : MonoBehaviour
+public class Equipment : InventoryEntity
 {
-    protected int id;
-    public Sprite icon = null;
-    protected bool isDefaultEquip = false;
     protected EquipmentQuality quality;
     protected EquipmentType type;
     protected int bonusRate = 0;
@@ -16,15 +13,14 @@ public class Equipment : MonoBehaviour
     protected int defense = 0;
     protected int speed = 0; 
     protected int durability = 0;
-    protected float defaultTime;
-    protected float targetTime;
-    protected bool active = false;
-    private ItemsManager itemManager;
+    protected ItemsManager itemManager;
+
     private Player player;
 
     public void Start()
     {
         itemManager = ItemsManager.Instance;
+
         id = itemManager.GetNewEquipID();
         player = GameManager.Instance.CurrentPlayer;
         SetDurability(100);
@@ -149,6 +145,10 @@ public class Equipment : MonoBehaviour
 
 
     }
+    public void SetTypeNum(int t)
+    {
+        type = (EquipmentType)t;
+    }
 
     private void SetQuality()
     {
@@ -173,6 +173,11 @@ public class Equipment : MonoBehaviour
         }
     }
 
+    public void SetQualityNum(int q)
+    {
+        quality = (EquipmentQuality) q;
+    }
+
     public void SetBonusRate(int b)
     {
         bonusRate = b;
@@ -182,9 +187,20 @@ public class Equipment : MonoBehaviour
     {
         active = b;
     }
-    public bool GetActive()
+
+    public void SetAttack(int a)
     {
-        return active;
+        attack = a;
+    }
+
+    public void SetDefense(int d)
+    {
+        defense = d;
+    }
+
+    public void SetSpeed(int s)
+    {
+        speed = s;
     }
 
     public void SetDurability(int d)
@@ -237,6 +253,10 @@ public class Equipment : MonoBehaviour
 
         return null;
     }
+    public EquipmentType GetEquipmentTypeNum()
+    {
+        return type;
+    }
 
     public string GetEquipmentQuality()
     {
@@ -259,20 +279,29 @@ public class Equipment : MonoBehaviour
         return null;
     }
 
+    public EquipmentQuality GetEquipmentQualityNum()
+    {
+        return quality;
+    }
+
     public int GetTotalPower()
     {
         return (attack + speed + defense);
     }
 
-    public void DisableComponents()
+    public int GetAttack()
     {
-        gameObject.GetComponent<ItemPickup>().enabled = false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        return attack;
     }
 
-    public void DeleteObject()
+    public int GetDefense()
     {
-        Destroy(gameObject);
+        return defense;
     }
+
+    public int GetSpeed()
+    {
+        return speed;
+    }
+
 }

@@ -25,31 +25,54 @@ public class Player : MonoBehaviour {
     public int Hp
     {
         get { return hp; }
+        set { hp = value; }
+    }
+    public int MaxHp
+    {
+        get { return maxHp; }
+        set { maxHp = value; }
+    }
+    
+    public int Xp_Multiplier
+    {
+        get { return xp_multiplier; }
+        set { xp_multiplier = value; }
     }
     public float CaptureRange
     {
         get { return captureRange; }
+        set { captureRange = value; }
+    }
+    public CaptureRange CaptureRangeObj
+    {
+        get { return captureRangeObj; }
+        set { captureRangeObj = value; }
     }
     public int Xp
     {
         get { return xp; }
+        set { xp = value; }
     }
     public int RequiredXp
     {
         get { return requiredXp; }
+        set { requiredXp = value; }
     }
     public int LevelBase
     {
         get { return levelBase; }
+        set { levelBase = value; }
     }
     public List<GameObject> Droids
     {
         get { return droids; }
+        set { droids = value; }
     }
 
     public int Lvl
     {
         get{ return lvl; }
+        set { lvl = value; }
     }
     private void Start () {
         walk = this.GetComponent(typeof(Animator)) as Animator;
@@ -81,6 +104,10 @@ public class Player : MonoBehaviour {
     public void SetXpMultiplier(int x)
     {
         xp_multiplier = x;
+    }
+    public int GetXpMultiplier()
+    {
+        return xp_multiplier;
     }
     public void Adddroid(GameObject droid)
     {
