@@ -45,6 +45,16 @@ public class Item : InventoryEntity{
         //action after update
     }
 
+    public void SetRandNum(int r)
+    {
+        rand = r;
+    }
+
+    public void SetType(int t)
+    {
+        type = t;
+    }
+
     public virtual void SetRand()
     {
         //set rand depending the obj

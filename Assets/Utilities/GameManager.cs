@@ -12,8 +12,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Player currentPlayer;
     private string playerFile = "/playerInfo.dat";
     private string inventoryFile = "/inventoryInfo.dat";
+    private string itemManagerFile = "/itemManagerInfo.dat";
     PlayerData dataPly;
     InventoryData dataInv;
+    ItemsManagerData dataItemsManager;
     Inventory inv;
 
     private void Start()
@@ -21,6 +23,7 @@ public class GameManager : Singleton<GameManager>
         Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
         dataPly = new PlayerData();
         dataInv = new InventoryData();
+        dataItemsManager = new ItemsManagerData();
         inv = Inventory.Instance;
         
         Load();
@@ -48,6 +51,8 @@ public class GameManager : Singleton<GameManager>
         dataPly.xp = currentPlayer.Xp;
         dataPly.requiredXp = currentPlayer.RequiredXp;
         dataPly.levelBase = currentPlayer.LevelBase;
+        dataPly.lvl = currentPlayer.Lvl;
+        dataPly.total_xp = currentPlayer.Total_xp;
         dataPly.hp = currentPlayer.Hp;
         dataPly.maxHp = currentPlayer.MaxHp;
         dataPly.captureRange = currentPlayer.CaptureRange;
@@ -57,12 +62,13 @@ public class GameManager : Singleton<GameManager>
         file.Close();
 
         FileStream file2 = File.Create(Application.persistentDataPath + inventoryFile);
-
+        
         /*dataInv.items = inv.getItems();
         dataInv.equipment = inv.getEquipments();
         dataInv.e_selected = inv.GetCurrentEquipment();
         dataInv.space = inv.getEquipments().Count;*/
         int size = inv.getItems().Count;
+        dataInv.itemsSize = size;
         dataInv.itemIDs = new int[size];
         dataInv.itemRand = new int[size];
         dataInv.itemActive = new bool[size];
@@ -78,6 +84,7 @@ public class GameManager : Singleton<GameManager>
 
 
         size = inv.getEquipments().Count;
+        dataInv.equipmentsSize = size;
         dataInv.equipIDs = new int[size];
         dataInv.equipQuality = new int[size];
         dataInv.equipType = new int[size];
@@ -106,6 +113,13 @@ public class GameManager : Singleton<GameManager>
         bf.Serialize(file2, dataInv);
         file2.Close();
 
+        FileStream file3 = File.Create(Application.persistentDataPath + itemManagerFile);
+
+        dataItemsManager.lastIDEquip = ItemsManager.Instance.GetLastEquipID();
+        dataItemsManager.lastIDItem = ItemsManager.Instance.GetLastItemID();
+        bf.Serialize(file3, dataItemsManager);
+        file3.Close();
+
     }
     public void Load()
     {
@@ -113,6 +127,15 @@ public class GameManager : Singleton<GameManager>
         if (File.Exists(Application.persistentDataPath + playerFile))
         {
             BinaryFormatter bf = new BinaryFormatter();
+
+            FileStream file3 = File.Open(Application.persistentDataPath + itemManagerFile, FileMode.Open);
+            dataItemsManager = (ItemsManagerData)bf.Deserialize(file3);
+            file3.Close();
+
+            ItemsManager.Instance.SetLastEquipID(dataItemsManager.lastIDEquip);
+            ItemsManager.Instance.SetLastItemID(dataItemsManager.lastIDItem);
+
+
             FileStream file1 = File.Open(Application.persistentDataPath + playerFile, FileMode.Open);
             dataPly = (PlayerData)bf.Deserialize(file1);
             file1.Close();
@@ -120,6 +143,8 @@ public class GameManager : Singleton<GameManager>
             currentPlayer.Xp = dataPly.xp;
             currentPlayer.RequiredXp = dataPly.requiredXp;
             currentPlayer.LevelBase = dataPly.levelBase;
+            currentPlayer.Lvl = dataPly.lvl;
+            currentPlayer.Total_xp = dataPly.total_xp;
             currentPlayer.Hp = dataPly.hp;
             currentPlayer.MaxHp = dataPly.maxHp;
             currentPlayer.CaptureRange = dataPly.captureRange;
@@ -138,32 +163,68 @@ public class GameManager : Singleton<GameManager>
             inv.SetSpace(dataInv.space);
             Debug.Log(dataInv.space);
             Debug.Log(dataInv.equipment.Count);*/
+            ItemsManager itemM = ItemsManager.Instance;
+            GameObject gmObject = null;
+            Item item=null;
 
-            for (int i = 0; i < inv.getItems().Count; i++)
+            Debug.Log("Items: " + dataInv.itemsSize);
+            for (int i = 0; i < dataInv.itemsSize; i++)
             {
+                switch (dataInv.itemType[i])
+                {
+                    case 0:
+                        gmObject= Instantiate(Resources.Load("Items/ManaPot", typeof(GameObject))) as GameObject;
+                        item = gmObject.GetComponent<HealthItem>();
+                        break;
+                    case 1:
+                        gmObject= Instantiate(Resources.Load("Items/LifePot", typeof(GameObject))) as GameObject;
+                        item = gmObject.GetComponent<BigHealthItem>();
+                        break;
+                    case 2:
+                        gmObject= Instantiate(Resources.Load("Items/Shield", typeof(GameObject))) as GameObject;
+                        item = gmObject.GetComponent<ExtendCaptureItem>();
+                        break;
+                    case 3:
+                        gmObject= Instantiate(Resources.Load("Items/Key", typeof(GameObject))) as GameObject;
+                        item = gmObject.GetComponent<XPMultiplierItem>();
+                        break;
+                }
+
                 //crear objeto instancia de objeto (a partir de prefab o algo asi)
-                dataInv.itemIDs[i] = inv.getItems()[i].GetID();
-                dataInv.itemRand[i] = inv.getItems()[i].GetRand();
-                dataInv.itemActive[i] = inv.getItems()[i].GetActive();
-                dataInv.itemType[i] = inv.getItems()[i].GetItemType();
+                item.SetID(dataInv.itemIDs[i]);
+                item.SetRandNum(dataInv.itemRand[i]);
+                item.SetActive(dataInv.itemActive[i]);
+                item.SetType(dataInv.itemType[i]);
+                item.DisableComponents();
+                inv.SetItem(item, i);
             }
 
-            for (int i = 0; i < inv.getEquipments().Count; i++)
+            Equipment equip = null;
+            Debug.Log("Equipments: " + dataInv.equipmentsSize);
+            for (int i = 0; i < dataInv.equipmentsSize; i++)
             {
                 //crear objeto instancia de equipamiento (a partir de prefab o algo asi)
-                inv.getEquipments()[i].SetID(dataInv.equipIDs[i]);
-                inv.getEquipments()[i].SetQualityNum(dataInv.equipQuality[i]);
-                inv.getEquipments()[i].SetTypeNum(dataInv.equipType[i]);
-                inv.getEquipments()[i].SetAttack(dataInv.equipAttack[i]);
-                inv.getEquipments()[i].SetDefense(dataInv.equipDefense[i]);
-                inv.getEquipments()[i].SetSpeed(dataInv.equipSpeed[i]);
-                inv.getEquipments()[i].SetDurability(dataInv.equipDurability[i]);
-                inv.getEquipments()[i].SetActive(dataInv.equipActive[i]);
+                gmObject = Instantiate(Resources.Load(itemM.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
+                equip = gmObject.GetComponent<Equipment>();
+
+                equip.SetID(dataInv.equipIDs[i]);
+                equip.SetQualityNum(dataInv.equipQuality[i]);
+                equip.SetTypeNum(dataInv.equipType[i]);
+                equip.SetAttack(dataInv.equipAttack[i]);
+                equip.SetDefense(dataInv.equipDefense[i]);
+                equip.SetSpeed(dataInv.equipSpeed[i]);
+                equip.SetDurability(dataInv.equipDurability[i]);
+                equip.SetActive(dataInv.equipActive[i]);
+                equip.DisableComponents();
+                inv.SetEquip(equip,i);
             }
 
             inv.modified=true;
             inv.SetSpace(dataInv.space);
             inv.SelectEquipmentID(dataInv.id_e_selected);
+
+
+            
         }
     }
 }
@@ -193,6 +254,7 @@ class InventoryData
     public int[] itemRand;
     public bool[] itemActive;
     public int[] itemType;
+    public int itemsSize;
 
     public int[] equipIDs;
     public int[] equipQuality;
@@ -202,9 +264,16 @@ class InventoryData
     public int[] equipSpeed;
     public int[] equipDurability;
     public bool[] equipActive;
+    public int equipmentsSize;
 
     public int id_e_selected;
     public int space;
     public bool modified;
 }
 
+[Serializable]
+class ItemsManagerData
+{
+    public int lastIDItem;
+    public int lastIDEquip;
+}

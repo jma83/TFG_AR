@@ -1254,7 +1254,7 @@ GameObject:
   - component: {fileID: 23409063751923388}
   - component: {fileID: 114279165206733678}
   - component: {fileID: 54610588900368184}
-  - component: {fileID: 135600737682775942}
+  - component: {fileID: 65833517371559130}
   m_Layer: 0
   m_Name: CaptureRange
   m_TagString: player_range
@@ -1730,7 +1730,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788648829114752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00001, z: 0}
+  m_LocalPosition: {x: 0, y: 0.00005, z: 0}
   m_LocalScale: {x: 0.5, y: 0.00001, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4574041212354540}
@@ -3004,6 +3004,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65833517371559130
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788648829114752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 331.29974, z: 1.0000002}
+  m_Center: {x: 0.000000076293944, y: 164.65009, z: 0.00000007629394}
 --- !u!81 &81805166317696968
 AudioListener:
   m_ObjectHideFlags: 1
@@ -3146,6 +3158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800507e8e083c914b8b0837256d8492e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modified: 0
 --- !u!114 &114398761638782900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3253,18 +3266,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1765289178366704}
   m_Enabled: 1
---- !u!135 &135600737682775942
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1788648829114752}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.64
-  m_Center: {x: 0.000000059604645, y: -0.000000059604645, z: -0.00000008940697}
 --- !u!137 &137081178778780094
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

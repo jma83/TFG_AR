@@ -53,6 +53,11 @@ public class Player : MonoBehaviour {
         get { return xp; }
         set { xp = value; }
     }
+    public int Total_xp
+    {
+        get { return total_xp; }
+        set { total_xp = value; }
+    }
     public int RequiredXp
     {
         get { return requiredXp; }

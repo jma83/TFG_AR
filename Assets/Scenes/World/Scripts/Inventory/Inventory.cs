@@ -173,6 +173,22 @@ public class Inventory : Singleton <Inventory> {
         items = i;
     }
 
+    public void SetItem(Item i, int pos)
+    {
+        if (i != null && pos >= 0 && pos < items.Count)
+            items[pos] = i;
+        else
+            AddItem(i);
+    }
+
+    public void SetEquip(Equipment e, int pos)
+    {
+        if (e != null && pos >= 0 && pos < equipment.Count)
+            equipment[pos] = e;
+        else
+            AddEquipment(e);
+    }
+
     public void SetEquipments(List<Equipment> e)
     {
         equipment = e;

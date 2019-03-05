@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,11 @@ using UnityEngine.UI;
 
 public class ItemsManager : Singleton<ItemsManager>
 {
+    private String equipmentPrefab = "Equipment/Sword";
+    private String healthPrefab = "Items/ManaPot";
+    private String bigHealtPrefab = "Items/LifePot";
+    private String extendCapturePrefab = "Items/Shield";
+    private String xpMultiplierPrefab = "Items/Key";
 
     public List<Item> items;
     [SerializeField] GameObject activeObjects;
@@ -118,6 +124,47 @@ public class ItemsManager : Singleton<ItemsManager>
         id_equipment++;
         return id_equipment;
     }
+
+    public void SetLastItemID(int i)
+    {
+        id_item=i;
+    }
+
+    public void SetLastEquipID(int i)
+    {
+        id_equipment=i;
+    }
+
+    public int GetLastItemID()
+    {
+        return id_item;
+    }
+
+    public int GetLastEquipID()
+    {
+        return id_equipment;
+    }
+
+    public String GetEquipmentPrefab(){
+        return equipmentPrefab;
+    }
+    public String GetHealthPrefab()
+    {
+        return healthPrefab;
+    }
+    public String GetBigHealtPrefab()
+    {
+        return xpMultiplierPrefab;
+    }
+    public String GetXpMultiplierPrefab()
+    {
+        return extendCapturePrefab;
+    }
+    public String GetExtendCapturePrefab()
+    {
+        return extendCapturePrefab;
+    }
+
 }
 
 

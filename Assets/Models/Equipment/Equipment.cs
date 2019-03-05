@@ -183,11 +183,6 @@ public class Equipment : InventoryEntity
         bonusRate = b;
     }
 
-    public void SetActive(bool b)
-    {
-        active = b;
-    }
-
     public void SetAttack(int a)
     {
         attack = a;

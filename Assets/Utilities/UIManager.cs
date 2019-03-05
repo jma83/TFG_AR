@@ -57,20 +57,25 @@ public class UIManager : MonoBehaviour {
     }
 
     public void updateLevel() {
+        if (GameManager.Instance.CurrentPlayer!=null && levelText!=null)
         levelText.text = GameManager.Instance.CurrentPlayer.Lvl.ToString();
     }
 
     public void updateXP()
     {
-        xpText.text = GameManager.Instance.CurrentPlayer.Xp + " / " + GameManager.Instance.CurrentPlayer.RequiredXp;
+        if (GameManager.Instance.CurrentPlayer != null && xpText != null)
+            xpText.text = GameManager.Instance.CurrentPlayer.Xp + " / " + GameManager.Instance.CurrentPlayer.RequiredXp;
 
     }
     public void updateHP()
     {
-        float hp_value = GameManager.Instance.CurrentPlayer.Hp;
-        float f = hp_value / 100;
-        hpText.text = "HP: "+ hp_value.ToString() + "%";
-        currentHPBar.transform.localScale = new Vector3(f, 1, 1);
+        if (GameManager.Instance.CurrentPlayer != null && hpText != null && currentHPBar != null)
+        {
+            float hp_value = GameManager.Instance.CurrentPlayer.Hp;
+            float f = hp_value / 100;
+            hpText.text = "HP: " + hp_value.ToString() + "%";
+            currentHPBar.transform.localScale = new Vector3(f, 1, 1);
+        }
     }
 
     public void MenuButtonClick(int a)

@@ -42,7 +42,10 @@
 			_lineRenderer.endColor = _color;
 			_lineRenderer.widthMultiplier = _lineWidth;
 			_sqDistance = _minDistance * _minDistance;
-		}
+
+            if (!_isStable) _isStable = false; //avoid warnings;
+
+        }
 
 		void AddAnchor(BoundedPlane anchorData)
 		{

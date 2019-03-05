@@ -21,6 +21,10 @@ public abstract class InventoryEntity : MonoBehaviour {
     {
         id=i;
     }
+    public void SetActive(bool b)
+    {
+        active = b;
+    }
 
     public int GetID()
     {
