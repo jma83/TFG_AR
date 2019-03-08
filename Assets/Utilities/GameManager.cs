@@ -45,6 +45,8 @@ public class GameManager : Singleton<GameManager>
     }
     public void Save()
     {
+        inv = Inventory.Instance;
+
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + playerFile);
 
@@ -67,14 +69,19 @@ public class GameManager : Singleton<GameManager>
         dataInv.equipment = inv.getEquipments();
         dataInv.e_selected = inv.GetCurrentEquipment();
         dataInv.space = inv.getEquipments().Count;*/
-        int size = inv.getItems().Count;
-        dataInv.itemsSize = size;
-        dataInv.itemIDs = new int[size];
-        dataInv.itemRand = new int[size];
-        dataInv.itemActive = new bool[size];
-        dataInv.itemType = new int[size];
+        dataInv.itemsSize = inv.getItems().Count;
+        Debug.Log("EQUIPMENT SIZE: " + dataInv.itemsSize);
 
-        for (int i=0;i< inv.getItems().Count; i++)
+        dataInv.space = 26;
+        if (dataInv.itemIDs == null)
+        {
+            dataInv.itemIDs = new int[dataInv.space];
+            dataInv.itemRand = new int[dataInv.space];
+            dataInv.itemActive = new bool[dataInv.space];
+            dataInv.itemType = new int[dataInv.space];
+        }
+
+        for (int i=0;i< dataInv.itemsSize; i++)
         {
             dataInv.itemIDs[i] = inv.getItems()[i].GetID();
             dataInv.itemRand[i] = inv.getItems()[i].GetRand();
@@ -83,18 +90,20 @@ public class GameManager : Singleton<GameManager>
         }
 
 
-        size = inv.getEquipments().Count;
-        dataInv.equipmentsSize = size;
-        dataInv.equipIDs = new int[size];
-        dataInv.equipQuality = new int[size];
-        dataInv.equipType = new int[size];
-        dataInv.equipAttack = new int[size];
-        dataInv.equipDefense = new int[size];
-        dataInv.equipSpeed = new int[size];
-        dataInv.equipDurability = new int[size];
-        dataInv.equipActive = new bool[size];
-
-        for (int i = 0; i < inv.getEquipments().Count; i++)
+        dataInv.equipmentsSize = inv.getEquipments().Count;
+        Debug.Log("EQUIPMENT SIZE: " + dataInv.equipmentsSize);
+        if (dataInv.equipIDs == null)
+        {
+            dataInv.equipIDs = new int[dataInv.space];
+            dataInv.equipQuality = new int[dataInv.space];
+            dataInv.equipType = new int[dataInv.space];
+            dataInv.equipAttack = new int[dataInv.space];
+            dataInv.equipDefense = new int[dataInv.space];
+            dataInv.equipSpeed = new int[dataInv.space];
+            dataInv.equipDurability = new int[dataInv.space];
+            dataInv.equipActive = new bool[dataInv.space];
+        }
+        for (int i = 0; i < dataInv.equipmentsSize; i++)
         {
             dataInv.equipIDs[i] = inv.getEquipments()[i].GetID();
             dataInv.equipQuality[i] = (int)inv.getEquipments()[i].GetEquipmentQualityNum();
@@ -106,8 +115,6 @@ public class GameManager : Singleton<GameManager>
             dataInv.equipActive[i] = inv.getEquipments()[i].GetActive();
         }
 
-        dataInv.modified = inv.modified;
-        dataInv.space = 26;
         dataInv.id_e_selected = inv.GetCurrentEquipmentID();
 
         bf.Serialize(file2, dataInv);
@@ -268,7 +275,6 @@ class InventoryData
 
     public int id_e_selected;
     public int space;
-    public bool modified;
 }
 
 [Serializable]

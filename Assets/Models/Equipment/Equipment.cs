@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentQuality : int { Basic, Rare, Epic, Legend };
-public enum EquipmentType : int { Defensive, Ofensive, Balanced, Fast };
+public enum EquipmentQuality : int { Basic=0, Rare=1, Epic=2, Legend=3 };
+public enum EquipmentType : int { Defensive=0, Ofensive=1, Balanced=2, Fast=3 };
 public class Equipment : InventoryEntity
 {
     protected EquipmentQuality quality;
@@ -20,11 +20,14 @@ public class Equipment : InventoryEntity
     public void Start()
     {
         itemManager = ItemsManager.Instance;
-
+        if (id==0 || id==-1)
         id = itemManager.GetNewEquipID();
-        player = GameManager.Instance.CurrentPlayer;
-        SetDurability(100);
-        SetRandomStats();
+        if (attack == 0 && defense == 0 && speed == 0 && durability == 0)
+        {
+            player = GameManager.Instance.CurrentPlayer;
+            SetDurability(100);
+            SetRandomStats();
+        }
     }
 
     public void SetRandomStats()
@@ -147,6 +150,24 @@ public class Equipment : InventoryEntity
     }
     public void SetTypeNum(int t)
     {
+        if (t == 0)
+        {
+            icon = Resources.Load<Sprite>("Equipment/sword-and-shield");
+        }
+        else if (t == 1)
+        {
+            icon = Resources.Load<Sprite>("Equipment/laser");
+        }
+        else if (t == 2)
+        {
+            icon = Resources.Load<Sprite>("Equipment/armor");
+
+        }
+        else if (t == 3)
+        {
+            icon = Resources.Load<Sprite>("Equipment/sword-icon");
+
+        }
         type = (EquipmentType)t;
     }
 
@@ -176,6 +197,7 @@ public class Equipment : InventoryEntity
     public void SetQualityNum(int q)
     {
         quality = (EquipmentQuality) q;
+       
     }
 
     public void SetBonusRate(int b)
