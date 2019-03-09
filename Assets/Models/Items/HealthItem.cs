@@ -24,6 +24,7 @@ public class HealthItem : Item {
     public override void Use()
     {       
         GameManager.Instance.CurrentPlayer.addHp(rand);
+        active = true;
         this.DeleteObject();
     }
 }

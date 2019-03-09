@@ -25,6 +25,7 @@ public class ItemsManager : Singleton<ItemsManager>
         items = new List<Item>();
         id_item = -1;
         maxSizeActive = 3;
+        Time.timeScale = 1.0f;
     }
 	
 	// Update is called once per frame
@@ -40,19 +41,22 @@ public class ItemsManager : Singleton<ItemsManager>
 
                 for (int i = 0; i < items.Count; i++)
                 {
-                    if (items[i].GetActive())
+                    if (items[i] != null)
                     {
-                        items[i].Update();
-                        //Debug.Log("Items Activos: " + items.Count);
+                        if (items[i].GetActive())
+                        {
+                            items[i].Update();
+                            Debug.Log("Items Activos: " + items.Count);
 
-                    }
-                    else
-                    {
-                        deleteImages(items[i].icon);
-                        Item item_aux = items[i];
-                        items.Remove(items[i]);
-                        item_aux.DeleteObject();
-                        if (items.Count == 0) targetTime = 1;
+                        }
+                        else
+                        {
+                            deleteImages(items[i].icon);
+                            Item item_aux = items[i];
+                            items.Remove(items[i]);
+                            item_aux.DeleteObject();
+                            if (items.Count == 0) targetTime = 1;
+                        }
                     }
 
                 }
@@ -69,12 +73,16 @@ public class ItemsManager : Singleton<ItemsManager>
                 }
             }
         }
+        else
+        {
+            activeObjects = GameObject.Find("/GUI/ActiveItems");
+        }
     }
     
     
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
-        
+        bool b = false;
         for (int i = 0; i < maxSizeActive; i++)
         {
 
@@ -84,6 +92,7 @@ public class ItemsManager : Singleton<ItemsManager>
                 {
                     items.Remove(item);
                     items.Add(item);
+                    b = true;
                     break;
                 }
             }
@@ -92,9 +101,11 @@ public class ItemsManager : Singleton<ItemsManager>
                 activeObjects.GetComponentsInChildren<Image>()[i].sprite = item.icon;
                 activeObjects.GetComponentsInChildren<Image>()[i].enabled = true;
                 items.Add(item);
+                b = true;
                 break;
             }
         }
+        return b;
     }
     private void deleteImages(Sprite spr)
     {

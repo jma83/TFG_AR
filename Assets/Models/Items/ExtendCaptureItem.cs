@@ -31,10 +31,12 @@ public class ExtendCaptureItem : Item {
 
     public override void Use()
     {
-        GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(1.0f);
-        targetTime = defaultTime;
-        active = true;
-        ItemsManager.Instance.AddItem(this);
+        if (ItemsManager.Instance.AddItem(this))
+        {
+            GameManager.Instance.CurrentPlayer.SetMaxCaptureRange(1.0f);
+            targetTime = defaultTime;
+            active = true;
+        }
     }
 
 }

@@ -103,6 +103,7 @@ public class Inventory : Singleton <Inventory> {
         {
             modified = true;
 
+            if (e_selected!=null)
             if (equip_id == e_selected.GetID()) { e_selected = null; return false; }
 
             for (int j = 0; j < equipment.Count; j++)

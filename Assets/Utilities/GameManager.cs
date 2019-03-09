@@ -28,6 +28,11 @@ public class GameManager : Singleton<GameManager>
         
         Load();
     }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
     public Player CurrentPlayer
     {       
         get { FindPlayer(); return currentPlayer; }
@@ -124,6 +129,7 @@ public class GameManager : Singleton<GameManager>
 
         dataItemsManager.lastIDEquip = ItemsManager.Instance.GetLastEquipID();
         dataItemsManager.lastIDItem = ItemsManager.Instance.GetLastItemID();
+
         bf.Serialize(file3, dataItemsManager);
         file3.Close();
 
@@ -141,7 +147,22 @@ public class GameManager : Singleton<GameManager>
 
             ItemsManager.Instance.SetLastEquipID(dataItemsManager.lastIDEquip);
             ItemsManager.Instance.SetLastItemID(dataItemsManager.lastIDItem);
+            Item item = null;
 
+            for (int i = 0; i < dataItemsManager.maxSizeActive; i++)
+            {
+                item=CreateItemByType(dataInv.itemType[i]);
+
+                //crear objeto instancia de objeto (a partir de prefab o algo asi)
+                item.SetID(dataItemsManager.itemIDs[i]);
+                item.SetRandNum(dataItemsManager.itemRand[i]);
+                item.SetActive(dataItemsManager.itemActive[i]);
+                item.SetType(dataItemsManager.itemType[i]);
+                item.SetTargetTime(dataItemsManager.itemTargetTime[i]);
+                
+                item.DisableComponents();
+                //invItemsManager.Instance.SetItem(item, i); AQUIIII
+            }
 
             FileStream file1 = File.Open(Application.persistentDataPath + playerFile, FileMode.Open);
             dataPly = (PlayerData)bf.Deserialize(file1);
@@ -171,31 +192,12 @@ public class GameManager : Singleton<GameManager>
             Debug.Log(dataInv.space);
             Debug.Log(dataInv.equipment.Count);*/
             ItemsManager itemM = ItemsManager.Instance;
-            GameObject gmObject = null;
-            Item item=null;
+            item = null;
 
-            Debug.Log("Items: " + dataInv.itemsSize);
+            //Debug.Log("Items: " + dataInv.itemsSize);
             for (int i = 0; i < dataInv.itemsSize; i++)
             {
-                switch (dataInv.itemType[i])
-                {
-                    case 0:
-                        gmObject= Instantiate(Resources.Load("Items/ManaPot", typeof(GameObject))) as GameObject;
-                        item = gmObject.GetComponent<HealthItem>();
-                        break;
-                    case 1:
-                        gmObject= Instantiate(Resources.Load("Items/LifePot", typeof(GameObject))) as GameObject;
-                        item = gmObject.GetComponent<BigHealthItem>();
-                        break;
-                    case 2:
-                        gmObject= Instantiate(Resources.Load("Items/Shield", typeof(GameObject))) as GameObject;
-                        item = gmObject.GetComponent<ExtendCaptureItem>();
-                        break;
-                    case 3:
-                        gmObject= Instantiate(Resources.Load("Items/Key", typeof(GameObject))) as GameObject;
-                        item = gmObject.GetComponent<XPMultiplierItem>();
-                        break;
-                }
+                item=CreateItemByType(dataInv.itemType[i]);
 
                 //crear objeto instancia de objeto (a partir de prefab o algo asi)
                 item.SetID(dataInv.itemIDs[i]);
@@ -207,7 +209,9 @@ public class GameManager : Singleton<GameManager>
             }
 
             Equipment equip = null;
-            Debug.Log("Equipments: " + dataInv.equipmentsSize);
+            GameObject gmObject = null;
+
+            //Debug.Log("Equipments: " + dataInv.equipmentsSize);
             for (int i = 0; i < dataInv.equipmentsSize; i++)
             {
                 //crear objeto instancia de equipamiento (a partir de prefab o algo asi)
@@ -233,6 +237,33 @@ public class GameManager : Singleton<GameManager>
 
             
         }
+    }
+
+    public Item CreateItemByType(int i)
+    {
+        GameObject gmObject = null;
+        Item item = null;
+
+        switch (dataInv.itemType[i])
+        {
+            case 0:
+                gmObject = Instantiate(Resources.Load("Items/ManaPot", typeof(GameObject))) as GameObject;
+                item = gmObject.GetComponent<HealthItem>();
+                break;
+            case 1:
+                gmObject = Instantiate(Resources.Load("Items/LifePot", typeof(GameObject))) as GameObject;
+                item = gmObject.GetComponent<BigHealthItem>();
+                break;
+            case 2:
+                gmObject = Instantiate(Resources.Load("Items/Shield", typeof(GameObject))) as GameObject;
+                item = gmObject.GetComponent<ExtendCaptureItem>();
+                break;
+            case 3:
+                gmObject = Instantiate(Resources.Load("Items/Key", typeof(GameObject))) as GameObject;
+                item = gmObject.GetComponent<XPMultiplierItem>();
+                break;
+        }
+        return item;
     }
 }
 
@@ -282,4 +313,10 @@ class ItemsManagerData
 {
     public int lastIDItem;
     public int lastIDEquip;
+    public int maxSizeActive;
+    public int[] itemIDs;
+    public int[] itemRand;
+    public bool[] itemActive;
+    public int[] itemType;
+    public int[] itemTargetTime;
 }

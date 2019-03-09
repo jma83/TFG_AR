@@ -27,10 +27,14 @@ public class XPMultiplierItem : Item {
 
     public override void Use()
     {
-        GameManager.Instance.CurrentPlayer.SetXpMultiplier(multiplier);
-        targetTime = defaultTime;
-        active = true;
-        ItemsManager.Instance.AddItem(this);
+        if (ItemsManager.Instance.AddItem(this))
+        {
+
+            GameManager.Instance.CurrentPlayer.SetXpMultiplier(multiplier);
+
+            targetTime = defaultTime;
+            active = true;
+        }
     }
 
 }

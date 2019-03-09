@@ -8,7 +8,6 @@ public class InventorySlot : MonoBehaviour {
 
     Item item;
     Equipment equipment;
-    Inventory inv;
     [SerializeField] Image icon;
     [SerializeField] Image powerIcon;
     [SerializeField] Text txt;
@@ -23,7 +22,6 @@ public class InventorySlot : MonoBehaviour {
 
     private void Start()
     {
-        inv = Inventory.Instance;
         
     }
 
@@ -117,16 +115,18 @@ public class InventorySlot : MonoBehaviour {
         infoIcon.gameObject.SetActive(infoIcon.enabled);
     }
 
-    public void UseItem()
+    public void UseItem(Inventory inv)
     {
         if (item != null && deleteIcon.enabled==false && infoIcon.enabled == false)
         {
             item.Use();
+            if (item != null) 
+            if (item.GetActive())
             inv.RemoveItem(item);
         }else if (equipment != null && deleteIcon.enabled == false && infoIcon.enabled == false)
         {
             //equipment.Activate();
-            Debug.Log("trying to equip: "+equipment.name);
+            //Debug.Log("trying to equip: "+equipment.name);
             inv.SelectEquipment(equipment);
 
         }
@@ -160,7 +160,7 @@ public class InventorySlot : MonoBehaviour {
         hp_image.transform.localScale = new Vector3(f, 1, 1);
     }
 
-    public void OnRemoveButton()
+    public void OnRemoveButton(Inventory inv)
     {
         HideDeleteButton();
         //ClearSlot();       

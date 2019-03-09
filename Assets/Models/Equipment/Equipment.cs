@@ -124,27 +124,20 @@ public class Equipment : InventoryEntity
         if (r < aux)     //balanced
         {
             type = EquipmentType.Balanced;
-            icon = Resources.Load<Sprite>("Equipment/sword-and-shield");
-
         }
         else if (r >= aux && r <= aux*2)
         {
             type = EquipmentType.Fast;
-            icon = Resources.Load<Sprite>("Equipment/laser");
-
         }
         else if (r > aux*2 && r < aux*3)
         {
             type = EquipmentType.Defensive;
-            icon = Resources.Load<Sprite>("Equipment/armor");
-
         }
         else if (r >= aux*3)
         {
             type = EquipmentType.Ofensive;
-            icon = Resources.Load<Sprite>("Equipment/sword-icon");
-
         }
+        SetTypeNum((int)type);
 
 
     }
@@ -161,12 +154,10 @@ public class Equipment : InventoryEntity
         else if (t == 2)
         {
             icon = Resources.Load<Sprite>("Equipment/armor");
-
         }
         else if (t == 3)
         {
             icon = Resources.Load<Sprite>("Equipment/sword-icon");
-
         }
         type = (EquipmentType)t;
     }

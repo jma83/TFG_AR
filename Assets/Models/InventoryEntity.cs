@@ -36,6 +36,16 @@ public abstract class InventoryEntity : MonoBehaviour {
         return active;
     }
 
+    public void SetTargetTime(float f)
+    {
+        targetTime=f;
+    }
+
+    public float GetTargetTime()
+    {
+        return targetTime;
+    }
+
     public void DisableComponents()
     {
         gameObject.GetComponent<ItemPickup>().enabled = false;

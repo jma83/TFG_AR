@@ -13,7 +13,8 @@ public class Item : InventoryEntity{
     public virtual void Start()
     {
         itemManager = ItemsManager.Instance;
-
+        Time.timeScale = 1.0f;
+        if (id == 0 || id == -1)
         id = itemManager.GetNewItemID();
 
     }
@@ -32,6 +33,7 @@ public class Item : InventoryEntity{
                 active = false;
 
             }
+            Debug.Log(targetTime);
         }
     }
 

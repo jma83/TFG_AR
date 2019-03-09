@@ -57,7 +57,7 @@ public class InventoryUI : MonoBehaviour
         {
             size = inv.getEquipments().Count;
         }
-        Debug.Log("checkSwitch: " + checkSwitch + " size: " + size);
+        //Debug.Log("checkSwitch: " + checkSwitch + " size: " + size);
 
         for (int i = 0; i < slots.Length; i++)
         {
