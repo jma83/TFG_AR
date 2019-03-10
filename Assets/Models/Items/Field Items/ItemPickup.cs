@@ -49,7 +49,7 @@ public class ItemPickup : MapEntity {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
 
-            Debug.Log("OnMouseDown");
+            //Debug.Log("OnMouseDown");
 
             if (captureRange)
             {
@@ -78,7 +78,7 @@ public class ItemPickup : MapEntity {
         if (item != null)
             item.SetRand();
 
-        Debug.Log("PickUp");
+        //Debug.Log("PickUp");
 
         if (item != null)
         {

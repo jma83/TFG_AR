@@ -26,14 +26,14 @@ public class Inventory : Singleton <Inventory> {
 
             if (onItemChangedCallback != null)
             {
-                Debug.Log("Inventory = onItemChangedCallback");
+                //Debug.Log("Inventory = onItemChangedCallback");
                 onItemChangedCallback.Invoke();
             }
             return true;
         }
         else
         {
-            Debug.Log("Your inventory is full!");
+            Debug.Log("Your inventory is full! NOW:" + items.Count +"/" + space);
         }
         return false;
     }
@@ -46,7 +46,7 @@ public class Inventory : Singleton <Inventory> {
 
             if (onEquipChangedCallback != null)
             {
-                Debug.Log("Inventory = onEquipChangedCallback");
+                //Debug.Log("Inventory = onEquipChangedCallback");
                 onEquipChangedCallback.Invoke();
             }
             return true;

@@ -153,7 +153,7 @@ public class InventorySlot : MonoBehaviour {
 
     public void updateHP()
     {
-        Debug.Log(equipment.GetDurability());
+        //Debug.Log(equipment.GetDurability());
         float f = equipment.GetDurability() / 100f;
         hp_text.text = equipment.GetDurability().ToString() + "%";
 

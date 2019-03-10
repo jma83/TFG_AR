@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     InventoryData dataInv;
     ItemsManagerData dataItemsManager;
     Inventory inv;
+    ItemsManager itemsManager;
 
     private void Start()
     {
@@ -51,8 +52,14 @@ public class GameManager : Singleton<GameManager>
     public void Save()
     {
         inv = Inventory.Instance;
+        itemsManager = ItemsManager.Instance;
 
         BinaryFormatter bf = new BinaryFormatter();
+
+        //---------------------------------------------------------------
+        // GUARDAMOS EL FICHERO DE LOS DATOS DEL JUGADOR
+        //---------------------------------------------------------------
+
         FileStream file = File.Create(Application.persistentDataPath + playerFile);
 
         dataPly.xp = currentPlayer.Xp;
@@ -68,16 +75,15 @@ public class GameManager : Singleton<GameManager>
         bf.Serialize(file, dataPly);
         file.Close();
 
-        FileStream file2 = File.Create(Application.persistentDataPath + inventoryFile);
-        
-        /*dataInv.items = inv.getItems();
-        dataInv.equipment = inv.getEquipments();
-        dataInv.e_selected = inv.GetCurrentEquipment();
-        dataInv.space = inv.getEquipments().Count;*/
-        dataInv.itemsSize = inv.getItems().Count;
-        Debug.Log("EQUIPMENT SIZE: " + dataInv.itemsSize);
+        //---------------------------------------------------------------
+        // GUARDAMOS EL FICHERO DEL INVENTARIO Y LOS ITEMS QUE CONTIENE
+        //---------------------------------------------------------------
 
-        dataInv.space = 26;
+        FileStream file2 = File.Create(Application.persistentDataPath + inventoryFile);       
+        
+        dataInv.itemsSize = inv.getItems().Count;
+
+        dataInv.space = 26; // inv.getItems().Capacity
         if (dataInv.itemIDs == null)
         {
             dataInv.itemIDs = new int[dataInv.space];
@@ -96,7 +102,6 @@ public class GameManager : Singleton<GameManager>
 
 
         dataInv.equipmentsSize = inv.getEquipments().Count;
-        Debug.Log("EQUIPMENT SIZE: " + dataInv.equipmentsSize);
         if (dataInv.equipIDs == null)
         {
             dataInv.equipIDs = new int[dataInv.space];
@@ -125,10 +130,39 @@ public class GameManager : Singleton<GameManager>
         bf.Serialize(file2, dataInv);
         file2.Close();
 
+        //---------------------------------------------------------------
+        // GUARDAMOS EL FICHERO DEL GESTOR DE ITEMS (IDS Y OBJETOS ACTIVOS)
+        //---------------------------------------------------------------
+
         FileStream file3 = File.Create(Application.persistentDataPath + itemManagerFile);
 
-        dataItemsManager.lastIDEquip = ItemsManager.Instance.GetLastEquipID();
-        dataItemsManager.lastIDItem = ItemsManager.Instance.GetLastItemID();
+        dataItemsManager.lastIDEquip = itemsManager.GetLastEquipID();
+        dataItemsManager.lastIDItem = itemsManager.GetLastItemID();
+        dataItemsManager.itemSize = itemsManager.GetItems().Count;
+
+        dataItemsManager.maxSizeActive = 3; //itemsManager.GetItems().Capacity;  
+        Debug.Log("item size save: " + dataItemsManager.itemSize);
+        if (dataItemsManager.itemIDs == null)
+        {
+            dataItemsManager.itemIDs = new int[dataItemsManager.maxSizeActive];
+            dataItemsManager.itemRand = new int[dataItemsManager.maxSizeActive];
+            dataItemsManager.itemActive = new bool[dataItemsManager.maxSizeActive];
+            dataItemsManager.itemType = new int[dataItemsManager.maxSizeActive];
+            dataItemsManager.itemTargetTime = new float[dataItemsManager.maxSizeActive];
+        }
+
+        for (int i = 0; i < dataItemsManager.itemSize; i++)
+        {
+            dataItemsManager.itemIDs[i] = itemsManager.GetItems()[i].GetID();
+            dataItemsManager.itemRand[i] = itemsManager.GetItems()[i].GetRand();
+            dataItemsManager.itemActive[i] = itemsManager.GetItems()[i].GetActive();
+            dataItemsManager.itemType[i] = itemsManager.GetItems()[i].GetItemType();
+            dataItemsManager.itemTargetTime[i] = itemsManager.GetItems()[i].GetTargetTime();
+
+            Debug.Log("ID save: " + dataItemsManager.itemIDs[i]);
+            Debug.Log("Active save: " + dataItemsManager.itemActive[i]);
+            Debug.Log("Target save: " + dataItemsManager.itemTargetTime[i]);
+        }
 
         bf.Serialize(file3, dataItemsManager);
         file3.Close();
@@ -136,33 +170,17 @@ public class GameManager : Singleton<GameManager>
     }
     public void Load()
     {
-        // Debug.Log(Application.persistentDataPath);
         if (File.Exists(Application.persistentDataPath + playerFile))
         {
+            itemsManager = ItemsManager.Instance;
+
             BinaryFormatter bf = new BinaryFormatter();
 
-            FileStream file3 = File.Open(Application.persistentDataPath + itemManagerFile, FileMode.Open);
-            dataItemsManager = (ItemsManagerData)bf.Deserialize(file3);
-            file3.Close();
+            
 
-            ItemsManager.Instance.SetLastEquipID(dataItemsManager.lastIDEquip);
-            ItemsManager.Instance.SetLastItemID(dataItemsManager.lastIDItem);
-            Item item = null;
-
-            for (int i = 0; i < dataItemsManager.maxSizeActive; i++)
-            {
-                item=CreateItemByType(dataInv.itemType[i]);
-
-                //crear objeto instancia de objeto (a partir de prefab o algo asi)
-                item.SetID(dataItemsManager.itemIDs[i]);
-                item.SetRandNum(dataItemsManager.itemRand[i]);
-                item.SetActive(dataItemsManager.itemActive[i]);
-                item.SetType(dataItemsManager.itemType[i]);
-                item.SetTargetTime(dataItemsManager.itemTargetTime[i]);
-                
-                item.DisableComponents();
-                //invItemsManager.Instance.SetItem(item, i); AQUIIII
-            }
+            //---------------------------------------------------------------
+            // ABRIMOS EL FICHERO DE LOS DATOS DEL JUGADOR
+            //---------------------------------------------------------------
 
             FileStream file1 = File.Open(Application.persistentDataPath + playerFile, FileMode.Open);
             dataPly = (PlayerData)bf.Deserialize(file1);
@@ -178,28 +196,56 @@ public class GameManager : Singleton<GameManager>
             currentPlayer.CaptureRange = dataPly.captureRange;
             currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
 
+            //---------------------------------------------------------------
+            // ABRIMOS EL FICHERO DEL GESTOR DE ITEMS (IDS Y OBJETOS ACTIVOS)
+            //---------------------------------------------------------------
+
+            FileStream file3 = File.Open(Application.persistentDataPath + itemManagerFile, FileMode.Open);
+            dataItemsManager = (ItemsManagerData)bf.Deserialize(file3);
+            file3.Close();
+
+            itemsManager.SetLastEquipID(dataItemsManager.lastIDEquip);
+            itemsManager.SetLastItemID(dataItemsManager.lastIDItem);
+            Item item = null;
+
+            Debug.Log("item size load: " + dataItemsManager.itemSize);
+
+            for (int i = 0; i < dataItemsManager.itemSize; i++)
+            {
+                item = CreateItemByType(dataItemsManager.itemType[i]);
+
+                //crear instancia de los ITEMS ACTIVOS
+                item.SetID(dataItemsManager.itemIDs[i]);
+                item.SetRandNum(dataItemsManager.itemRand[i]);
+                item.SetTargetTime(dataItemsManager.itemTargetTime[i]);
+
+                //Debug.Log("ID load: " + item.GetID());
+                //Debug.Log("Active load: " + dataItemsManager.itemActive[i]);
+                //Debug.Log("Target load: " + item.GetTargetTime());
+                item.SetActive(dataItemsManager.itemActive[i]);
+
+                item.SetType(dataItemsManager.itemType[i]);
+                item.timeStampAux = dataItemsManager.itemTargetTime[i];
+                item.DisableComponents();
+                if (!itemsManager.AddItem(item)) Debug.Log("algo salio mal!");
+
+            }
+
+            //---------------------------------------------------------------
+            // ABRIMOS EL FICHERO DEL INVENTARIO Y LOS ITEMS QUE CONTIENE
+            //---------------------------------------------------------------
+
             FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
             dataInv = (InventoryData)bf.Deserialize(file2);
             file2.Close();
 
-            /*Debug.Log(dataInv.items);
-            inv.SetItems(dataInv.items);
-            Debug.Log(dataInv.equipment);
-            inv.SetEquipments(dataInv.equipment);
-            Debug.Log(dataInv.e_selected);
-            inv.SelectEquipment(dataInv.e_selected);
-            inv.SetSpace(dataInv.space);
-            Debug.Log(dataInv.space);
-            Debug.Log(dataInv.equipment.Count);*/
-            ItemsManager itemM = ItemsManager.Instance;
             item = null;
 
-            //Debug.Log("Items: " + dataInv.itemsSize);
             for (int i = 0; i < dataInv.itemsSize; i++)
             {
-                item=CreateItemByType(dataInv.itemType[i]);
+                //crear objeto instancia de los ITEMs
+                item = CreateItemByType(dataInv.itemType[i]);
 
-                //crear objeto instancia de objeto (a partir de prefab o algo asi)
                 item.SetID(dataInv.itemIDs[i]);
                 item.SetRandNum(dataInv.itemRand[i]);
                 item.SetActive(dataInv.itemActive[i]);
@@ -211,11 +257,10 @@ public class GameManager : Singleton<GameManager>
             Equipment equip = null;
             GameObject gmObject = null;
 
-            //Debug.Log("Equipments: " + dataInv.equipmentsSize);
             for (int i = 0; i < dataInv.equipmentsSize; i++)
             {
-                //crear objeto instancia de equipamiento (a partir de prefab o algo asi)
-                gmObject = Instantiate(Resources.Load(itemM.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
+                //crear instancia de equipamiento
+                gmObject = Instantiate(Resources.Load(itemsManager.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
                 equip = gmObject.GetComponent<Equipment>();
 
                 equip.SetID(dataInv.equipIDs[i]);
@@ -244,7 +289,7 @@ public class GameManager : Singleton<GameManager>
         GameObject gmObject = null;
         Item item = null;
 
-        switch (dataInv.itemType[i])
+        switch (i)
         {
             case 0:
                 gmObject = Instantiate(Resources.Load("Items/ManaPot", typeof(GameObject))) as GameObject;
@@ -286,8 +331,6 @@ class PlayerData
 [Serializable]
 class InventoryData
 {
-    //public List<Item> items;
-    //public List<Equipment> equipment;
     public int[] itemIDs;
     public int[] itemRand;
     public bool[] itemActive;
@@ -318,5 +361,6 @@ class ItemsManagerData
     public int[] itemRand;
     public bool[] itemActive;
     public int[] itemType;
-    public int[] itemTargetTime;
+    public float[] itemTargetTime;
+    public int itemSize;
 }

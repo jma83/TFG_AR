@@ -22,14 +22,20 @@ public class ItemsManager : Singleton<ItemsManager>
 
     // Use this for initialization
     void Start () {
-        items = new List<Item>();
-        id_item = -1;
-        maxSizeActive = 3;
-        Time.timeScale = 1.0f;
+        if (maxSizeActive != 3)
+        {
+            items = new List<Item>();
+            id_item = -1;
+            maxSizeActive = 3;
+            Time.timeScale = 1.0f;
+        }
+        if (activeObjects == null) activeObjects = GameObject.Find("/GUI/ActiveItems");
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
         if (activeObjects != null)
         {
@@ -45,8 +51,8 @@ public class ItemsManager : Singleton<ItemsManager>
                     {
                         if (items[i].GetActive())
                         {
-                            items[i].Update();
-                            Debug.Log("Items Activos: " + items.Count);
+                            //items[i].Update();
+                            //Debug.Log("Items Activos: " + items.Count);
 
                         }
                         else
@@ -73,16 +79,20 @@ public class ItemsManager : Singleton<ItemsManager>
                 }
             }
         }
-        else
-        {
-            activeObjects = GameObject.Find("/GUI/ActiveItems");
-        }
     }
-    
-    
+
+    public void SetItem(Item i, int pos)
+    {
+        if (i != null && pos >= 0 && pos < items.Count)
+            items[pos] = i;
+        else
+            AddItem(i);
+    }
+
     public bool AddItem(Item item)
     {
         bool b = false;
+        if (maxSizeActive == 0) Start();
         for (int i = 0; i < maxSizeActive; i++)
         {
 
@@ -91,6 +101,7 @@ public class ItemsManager : Singleton<ItemsManager>
                 if (activeObjects.GetComponentsInChildren<Image>()[i].sprite == item.icon)
                 {
                     items.Remove(item);
+                    //item.DeleteObject();
                     items.Add(item);
                     b = true;
                     break;
@@ -98,6 +109,9 @@ public class ItemsManager : Singleton<ItemsManager>
             }
             else
             {
+                if (item.icon == null)
+                    item.Start();
+                
                 activeObjects.GetComponentsInChildren<Image>()[i].sprite = item.icon;
                 activeObjects.GetComponentsInChildren<Image>()[i].enabled = true;
                 items.Add(item);
@@ -105,6 +119,7 @@ public class ItemsManager : Singleton<ItemsManager>
                 break;
             }
         }
+        Debug.Log("Tam: " + maxSizeActive);
         return b;
     }
     private void deleteImages(Sprite spr)
@@ -144,6 +159,11 @@ public class ItemsManager : Singleton<ItemsManager>
     public void SetLastEquipID(int i)
     {
         id_equipment=i;
+    }
+
+    public List<Item> GetItems()
+    {
+        return items;
     }
 
     public int GetLastItemID()

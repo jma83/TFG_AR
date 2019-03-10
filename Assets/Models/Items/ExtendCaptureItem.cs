@@ -12,7 +12,7 @@ public class ExtendCaptureItem : Item {
     public override void Start () {
         name = "ExtendCaptureItem";
         targetTime = 0;
-        defaultTime = 15;
+        defaultTime = 50;
         icon = Resources.Load<Sprite>("Items/iconfinder_Spell_Scroll");
         type = 2;
     }

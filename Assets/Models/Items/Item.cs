@@ -8,6 +8,7 @@ public class Item : InventoryEntity{
 
     protected int type = -1;    // 0 == health ; 1 == bighealth ; 2 == extend ; 3 == xpmultiplier
     protected int rand=0;
+    public float timeStampAux;
     protected ItemsManager itemManager;
 
     public virtual void Start()
@@ -29,11 +30,20 @@ public class Item : InventoryEntity{
             }
             else
             {
-                RestoreAction();
-                active = false;
+                if (timeStampAux <= 0)
+                {
+                    Debug.Log("restore action y activo=false " + targetTime + " id: " + id + " type: " + type);
+                    RestoreAction();
+                    active = false;
+                }
+                else
+                {
+                    targetTime = timeStampAux;
+                    timeStampAux = 0;
+                }
 
             }
-            Debug.Log(targetTime);
+            //Debug.Log(targetTime);
         }
     }
 
@@ -41,7 +51,10 @@ public class Item : InventoryEntity{
     {
         //Use item
     }
-
+    public void SetTargetTime(float f)
+    {
+        targetTime = f;
+    }
     public virtual void RestoreAction()
     {
         //action after update

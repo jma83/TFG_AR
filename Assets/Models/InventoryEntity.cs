@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InventoryEntity : MonoBehaviour {
+public class InventoryEntity : MonoBehaviour {
 
     protected float defaultTime;
-    protected float targetTime;
-    protected bool active = false;
+    [SerializeField] protected float targetTime;
+    [SerializeField] protected bool active = false;
     protected int id;
     public Sprite icon = null;
     protected bool isDefault = false;
@@ -36,10 +36,7 @@ public abstract class InventoryEntity : MonoBehaviour {
         return active;
     }
 
-    public void SetTargetTime(float f)
-    {
-        targetTime=f;
-    }
+    
 
     public float GetTargetTime()
     {
