@@ -36,8 +36,6 @@ public class InventoryEntity : MonoBehaviour {
         return active;
     }
 
-    
-
     public float GetTargetTime()
     {
         return targetTime;

@@ -34,6 +34,16 @@ public class GameManager : Singleton<GameManager>
     {
         Save();
     }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+            Save();
+        //else
+            //Load();
+
+    }
+
     public Player CurrentPlayer
     {       
         get { FindPlayer(); return currentPlayer; }

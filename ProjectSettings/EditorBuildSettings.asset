@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FightScene/FightScene.unity
     guid: 6b7bfe7a7372a9d47a1bd559177a76ff
+  - enabled: 1
+    path: Assets/Scenes/PuzzleScene/PuzzleScene.unity
+    guid: 7bb2ab0918b66a24bb49f4ed012b810e
   m_configObjects: {}

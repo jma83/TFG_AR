@@ -16,7 +16,7 @@ public class FightSceneManager : ARGameSceneManager {
 		
 	}
 
-    public override void ChangeScene(GameObject droid)
+    public override void ChangeScene(GameObject droid,int i)
     {
 
         List<GameObject> list = new List<GameObject>();
@@ -27,6 +27,6 @@ public class FightSceneManager : ARGameSceneManager {
 
     public override void playerTapped(GameObject player)
     {
-        
+        ChangeScene(null, 0);
     }
 }

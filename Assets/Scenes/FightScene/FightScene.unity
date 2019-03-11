@@ -874,7 +874,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 534669909}
-        m_MethodName: ChangeScene
+        m_MethodName: playerTapped
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 264993367}

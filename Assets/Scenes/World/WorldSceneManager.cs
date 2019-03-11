@@ -17,18 +17,21 @@ public class WorldSceneManager : ARGameSceneManager {
 
     }
 
-    public override void ChangeScene(GameObject droid)
+    public override void ChangeScene(GameObject droid,int i)
     {
         List<GameObject> list = new List<GameObject>();
         list.Add(droid);
 
         GameManager.Instance.Save();
-        SceneChangeManager.Instance.GoToScene(ARGameConstants.SCENE_COMBAT, list);
+        if (i==0)
+            SceneChangeManager.Instance.GoToScene(ARGameConstants.SCENE_COMBAT, list);
+        else
+            SceneChangeManager.Instance.GoToScene(ARGameConstants.SCENE_PUZZLE, list);
     }
 
     public override void playerTapped(GameObject player)
     {
-        
+        ChangeScene(null, 1);
     }
 
     

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapBoxTest2", "mapBoxTest2.csproj", "{2E5ADCF1-E0DB-46C0-12EE-B8ED781BD950}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuforiaScripts", "VuforiaScripts.csproj", "{CC179C3A-F110-1C81-4789-6A3E1CBBEDBC}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TextMeshPro", "Unity.TextMeshPro.csproj", "{07A21C90-D344-AE1A-8456-9910C203B41A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapBoxTest2.Plugins", "mapBoxTest2.Plugins.csproj", "{3D21477C-96C5-37CE-DED1-624EC74EC73A}"
@@ -15,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.TextMeshPro.Editor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEditor.StandardEvents", "UnityEditor.StandardEvents.csproj", "{6800202F-4402-D405-F8CB-03DC7BD78B92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuforiaEditorScripts", "VuforiaEditorScripts.csproj", "{CDE0E850-A104-61B8-8B4D-585E45985D86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{2E5ADCF1-E0DB-46C0-12EE-B8ED781BD950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E5ADCF1-E0DB-46C0-12EE-B8ED781BD950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E5ADCF1-E0DB-46C0-12EE-B8ED781BD950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC179C3A-F110-1C81-4789-6A3E1CBBEDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC179C3A-F110-1C81-4789-6A3E1CBBEDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC179C3A-F110-1C81-4789-6A3E1CBBEDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC179C3A-F110-1C81-4789-6A3E1CBBEDBC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{07A21C90-D344-AE1A-8456-9910C203B41A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{07A21C90-D344-AE1A-8456-9910C203B41A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07A21C90-D344-AE1A-8456-9910C203B41A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,6 +57,10 @@ Global
 		{6800202F-4402-D405-F8CB-03DC7BD78B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6800202F-4402-D405-F8CB-03DC7BD78B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6800202F-4402-D405-F8CB-03DC7BD78B92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE0E850-A104-61B8-8B4D-585E45985D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE0E850-A104-61B8-8B4D-585E45985D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE0E850-A104-61B8-8B4D-585E45985D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE0E850-A104-61B8-8B4D-585E45985D86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

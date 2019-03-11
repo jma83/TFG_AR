@@ -25,6 +25,7 @@ public class SceneChangeManager : Singleton<SceneChangeManager> {
         {
             foreach (GameObject obj in objectsToMove)
             {
+                if (obj!=null)
                 SceneManager.MoveGameObjectToScene(obj, sceneToLoad);
             }
         }

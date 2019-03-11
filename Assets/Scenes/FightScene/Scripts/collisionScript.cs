@@ -31,7 +31,7 @@ public class collisionScript : MonoBehaviour
 
         if (GameObject.FindGameObjectsWithTag("Player").Length == 0)
         {
-            FightSceneManager.Instance.ChangeScene(null);
+            FightSceneManager.Instance.ChangeScene(null,0);
             /*GameObject enemy = Instantiate(Resources.Load("FightScene/enemy1", typeof(GameObject))) as GameObject;
             GameObject enemy1 = Instantiate(Resources.Load("FightScene/enemy2", typeof(GameObject))) as GameObject;
             GameObject enemy2 = Instantiate(Resources.Load("FightScene/enemy3", typeof(GameObject))) as GameObject;
