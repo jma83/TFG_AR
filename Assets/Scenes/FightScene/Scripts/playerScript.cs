@@ -35,4 +35,9 @@ public class playerScript : MonoBehaviour {
             targetTime = 1.5f;
         }
     }
+
+    void Defend()
+    {
+
+    }
 }
