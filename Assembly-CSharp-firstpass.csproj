@@ -322,22 +322,22 @@
       <HintPath>D:/Programas/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.ExtensionMethods">
-      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.ExtensionMethods.dll</HintPath>
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.ExtensionMethods.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.Geometry">
-      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.Geometry.dll</HintPath>
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.Geometry.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.PbfReader">
-      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.PbfReader.dll</HintPath>
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.PbfReader.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.VectorTile.VectorTileReader">
-      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.VectorTileReader.dll</HintPath>
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/Mapbox/vector-tile-cs/net46/Mapbox.VectorTile.VectorTileReader.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.IO.Compression">
-      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/MapBoxSDK/MapBox/Core/Plugins/ThirdParty/Mapbox.IO.Compression/net35/Mapbox.IO.Compression.dll</HintPath>
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/ThirdParty/Mapbox.IO.Compression/net35/Mapbox.IO.Compression.dll</HintPath>
     </Reference>
     <Reference Include="Mapbox.Json">
-      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/MapBoxSDK/MapBox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Javi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
@@ -372,6 +372,16 @@
     <Reference Include="Boo.Lang">
       <HintPath>D:/Programas/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="VuforiaScripts.csproj">
+      <Project>{6BC8C4F2-A2DA-4556-4987-3F2568E0C31C}</Project>
+      <Name>VuforiaScripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="VuforiaEditorScripts.csproj">
+      <Project>{134DFFCF-C235-84F5-E822-AF273E3CA06B}</Project>
+      <Name>VuforiaEditorScripts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
