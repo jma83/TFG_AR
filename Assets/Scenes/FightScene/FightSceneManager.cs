@@ -8,7 +8,8 @@ public class FightSceneManager : ARGameSceneManager {
 
     // Use this for initialization
     void Start () {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        StartCoroutine(LoadAnimation());
+
     }
 	
 	// Update is called once per frame
@@ -28,5 +29,13 @@ public class FightSceneManager : ARGameSceneManager {
     public override void playerTapped(GameObject player)
     {
         ChangeScene(null, 0);
+    }
+
+    private IEnumerator LoadAnimation()
+    {
+        transtionAnim.SetTrigger("end");
+        yield return new WaitForSeconds(2.5f);
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
     }
 }

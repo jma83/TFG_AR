@@ -6942,6 +6942,11 @@ Prefab:
       propertyPath: textInfo
       value: 
       objectReference: {fileID: 1320059203}
+    - target: {fileID: 114895142116931626, guid: 60f8f1600a3295644bfd298a9bae82c3,
+        type: 2}
+      propertyPath: transtionAnim
+      value: 
+      objectReference: {fileID: 2124289680}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60f8f1600a3295644bfd298a9bae82c3, type: 2}
   m_IsPrefabAsset: 0
@@ -13875,7 +13880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f11d70bfd5954641ab1ff114f2bf768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transtionAnim: {fileID: 2124289680}
 --- !u!1 &714113302
 GameObject:
   m_ObjectHideFlags: 0
@@ -36355,7 +36359,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2124289678}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 653868b431dd8c24fa85605c3aef2d7d, type: 2}
   m_CullingMode: 0

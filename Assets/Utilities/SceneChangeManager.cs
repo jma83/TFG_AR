@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneChangeManager : Singleton<SceneChangeManager> {
 
     private AsyncOperation sceneAsync;
-    public Animator transtionAnim;
 
 	public void GoToScene(string sceneName, List<GameObject> objectsToMove)
     {
@@ -20,9 +19,6 @@ public class SceneChangeManager : Singleton<SceneChangeManager> {
         SceneManager.sceneLoaded += (newScene, mode) => {
             SceneManager.SetActiveScene(newScene);
         };
-
-        transtionAnim.SetTrigger("end");
-        yield return new WaitForSeconds(1.5f);
 
         Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
         if (objectsToMove != null)
