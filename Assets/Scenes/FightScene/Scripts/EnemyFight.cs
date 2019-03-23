@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyScript : MonoBehaviour
+public class EnemyFight : MonoBehaviour
 {
 
     private int numEnemies;

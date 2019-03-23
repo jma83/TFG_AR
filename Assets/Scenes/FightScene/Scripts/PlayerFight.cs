@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class playerScript : MonoBehaviour {
+public class PlayerFight : MonoBehaviour {
     public Button fireButton;
-    private bulletScript bullet;
+    private Weapon bullet;
     private float targetTime;
     private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
-        bullet = gameObject.AddComponent(typeof(bulletScript)) as bulletScript;
+        bullet = gameObject.AddComponent(typeof(Weapon)) as Weapon;
         fireButton.onClick.AddListener(Attack);
         targetTime = 0.0f;
     }

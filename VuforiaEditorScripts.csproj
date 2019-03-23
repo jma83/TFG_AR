@@ -369,6 +369,7 @@
     <Compile Include="Assets\Lib\Vuforia\Editor\Scripts\OpenSourceInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Editor\Vuforia\CylinderTargetTextures\VuforiaMars_Images\authoringinfo.xml" />
     <None Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Materials\AREdgeDetectionBackground.shader" />
     <None Include="Assets\Lib\MapBoxSDK\GoogleARCore\SDK\Materials\ARBackground.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Core\Plugins\Android\UniAndroidPermission\AndroidManifest-uniRP.xml" />

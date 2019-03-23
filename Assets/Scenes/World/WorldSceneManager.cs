@@ -10,6 +10,7 @@ public class WorldSceneManager : ARGameSceneManager {
     void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
+        GameManager.Instance.InitializeScene();
     }
 
     // Update is called once per frame
@@ -21,6 +22,12 @@ public class WorldSceneManager : ARGameSceneManager {
     public override void ChangeScene(GameObject droid,int i)
     {
         List<GameObject> list = new List<GameObject>();
+        /*for (int j=0;j< UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects().Length; j++)
+        {
+            list.Add(UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects()[j]);
+        }*/
+        
+        //list.Add(GameManager.Instance.CurrentPlayer.gameObject);
         list.Add(droid);
 
         GameManager.Instance.Save();
@@ -38,7 +45,7 @@ public class WorldSceneManager : ARGameSceneManager {
         transtionAnim.SetTrigger("active");
         
         yield return new WaitForSeconds(1.5f);
-        transtionAnim.ResetTrigger("active");
+        //transtionAnim.ResetTrigger("active");
         if (i == 0)
             SceneChangeManager.Instance.GoToScene(ARGameConstants.SCENE_COMBAT, list);
         else

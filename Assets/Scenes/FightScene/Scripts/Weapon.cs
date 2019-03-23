@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class bulletScript : MonoBehaviour {
+public class Weapon : MonoBehaviour {
 
     private string path;
     private GameObject bullet;

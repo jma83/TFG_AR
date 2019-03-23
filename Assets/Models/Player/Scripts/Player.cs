@@ -82,7 +82,7 @@ public class Player : MonoBehaviour {
     private void Start () {
         walk = this.GetComponent(typeof(Animator)) as Animator;
         //temp_pos = Vector3.zero;
-        InitLevelData(0);
+        InitLevelData(0,false);
 	}
 
     public void SetMaxCaptureRange(float f)
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour {
         if (this.xp >= requiredXp)
         {
             diff = this.xp - requiredXp;
-            InitLevelData(diff);
+            InitLevelData(diff,true);
         }
     }
 
@@ -118,12 +118,13 @@ public class Player : MonoBehaviour {
     {
         droids.Add(droid);
     }
-    private void InitLevelData(int diff)
+    private void InitLevelData(int diff,bool add)
     {
+        if (!add && lvl==0 || add)
         lvl++;
         requiredXp = levelBase * lvl;
         xp = diff;
-        if (lvl != 1)
+        if (lvl != 1 && add)
             WindowAlert.Instance.CreateInfoWindow("SUBES DE NIVEL!\n Nivel " + lvl,true);
     }
     public void addHp(int diff)
@@ -143,6 +144,7 @@ public class Player : MonoBehaviour {
 
     private void Update()
     {
+        if (walk!=null)
         Walk();
         
     }

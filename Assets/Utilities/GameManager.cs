@@ -18,18 +18,33 @@ public class GameManager : Singleton<GameManager>
     ItemsManagerData dataItemsManager;
     Inventory inv;
     ItemsManager itemsManager;
+    bool spawned = false;
 
     private void Start()
+    {
+        if (spawned == false)
+        {
+            spawned = true;
+            DontDestroyOnLoad(gameObject);
+            
+            //InitializeScene();
+
+        }
+        else
+        {
+            Debug.Log("DESTURUCCION!");
+            DestroyImmediate(gameObject);
+        }
+    }
+    public void InitializeScene()
     {
         Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
         dataPly = new PlayerData();
         dataInv = new InventoryData();
         dataItemsManager = new ItemsManagerData();
-        inv = Inventory.Instance;
-        
+        FindPlayer();
         Load();
     }
-
     private void OnApplicationQuit()
     {
         Save();
@@ -39,8 +54,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (pause)
             Save();
-        //else
-            //Load();
 
     }
 
@@ -54,6 +67,11 @@ public class GameManager : Singleton<GameManager>
         if (currentPlayer == null)
         {
             currentPlayer = FindObjectOfType<Player>();
+            if (currentPlayer == null)
+            {
+                PlayerFight ply = FindObjectOfType<PlayerFight>();
+                currentPlayer=ply.gameObject.AddComponent<Player>();
+            }
         }
 
         //Assert.IsNotNull(currentPlayer);
@@ -69,226 +87,294 @@ public class GameManager : Singleton<GameManager>
         //---------------------------------------------------------------
         // GUARDAMOS EL FICHERO DE LOS DATOS DEL JUGADOR
         //---------------------------------------------------------------
+        if (currentPlayer != null)
+        {
+            FileStream file = File.Create(Application.persistentDataPath + playerFile);
 
-        FileStream file = File.Create(Application.persistentDataPath + playerFile);
+            dataPly.xp = currentPlayer.Xp;
+            dataPly.requiredXp = currentPlayer.RequiredXp;
+            dataPly.levelBase = currentPlayer.LevelBase;
+            dataPly.lvl = currentPlayer.Lvl;
+            dataPly.total_xp = currentPlayer.Total_xp;
+            dataPly.hp = currentPlayer.Hp;
+            dataPly.maxHp = currentPlayer.MaxHp;
+            dataPly.captureRange = currentPlayer.CaptureRange;
+            dataPly.xp_multiplier = currentPlayer.Xp_Multiplier;
 
-        dataPly.xp = currentPlayer.Xp;
-        dataPly.requiredXp = currentPlayer.RequiredXp;
-        dataPly.levelBase = currentPlayer.LevelBase;
-        dataPly.lvl = currentPlayer.Lvl;
-        dataPly.total_xp = currentPlayer.Total_xp;
-        dataPly.hp = currentPlayer.Hp;
-        dataPly.maxHp = currentPlayer.MaxHp;
-        dataPly.captureRange = currentPlayer.CaptureRange;
-        dataPly.xp_multiplier = currentPlayer.Xp_Multiplier;
-
-        bf.Serialize(file, dataPly);
-        file.Close();
+            bf.Serialize(file, dataPly);
+            file.Close();
+        }
 
         //---------------------------------------------------------------
         // GUARDAMOS EL FICHERO DEL INVENTARIO Y LOS ITEMS QUE CONTIENE
         //---------------------------------------------------------------
 
-        FileStream file2 = File.Create(Application.persistentDataPath + inventoryFile);       
-        
-        dataInv.itemsSize = inv.getItems().Count;
-
-        dataInv.space = 26; // inv.getItems().Capacity
-        if (dataInv.itemIDs == null)
+        if (inv != null)
         {
-            dataInv.itemIDs = new int[dataInv.space];
-            dataInv.itemRand = new int[dataInv.space];
-            dataInv.itemActive = new bool[dataInv.space];
-            dataInv.itemType = new int[dataInv.space];
-        }
+            FileStream file2 = File.Create(Application.persistentDataPath + inventoryFile);
 
-        for (int i=0;i< dataInv.itemsSize; i++)
+            dataInv.itemsSize = inv.getItems().Count;
+            Debug.Log("inventory item size save: " + dataInv.itemsSize);
+            dataInv.space = 26; // inv.getItems().Capacity
+            if (dataInv.itemIDs == null)
+            {
+                dataInv.itemIDs = new int[dataInv.space];
+                dataInv.itemRand = new int[dataInv.space];
+                dataInv.itemActive = new bool[dataInv.space];
+                dataInv.itemType = new int[dataInv.space];
+            }
+
+            for (int i = 0; i < dataInv.itemsSize; i++)
+            {
+                dataInv.itemIDs[i] = inv.getItems()[i].GetID();
+                dataInv.itemRand[i] = inv.getItems()[i].GetRand();
+                dataInv.itemActive[i] = inv.getItems()[i].GetActive();
+                dataInv.itemType[i] = inv.getItems()[i].GetItemType();
+            }
+
+
+            dataInv.equipmentsSize = inv.getEquipments().Count;
+            Debug.Log("inventory equip size save: " + dataInv.equipmentsSize);
+            if (dataInv.equipIDs == null)
+            {
+                dataInv.equipIDs = new int[dataInv.space];
+                dataInv.equipQuality = new int[dataInv.space];
+                dataInv.equipType = new int[dataInv.space];
+                dataInv.equipAttack = new int[dataInv.space];
+                dataInv.equipDefense = new int[dataInv.space];
+                dataInv.equipSpeed = new int[dataInv.space];
+                dataInv.equipDurability = new int[dataInv.space];
+                dataInv.equipActive = new bool[dataInv.space];
+            }
+            for (int i = 0; i < dataInv.equipmentsSize; i++)
+            {
+                dataInv.equipIDs[i] = inv.getEquipments()[i].GetID();
+                dataInv.equipQuality[i] = (int)inv.getEquipments()[i].GetEquipmentQualityNum();
+                dataInv.equipType[i] = (int)inv.getEquipments()[i].GetEquipmentTypeNum();
+                dataInv.equipAttack[i] = inv.getEquipments()[i].GetAttack();
+                dataInv.equipDefense[i] = inv.getEquipments()[i].GetDefense();
+                dataInv.equipSpeed[i] = inv.getEquipments()[i].GetSpeed();
+                dataInv.equipDurability[i] = inv.getEquipments()[i].GetDurability();
+                dataInv.equipActive[i] = inv.getEquipments()[i].GetActive();
+            }
+
+            dataInv.id_e_selected = inv.GetCurrentEquipmentID();
+
+            bf.Serialize(file2, dataInv);
+            file2.Close();
+        }
+        else
         {
-            dataInv.itemIDs[i] = inv.getItems()[i].GetID();
-            dataInv.itemRand[i] = inv.getItems()[i].GetRand();
-            dataInv.itemActive[i] = inv.getItems()[i].GetActive();
-            dataInv.itemType[i] = inv.getItems()[i].GetItemType();
+            Debug.Log("El inventario es nulo al guardar");
         }
-
-
-        dataInv.equipmentsSize = inv.getEquipments().Count;
-        if (dataInv.equipIDs == null)
-        {
-            dataInv.equipIDs = new int[dataInv.space];
-            dataInv.equipQuality = new int[dataInv.space];
-            dataInv.equipType = new int[dataInv.space];
-            dataInv.equipAttack = new int[dataInv.space];
-            dataInv.equipDefense = new int[dataInv.space];
-            dataInv.equipSpeed = new int[dataInv.space];
-            dataInv.equipDurability = new int[dataInv.space];
-            dataInv.equipActive = new bool[dataInv.space];
-        }
-        for (int i = 0; i < dataInv.equipmentsSize; i++)
-        {
-            dataInv.equipIDs[i] = inv.getEquipments()[i].GetID();
-            dataInv.equipQuality[i] = (int)inv.getEquipments()[i].GetEquipmentQualityNum();
-            dataInv.equipType[i] = (int)inv.getEquipments()[i].GetEquipmentTypeNum();
-            dataInv.equipAttack[i] = inv.getEquipments()[i].GetAttack();
-            dataInv.equipDefense[i] = inv.getEquipments()[i].GetDefense();
-            dataInv.equipSpeed[i] = inv.getEquipments()[i].GetSpeed();
-            dataInv.equipDurability[i] = inv.getEquipments()[i].GetDurability();
-            dataInv.equipActive[i] = inv.getEquipments()[i].GetActive();
-        }
-
-        dataInv.id_e_selected = inv.GetCurrentEquipmentID();
-
-        bf.Serialize(file2, dataInv);
-        file2.Close();
-
         //---------------------------------------------------------------
         // GUARDAMOS EL FICHERO DEL GESTOR DE ITEMS (IDS Y OBJETOS ACTIVOS)
         //---------------------------------------------------------------
-
-        FileStream file3 = File.Create(Application.persistentDataPath + itemManagerFile);
-
-        dataItemsManager.lastIDEquip = itemsManager.GetLastEquipID();
-        dataItemsManager.lastIDItem = itemsManager.GetLastItemID();
-        dataItemsManager.itemSize = itemsManager.GetItems().Count;
-
-        dataItemsManager.maxSizeActive = 3; //itemsManager.GetItems().Capacity;  
-        Debug.Log("item size save: " + dataItemsManager.itemSize);
-        if (dataItemsManager.itemIDs == null)
+        if (itemsManager != null)
         {
-            dataItemsManager.itemIDs = new int[dataItemsManager.maxSizeActive];
-            dataItemsManager.itemRand = new int[dataItemsManager.maxSizeActive];
-            dataItemsManager.itemActive = new bool[dataItemsManager.maxSizeActive];
-            dataItemsManager.itemType = new int[dataItemsManager.maxSizeActive];
-            dataItemsManager.itemTargetTime = new float[dataItemsManager.maxSizeActive];
-        }
+            FileStream file3 = File.Create(Application.persistentDataPath + itemManagerFile);
 
-        for (int i = 0; i < dataItemsManager.itemSize; i++)
+            dataItemsManager.lastIDEquip = itemsManager.GetLastEquipID();
+            dataItemsManager.lastIDItem = itemsManager.GetLastItemID();
+            dataItemsManager.itemSize = itemsManager.GetItems().Count;
+
+            dataItemsManager.maxSizeActive = 3; //itemsManager.GetItems().Capacity;  
+            Debug.Log("item manager size save: " + dataItemsManager.itemSize);
+            if (dataItemsManager.itemIDs == null)
+            {
+                dataItemsManager.itemIDs = new int[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemRand = new int[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemActive = new bool[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemType = new int[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemTargetTime = new float[dataItemsManager.maxSizeActive];
+            }
+
+            for (int i = 0; i < dataItemsManager.itemSize; i++)
+            {
+                dataItemsManager.itemIDs[i] = itemsManager.GetItems()[i].GetID();
+                dataItemsManager.itemRand[i] = itemsManager.GetItems()[i].GetRand();
+                dataItemsManager.itemActive[i] = itemsManager.GetItems()[i].GetActive();
+                dataItemsManager.itemType[i] = itemsManager.GetItems()[i].GetItemType();
+                dataItemsManager.itemTargetTime[i] = itemsManager.GetItems()[i].GetTargetTime();
+
+                Debug.Log("ID save: " + dataItemsManager.itemIDs[i]);
+                Debug.Log("Active save: " + dataItemsManager.itemActive[i]);
+                Debug.Log("Target save: " + dataItemsManager.itemTargetTime[i]);
+            }
+
+            bf.Serialize(file3, dataItemsManager);
+            file3.Close();
+        }
+        else
         {
-            dataItemsManager.itemIDs[i] = itemsManager.GetItems()[i].GetID();
-            dataItemsManager.itemRand[i] = itemsManager.GetItems()[i].GetRand();
-            dataItemsManager.itemActive[i] = itemsManager.GetItems()[i].GetActive();
-            dataItemsManager.itemType[i] = itemsManager.GetItems()[i].GetItemType();
-            dataItemsManager.itemTargetTime[i] = itemsManager.GetItems()[i].GetTargetTime();
-
-            Debug.Log("ID save: " + dataItemsManager.itemIDs[i]);
-            Debug.Log("Active save: " + dataItemsManager.itemActive[i]);
-            Debug.Log("Target save: " + dataItemsManager.itemTargetTime[i]);
+            Debug.Log("El itemManager es nulo al guardar");
         }
-
-        bf.Serialize(file3, dataItemsManager);
-        file3.Close();
 
     }
     public void Load()
     {
+        itemsManager = ItemsManager.Instance;
+        inv = Inventory.Instance;
+
         if (File.Exists(Application.persistentDataPath + playerFile))
         {
-            itemsManager = ItemsManager.Instance;
 
             BinaryFormatter bf = new BinaryFormatter();
-
-            
 
             //---------------------------------------------------------------
             // ABRIMOS EL FICHERO DE LOS DATOS DEL JUGADOR
             //---------------------------------------------------------------
 
             FileStream file1 = File.Open(Application.persistentDataPath + playerFile, FileMode.Open);
-            dataPly = (PlayerData)bf.Deserialize(file1);
-            file1.Close();
+            if (file1.Length > 0)
+            {
+                dataPly = (PlayerData)bf.Deserialize(file1);
+                file1.Close();
 
-            currentPlayer.Xp = dataPly.xp;
-            currentPlayer.RequiredXp = dataPly.requiredXp;
-            currentPlayer.LevelBase = dataPly.levelBase;
-            currentPlayer.Lvl = dataPly.lvl;
-            currentPlayer.Total_xp = dataPly.total_xp;
-            currentPlayer.Hp = dataPly.hp;
-            currentPlayer.MaxHp = dataPly.maxHp;
-            currentPlayer.CaptureRange = dataPly.captureRange;
-            currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
+            }
+            else
+            {
+                file1.Close();
+                File.Delete(Application.persistentDataPath + playerFile);
+            }
+            if (dataPly != null)
+            {
+                currentPlayer.Xp = dataPly.xp;
+                currentPlayer.RequiredXp = dataPly.requiredXp;
+                currentPlayer.LevelBase = dataPly.levelBase;
+                //Debug.Log("dataPly.lvl "+ dataPly.lvl);
+                currentPlayer.Lvl = dataPly.lvl;
+                currentPlayer.Total_xp = dataPly.total_xp;
+                currentPlayer.Hp = dataPly.hp;
+                //Debug.Log("dataPly.hp " + dataPly.hp);
+                currentPlayer.MaxHp = dataPly.maxHp;
+                currentPlayer.CaptureRange = dataPly.captureRange;
+                currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
+            }
 
             //---------------------------------------------------------------
             // ABRIMOS EL FICHERO DEL GESTOR DE ITEMS (IDS Y OBJETOS ACTIVOS)
             //---------------------------------------------------------------
-
-            FileStream file3 = File.Open(Application.persistentDataPath + itemManagerFile, FileMode.Open);
-            dataItemsManager = (ItemsManagerData)bf.Deserialize(file3);
-            file3.Close();
-
-            itemsManager.SetLastEquipID(dataItemsManager.lastIDEquip);
-            itemsManager.SetLastItemID(dataItemsManager.lastIDItem);
             Item item = null;
 
-            Debug.Log("item size load: " + dataItemsManager.itemSize);
-
-            for (int i = 0; i < dataItemsManager.itemSize; i++)
+            if (itemsManager != null)
             {
-                item = CreateItemByType(dataItemsManager.itemType[i]);
+                FileStream file3 = File.Open(Application.persistentDataPath + itemManagerFile, FileMode.Open);
+                if (file3.Length > 0)
+                {
+                    dataItemsManager = (ItemsManagerData)bf.Deserialize(file3);
+                    file3.Close();
 
-                //crear instancia de los ITEMS ACTIVOS
-                item.SetID(dataItemsManager.itemIDs[i]);
-                item.SetRandNum(dataItemsManager.itemRand[i]);
-                item.SetTargetTime(dataItemsManager.itemTargetTime[i]);
+                }
+                else
+                {
+                    file3.Close();
 
-                //Debug.Log("ID load: " + item.GetID());
-                //Debug.Log("Active load: " + dataItemsManager.itemActive[i]);
-                //Debug.Log("Target load: " + item.GetTargetTime());
-                item.SetActive(dataItemsManager.itemActive[i]);
+                    File.Delete(Application.persistentDataPath + itemManagerFile);
+                }
 
-                item.SetType(dataItemsManager.itemType[i]);
-                item.timeStampAux = dataItemsManager.itemTargetTime[i];
-                item.DisableComponents();
-                if (!itemsManager.AddItem(item)) Debug.Log("algo salio mal!");
+                if (dataItemsManager != null)
+                {
+                    itemsManager.SetLastEquipID(dataItemsManager.lastIDEquip);
+                    itemsManager.SetLastItemID(dataItemsManager.lastIDItem);
 
+                    Debug.Log("item size load: " + dataItemsManager.itemSize);
+
+                    for (int i = 0; i < dataItemsManager.itemSize; i++)
+                    {
+                        item = CreateItemByType(dataItemsManager.itemType[i]);
+
+                        //crear instancia de los ITEMS ACTIVOS
+                        item.SetID(dataItemsManager.itemIDs[i]);
+                        item.SetRandNum(dataItemsManager.itemRand[i]);
+                        item.SetTargetTime(dataItemsManager.itemTargetTime[i]);
+
+                        //Debug.Log("ID load: " + item.GetID());
+                        //Debug.Log("Active load: " + dataItemsManager.itemActive[i]);
+                        //Debug.Log("Target load: " + item.GetTargetTime());
+                        item.SetActive(dataItemsManager.itemActive[i]);
+
+                        item.SetType(dataItemsManager.itemType[i]);
+                        item.timeStampAux = dataItemsManager.itemTargetTime[i];
+                        item.DisableComponents();
+                        if (!itemsManager.AddItem(item)) Debug.Log("algo salio mal!");
+
+                    }
+                }
             }
-
+            else
+            {
+                Debug.Log("El itemManager es nulo al cargar");
+            }
             //---------------------------------------------------------------
             // ABRIMOS EL FICHERO DEL INVENTARIO Y LOS ITEMS QUE CONTIENE
             //---------------------------------------------------------------
 
-            FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
-            dataInv = (InventoryData)bf.Deserialize(file2);
-            file2.Close();
-
-            item = null;
-
-            for (int i = 0; i < dataInv.itemsSize; i++)
+            if (inv != null)
             {
-                //crear objeto instancia de los ITEMs
-                item = CreateItemByType(dataInv.itemType[i]);
+                FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
+                if (file2.Length > 0)
+                {
+                    dataInv = (InventoryData)bf.Deserialize(file2);
+                    file2.Close();
 
-                item.SetID(dataInv.itemIDs[i]);
-                item.SetRandNum(dataInv.itemRand[i]);
-                item.SetActive(dataInv.itemActive[i]);
-                item.SetType(dataInv.itemType[i]);
-                item.DisableComponents();
-                inv.SetItem(item, i);
+                }
+                else
+                {
+                    file2.Close();
+                    File.Delete(Application.persistentDataPath + inventoryFile);
+                }
+
+                item = null;
+                if (dataInv != null)
+                {
+                    
+                    for (int i = 0; i < dataInv.itemsSize; i++)
+                    {
+                        //crear objeto instancia de los ITEMs
+                        item = CreateItemByType(dataInv.itemType[i]);
+
+                        item.SetID(dataInv.itemIDs[i]);
+                        item.SetRandNum(dataInv.itemRand[i]);
+                        item.SetActive(dataInv.itemActive[i]);
+                        item.SetType(dataInv.itemType[i]);
+                        item.DisableComponents();
+                        //if (inv.getItems().Count > i)
+                            inv.SetItem(item, i);
+                    }
+                    Debug.Log("items inventory size load: " + inv.getItems().Count);
+                    Equipment equip = null;
+                    GameObject gmObject = null;
+                    
+                    for (int i = 0; i < dataInv.equipmentsSize; i++)
+                    {
+                        //crear instancia de equipamiento
+                        gmObject = Instantiate(Resources.Load(itemsManager.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
+                        equip = gmObject.GetComponent<Equipment>();
+
+                        equip.SetID(dataInv.equipIDs[i]);
+                        equip.SetQualityNum(dataInv.equipQuality[i]);
+                        equip.SetTypeNum(dataInv.equipType[i]);
+                        equip.SetAttack(dataInv.equipAttack[i]);
+                        equip.SetDefense(dataInv.equipDefense[i]);
+                        equip.SetSpeed(dataInv.equipSpeed[i]);
+                        equip.SetDurability(dataInv.equipDurability[i]);
+                        equip.SetActive(dataInv.equipActive[i]);
+                        equip.DisableComponents();
+                        //if (inv.getEquipments().Count>i)
+                        inv.SetEquip(equip, i);
+                    }
+                    Debug.Log("equip inventory size load: " + inv.getEquipments().Count);
+                    inv.modified = true;
+                    inv.SetSpace(dataInv.space);
+                    if (inv.getEquipments().Count > dataInv.id_e_selected && dataInv.id_e_selected > 0)
+                        inv.SelectEquipmentID(dataInv.id_e_selected);
+                }
             }
-
-            Equipment equip = null;
-            GameObject gmObject = null;
-
-            for (int i = 0; i < dataInv.equipmentsSize; i++)
+            else
             {
-                //crear instancia de equipamiento
-                gmObject = Instantiate(Resources.Load(itemsManager.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
-                equip = gmObject.GetComponent<Equipment>();
-
-                equip.SetID(dataInv.equipIDs[i]);
-                equip.SetQualityNum(dataInv.equipQuality[i]);
-                equip.SetTypeNum(dataInv.equipType[i]);
-                equip.SetAttack(dataInv.equipAttack[i]);
-                equip.SetDefense(dataInv.equipDefense[i]);
-                equip.SetSpeed(dataInv.equipSpeed[i]);
-                equip.SetDurability(dataInv.equipDurability[i]);
-                equip.SetActive(dataInv.equipActive[i]);
-                equip.DisableComponents();
-                inv.SetEquip(equip,i);
+                Debug.Log("El inventario es nulo al cargar");
             }
-
-            inv.modified=true;
-            inv.SetSpace(dataInv.space);
-            inv.SelectEquipmentID(dataInv.id_e_selected);
-
 
             
         }

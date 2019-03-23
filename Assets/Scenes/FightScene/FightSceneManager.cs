@@ -8,14 +8,17 @@ public class FightSceneManager : ARGameSceneManager {
 
     // Use this for initialization
     void Start () {
-        StartCoroutine(LoadAnimation());
+        //StartCoroutine(LoadAnimation());
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        GameManager.Instance.InitializeScene();
 
+        Debug.Log(GameManager.Instance.CurrentPlayer.Lvl);
+        Debug.Log(GameManager.Instance.CurrentPlayer.Hp);
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
 
     public override void ChangeScene(GameObject droid,int i)
     {
@@ -35,7 +38,7 @@ public class FightSceneManager : ARGameSceneManager {
     {
         transtionAnim.SetTrigger("end");
         yield return new WaitForSeconds(2.5f);
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        
 
     }
 }
