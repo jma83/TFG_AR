@@ -10,7 +10,7 @@ public class WindowAlert : Singleton<WindowAlert>
     [SerializeField] Button bt1;
     [SerializeField] Button bt2;
     [SerializeField] Button bt3;
-    public delegate void DelegateFunction();
+    public delegate void DelegateFunction(GameObject gm=null,int j=0);
     public DelegateFunction funcion;
     // Use this for initialization
     void Start()
@@ -39,6 +39,23 @@ public class WindowAlert : Singleton<WindowAlert>
     public void CreateConfirmWindow(string confirmText, bool active, DelegateFunction f=null)
     {
         alert.SetActive(active);
+        bt1.enabled = false;
+        bt1.gameObject.SetActive(bt1.enabled);
+        bt2.enabled = false;
+        bt2.gameObject.SetActive(bt2.enabled);
+        bt3.enabled = true;
+        bt3.gameObject.SetActive(bt3.enabled);
+
+        infoText.text = confirmText;
+        funcion = f;
+        
+
+
+    }
+
+    public void CreateSelectWindow(string confirmText, bool active, DelegateFunction f = null)
+    {
+        alert.SetActive(active);
         bt3.enabled = false;
         bt3.gameObject.SetActive(bt3.enabled);
         bt1.enabled = true;
@@ -48,7 +65,7 @@ public class WindowAlert : Singleton<WindowAlert>
 
         infoText.text = confirmText;
         funcion = f;
-        
+
 
 
     }
@@ -76,6 +93,7 @@ public class WindowAlert : Singleton<WindowAlert>
     }
     void TaskOnClick2()
     {
+        funcion();
         //disable alert and window alert
         alert.SetActive(false);
     }

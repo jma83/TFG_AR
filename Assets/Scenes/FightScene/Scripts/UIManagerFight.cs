@@ -9,17 +9,23 @@ public class UIManagerFight : MonoBehaviour {
     [SerializeField] private Image currentHPBar;
     [SerializeField] private GameObject reloadWeapon;
     [SerializeField] private GameObject reloadShield;
+    [SerializeField] private GameObject playerScreen;
+    private Player ply;
+    private PlayerFight plyFight;
 
     // Use this for initialization
     void Start () {
-        UpdatePlayerHP();
-
+        ply = GameManager.Instance.CurrentPlayer;
+        plyFight=ply.gameObject.GetComponent<PlayerFight>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        UpdatePlayerHP();
+        GameManager.Instance.CurrentPlayer.gameObject.GetComponent<PlayerFight>();
+        if (plyFight.GetHit())
+            StartCoroutine(UpdatePlayerScreen(true));
+    }
 
     public void UpdatePlayerHP()
     {
@@ -30,5 +36,15 @@ public class UIManagerFight : MonoBehaviour {
             hpText.text = "HP: " + hp_value.ToString() + "%";
             currentHPBar.transform.localScale = new Vector3(f, 1, 1);
         }
+    }
+
+    private IEnumerator UpdatePlayerScreen(bool b)
+    {
+
+        playerScreen.SetActive(b);
+        yield return new WaitForSeconds(0.5f);
+        plyFight.SetHit(!b);
+        playerScreen.SetActive(!b);
+        yield return null;
     }
 }

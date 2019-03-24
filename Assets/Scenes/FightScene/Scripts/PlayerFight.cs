@@ -4,40 +4,46 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlayerFight : MonoBehaviour {
+public class PlayerFight : FightEntity
+{
     public Button fireButton;
-    private Weapon bullet;
-    private float targetTime;
-    private AudioSource audioSource;
+    private int bonusAtack;
+    private int bonusDefense;
+    private int bonusSpeed;
+    private Player ply;
+    private bool hit;
+
 
     // Use this for initialization
     void Start () {
-        bullet = gameObject.AddComponent(typeof(Weapon)) as Weapon;
+        weapon = gameObject.AddComponent(typeof(Weapon)) as Weapon;
         fireButton.onClick.AddListener(Attack);
-        targetTime = 0.0f;
+        ply = GameManager.Instance.CurrentPlayer;
+        hit = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (targetTime >= 0)
-            targetTime -= Time.deltaTime;
+        
         
     }
-
-    void Attack()
+    public override void DealDamage(int d)
     {
-        if (targetTime < 1)
-        {
-            bullet.CreateBullet();
-            bullet.Shoot();
-            audioSource = this.GetComponent<AudioSource>();
-            audioSource.Play();
-            targetTime = 1.5f;
-        }
+        //decrease health calling player
+        ply.substractHp(d);
+        hp=ply.Hp;
+        //hud transition
+        SetHit(true);
+
     }
 
-    void Defend()
+    public void SetHit(bool b)
     {
+        hit = b;
+    }
 
+    public bool GetHit()
+    {
+        return hit;
     }
 }

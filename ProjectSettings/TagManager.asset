@@ -9,6 +9,7 @@ TagManager:
   - player_range
   - droid
   - item
+  - enemy
   layers:
   - Default
   - TransparentFX

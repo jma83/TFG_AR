@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
 {
 
     [SerializeField] private Player currentPlayer;
+    PlayerFight playerFight;
     private string playerFile = "/playerInfo.dat";
     private string inventoryFile = "/inventoryInfo.dat";
     private string itemManagerFile = "/itemManagerInfo.dat";
@@ -69,8 +70,8 @@ public class GameManager : Singleton<GameManager>
             currentPlayer = FindObjectOfType<Player>();
             if (currentPlayer == null)
             {
-                PlayerFight ply = FindObjectOfType<PlayerFight>();
-                currentPlayer=ply.gameObject.AddComponent<Player>();
+                playerFight = FindObjectOfType<PlayerFight>();
+                currentPlayer= playerFight.gameObject.GetComponent<Player>();
             }
         }
 
@@ -373,7 +374,23 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                Debug.Log("El inventario es nulo al cargar");
+                if (playerFight != null)
+                {
+                    for (int i = 0; i < dataInv.equipmentsSize; i++)
+                    {
+                        if (dataInv.id_e_selected== dataInv.equipIDs[i])
+                        {
+                            playerFight.gameObject.GetComponent<Weapon>().SetWeaponStats(dataInv.equipAttack[i],dataInv.equipDefense[i],dataInv.equipSpeed[i]);
+                            break;
+                        }
+                    }
+                        
+                }
+                else
+                {
+                    Debug.Log("El inventario es nulo al cargar");
+                }
+                
             }
 
             

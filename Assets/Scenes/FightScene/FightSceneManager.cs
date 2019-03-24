@@ -34,6 +34,7 @@ public class FightSceneManager : ARGameSceneManager {
         ChangeScene(null, 0);
     }
 
+
     private IEnumerator LoadAnimation()
     {
         transtionAnim.SetTrigger("end");
