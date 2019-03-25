@@ -54,21 +54,30 @@ public class Droid : MapEntity {
     }
 
     private void OnMouseDown()
-    {
+    {        
         if (!EventSystem.current.IsPointerOverGameObject())
         {
-            ARGameSceneManager[] managers = FindObjectsOfType<ARGameSceneManager>();
-
-            foreach (ARGameSceneManager scenemanager1 in managers)
+            if (captureRange)
             {
-                if (scenemanager1.gameObject.activeSelf)
+                if (GameManager.Instance.CurrentPlayer.Hp > 0)
                 {
-                    if (captureRange)
+                    ARGameSceneManager[] managers = FindObjectsOfType<ARGameSceneManager>();
+
+                    foreach (ARGameSceneManager scenemanager1 in managers)
                     {
-                        audioSource.PlayOneShot(enemySound);
-                        scenemanager1.ChangeScene(this.gameObject,0);
+                        if (scenemanager1.gameObject.activeSelf)
+                        {
+
+                            audioSource.PlayOneShot(enemySound);
+                            scenemanager1.ChangeScene(this.gameObject, 0);
+
+                            //SceneManager.LoadScene("FightScene");
+                        }
                     }
-                    //SceneManager.LoadScene("FightScene");
+                }
+                else
+                {
+                    WindowAlert.Instance.CreateInfoWindow("Necesitas energia para luchar contra este Enemigo", true);
                 }
             }
         }

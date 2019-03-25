@@ -72,9 +72,9 @@ public class GameManager : Singleton<GameManager>
             {
                 playerFight = FindObjectOfType<PlayerFight>();
                 currentPlayer= playerFight.gameObject.GetComponent<Player>();
+                Debug.Log("playerFight");
             }
         }
-
         //Assert.IsNotNull(currentPlayer);
 
     }
@@ -82,16 +82,18 @@ public class GameManager : Singleton<GameManager>
     {
         inv = Inventory.Instance;
         itemsManager = ItemsManager.Instance;
+        if (dataPly == null || dataInv == null || dataItemsManager == null)
+            InitializeScene();
 
         BinaryFormatter bf = new BinaryFormatter();
 
         //---------------------------------------------------------------
         // GUARDAMOS EL FICHERO DE LOS DATOS DEL JUGADOR
         //---------------------------------------------------------------
+        
         if (currentPlayer != null)
         {
             FileStream file = File.Create(Application.persistentDataPath + playerFile);
-
             dataPly.xp = currentPlayer.Xp;
             dataPly.requiredXp = currentPlayer.RequiredXp;
             dataPly.levelBase = currentPlayer.LevelBase;
@@ -219,7 +221,6 @@ public class GameManager : Singleton<GameManager>
 
         if (File.Exists(Application.persistentDataPath + playerFile))
         {
-
             BinaryFormatter bf = new BinaryFormatter();
 
             //---------------------------------------------------------------
@@ -251,6 +252,10 @@ public class GameManager : Singleton<GameManager>
                 currentPlayer.MaxHp = dataPly.maxHp;
                 currentPlayer.CaptureRange = dataPly.captureRange;
                 currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
+            }
+            else
+            {
+                Debug.Log("El player es nulo al cargar");
             }
 
             //---------------------------------------------------------------
@@ -374,22 +379,10 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                if (playerFight != null)
-                {
-                    for (int i = 0; i < dataInv.equipmentsSize; i++)
-                    {
-                        if (dataInv.id_e_selected== dataInv.equipIDs[i])
-                        {
-                            playerFight.gameObject.GetComponent<Weapon>().SetWeaponStats(dataInv.equipAttack[i],dataInv.equipDefense[i],dataInv.equipSpeed[i]);
-                            break;
-                        }
-                    }
-                        
-                }
-                else
-                {
-                    Debug.Log("El inventario es nulo al cargar");
-                }
+                
+                if (!SetFightEquipment())
+                Debug.Log("El inventario es nulo al cargar");
+                
                 
             }
 
@@ -423,6 +416,58 @@ public class GameManager : Singleton<GameManager>
         }
         return item;
     }
+
+    public bool SetFightEquipment()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
+        if (file2.Length > 0)
+        {
+            dataInv = (InventoryData)bf.Deserialize(file2);
+            file2.Close();
+
+        }
+        else
+        {
+            file2.Close();
+            File.Delete(Application.persistentDataPath + inventoryFile);
+        }
+
+        if (dataInv != null)
+        {
+            Debug.Log("Intentamos cargar equipment en escena batalla");
+            if (playerFight == null)
+                playerFight = FindObjectOfType<PlayerFight>();
+
+            if (playerFight != null)
+            {
+                Debug.Log("No es nulo!");
+                Weapon w = null;
+                for (int i = 0; i < dataInv.equipmentsSize; i++)
+                {
+                    if (dataInv.id_e_selected == dataInv.equipIDs[i])
+                    {
+                        Debug.Log("encontrado!");
+                        w = playerFight.gameObject.GetComponent<Weapon>();
+                        if (w != null)
+                        {
+                            Debug.Log("cargamos!");
+                            w.SetWeaponStats(dataInv.equipAttack[i], dataInv.equipDefense[i], dataInv.equipSpeed[i]);
+                            return true;
+                        }
+                        else
+                        {
+                            Debug.Log("Sa liao!");
+                        }
+                        break;
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
+
 }
 
 

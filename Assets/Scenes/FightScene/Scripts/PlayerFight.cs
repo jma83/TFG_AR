@@ -16,7 +16,7 @@ public class PlayerFight : FightEntity
 
     // Use this for initialization
     void Start () {
-        weapon = gameObject.AddComponent(typeof(Weapon)) as Weapon;
+        weapon = gameObject.GetComponent<Weapon>();
         fireButton.onClick.AddListener(Attack);
         ply = GameManager.Instance.CurrentPlayer;
         hit = false;

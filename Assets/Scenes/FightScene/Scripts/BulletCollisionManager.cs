@@ -104,7 +104,6 @@ public class BulletCollisionManager : MonoBehaviour
         window.SetActiveAlert();
     }
 
-
     public void SetDamage(int i)
     {
         damage = i;

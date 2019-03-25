@@ -20,10 +20,15 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         targetTime = 0.0f;
+
         //default stats for weapon:
-        attack = 5;
-        defense = 5;
-        speed = 5;
+        if (attack==0)
+            attack = 5;
+        if (defense == 0)
+            defense = 5;
+        if (speed == 0)
+            speed = 5;
+
         owner = gameObject.tag;
     }
 
@@ -44,6 +49,7 @@ public class Weapon : MonoBehaviour
 
     public void SetWeaponStats(int attack,int defense,int speed, string owner = null)
     {
+        Debug.Log("SetWeaponStats: " + attack + ", " + defense + ", " + speed);
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
@@ -55,6 +61,7 @@ public class Weapon : MonoBehaviour
         bullet = null;
         if (targetTime < 1)
         {
+            Debug.Log("CreateBullet: " + attack + ", " + defense + ", " + speed);
             bullet = Instantiate(Resources.Load("FightScene/bullet", typeof(GameObject))) as GameObject;
 
             bt = bullet.gameObject.GetComponent<BulletCollisionManager>();

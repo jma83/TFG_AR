@@ -93,6 +93,7 @@ public class WindowAlert : Singleton<WindowAlert>
     }
     void TaskOnClick2()
     {
+        if (funcion!=null)
         funcion();
         //disable alert and window alert
         alert.SetActive(false);

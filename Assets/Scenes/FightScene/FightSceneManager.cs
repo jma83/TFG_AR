@@ -23,6 +23,7 @@ public class FightSceneManager : ARGameSceneManager {
     public override void ChangeScene(GameObject droid,int i)
     {
 
+        GameManager.Instance.Save();
         List<GameObject> list = new List<GameObject>();
         list.Add(droid);
         list = null;
