@@ -10,6 +10,7 @@ TagManager:
   - droid
   - item
   - enemy
+  - wall
   layers:
   - Default
   - TransparentFX

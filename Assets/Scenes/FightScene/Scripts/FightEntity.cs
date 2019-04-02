@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FightEntity : MonoBehaviour {
     protected Weapon weapon;
-    protected AudioSource audioSource;
-    protected int hp; 
+    protected int hp;
+    protected Vector3 forceVector;
     // Use this for initialization
     void Start () {
-
+        
     }
 
     // Update is called once per frame
@@ -16,16 +16,16 @@ public class FightEntity : MonoBehaviour {
         
     }
 
-    protected void Attack()
+    public void Attack()
     {
-        
+        if (tag!="Player")
+        forceVector = (Vector3.zero - gameObject.transform.position).normalized;
         if (weapon.CreateBullet() != null)
         {
             Debug.Log("tag del creador:" + gameObject.tag);
 
-            weapon.Shoot();
-            audioSource = this.GetComponent<AudioSource>();
-            audioSource.Play();
+            weapon.Shoot(forceVector);
+            
         }
         
     }

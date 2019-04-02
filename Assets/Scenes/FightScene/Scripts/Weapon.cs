@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     private int speed;
     private string owner;
     protected float targetTime;
+    private AudioSource audioSource;
 
 
     private void Start()
@@ -29,6 +30,9 @@ public class Weapon : MonoBehaviour
         if (speed == 0)
             speed = 5;
 
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.clip = Resources.Load("FightScene/laser") as AudioClip;
         owner = gameObject.tag;
     }
 
@@ -62,9 +66,9 @@ public class Weapon : MonoBehaviour
         if (targetTime < 1)
         {
             Debug.Log("CreateBullet: " + attack + ", " + defense + ", " + speed);
-            bullet = Instantiate(Resources.Load("FightScene/bullet", typeof(GameObject))) as GameObject;
-
+            bullet = Instantiate(Resources.Load("FightScene/bullet", typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) as GameObject;
             bt = bullet.gameObject.GetComponent<BulletCollisionManager>();
+            //bt.gameObject.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
             bt.SetDamage(attack);
             bt.SetOwner(owner);
             rb = bullet.GetComponent<Rigidbody>();
@@ -74,8 +78,11 @@ public class Weapon : MonoBehaviour
                 return null;
             }
 
-            bullet.transform.rotation = GameObject.FindGameObjectsWithTag("camera")[0].transform.rotation;
-            bullet.transform.position = GameObject.FindGameObjectsWithTag("camera")[0].transform.position;
+            if (owner == "Player")
+            {
+                bullet.transform.rotation = GameObject.FindGameObjectsWithTag("camera")[0].transform.rotation;
+                bullet.transform.position = GameObject.FindGameObjectsWithTag("camera")[0].transform.position;
+            }
 
             targetTime = 1.5f;
 
@@ -83,9 +90,11 @@ public class Weapon : MonoBehaviour
         return bullet;
 
     }
-    public void Shoot()
+    public void Shoot(Vector3 force)
     {
-        rb.AddForce(GameObject.FindGameObjectsWithTag("camera")[0].transform.forward * 500f);
+        audioSource = this.GetComponent<AudioSource>();
+        audioSource.Play();
+        rb.AddForce(force * 500f);
 
         Destroy(bullet, 3);
     }

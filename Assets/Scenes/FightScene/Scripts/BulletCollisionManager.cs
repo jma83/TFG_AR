@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletCollisionManager : MonoBehaviour
 {
     private int damage;
-    private string owner;
+    private string owner="Player";
     private GameObject explosion;
     
 

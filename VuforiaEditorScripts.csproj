@@ -313,6 +313,12 @@
     <Reference Include="Mapbox.Json">
       <HintPath>Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PandaBehaviour">
+      <HintPath>Assets/Lib/PandaBehaviour/Core/PandaBehaviour.dll</HintPath>
+    </Reference>
+    <Reference Include="PandaBehaviourEditor">
+      <HintPath>Assets/Lib/PandaBehaviour/Core/Editor/PandaBehaviourEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/xivi_/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -401,6 +407,22 @@
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Examples\Common\Shaders\MobileOcclusion.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\Shaders\YUVShader.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\Shaders\YUVShaderLinear.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\ChangeLog.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Core\PandaBehaviour.xml" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\00_ChangeColor\Assets\ChangeColor.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\01_Move\Assets\Move.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\Computer.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\PlayTag.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\PlayTag.commented.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\TagDialogue.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\AI.BT.lib.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\GameController.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Hunter.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Patroller.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Player.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Sniper.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\LICENSE.TXT" />
+    <None Include="Assets\Lib\PandaBehaviour\README.txt" />
     <None Include="Assets\Lib\Vuforia\Databases\Emulator\VuforiaEmulator.xml" />
     <None Include="Assets\Lib\Vuforia\Shaders\BrightTexture.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\CameraDiffuse.shader" />
@@ -413,6 +435,7 @@
     <None Include="Assets\Lib\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VideoBackground.shader" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
+    <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyTree.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />

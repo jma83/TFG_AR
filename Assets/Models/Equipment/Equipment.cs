@@ -64,7 +64,7 @@ public class Equipment : InventoryEntity
                 defense = arr[2];
                 attack = arr[1];
             }
-
+            speed = arr[1];
             if (type == EquipmentType.Fast)
             {
                 speed = arr[0];              
