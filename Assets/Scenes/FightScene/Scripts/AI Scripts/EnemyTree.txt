@@ -17,10 +17,10 @@ tree("movement")
 			CheckMovementActive
 			sequence
 				Move
+				CheckLimit
 
 tree("idle")
 	sequence
-		Idle
 		InitMove
 
 

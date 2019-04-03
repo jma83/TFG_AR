@@ -141,7 +141,7 @@ namespace Panda.Examples.Shooter
         {
             SetDestination(dst);
             if (Task.current.isStarting)
-                navMeshAgent.Resume();
+                navMeshAgent.isStopped=false; //navMeshAgent.Resume();
             WaitArrival();
         }
 
@@ -191,7 +191,7 @@ namespace Panda.Examples.Shooter
         [Task]
         public bool Stop()
         {
-            navMeshAgent.Stop();
+            navMeshAgent.isStopped=true; //navMeshAgent.Stop();
             return true;
         }
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletCollisionManager : MonoBehaviour
 {
     private int damage;
-    private string owner="Player";
+    private string owner;
     private GameObject explosion;
     
 
@@ -38,7 +38,7 @@ public class BulletCollisionManager : MonoBehaviour
                 {
                     if (fe.GetHP() <= 0)
                     {
-                        GameOver();
+                        EnemyFightManager.Instance.GameOver();
                     }
                 }
 
@@ -47,7 +47,8 @@ public class BulletCollisionManager : MonoBehaviour
                     if (fe.GetHP() <= 0)
                     {
                         Destroy(col.gameObject);
-                        CheckWin();
+                        EnemyFightManager.Instance.CheckWin();
+                        
                         explosion = Instantiate(Resources.Load("FightScene/FlareMobile", typeof(GameObject))) as GameObject;
 
                     }
@@ -67,41 +68,6 @@ public class BulletCollisionManager : MonoBehaviour
             }
         }
 
-
-        /*if (col.gameObject.tag == "enemy")
-        {
-
-            //FightSceneManager.Instance.ChangeScene(null,0);
-            GameObject enemy = Instantiate(Resources.Load("FightScene/enemy1", typeof(GameObject))) as GameObject;
-            GameObject enemy1 = Instantiate(Resources.Load("FightScene/enemy2", typeof(GameObject))) as GameObject;
-            GameObject enemy2 = Instantiate(Resources.Load("FightScene/enemy3", typeof(GameObject))) as GameObject;
-            GameObject enemy3 = Instantiate(Resources.Load("FightScene/enemy4", typeof(GameObject))) as GameObject;
-
-        }*/
-
-    }
-
-    public bool CheckWin()
-    {
-        GameObject[] gmObjects = GameObject.FindGameObjectsWithTag("enemy");
-
-        if (gmObjects != null)
-            if (gmObjects.Length <= 0)
-            {
-                //WindowAlert.Instance.SetActiveAlert(); ENEMIGOS DERROTADOS, pulsa OK para volver al mapa
-                WindowAlert window = WindowAlert.Instance;
-                window.CreateConfirmWindow("BIEN HECHO! ENEMIGOS DERROTADOS, pulsa OK para volver al mapa", false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
-                window.SetActiveAlert();
-                return true;
-            }
-        return false;
-    }
-
-    public void GameOver()
-    {
-        WindowAlert window = WindowAlert.Instance;
-        window.CreateConfirmWindow("HAS SIDO DERROTADO, pulsa OK para volver al mapa",false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
-        window.SetActiveAlert();
     }
 
     public void SetDamage(int i)

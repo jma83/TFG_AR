@@ -13,6 +13,9 @@ public class Weapon : MonoBehaviour
     private int attack;
     private int defense;
     private int speed;
+    private int type;
+    private int quality;
+    private int durability;
     private string owner;
     protected float targetTime;
     private AudioSource audioSource;
@@ -51,12 +54,15 @@ public class Weapon : MonoBehaviour
             targetTime -= Time.deltaTime;
     }
 
-    public void SetWeaponStats(int attack,int defense,int speed, string owner = null)
+    public void SetWeaponStats(int durability,int type,int quality,int attack,int defense,int speed, string owner = null)
     {
         Debug.Log("SetWeaponStats: " + attack + ", " + defense + ", " + speed);
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
+        this.durability = durability;
+        this.type = type;
+        this.quality = quality;
         this.owner = owner;
     }
 
@@ -99,4 +105,53 @@ public class Weapon : MonoBehaviour
         Destroy(bullet, 3);
     }
 
+    public string GetWeaponType()
+    {
+        if (type == 3)
+        {
+            return "Fast";
+        }
+        else if (type == 2)
+        {
+            return "Defensive";
+        }
+        else if (type == 1)
+        {
+            return "Ofensive";
+        }
+        else if (type == 0)
+        {
+            return "Balanced";
+        }
+
+        return null;
+    }
+
+    public string GetWeaponQuality()
+    {
+
+        if (quality == 3)
+        {
+            return "GUI/legendQuality";
+        }
+        else if (quality == 2)
+        {
+            return "GUI/epicQuality";
+        }
+        else if (quality == 1)
+        {
+            return "GUI/rareQuality";
+        }
+        else if (quality == 0)
+        {
+            return "GUI/basicQuality";
+        }
+        return null;
+        
+    }
+
+    public int GetWeaponStats()
+    {
+        return attack+defense+speed;
+    }
 }

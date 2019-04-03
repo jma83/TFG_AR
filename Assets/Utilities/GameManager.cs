@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void InitializeScene()
     {
+        Debug.Log("INICIALIZO");
         Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
         dataPly = new PlayerData();
         dataInv = new InventoryData();
@@ -83,7 +84,10 @@ public class GameManager : Singleton<GameManager>
         inv = Inventory.Instance;
         itemsManager = ItemsManager.Instance;
         if (dataPly == null || dataInv == null || dataItemsManager == null)
+        {
+            Debug.Log("algun data es null - VAMOS A INICIALIZAR DE NUEVO");
             InitializeScene();
+        }
 
         BinaryFormatter bf = new BinaryFormatter();
 
@@ -117,7 +121,7 @@ public class GameManager : Singleton<GameManager>
             FileStream file2 = File.Create(Application.persistentDataPath + inventoryFile);
 
             dataInv.itemsSize = inv.getItems().Count;
-            Debug.Log("inventory item size save: " + dataInv.itemsSize);
+            //Debug.Log("inventory item size save: " + dataInv.itemsSize);
             dataInv.space = 26; // inv.getItems().Capacity
             if (dataInv.itemIDs == null)
             {
@@ -137,7 +141,7 @@ public class GameManager : Singleton<GameManager>
 
 
             dataInv.equipmentsSize = inv.getEquipments().Count;
-            Debug.Log("inventory equip size save: " + dataInv.equipmentsSize);
+            //Debug.Log("inventory equip size save: " + dataInv.equipmentsSize);
             if (dataInv.equipIDs == null)
             {
                 dataInv.equipIDs = new int[dataInv.space];
@@ -161,6 +165,7 @@ public class GameManager : Singleton<GameManager>
                 dataInv.equipActive[i] = inv.getEquipments()[i].GetActive();
             }
 
+            //Debug.Log("ID SAVE inv.GetCurrentEquipmentID(): " + inv.GetCurrentEquipmentID());
             dataInv.id_e_selected = inv.GetCurrentEquipmentID();
 
             bf.Serialize(file2, dataInv);
@@ -182,7 +187,7 @@ public class GameManager : Singleton<GameManager>
             dataItemsManager.itemSize = itemsManager.GetItems().Count;
 
             dataItemsManager.maxSizeActive = 3; //itemsManager.GetItems().Capacity;  
-            Debug.Log("item manager size save: " + dataItemsManager.itemSize);
+            //Debug.Log("item manager size save: " + dataItemsManager.itemSize);
             if (dataItemsManager.itemIDs == null)
             {
                 dataItemsManager.itemIDs = new int[dataItemsManager.maxSizeActive];
@@ -200,9 +205,9 @@ public class GameManager : Singleton<GameManager>
                 dataItemsManager.itemType[i] = itemsManager.GetItems()[i].GetItemType();
                 dataItemsManager.itemTargetTime[i] = itemsManager.GetItems()[i].GetTargetTime();
 
-                Debug.Log("ID save: " + dataItemsManager.itemIDs[i]);
-                Debug.Log("Active save: " + dataItemsManager.itemActive[i]);
-                Debug.Log("Target save: " + dataItemsManager.itemTargetTime[i]);
+                //Debug.Log("ID save: " + dataItemsManager.itemIDs[i]);
+                //Debug.Log("Active save: " + dataItemsManager.itemActive[i]);
+                //Debug.Log("Target save: " + dataItemsManager.itemTargetTime[i]);
             }
 
             bf.Serialize(file3, dataItemsManager);
@@ -284,7 +289,7 @@ public class GameManager : Singleton<GameManager>
                     itemsManager.SetLastEquipID(dataItemsManager.lastIDEquip);
                     itemsManager.SetLastItemID(dataItemsManager.lastIDItem);
 
-                    Debug.Log("item size load: " + dataItemsManager.itemSize);
+                    //Debug.Log("item size load: " + dataItemsManager.itemSize);
 
                     for (int i = 0; i < dataItemsManager.itemSize; i++)
                     {
@@ -348,7 +353,7 @@ public class GameManager : Singleton<GameManager>
                         //if (inv.getItems().Count > i)
                             inv.SetItem(item, i);
                     }
-                    Debug.Log("items inventory size load: " + inv.getItems().Count);
+                    //Debug.Log("items inventory size load: " + inv.getItems().Count);
                     Equipment equip = null;
                     GameObject gmObject = null;
                     
@@ -370,11 +375,13 @@ public class GameManager : Singleton<GameManager>
                         //if (inv.getEquipments().Count>i)
                         inv.SetEquip(equip, i);
                     }
-                    Debug.Log("equip inventory size load: " + inv.getEquipments().Count);
+                    //Debug.Log("equip inventory size load: " + inv.getEquipments().Count);
                     inv.modified = true;
                     inv.SetSpace(dataInv.space);
-                    if (inv.getEquipments().Count > dataInv.id_e_selected && dataInv.id_e_selected > 0)
-                        inv.SelectEquipmentID(dataInv.id_e_selected);
+
+                    //Debug.Log("LOAD dataInv.id_e_selected: " + dataInv.id_e_selected);
+                    inv.SelectEquipmentID(dataInv.id_e_selected);
+
                 }
             }
             else
@@ -452,7 +459,7 @@ public class GameManager : Singleton<GameManager>
                         if (w != null)
                         {
                             Debug.Log("cargamos!");
-                            w.SetWeaponStats(dataInv.equipAttack[i], dataInv.equipDefense[i], dataInv.equipSpeed[i]);
+                            w.SetWeaponStats(dataInv.equipDurability[i],dataInv.equipType[i],dataInv.equipQuality[i],dataInv.equipAttack[i], dataInv.equipDefense[i], dataInv.equipSpeed[i]);
                             return true;
                         }
                         else

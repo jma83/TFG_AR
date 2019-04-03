@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    [SerializeField] private int xp = 0;
-    [SerializeField] private int requiredXp = 100;
-    [SerializeField] private int levelBase = 100;
-    [SerializeField] private List<GameObject> droids = new List<GameObject>();
+    private int xp = 0;
+    private int requiredXp = 100;
+    private int levelBase = 100;
     private Animator walk;
     //private Vector3 temp_pos;
     private int lvl = 0;
@@ -68,11 +67,6 @@ public class Player : MonoBehaviour {
         get { return levelBase; }
         set { levelBase = value; }
     }
-    public List<GameObject> Droids
-    {
-        get { return droids; }
-        set { droids = value; }
-    }
 
     public int Lvl
     {
@@ -98,6 +92,7 @@ public class Player : MonoBehaviour {
         int value= Mathf.Max(0, xp); 
         int diff = 0;
         this.xp += value* xp_multiplier;
+        Debug.Log("AddXp XP: " + this.xp);
         total_xp += value* xp_multiplier;
         if (this.xp >= requiredXp)
         {
@@ -114,16 +109,17 @@ public class Player : MonoBehaviour {
     {
         return xp_multiplier;
     }
-    public void Adddroid(GameObject droid)
-    {
-        droids.Add(droid);
-    }
+
     private void InitLevelData(int diff,bool add)
     {
-        if (!add && lvl==0 || add)
-        lvl++;
+        if (!add && lvl == 0 || add)
+        {
+            lvl++;
+            xp = diff;
+        }
         requiredXp = levelBase * lvl;
-        xp = diff;
+        
+        Debug.Log("InitLevelData XP: " + xp);
         if (lvl != 1 && add)
             WindowAlert.Instance.CreateInfoWindow("SUBES DE NIVEL!\n Nivel " + lvl,true);
     }

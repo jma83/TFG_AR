@@ -10,6 +10,10 @@ public class UIManagerFight : MonoBehaviour {
     [SerializeField] private GameObject reloadWeapon;
     [SerializeField] private GameObject reloadShield;
     [SerializeField] private GameObject playerScreen;
+    [SerializeField] private Image weaponQualityIcon;
+    [SerializeField] private Text weaponTypeText;
+    [SerializeField] private Text weaponStatsText;
+    private string weaponQuality;    
     private Player ply;
     private PlayerFight plyFight;
 
@@ -17,14 +21,28 @@ public class UIManagerFight : MonoBehaviour {
     void Start () {
         ply = GameManager.Instance.CurrentPlayer;
         plyFight=ply.gameObject.GetComponent<PlayerFight>();
+        weaponQuality=ply.gameObject.GetComponent<Weapon>().GetWeaponQuality();
+
+        weaponQualityIcon.sprite = Resources.Load<Sprite>(weaponQuality);
+        weaponStatsText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponStats().ToString();
+        weaponTypeText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponType().ToString();
+
+
     }
 	
 	// Update is called once per frame
 	void Update () {
         UpdatePlayerHP();
+
         GameManager.Instance.CurrentPlayer.gameObject.GetComponent<PlayerFight>();
         if (plyFight.GetHit())
             StartCoroutine(UpdatePlayerScreen(true));
+
+        if (weaponStatsText.text=="0")
+        {
+            weaponStatsText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponStats().ToString();
+            weaponTypeText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponType().ToString();
+        }
     }
 
     public void UpdatePlayerHP()

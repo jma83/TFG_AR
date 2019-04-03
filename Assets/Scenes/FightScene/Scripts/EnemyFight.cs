@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum StateAI : int { Idle = 0 , Check = 1 , Move = 2 , Attack = 3 , Defend = 4 };
+
 public class EnemyFight : FightEntity
 {
 
@@ -9,15 +12,17 @@ public class EnemyFight : FightEntity
     private int maxHp;
     private bool checkAttacked;
     private Rigidbody rb;
-    private Collider collider;
+    private Collider collide;
     private Vector3 lastPosition;
     private Vector3 lastVelocity;
     private Vector3 lastAngularVelocity;
+    private StateAI state;
+
     // Use this for initialization
     void Start()
     {
         weapon = gameObject.GetComponent<Weapon>();
-        collider = gameObject.GetComponent<Collider>();
+        collide = gameObject.GetComponent<Collider>();
         rb = gameObject.GetComponent<Rigidbody>();
         //rb.detectCollisions = false;
         numEnemies = GameObject.FindGameObjectsWithTag("enemy").Length;
@@ -26,7 +31,6 @@ public class EnemyFight : FightEntity
         //StartCoroutine("Move");
         checkAttacked = false;
         
-        Debug.Log("forceVector: " + forceVector);
     }
 
     // Update is called once per frame
@@ -105,6 +109,16 @@ public class EnemyFight : FightEntity
         return checkAttacked;
     }
 
+    public void SetStateAI(StateAI s)
+    {
+        state = s;
+    }
+
+    public StateAI GetStateAI()
+    {
+        return state;
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
@@ -112,9 +126,8 @@ public class EnemyFight : FightEntity
             transform.position = lastPosition;
             rb.velocity = lastVelocity;
             rb.angularVelocity = lastAngularVelocity;
-            Physics.IgnoreCollision(collider, col);
+            Physics.IgnoreCollision(collide, col);
             col.gameObject.GetComponent<PlayerFight>().DealDamage(3);
         }
-
     }
 }

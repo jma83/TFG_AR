@@ -343,6 +343,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\cameraPlane.cs" />
+    <Compile Include="Assets\EnemyFightManager.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
