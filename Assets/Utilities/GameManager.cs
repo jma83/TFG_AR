@@ -173,6 +173,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            if (!DecreaseEquipDurability())
             Debug.Log("El inventario es nulo al guardar");
         }
         //---------------------------------------------------------------
@@ -249,11 +250,9 @@ public class GameManager : Singleton<GameManager>
                 currentPlayer.Xp = dataPly.xp;
                 currentPlayer.RequiredXp = dataPly.requiredXp;
                 currentPlayer.LevelBase = dataPly.levelBase;
-                //Debug.Log("dataPly.lvl "+ dataPly.lvl);
                 currentPlayer.Lvl = dataPly.lvl;
                 currentPlayer.Total_xp = dataPly.total_xp;
                 currentPlayer.Hp = dataPly.hp;
-                //Debug.Log("dataPly.hp " + dataPly.hp);
                 currentPlayer.MaxHp = dataPly.maxHp;
                 currentPlayer.CaptureRange = dataPly.captureRange;
                 currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
@@ -460,6 +459,60 @@ public class GameManager : Singleton<GameManager>
                         {
                             Debug.Log("cargamos!");
                             w.SetWeaponStats(dataInv.equipDurability[i],dataInv.equipType[i],dataInv.equipQuality[i],dataInv.equipAttack[i], dataInv.equipDefense[i], dataInv.equipSpeed[i]);
+                            return true;
+                        }
+                        else
+                        {
+                            Debug.Log("Sa liao!");
+                        }
+                        break;
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
+
+    public bool DecreaseEquipDurability()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
+        if (file2.Length > 0)
+        {
+            dataInv = (InventoryData)bf.Deserialize(file2);
+            file2.Close();
+
+        }
+        else
+        {
+            file2.Close();
+            File.Delete(Application.persistentDataPath + inventoryFile);
+        }
+
+        if (dataInv != null)
+        {
+            Debug.Log("Intentamos establecer la durabilidad del equipment en escena batalla");
+            if (playerFight == null)
+                playerFight = FindObjectOfType<PlayerFight>();
+
+            if (playerFight != null)
+            {
+                Debug.Log("No es nulo!");
+                Weapon w = null;
+                for (int i = 0; i < dataInv.equipmentsSize; i++)
+                {
+                    if (dataInv.id_e_selected == dataInv.equipIDs[i])
+                    {
+                        Debug.Log("encontrado!");
+                        w = playerFight.gameObject.GetComponent<Weapon>();
+                        if (w != null)
+                        {
+                            Debug.Log("cargamos!");
+                            file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
+                            dataInv.equipDurability[i] = w.GetWeaponDurability();
+                            bf.Serialize(file2, dataInv);
+                            file2.Close();
                             return true;
                         }
                         else

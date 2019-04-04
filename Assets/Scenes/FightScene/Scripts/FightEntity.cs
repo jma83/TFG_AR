@@ -48,4 +48,5 @@ public class FightEntity : MonoBehaviour {
     {
         return hp;
     }
+    
 }

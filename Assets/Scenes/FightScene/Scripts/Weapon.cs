@@ -32,6 +32,9 @@ public class Weapon : MonoBehaviour
             defense = 5;
         if (speed == 0)
             speed = 5;
+        if (durability == 0)
+            durability = -1;
+
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
@@ -56,14 +59,18 @@ public class Weapon : MonoBehaviour
 
     public void SetWeaponStats(int durability,int type,int quality,int attack,int defense,int speed, string owner = null)
     {
-        Debug.Log("SetWeaponStats: " + attack + ", " + defense + ", " + speed);
-        this.attack = attack;
-        this.defense = defense;
-        this.speed = speed;
-        this.durability = durability;
-        this.type = type;
-        this.quality = quality;
+        if (durability > 0)
+        {
+            Debug.Log("SetWeaponStats: " + attack + ", " + defense + ", " + speed);
+            this.attack = attack;
+            this.defense = defense;
+            this.speed = speed;
+            this.durability = durability;
+            this.type = type;
+            this.quality = quality;
+        }
         this.owner = owner;
+        
     }
 
     public GameObject CreateBullet()
@@ -100,9 +107,14 @@ public class Weapon : MonoBehaviour
     {
         audioSource = this.GetComponent<AudioSource>();
         audioSource.Play();
-        rb.AddForce(force * 500f);
+        rb.AddForce(force * (100f*speed));
 
         Destroy(bullet, 3);
+    }
+
+    public void DecreaseWeaponDurability(int value)
+    {
+        durability = durability - value;
     }
 
     public string GetWeaponType()
@@ -153,5 +165,10 @@ public class Weapon : MonoBehaviour
     public int GetWeaponStats()
     {
         return attack+defense+speed;
+    }
+
+    public int GetWeaponDurability()
+    {
+        return durability;
     }
 }

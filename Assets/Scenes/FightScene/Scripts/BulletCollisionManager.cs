@@ -47,6 +47,8 @@ public class BulletCollisionManager : MonoBehaviour
                     if (fe.GetHP() <= 0)
                     {
                         Destroy(col.gameObject);
+                        EnemyFight ef = (EnemyFight)fe;
+                        EnemyFightManager.Instance.AddTotalXP(ef.GetXP());
                         EnemyFightManager.Instance.CheckWin();
                         
                         explosion = Instantiate(Resources.Load("FightScene/FlareMobile", typeof(GameObject))) as GameObject;

@@ -8,7 +8,7 @@ public class ItemsManager : Singleton<ItemsManager>
 {
     private String equipmentPrefab = "Equipment/Sword";
     private String healthPrefab = "Items/ManaPot";
-    private String bigHealtPrefab = "Items/LifePot";
+    //private String bigHealtPrefab = "Items/LifePot";
     private String extendCapturePrefab = "Items/Shield";
     private String xpMultiplierPrefab = "Items/Key";
 

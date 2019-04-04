@@ -17,6 +17,8 @@ public class EnemyFight : FightEntity
     private Vector3 lastVelocity;
     private Vector3 lastAngularVelocity;
     private StateAI state;
+    private int xp;
+
 
     // Use this for initialization
     void Start()
@@ -30,7 +32,7 @@ public class EnemyFight : FightEntity
         hp = maxHp;
         //StartCoroutine("Move");
         checkAttacked = false;
-        
+        xp = Random.Range(20, 40);
     }
 
     // Update is called once per frame
@@ -129,5 +131,10 @@ public class EnemyFight : FightEntity
             Physics.IgnoreCollision(collide, col);
             col.gameObject.GetComponent<PlayerFight>().DealDamage(3);
         }
+    }
+
+    public int GetXP()
+    {
+        return xp;
     }
 }

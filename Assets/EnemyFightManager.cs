@@ -9,10 +9,10 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private float timer;
     private int cont;
     private EnemyFight id_mutex;
-    // Use this for initialization
-    void Start () {
+    private int total_xp;
 
-        
+    // Use this for initialization
+    void Start () {        
         enemyOrderList = new List<EnemyFight>();
         cont = 1;
         UpdateOrderList();
@@ -26,6 +26,11 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
             timer = timer - Time.deltaTime;
         }
 	}
+
+    public void AddTotalXP(int xp)
+    {
+        total_xp = xp;
+    }
 
     public void UpdateOrderList()
     {
@@ -60,17 +65,33 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
 
     public bool CheckWin()
     {
+        Debug.Log("CheckWin");
         enemies = GameObject.FindGameObjectsWithTag("enemy");
         if (enemies != null)
-            if (enemies.Length <= 0)
+        {
+            if (enemies.Length <= 1)
             {
-                //WindowAlert.Instance.SetActiveAlert(); ENEMIGOS DERROTADOS, pulsa OK para volver al mapa
-                WindowAlert window = WindowAlert.Instance;
-                window.CreateConfirmWindow("BIEN HECHO! ENEMIGOS DERROTADOS, pulsa OK para volver al mapa", false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
-                window.SetActiveAlert();
+                Winner();
                 return true;
             }
+        }
+        else
+        {
+            Winner();
+            return true;
+        }
         return false;
+    }
+
+    private void Winner()
+    {
+        GameManager.Instance.CurrentPlayer.AddXp(total_xp);
+        GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().DecreaseWeaponDurability(7);
+        //WindowAlert.Instance.SetActiveAlert(); ENEMIGOS DERROTADOS, pulsa OK para volver al mapa
+        WindowAlert window = WindowAlert.Instance;
+        window.CreateConfirmWindow("BIEN HECHO! ENEMIGOS DERROTADOS, pulsa OK para volver al mapa" + System.Environment.NewLine + "XP: " + total_xp + " Weapon durability: " +
+            GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
+        window.SetActiveAlert();
     }
 
     public void GameOver()
@@ -79,6 +100,11 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
         WindowAlert window = WindowAlert.Instance;
         window.CreateConfirmWindow("HAS SIDO DERROTADO, pulsa OK para volver al mapa", false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
         window.SetActiveAlert();
+    }
+
+    public int GetTotalXP()
+    {
+        return total_xp;
     }
 
     public int GetNumEnemies()
