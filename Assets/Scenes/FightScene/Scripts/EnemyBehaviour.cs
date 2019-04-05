@@ -28,6 +28,7 @@ public class EnemyBehaviour : MonoBehaviour {
     private void Update()
     {
         if (timer > 0) timer = timer - Time.deltaTime;
+
         if (activeBodyAttack == true) {
             Vector3 v = new Vector3(0, Random.Range(-1f, 5f), 0);
             transform.position = Vector3.Lerp(this.gameObject.transform.position, v, Time.deltaTime);
@@ -43,9 +44,12 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void SetTimerOK()
     {
+        
         defaultTime = Random.Range(3f, 6f);
         timer = defaultTime;
+        
     }
+
     [Task]
     void CheckAttacked()
     {
@@ -180,16 +184,31 @@ public class EnemyBehaviour : MonoBehaviour {
         else Task.current.Fail();
 
     }
-    [Task]
+    /*[Task]
     void CheckLimit()
     {
-        if (Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f && timer > 0 && checkLimit == false)
+        if (Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f && timer > 0 && checkLimit == false)  //        if (checkLimit == false && ef.GetReturnTimer() > 0)
         {
             transform.eulerAngles += new Vector3(0, 180f, 0);
             timer = 0f;
             checkLimit = true;
         }
-        Task.current.Succeed();
+        Task.current.Fail();
+    }*/
+
+    [Task]
+    void CheckLimit()
+    {
+        if ((Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f || ef.GetReturnTimer() == 1f) && timer > 0 && checkLimit == false)  //        if (checkLimit == false && ef.GetReturnTimer() > 0)
+        {
+            transform.eulerAngles += new Vector3(0, 180f, 0);
+            timer = 0f;
+            checkLimit = true;
+
+            ef.SetReturnTimer(0);
+
+        }
+        Task.current.Fail();
     }
 
     IEnumerator Wait()

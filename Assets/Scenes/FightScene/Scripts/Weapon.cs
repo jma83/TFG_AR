@@ -115,6 +115,8 @@ public class Weapon : MonoBehaviour
     public void DecreaseWeaponDurability(int value)
     {
         durability = durability - value;
+
+        if (durability < 0) durability = 0;
     }
 
     public string GetWeaponType()

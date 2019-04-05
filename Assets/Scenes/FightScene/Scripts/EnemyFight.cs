@@ -18,6 +18,7 @@ public class EnemyFight : FightEntity
     private Vector3 lastAngularVelocity;
     private StateAI state;
     private int xp;
+    private float return_timer;
 
 
     // Use this for initialization
@@ -42,13 +43,14 @@ public class EnemyFight : FightEntity
     }
 
 
+    /*
     void FixedUpdate()
     {
         lastPosition = transform.position;
         lastVelocity = rb.velocity;
         lastAngularVelocity = rb.angularVelocity;
     }
-
+    */
 
 
     public int getNumEnemies()
@@ -123,14 +125,37 @@ public class EnemyFight : FightEntity
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject.tag == "FightBox" && return_timer == 0)
+        {
+            Debug.Log("return_timer establecido!");
+            return_timer = 1f;
+        }
+
         if (col.gameObject.tag == "Player")
         {
-            transform.position = lastPosition;
+            /*transform.position = lastPosition;
             rb.velocity = lastVelocity;
             rb.angularVelocity = lastAngularVelocity;
-            Physics.IgnoreCollision(collide, col);
+            Physics.IgnoreCollision(collide, col);*/
             col.gameObject.GetComponent<PlayerFight>().DealDamage(3);
+
+            if (col.gameObject.GetComponent<PlayerFight>().GetHP() <= 0)
+            {
+                EnemyFightManager.Instance.GameOver();
+            }
+            
         }
+    }
+
+    public void SetReturnTimer(float f)
+    {
+        return_timer = f;
+        Debug.Log("return_timer: " + return_timer);
+    }
+
+    public float GetReturnTimer()
+    {
+        return return_timer;
     }
 
     public int GetXP()

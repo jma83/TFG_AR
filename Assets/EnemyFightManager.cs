@@ -10,13 +10,14 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private int cont;
     private EnemyFight id_mutex;
     private int total_xp;
+    private bool gameOver;
 
     // Use this for initialization
     void Start () {        
         enemyOrderList = new List<EnemyFight>();
         cont = 1;
         UpdateOrderList();
-
+        gameOver = false;
     }
 	
 	// Update is called once per frame
@@ -96,10 +97,16 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
 
     public void GameOver()
     {
-        enemies = GameObject.FindGameObjectsWithTag("enemy");
-        WindowAlert window = WindowAlert.Instance;
-        window.CreateConfirmWindow("HAS SIDO DERROTADO, pulsa OK para volver al mapa", false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
-        window.SetActiveAlert();
+        if (gameOver == false)
+        {
+            gameOver = true;
+            enemies = GameObject.FindGameObjectsWithTag("enemy");
+            GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().DecreaseWeaponDurability(7);
+            WindowAlert window = WindowAlert.Instance;
+            window.CreateConfirmWindow("HAS SIDO DERROTADO, pulsa OK para volver al mapa " + System.Environment.NewLine + "Weapon durability: " +
+                GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
+            window.SetActiveAlert();
+        }
     }
 
     public int GetTotalXP()
