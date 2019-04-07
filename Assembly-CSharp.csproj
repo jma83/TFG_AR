@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\cameraPlane.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -596,25 +597,33 @@
     <Compile Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\ARUserAnchor.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\NativeInterface\UnityARSessionNativeInterface.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\UnityARKitPluginSettings.cs" />
-    <Compile Include="Assets\Models\Droid\Droid.cs" />
-    <Compile Include="Assets\Models\Equipment\Equipment.cs" />
-    <Compile Include="Assets\Models\InventoryEntity.cs" />
-    <Compile Include="Assets\Models\Items\BigHealthItem.cs" />
-    <Compile Include="Assets\Models\Items\ExtendCaptureItem.cs" />
-    <Compile Include="Assets\Models\Items\Field Items\ItemPickup.cs" />
-    <Compile Include="Assets\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
-    <Compile Include="Assets\Models\Items\HealthItem.cs" />
-    <Compile Include="Assets\Models\Items\Item.cs" />
-    <Compile Include="Assets\Models\Items\ItemsManager.cs" />
-    <Compile Include="Assets\Models\Items\XPMultiplierItem.cs" />
-    <Compile Include="Assets\Models\MapEntity.cs" />
-    <Compile Include="Assets\Models\Player\Scripts\CaptureRange.cs" />
-    <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Core\PandaBehaviour.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\00_ChangeColor\Assets\MyCube.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\01_Move\Assets\Move.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\Computer.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\Dialogue.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\Player.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\AI.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\AIVision.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Bullet.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\BulletImpact.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\FollowCamera.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\HUD.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Patroller.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\ShooterGameController.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\TriggerType.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
+    <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
-    <Compile Include="Assets\Scenes\FightScene\Scripts\bulletScript.cs" />
-    <Compile Include="Assets\Scenes\FightScene\Scripts\collisionScript.cs" />
-    <Compile Include="Assets\Scenes\FightScene\Scripts\enemyScript.cs" />
-    <Compile Include="Assets\Scenes\FightScene\Scripts\playerScript.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBehaviour.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFight.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFightManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\FightEntity.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\PlayerFight.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\UIManagerFight.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\webCamScript.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\PuzzleSceneManager.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\Scripts\SlidingSphere.cs" />
@@ -623,35 +632,62 @@
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Droid\Droid.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Equipment\Equipment.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\InventoryEntity.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\BigHealthItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\DurabilityUP.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ExtendCaptureItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Field Items\ItemPickup.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\HealthItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Item.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ItemsManager.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\XPMultiplierItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
-    <Compile Include="Assets\Utilities\UIManager.cs" />
     <Compile Include="Assets\Utilities\WindowAlert.cs" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Patroller.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Unity\Location\ExampleGpsTraces\LocationProviderAndroidNative.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\ColoredLines.shader" />
     <None Include="Assets\StreamingAssets\Vuforia\VuforiaMaze.xml" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\MobileOcclusion.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\01_Move\Assets\Move.BT.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\CameraDiffuse.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\InstancedSurfaceShader.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\TagDialogue.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Core\PandaBehaviour.xml" />
+    <None Include="Assets\Lib\PandaBehaviour\README.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Unity\Location\ExampleGpsTraces\Helsinki.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Player.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Sniper.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Examples\2_AstronautGame\AstronautGame\Building\CharacterBuildingShader.shader" />
     <None Include="Assets\Lib\MapBoxSDK\GoogleARCore\SDK\Materials\ARBackground.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Shaders\RasterWithTransparencyShader.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Shaders\MapboxStylesPerRenderer.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\00_ChangeColor\Assets\ChangeColor.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Fonts\OpenSansLic.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\link.xml" />
     <None Include="Assets\Lib\Vuforia\Shaders\VideoBackground.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\Examples\ARTabletop\Shaders\ClipBox\Clip_Box.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\README.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\OutlineOpaque.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Hunter.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Examples\Common\Shaders\MobileOcclusion.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\AI.BT.lib.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Core\Plugins\Android\UniAndroidPermission\AndroidManifest-uniRP.xml" />
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\Examples\ARTabletop\Shaders\ClipBox\LICENSE.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\Computer.BT.txt" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\GameController.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Shaders\MapboxStyles.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\DepthMask.shader" />
     <None Include="Assets\Lib\MapBoxSDK\Resources\Mapbox\MapboxConfiguration.txt" />
@@ -665,16 +701,20 @@
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Examples\2_AstronautGame\AstronautGame\Astronaut\ProjectorLight.shader" />
     <None Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Materials\AREdgeDetectionBackground.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Examples\Common\Shaders\MobileARShadow.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\PlayTag.commented.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\Examples\ARTabletop\Shaders\Clip_MapboxStyles.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Examples\Common\Shaders\InstancedSurfaceShader.shader" />
+    <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyTree.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\Examples\ARTabletop\Shaders\Clip_MapBoxStylesPerRenderer.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\Shaders\YUVShader.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\BrightTexture.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\DepthContour.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\MobileARShadow.shader" />
+    <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\PlayTag.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\link.xml" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Core\Plugins\link.xml" />
+    <None Include="Assets\Lib\PandaBehaviour\ChangeLog.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\Text3D.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
@@ -877,6 +917,9 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>D:/Programas/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="Vuforia.UnityExtensions">
+      <HintPath>D:/Programas/Unity/Editor/Data/PlaybackEngines/VuforiaSupport/Managed/Runtime/Vuforia.UnityExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>D:/Programas/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
     </Reference>
@@ -903,6 +946,9 @@
     </Reference>
     <Reference Include="Mapbox.Json">
       <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/MapBoxSDK/MapBox/Core/Plugins/ThirdParty/Mapbox.Json/Net35/Mapbox.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PandaBehaviour">
+      <HintPath>D:/Usuarios/Javi/Descargas/Git/mapBoxTest2/Assets/Lib/PandaBehaviour/Core/PandaBehaviour.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/Javi/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

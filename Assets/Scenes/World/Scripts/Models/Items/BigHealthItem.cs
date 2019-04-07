@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Items/BigHealthItem")]
+
+public class BigHealthItem : HealthItem {
+
+    public override void Start()
+    {
+        icon = Resources.Load<Sprite>("Items/big-potion");
+        //rand = Random.Range(40, 60);
+        type = (ARGameConstants.TypeObj)1;
+    }
+    public override void RestoreAction()
+    {
+
+    }
+
+    public override void SetRand()
+    {
+        rand = Random.Range(40, 60);
+
+    }
+}

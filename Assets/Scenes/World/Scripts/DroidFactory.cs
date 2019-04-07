@@ -1,9 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class DroidFactory : MonoBehaviour {
+public class DroidFactory : Singleton<DroidFactory> {
 
     [SerializeField] private Droid[] availableDroids;
     [SerializeField] private Player player;
@@ -11,9 +11,11 @@ public class DroidFactory : MonoBehaviour {
     [SerializeField] private int startingDroids = 5;
     [SerializeField] private float minRange = 5.0f;
     [SerializeField] private float maxRange = 50.0f;
+    private bool gameStarted = false;
 
     private List<Droid> liveDroids = new List<Droid>();
     private Droid selectedDroid;
+    private int selectedDroidIndex;
 
     public List<Droid> LiveDroids
     {
@@ -30,17 +32,29 @@ public class DroidFactory : MonoBehaviour {
 
     void Start()
     {
-        for (int i = 0; i < startingDroids; i++)
+        if (!gameStarted)
         {
-            InstantiateDroid();
-        }
+            for (int i = 0; i < startingDroids; i++)
+            {
+                InstantiateDroid();
+            }
 
-        StartCoroutine(GenerateDroids());
+            StartCoroutine(GenerateDroids());
+        }
     }
 
-    public void DroidWasSelected(Droid d)
+    public void SelectDroid(Droid d)
     {
-        selectedDroid = d;
+        
+        for (int i = 0; i < availableDroids.Length; i++)
+        {
+            if (availableDroids[i] == d)
+            {
+                selectedDroidIndex = i;
+                selectedDroid = d;
+                break;
+            }
+        }
     }
 
     private IEnumerator GenerateDroids()
@@ -75,5 +89,29 @@ public class DroidFactory : MonoBehaviour {
         }
         return randomNum*sign;
     }
+    
+    public void SetStartingDroids(int n)
+    {
+        startingDroids = n;
+        liveDroids.Clear();
+        for (int k = 0; k < startingDroids; k++)
+        {
+            if (k%2==0)
+                liveDroids.Add(Instantiate(availableDroids[0], Vector3.zero, Quaternion.identity));
+            else
+                liveDroids.Add(Instantiate(availableDroids[1], Vector3.zero, Quaternion.identity));
+        }
+    }
 
+    public int GetDroidIndex()
+    {
+        return selectedDroidIndex;
+    }
+
+    public void SetGameStarted()
+    {
+        gameStarted = true;
+    }
 }
+
+

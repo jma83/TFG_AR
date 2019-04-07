@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -17,8 +17,10 @@ public class GameManager : Singleton<GameManager>
     PlayerData dataPly;
     InventoryData dataInv;
     ItemsManagerData dataItemsManager;
+
     Inventory inv;
     ItemsManager itemsManager;
+    DroidFactory droidFactory;
     bool spawned = false;
 
     private void Start()
@@ -83,6 +85,7 @@ public class GameManager : Singleton<GameManager>
     {
         inv = Inventory.Instance;
         itemsManager = ItemsManager.Instance;
+        droidFactory = DroidFactory.Instance;
         if (dataPly == null || dataInv == null || dataItemsManager == null)
         {
             Debug.Log("algun data es null - VAMOS A INICIALIZAR DE NUEVO");
@@ -107,6 +110,34 @@ public class GameManager : Singleton<GameManager>
             dataPly.maxHp = currentPlayer.MaxHp;
             dataPly.captureRange = currentPlayer.CaptureRange;
             dataPly.xp_multiplier = currentPlayer.Xp_Multiplier;
+
+
+            dataPly.lastGameDate = System.DateTime.Now.ToString();
+
+            playerFight = FindObjectOfType<PlayerFight>();
+
+            if (playerFight == null)
+            {
+                dataPly.droidSize = droidFactory.LiveDroids.Count;
+                Debug.Log("dataPly.droidSize save: " + dataPly.droidSize);
+                dataPly.droidPosX = new float[dataPly.droidSize];
+                dataPly.droidPosY = new float[dataPly.droidSize];
+                dataPly.droidPosZ = new float[dataPly.droidSize];
+
+                for (int h = 0; h < dataPly.droidSize; h++)
+                {
+                    dataPly.droidPosX[h] = droidFactory.LiveDroids[h].transform.position.x;
+                    dataPly.droidPosY[h] = droidFactory.LiveDroids[h].transform.position.y;
+                    dataPly.droidPosZ[h] = droidFactory.LiveDroids[h].transform.position.z;
+                }
+                dataPly.droidCombatID = droidFactory.GetDroidIndex();
+
+            }
+
+            if (playerFight != null)
+            {
+                dataPly.combatWin = EnemyFightManager.Instance.GetWin();
+            }
 
             bf.Serialize(file, dataPly);
             file.Close();
@@ -224,6 +255,7 @@ public class GameManager : Singleton<GameManager>
     {
         itemsManager = ItemsManager.Instance;
         inv = Inventory.Instance;
+        droidFactory = DroidFactory.Instance;
 
         if (File.Exists(Application.persistentDataPath + playerFile))
         {
@@ -256,6 +288,31 @@ public class GameManager : Singleton<GameManager>
                 currentPlayer.MaxHp = dataPly.maxHp;
                 currentPlayer.CaptureRange = dataPly.captureRange;
                 currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
+
+
+                
+                
+
+                playerFight = FindObjectOfType<PlayerFight>();
+
+                if (playerFight == null)
+                {
+                    if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(59))
+                    {
+                        Debug.Log("dataPly.droidSize load: " + dataPly.droidSize);
+                        //droidFactory.SetGameStarted();
+                        if (droidFactory.LiveDroids.Count != dataPly.droidSize)
+                            droidFactory.SetStartingDroids(dataPly.droidSize);
+
+                        for (int h = 0; h < dataPly.droidSize; h++)
+                        {
+                            droidFactory.LiveDroids[h].transform.position = new Vector3(dataPly.droidPosX[h], dataPly.droidPosY[h], dataPly.droidPosZ[h]);
+                        }
+                        if (dataPly.combatWin)
+                            droidFactory.LiveDroids[dataPly.droidCombatID].SetDefeated();
+                        dataPly.combatWin = false;
+                    }
+                }
             }
             else
             {
@@ -419,6 +476,10 @@ public class GameManager : Singleton<GameManager>
                 gmObject = Instantiate(Resources.Load("Items/Key", typeof(GameObject))) as GameObject;
                 item = gmObject.GetComponent<XPMultiplierItem>();
                 break;
+            case 4:
+                gmObject = Instantiate(Resources.Load("Items/DurabilityUP", typeof(GameObject))) as GameObject;
+                item = gmObject.GetComponent<DurabilityUP>();
+                break;
         }
         return item;
     }
@@ -544,6 +605,14 @@ class PlayerData
     public int maxHp;
     public float captureRange;
     public int xp_multiplier;
+
+    public float[] droidPosX;
+    public float[] droidPosY;
+    public float[] droidPosZ;
+    public int droidSize;
+    public int droidCombatID;
+    public bool combatWin;
+    public string lastGameDate;
 }
 
 [Serializable]
@@ -554,6 +623,9 @@ class InventoryData
     public bool[] itemActive;
     public int[] itemType;
     public int itemsSize;
+    public float[] posItemX;
+    public float[] posItemY;
+    public float[] posItemZ;
 
     public int[] equipIDs;
     public int[] equipQuality;
@@ -564,6 +636,9 @@ class InventoryData
     public int[] equipDurability;
     public bool[] equipActive;
     public int equipmentsSize;
+    public float[] posEquipX;
+    public float[] posEquipY;
+    public float[] posEquipZ;
 
     public int id_e_selected;
     public int space;
