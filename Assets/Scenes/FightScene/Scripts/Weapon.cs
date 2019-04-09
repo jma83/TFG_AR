@@ -97,8 +97,18 @@ public class Weapon : MonoBehaviour
                 bullet.transform.position = GameObject.FindGameObjectsWithTag("camera")[0].transform.position;
             }
 
-            targetTime = 1.5f;
+            targetTime = 2.5f;
 
+            if (speed != 5)
+            {
+                if (speed - 5 > 50) targetTime = 1f;
+                else if (speed - 5 > 40) targetTime = 1.2f;
+                else if (speed - 5 > 30) targetTime = 1.4f;
+                else if (speed - 5 > 20) targetTime = 1.6f;
+                else if (speed - 5 > 10) targetTime = 1.8f;
+                else if (speed - 5 > 5) targetTime = 2f;
+                else targetTime = 2.5f;
+            }
         }
         return bullet;
 
@@ -107,7 +117,7 @@ public class Weapon : MonoBehaviour
     {
         audioSource = this.GetComponent<AudioSource>();
         audioSource.Play();
-        rb.AddForce(force * (100f*speed));
+        rb.AddForce(force * (speed * 60));
 
         Destroy(bullet, 3);
     }

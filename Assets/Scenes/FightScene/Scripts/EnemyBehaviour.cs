@@ -116,8 +116,8 @@ public class EnemyBehaviour : MonoBehaviour {
     [Task]
     void Attack()
     {
-        if (timer<=0)
-        checkLimit = false;
+        if (timer <= 0 || timer == 3)
+            checkLimit = false;
         if (efm.CheckEnemyAttack_Mutex(ef))
         {
             ef.SetStateAI(StateAI.Attack);

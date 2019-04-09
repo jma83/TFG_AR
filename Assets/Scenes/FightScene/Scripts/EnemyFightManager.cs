@@ -56,8 +56,8 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
             cont++;
             if (enemies.Length < cont)
                 cont = 1;
-             
-            timer = 3.5f;
+
+            timer = 3.8f;
             return true;
         }
         else

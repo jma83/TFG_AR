@@ -17,7 +17,6 @@ public class PlayerFight : FightEntity
 
     // Use this for initialization
     void Start () {
-        forceVector = GameObject.FindGameObjectsWithTag("camera")[0].transform.forward;
         weapon = gameObject.GetComponent<Weapon>();
         fireButton.onClick.AddListener(Attack);
         ply = GameManager.Instance.CurrentPlayer;

@@ -639,9 +639,6 @@ class InventoryData
     public bool[] itemActive;
     public int[] itemType;
     public int itemsSize;
-    public float[] posItemX;
-    public float[] posItemY;
-    public float[] posItemZ;
 
     public int[] equipIDs;
     public int[] equipQuality;
@@ -652,9 +649,6 @@ class InventoryData
     public int[] equipDurability;
     public bool[] equipActive;
     public int equipmentsSize;
-    public float[] posEquipX;
-    public float[] posEquipY;
-    public float[] posEquipZ;
 
     public int id_e_selected;
     public int space;

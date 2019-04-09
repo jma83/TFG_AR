@@ -12,8 +12,8 @@ public class EnemyFight : FightEntity
     private int maxHp;
     private bool checkAttacked;
     private Rigidbody rb;
-    private Collider collide;
-    private Vector3 lastPosition;
+    //private Collider collide;
+    //private Vector3 lastPosition;
     private Vector3 lastVelocity;
     private Vector3 lastAngularVelocity;
     private StateAI state;
@@ -25,8 +25,8 @@ public class EnemyFight : FightEntity
     void Start()
     {
         weapon = gameObject.GetComponent<Weapon>();
-        collide = gameObject.GetComponent<Collider>();
-        rb = gameObject.GetComponent<Rigidbody>();
+        //collide = gameObject.GetComponent<Collider>();
+        //rb = gameObject.GetComponent<Rigidbody>();
         //rb.detectCollisions = false;
         numEnemies = GameObject.FindGameObjectsWithTag("enemy").Length;
         maxHp = 20;

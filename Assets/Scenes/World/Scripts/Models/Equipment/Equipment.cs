@@ -218,6 +218,10 @@ public class Equipment : InventoryEntity
     public void SetDurability(int d)
     {
         durability = d;
+        if (durability > 100)
+            durability = 100;
+
+
     }
 
     public void AddDurability(int d)

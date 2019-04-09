@@ -18,8 +18,9 @@ public class FightEntity : MonoBehaviour {
 
     public void Attack()
     {
-        if (tag!="Player")
         forceVector = (Vector3.zero - gameObject.transform.position).normalized;
+        if (gameObject.tag == "Player") forceVector = GameObject.FindGameObjectsWithTag("camera")[0].transform.forward;
+
         if (weapon.CreateBullet() != null)
         {
             //Debug.Log("tag del creador:" + gameObject.tag);
