@@ -107,15 +107,16 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     void Idle()
     {
-        ef.SetStateAI(StateAI.Idle);
-        StartCoroutine("Wait");       
-        Task.current.Succeed();
+            ef.SetStateAI(StateAI.Idle);
+            StartCoroutine("Wait");
+        //Task.current.Succeed();
 
     }
 
     [Task]
     void Attack()
     {
+        if (timer<=0)
         checkLimit = false;
         if (efm.CheckEnemyAttack_Mutex(ef))
         {
@@ -137,6 +138,7 @@ public class EnemyBehaviour : MonoBehaviour {
         }
         else
         {
+            if (timer<=0)
             SetTimerOK();
             Task.current.Fail();
         }
@@ -180,8 +182,10 @@ public class EnemyBehaviour : MonoBehaviour {
     void CheckMovementActive()
     {
         //check timer (Return false if is finished)
-        if (timer > 0) Task.current.Succeed();
-        else Task.current.Fail();
+        if (timer > 0)
+            Task.current.Succeed();
+        else
+            Task.current.Fail();
 
     }
     /*[Task]
@@ -206,6 +210,7 @@ public class EnemyBehaviour : MonoBehaviour {
             checkLimit = true;
 
             ef.SetReturnTimer(0);
+            Task.current.Succeed();
 
         }
         Task.current.Fail();
@@ -214,6 +219,7 @@ public class EnemyBehaviour : MonoBehaviour {
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1.2f);
+
         int i = Random.Range(0, 2); //Stop and random to change direction
 
         if (i == 0)
@@ -224,5 +230,6 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             transform.eulerAngles += new Vector3(0, 90f, 0);
         }
+
     }
 }

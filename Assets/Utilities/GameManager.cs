@@ -303,7 +303,7 @@ public class GameManager : Singleton<GameManager>
 
                 if (playerFight == null)
                 {
-                    if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(59))
+                    if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(2))
                     {
                         Debug.Log("dataPly.droidSize load: " + dataPly.droidSize);
                         //droidFactory.SetGameStarted();
@@ -458,16 +458,14 @@ public class GameManager : Singleton<GameManager>
 
 
         }
-        else
+
+        playerFight = FindObjectOfType<PlayerFight>();
+
+        if (playerFight == null)
         {
-
-            playerFight = FindObjectOfType<PlayerFight>();
-
-            if (playerFight == null)
-            {
-                droidFactory.SetGameStarted(-1);
-            }
+            droidFactory.SetGameStarted(-1);
         }
+        
     }
 
     public Item CreateItemByType(int i)

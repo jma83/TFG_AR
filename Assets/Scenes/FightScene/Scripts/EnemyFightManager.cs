@@ -51,13 +51,13 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     {
         UpdateOrderList();
         //Debug.Log("ef.GetInstanceID(): " + ef + " id_mutex:" + id_mutex);
-        if (timer <= 0 && (ef == id_mutex && enemies.Length>1) || enemies.Length == 1)
+        if (timer <= 0 && (ef == id_mutex && enemies.Length>1) || enemies.Length == 1 && timer <= 0)
         {
             cont++;
             if (enemies.Length < cont)
                 cont = 1;
              
-            timer = 2.0f;
+            timer = 3.5f;
             return true;
         }
         else
