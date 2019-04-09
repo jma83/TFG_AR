@@ -78,7 +78,7 @@ public class Weapon : MonoBehaviour
         bullet = null;
         if (targetTime < 1)
         {
-            Debug.Log("CreateBullet: " + attack + ", " + defense + ", " + speed);
+            //Debug.Log("CreateBullet: " + attack + ", " + defense + ", " + speed);
             bullet = Instantiate(Resources.Load("FightScene/bullet", typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) as GameObject;
             bt = bullet.gameObject.GetComponent<BulletCollisionManager>();
             //bt.gameObject.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
     protected float targetTime =0;
     public CaptureRange captureRangeObj;
     private int xp_multiplier = 1;
+    private Vector3 aux_RespawnPos;
 
 
 
@@ -77,7 +78,10 @@ public class Player : MonoBehaviour {
         walk = this.GetComponent(typeof(Animator)) as Animator;
         //temp_pos = Vector3.zero;
         InitLevelData(0,false);
-	}
+        Debug.Log("Start RespawnPos: " + aux_RespawnPos.x + " " + aux_RespawnPos.y + " " + aux_RespawnPos.z);
+        aux_RespawnPos = transform.position;
+
+    }
 
     public void SetMaxCaptureRange(float f)
     {
@@ -142,7 +146,12 @@ public class Player : MonoBehaviour {
     {
         if (walk!=null)
         Walk();
-        
+
+
+        playerTimer();
+        if (Vector3.Distance(transform.position, aux_RespawnPos) > 80)
+            Debug.Log(Vector3.Distance(transform.position, aux_RespawnPos));
+
     }
 
     public void playerTimer()
@@ -151,8 +160,14 @@ public class Player : MonoBehaviour {
             targetTime -= Time.deltaTime;
         if (targetTime <= 0)
         {
+            if (Vector3.Distance(transform.position,aux_RespawnPos) > 80)
+            {
+                aux_RespawnPos = transform.position;
+                Debug.Log("aux_RespawnPos: " + aux_RespawnPos);
+                DroidFactory.Instance.ResetDroids();
+            }
             //temp_pos = transform.localPosition;
-            targetTime = 1;
+            targetTime = 10;
         }
     }
     public void Walk()
@@ -175,5 +190,16 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         transform.hasChanged = false;
+    }
+
+    public void SetAuxRespawnPos(Vector3 v)
+    {
+        Debug.Log("Seteamos SetAuxRespawnPos: " + v.x + " " + v.y + " " + v.z);
+        aux_RespawnPos = v;
+    }
+
+    public Vector3 GetAuxRespawnPos()
+    {
+        return aux_RespawnPos;
     }
 }

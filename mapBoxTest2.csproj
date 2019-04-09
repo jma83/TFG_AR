@@ -343,7 +343,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\cameraPlane.cs" />
-    <Compile Include="Assets\EnemyFightManager.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -897,24 +896,11 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
-    <Compile Include="Assets\Models\Droid\Droid.cs" />
-    <Compile Include="Assets\Models\Equipment\Equipment.cs" />
-    <Compile Include="Assets\Models\InventoryEntity.cs" />
-    <Compile Include="Assets\Models\Items\BigHealthItem.cs" />
-    <Compile Include="Assets\Models\Items\ExtendCaptureItem.cs" />
-    <Compile Include="Assets\Models\Items\Field Items\ItemPickup.cs" />
-    <Compile Include="Assets\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
-    <Compile Include="Assets\Models\Items\HealthItem.cs" />
-    <Compile Include="Assets\Models\Items\Item.cs" />
-    <Compile Include="Assets\Models\Items\ItemsManager.cs" />
-    <Compile Include="Assets\Models\Items\XPMultiplierItem.cs" />
-    <Compile Include="Assets\Models\MapEntity.cs" />
-    <Compile Include="Assets\Models\Player\Scripts\CaptureRange.cs" />
-    <Compile Include="Assets\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFight.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFightManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\FightEntity.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\PlayerFight.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\UIManagerFight.cs" />
@@ -927,6 +913,21 @@
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Droid\Droid.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Equipment\Equipment.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\InventoryEntity.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\BigHealthItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\DurabilityUP.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ExtendCaptureItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Field Items\ItemPickup.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\HealthItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Item.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ItemsManager.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\XPMultiplierItem.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />

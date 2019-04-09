@@ -30,25 +30,12 @@ public class DroidFactory : Singleton<DroidFactory> {
         Assert.IsNotNull(player);
     }
 
-    void Start()
-    {
-        if (!gameStarted)
-        {
-            for (int i = 0; i < startingDroids; i++)
-            {
-                InstantiateDroid();
-            }
-
-            StartCoroutine(GenerateDroids());
-        }
-    }
-
     public void SelectDroid(Droid d)
     {
         
-        for (int i = 0; i < availableDroids.Length; i++)
+        for (int i = 0; i < liveDroids.Count; i++)
         {
-            if (availableDroids[i] == d)
+            if (liveDroids[i] == d)
             {
                 selectedDroidIndex = i;
                 selectedDroid = d;
@@ -90,7 +77,7 @@ public class DroidFactory : Singleton<DroidFactory> {
         return randomNum*sign;
     }
     
-    public void SetStartingDroids(int n)
+    /*public void SetStartingDroids(int n)
     {
         startingDroids = n;
         liveDroids.Clear();
@@ -101,16 +88,57 @@ public class DroidFactory : Singleton<DroidFactory> {
             else
                 liveDroids.Add(Instantiate(availableDroids[1], Vector3.zero, Quaternion.identity));
         }
-    }
+    }*/
 
     public int GetDroidIndex()
     {
         return selectedDroidIndex;
     }
 
-    public void SetGameStarted()
+    public void SetGameStarted(int start)
     {
-        gameStarted = true;
+        if (liveDroids.Count <= 0 && !gameStarted)
+        {
+            gameStarted = true;
+            if (start>=0)
+            startingDroids = start;
+            for (int i = 0; i < startingDroids; i++)
+            {
+                InstantiateDroid();
+            }
+
+            //StartCoroutine(GenerateDroids());
+        }
+    }
+
+    public void ResetDroids()
+    {
+        for (int i = 0; i < liveDroids.Count; i++)
+        {
+            liveDroids[i].Destroy();
+        }
+        liveDroids.Clear();
+        //FindObjectsOfType<Droid>()
+        startingDroids = 5;
+
+        for (int k = 0; k < startingDroids; k++)
+        {
+            InstantiateDroid();
+        }
+
+        //StartCoroutine(GenerateDroids());
+        
+    }
+
+    public bool SetDefeated(int i)
+    {
+        if (i >= 0 && i < liveDroids.Count) {
+            liveDroids[i].Destroy();
+            liveDroids.Remove(liveDroids[i]);
+            startingDroids = liveDroids.Count;
+            return true;
+        }
+        return false;
     }
 }
 

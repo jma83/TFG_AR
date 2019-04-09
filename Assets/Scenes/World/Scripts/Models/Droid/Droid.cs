@@ -55,7 +55,7 @@ public class Droid : MapEntity {
                     {
                         if (scenemanager1.gameObject.activeSelf)
                         {
-
+                            DroidFactory.Instance.SelectDroid(this);
                             audioSource.PlayOneShot(enemySound);
                             scenemanager1.ChangeScene(this.gameObject, 0);
 
@@ -71,10 +71,9 @@ public class Droid : MapEntity {
         }
     }
 
-    public void SetDefeated()
+
+    public void Destroy()
     {
         Destroy(gameObject);
-        
     }
-
 }

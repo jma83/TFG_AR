@@ -202,7 +202,7 @@ public class EnemyBehaviour : MonoBehaviour {
         if ((Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f || ef.GetReturnTimer() == 1f) && timer > 0 && checkLimit == false)  //        if (checkLimit == false && ef.GetReturnTimer() > 0)
         {
             transform.eulerAngles += new Vector3(0, 180f, 0);
-            timer = 0f;
+            //timer = 0f;
             checkLimit = true;
 
             ef.SetReturnTimer(0);

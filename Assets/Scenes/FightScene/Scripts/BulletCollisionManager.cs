@@ -29,8 +29,8 @@ public class BulletCollisionManager : MonoBehaviour
             if ((col.gameObject.tag == "Player" && col.gameObject.tag!= owner) || (col.gameObject.tag == "enemy" && col.gameObject.tag != owner))
             {
 
-                Debug.Log("HIT: " + col.gameObject.tag);
-                Debug.Log("OWNER: " +owner);
+                //Debug.Log("HIT: " + col.gameObject.tag);
+                //Debug.Log("OWNER: " +owner);
 
                 FightEntity fe = col.gameObject.GetComponent<FightEntity>();
                 fe.DealDamage(damage);

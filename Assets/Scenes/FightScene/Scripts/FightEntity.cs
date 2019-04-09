@@ -22,7 +22,7 @@ public class FightEntity : MonoBehaviour {
         forceVector = (Vector3.zero - gameObject.transform.position).normalized;
         if (weapon.CreateBullet() != null)
         {
-            Debug.Log("tag del creador:" + gameObject.tag);
+            //Debug.Log("tag del creador:" + gameObject.tag);
 
             weapon.Shoot(forceVector);
             

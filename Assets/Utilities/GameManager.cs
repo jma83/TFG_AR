@@ -86,10 +86,15 @@ public class GameManager : Singleton<GameManager>
         inv = Inventory.Instance;
         itemsManager = ItemsManager.Instance;
         droidFactory = DroidFactory.Instance;
-        if (dataPly == null || dataInv == null || dataItemsManager == null)
+         if (dataPly == null || dataInv == null || dataItemsManager == null)
         {
             Debug.Log("algun data es null - VAMOS A INICIALIZAR DE NUEVO");
-            InitializeScene();
+
+            dataPly = new PlayerData();
+            dataInv = new InventoryData();
+            dataItemsManager = new ItemsManagerData();
+            FindPlayer();
+            //InitializeScene();
         }
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -110,7 +115,10 @@ public class GameManager : Singleton<GameManager>
             dataPly.maxHp = currentPlayer.MaxHp;
             dataPly.captureRange = currentPlayer.CaptureRange;
             dataPly.xp_multiplier = currentPlayer.Xp_Multiplier;
-
+            dataPly.pos = new float[3];
+            dataPly.pos[0] = currentPlayer.GetAuxRespawnPos().x;
+            dataPly.pos[1] = currentPlayer.GetAuxRespawnPos().y;
+            dataPly.pos[2] = currentPlayer.GetAuxRespawnPos().z;
 
             dataPly.lastGameDate = System.DateTime.Now.ToString();
 
@@ -288,10 +296,8 @@ public class GameManager : Singleton<GameManager>
                 currentPlayer.MaxHp = dataPly.maxHp;
                 currentPlayer.CaptureRange = dataPly.captureRange;
                 currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
-
-
-                
-                
+                Vector3 v3 = new Vector3(dataPly.pos[0], dataPly.pos[1], dataPly.pos[2]);
+                currentPlayer.SetAuxRespawnPos(v3);
 
                 playerFight = FindObjectOfType<PlayerFight>();
 
@@ -301,15 +307,16 @@ public class GameManager : Singleton<GameManager>
                     {
                         Debug.Log("dataPly.droidSize load: " + dataPly.droidSize);
                         //droidFactory.SetGameStarted();
-                        if (droidFactory.LiveDroids.Count != dataPly.droidSize)
-                            droidFactory.SetStartingDroids(dataPly.droidSize);
-
+                        /*if (droidFactory.LiveDroids.Count != dataPly.droidSize)
+                            droidFactory.SetStartingDroids(dataPly.droidSize);*/
+                        droidFactory.SetGameStarted(dataPly.droidSize);
                         for (int h = 0; h < dataPly.droidSize; h++)
                         {
                             droidFactory.LiveDroids[h].transform.position = new Vector3(dataPly.droidPosX[h], dataPly.droidPosY[h], dataPly.droidPosZ[h]);
                         }
+                        Debug.Log("dataPly.combatWin load (borramos?): " + dataPly.combatWin);
                         if (dataPly.combatWin)
-                            droidFactory.LiveDroids[dataPly.droidCombatID].SetDefeated();
+                            droidFactory.SetDefeated(dataPly.droidCombatID);
                         dataPly.combatWin = false;
                     }
                 }
@@ -395,7 +402,7 @@ public class GameManager : Singleton<GameManager>
                 item = null;
                 if (dataInv != null)
                 {
-                    
+
                     for (int i = 0; i < dataInv.itemsSize; i++)
                     {
                         //crear objeto instancia de los ITEMs
@@ -407,12 +414,12 @@ public class GameManager : Singleton<GameManager>
                         item.SetType(dataInv.itemType[i]);
                         item.DisableComponents();
                         //if (inv.getItems().Count > i)
-                            inv.SetItem(item, i);
+                        inv.SetItem(item, i);
                     }
                     //Debug.Log("items inventory size load: " + inv.getItems().Count);
                     Equipment equip = null;
                     GameObject gmObject = null;
-                    
+
                     for (int i = 0; i < dataInv.equipmentsSize; i++)
                     {
                         //crear instancia de equipamiento
@@ -442,14 +449,24 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                
+
                 if (!SetFightEquipment())
-                Debug.Log("El inventario es nulo al cargar");
-                
-                
+                    Debug.Log("El inventario es nulo al cargar");
+
+
             }
 
-            
+
+        }
+        else
+        {
+
+            playerFight = FindObjectOfType<PlayerFight>();
+
+            if (playerFight == null)
+            {
+                droidFactory.SetGameStarted(-1);
+            }
         }
     }
 
@@ -605,6 +622,7 @@ class PlayerData
     public int maxHp;
     public float captureRange;
     public int xp_multiplier;
+    public float[] pos;
 
     public float[] droidPosX;
     public float[] droidPosY;

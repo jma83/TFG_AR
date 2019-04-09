@@ -25,12 +25,12 @@ public class Equipment : InventoryEntity
             id = itemManager.GetNewEquipID();            
             SetDurability(100);
             
-            Debug.Log("Inicializo arma");
+            //Debug.Log("Inicializo arma");
         }
         else
         {
 
-            Debug.Log("Else!!! No inicializamos los stats del arma: "+ id);
+            //Debug.Log("Else!!! No inicializamos los stats del arma: "+ id);
         }
     }
 
