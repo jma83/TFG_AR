@@ -429,6 +429,7 @@
     <None Include="Assets\Lib\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VideoBackground.shader" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
+    <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyAdvancedTree.txt" />
     <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyTree.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />

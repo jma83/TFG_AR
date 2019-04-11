@@ -17,14 +17,19 @@ public class Weapon : MonoBehaviour
     private int quality;
     private int durability;
     private string owner;
-    protected float targetTime;
+    protected float targetAttackTime = 0f;
+    protected float reloadDefendTime = 0f;
+    protected float targetDefendTime = 0f;
+    private float defaultTargetDefendTime;
+    private float defaultTargetAttackTime;
     private AudioSource audioSource;
 
 
     private void Start()
     {
-        targetTime = 0.0f;
-
+        reloadDefendTime = targetDefendTime = targetAttackTime = 0.0f;
+         
+        defaultTargetDefendTime = 5f;
         //default stats for weapon:
         if (attack==0)
             attack = 5;
@@ -53,8 +58,18 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetTime >= 0)
-            targetTime -= Time.deltaTime;
+        if (targetAttackTime >= 0)
+            targetAttackTime -= Time.deltaTime;
+        if (targetDefendTime >= 0)
+        {
+            targetDefendTime -= Time.deltaTime;
+        }
+        else
+        {
+            if (reloadDefendTime >= 0)
+                reloadDefendTime -= Time.deltaTime;
+        }
+
     }
 
     public void SetWeaponStats(int durability,int type,int quality,int attack,int defense,int speed, string owner = null)
@@ -73,10 +88,10 @@ public class Weapon : MonoBehaviour
         
     }
 
-    public GameObject CreateBullet()
+    public bool CreateBullet()
     {
         bullet = null;
-        if (targetTime < 1)
+        if (targetAttackTime < 1)
         {
             //Debug.Log("CreateBullet: " + attack + ", " + defense + ", " + speed);
             bullet = Instantiate(Resources.Load("FightScene/bullet", typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) as GameObject;
@@ -88,7 +103,7 @@ public class Weapon : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("camera").Length <= 0)
             {
                 print("Error. No cameras found");
-                return null;
+                return false;
             }
 
             if (owner == "Player")
@@ -97,20 +112,22 @@ public class Weapon : MonoBehaviour
                 bullet.transform.position = GameObject.FindGameObjectsWithTag("camera")[0].transform.position;
             }
 
-            targetTime = 2.5f;
+            targetAttackTime = 2.5f;
 
             if (speed != 5)
             {
-                if (speed - 5 > 50) targetTime = 1f;
-                else if (speed - 5 > 40) targetTime = 1.2f;
-                else if (speed - 5 > 30) targetTime = 1.4f;
-                else if (speed - 5 > 20) targetTime = 1.6f;
-                else if (speed - 5 > 10) targetTime = 1.8f;
-                else if (speed - 5 > 5) targetTime = 2f;
-                else targetTime = 2.5f;
+                if (speed - 5 > 50) targetAttackTime = 1f;
+                else if (speed - 5 > 40) targetAttackTime = 1.2f;
+                else if (speed - 5 > 30) targetAttackTime = 1.4f;
+                else if (speed - 5 > 20) targetAttackTime = 1.6f;
+                else if (speed - 5 > 10) targetAttackTime = 1.8f;
+                else if (speed - 5 > 5) targetAttackTime = 2f;
+                else targetAttackTime = 2.5f;
             }
+            return true;
+
         }
-        return bullet;
+        return false;
 
     }
     public void Shoot(Vector3 force)
@@ -120,6 +137,31 @@ public class Weapon : MonoBehaviour
         rb.AddForce(force * (speed * 60));
 
         Destroy(bullet, 3);
+    }
+
+    public bool ActivateShield(bool priorityAI)
+    {
+        Debug.Log("holii");
+        if (targetDefendTime <= 0 && reloadDefendTime <=0 || priorityAI)
+        {
+            targetDefendTime = defaultTargetDefendTime;
+            reloadDefendTime = defaultTargetDefendTime;
+            return true;
+        }
+        return false;
+    }
+
+    public void SetHeavyStrike(bool b)
+    {
+        if (b)
+        {
+            attack = attack * 2;
+        }
+        else
+        {
+            attack = attack / 2;
+        }
+
     }
 
     public void DecreaseWeaponDurability(int value)
@@ -182,5 +224,18 @@ public class Weapon : MonoBehaviour
     public int GetWeaponDurability()
     {
         return durability;
+    }
+
+    public float GetTargetAttackTime()
+    {
+        return targetAttackTime;
+    }
+    public float GetTargetDefendTime()
+    {
+        return targetDefendTime;
+    }
+    public float GetReloadDefendTime()
+    {
+        return reloadDefendTime;
     }
 }

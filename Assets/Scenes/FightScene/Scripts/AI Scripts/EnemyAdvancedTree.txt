@@ -1,0 +1,46 @@
+tree("Root")
+	fallback
+		tree("checkAttack")
+		tree("checkBullet")
+		tree("movement")
+		tree("attack")
+
+
+tree("checkAttack")
+	sequence
+		CheckAttacked
+		tree("attackedDecision")	
+
+
+tree("movement")
+	sequence
+		while
+			CheckMovementActive
+			sequence
+				Move
+				CheckLimit
+
+tree("idle")
+	sequence
+		InitMove
+
+
+tree("attackedDecision")
+	random
+		Attack
+		Defend
+
+
+tree("attack")
+	sequence
+		tree("advancedAttack")
+		tree("idle")
+
+tree("advancedAttack")
+	random
+		Attack
+		UseAbility
+
+tree("checkBullet")
+	sequence
+		Protect

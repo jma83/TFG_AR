@@ -6,14 +6,24 @@ public class FightEntity : MonoBehaviour {
     protected Weapon weapon;
     protected int hp;
     protected Vector3 forceVector;
+    protected bool defend;
+    protected bool AI;
+
     // Use this for initialization
     void Start () {
-        
+        defend = false;
+        //weapon = gameObject.GetComponent<Weapon>();
+
     }
 
     // Update is called once per frame
-    void Update () {
-        
+    public void Update () {
+        if (defend)
+        {
+            Debug.Log("defend: " + weapon.GetTargetDefendTime());
+            if (weapon.GetTargetDefendTime() <= 0)
+                SetDefend(false);
+        }
     }
 
     public void Attack()
@@ -21,19 +31,22 @@ public class FightEntity : MonoBehaviour {
         forceVector = (Vector3.zero - gameObject.transform.position).normalized;
         if (gameObject.tag == "Player") forceVector = GameObject.FindGameObjectsWithTag("camera")[0].transform.forward;
 
-        if (weapon.CreateBullet() != null)
-        {
-            //Debug.Log("tag del creador:" + gameObject.tag);
 
-            weapon.Shoot(forceVector);
-            
+        if (weapon != null)
+        {
+            if (weapon.CreateBullet())
+                weapon.Shoot(forceVector);
+
         }
-        
+
     }
 
-    protected void Defend()
+    public void Defend()
     {
-
+        if (weapon != null)
+            if (weapon.ActivateShield(AI))
+                SetDefend(true);
+        
     }
 
     public virtual void HealDamage()
@@ -49,5 +62,16 @@ public class FightEntity : MonoBehaviour {
     {
         return hp;
     }
-    
+
+    public virtual void SetDefend(bool b)
+    {
+        defend = b;
+
+    }
+
+    public bool GetDefend()
+    {
+        return defend;
+    }
+
 }

@@ -898,6 +898,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyAdvancedBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFight.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFightManager.cs" />
@@ -998,6 +999,7 @@
     <None Include="Assets\Lib\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VideoBackground.shader" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
+    <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyAdvancedTree.txt" />
     <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyTree.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />

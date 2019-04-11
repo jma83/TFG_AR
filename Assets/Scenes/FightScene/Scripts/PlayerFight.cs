@@ -6,35 +6,44 @@ using UnityEngine.UI;
 
 public class PlayerFight : FightEntity
 {
-    public Button fireButton;
+    //[SerializeField] private Button fireButton;
+    //[SerializeField] private Button defendButton;
     private int bonusAtack;
     private int bonusDefense;
     private int bonusSpeed;
     private Player ply;
     private bool hit;
-    
+    private bool badVisibility;
 
 
     // Use this for initialization
-    void Start () {
+    public void Start () {
+        //fireButton.onClick.AddListener(Attack);
+        //defendButton.onClick.AddListener(Defend);
         weapon = gameObject.GetComponent<Weapon>();
-        fireButton.onClick.AddListener(Attack);
+
         ply = GameManager.Instance.CurrentPlayer;
         hit = false;
+        AI = false;
     }
 	
 	// Update is called once per frame
-	void Update () {       
-        
-    }
+
     public override void DealDamage(int d)
     {
         //decrease health calling player
-        ply.substractHp(d);
-        hp=ply.Hp;
+        if (!defend) { 
+            ply.substractHp(d);
+            hp = ply.Hp;
+        }
         //hud transition
         SetHit(true);
 
+    }
+
+    public override void SetDefend(bool b)
+    {
+        defend = b;
     }
 
     public void SetHit(bool b)
@@ -42,8 +51,14 @@ public class PlayerFight : FightEntity
         hit = b;
     }
 
+    public void SetBadVisibility(bool b)
+    {
+        badVisibility = b;
+    }
+
     public bool GetHit()
     {
         return hit;
     }
+
 }

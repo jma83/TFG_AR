@@ -5,20 +5,25 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    private EnemyFight ef;
-    private EnemyFightManager efm;
+    protected EnemyFight ef;
+    protected EnemyFightManager efm;
     public float timer;
-    private float defaultTime;
-    private bool activeBoost;
-    private bool activeBodyAttack;
-    private bool checkLimit;
-    private float speed;
-    private void Start()
+    protected float defaultTime;
+    protected bool activeBoost;
+    protected float boostFactor;
+    protected bool activeBodyAttack;
+    protected bool checkLimit;
+    protected bool checkCounter = false;
+    protected float speed;
+    
+
+    public void Start()
     {
         efm = EnemyFightManager.Instance;
         ef = gameObject.GetComponent<EnemyFight>();
         defaultTime = 4f;
         speed = 3f;
+        boostFactor = 2.5f;
         timer = 0;
         activeBoost = false;
         checkLimit = false;
@@ -29,34 +34,27 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         if (timer > 0) timer = timer - Time.deltaTime;
 
-        if (activeBodyAttack == true) {
-            Vector3 v = new Vector3(0, Random.Range(-1f, 5f), 0);
-            transform.position = Vector3.Lerp(this.gameObject.transform.position, v, Time.deltaTime);
-            if (Vector3.Distance(gameObject.transform.position,Vector3.zero) < 1.5)
-            {
-                activeBodyAttack = false;
-                
-                gameObject.transform.rotation = Quaternion.Euler(0, (gameObject.transform.rotation.eulerAngles.y), 0);
-            }
-        }
+        if (activeBodyAttack)
+            activeBodyAttack = ef.UpdateBodyAttack();
     }
 
 
     void SetTimerOK()
-    {
-        
+    {        
         defaultTime = Random.Range(3f, 6f);
-        timer = defaultTime;
-        
+        timer = defaultTime;        
     }
 
+    
+
     [Task]
-    void CheckAttacked()
+    public void CheckAttacked()
     {
         ef.SetStateAI(StateAI.Check);
-        if (ef.GetAttacked())   //check if recently has been attacked
+        if (ef.GetAttacked() && !ef.GetDefend())   // check if recently has been attacked
         {
-            ef.SetAttacked(false);
+            ef.SetAttacked(false);  // reset attacked status to false
+            checkCounter = true;    // counter attack active -> It allows to attack even if the timer is not over
             Task.current.Succeed();
         }
         else
@@ -66,7 +64,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     [Task]
-    void InitMove()
+    public void InitMove()
     {
         ef.SetStateAI(StateAI.Check);
         if (timer <= 0)
@@ -78,23 +76,21 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             Task.current.Fail();
         }
-        
-
     }
 
     [Task]
-    void Move()
+    public void Move()
     {
         if (timer > 0)
         {
             ef.SetStateAI(StateAI.Move);
             if (!activeBoost)
             {
-                transform.Translate(Vector3.forward * speed * Time.deltaTime); //Move at a certain distance from the objective.
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);  //Move at a certain distance from the objective.
             }
             else
             {
-                transform.Translate(Vector3.forward * speed * 2 * Time.deltaTime);
+                transform.Translate(Vector3.forward * speed * boostFactor * Time.deltaTime);    //Move with a boost
                 activeBoost = false;
             }
             Task.current.Succeed();
@@ -107,32 +103,28 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     void Idle()
     {
-            ef.SetStateAI(StateAI.Idle);
-            StartCoroutine("Wait");
-        //Task.current.Succeed();
-
+        ef.SetStateAI(StateAI.Idle);
+        StartCoroutine("Wait");
     }
 
     [Task]
-    void Attack()
+    public void Attack()
     {
         if (timer <= 0 || timer == 3)
             checkLimit = false;
-        if (efm.CheckEnemyAttack_Mutex(ef))
+        if (efm.CheckEnemyAttack_Mutex(ef) || checkCounter)
         {
+            checkCounter = false;
             ef.SetStateAI(StateAI.Attack);
 
             //decide between DistanceAttack and BodyAttack (random)
             int i = Random.Range(0, 2);
             transform.LookAt(Vector3.zero);
             if (i == 0)
-            {
                 DistanceAttack();
-            }
             else
-            {
                 BodyAttack();
-            }
+
             Idle();
             Task.current.Succeed();
         }
@@ -152,64 +144,46 @@ public class EnemyBehaviour : MonoBehaviour {
     void BodyAttack()
     {
         activeBodyAttack = true;
-        ActivateBoost();
-    }
-
-    [Task]
-    void Defend()
-    {
-        checkLimit = false;
-        ef.SetStateAI(StateAI.Defend);
-        //decide between ActivateShield and ActivateBoost (random)
-
-        ActivateBoost();
-        // ActivateShield
-
-        Task.current.Succeed();
-    }
-
-    void ActivateShield()
-    {
-
-    }
-
-    void ActivateBoost()
-    {
         activeBoost = true;
     }
 
     [Task]
-    void CheckMovementActive()
+    public void Defend()
+    {
+        checkLimit = false;
+        ef.SetStateAI(StateAI.Defend);
+
+        //decide between ActivateShield and ActivateBoost (random)
+        int i = Random.Range(0, 2);
+
+        if (i == 0)
+            activeBoost = true;     // ActivateBoost
+        else
+            ef.Defend();    // ActivateShield
+
+        Task.current.Succeed();
+    }
+
+    [Task]
+    public void CheckMovementActive()
     {
         //check timer (Return false if is finished)
         if (timer > 0)
             Task.current.Succeed();
         else
             Task.current.Fail();
-
     }
-    /*[Task]
-    void CheckLimit()
-    {
-        if (Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f && timer > 0 && checkLimit == false)  //        if (checkLimit == false && ef.GetReturnTimer() > 0)
-        {
-            transform.eulerAngles += new Vector3(0, 180f, 0);
-            timer = 0f;
-            checkLimit = true;
-        }
-        Task.current.Fail();
-    }*/
 
     [Task]
-    void CheckLimit()
+    public void CheckLimit()
     {
-        if ((Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f || ef.GetReturnTimer() == 1f) && timer > 0 && checkLimit == false)  //        if (checkLimit == false && ef.GetReturnTimer() > 0)
+        // Check if patrol movement is inside the limits (distance, colision and timer of movement). There is also a flag: checkLimit to avoid entering several times
+        if ((Vector3.Distance(gameObject.transform.position, Vector3.zero) > 12.0f || ef.GetReturnCollision()) && timer > 0 && checkLimit == false) 
         {
-            transform.eulerAngles += new Vector3(0, 180f, 0);
-            //timer = 0f;
-            checkLimit = true;
+            transform.eulerAngles += new Vector3(0, 180f, 0);   //turn around
+            checkLimit = true;  // active flag to avoid repeat 
 
-            ef.SetReturnTimer(0);
+            ef.SetReturnCollision(false);   //set collision to false
             Task.current.Succeed();
 
         }
@@ -223,13 +197,9 @@ public class EnemyBehaviour : MonoBehaviour {
         int i = Random.Range(0, 2); //Stop and random to change direction
 
         if (i == 0)
-        {
             transform.eulerAngles += new Vector3(0, 180f, 0);
-        }
         else
-        {
             transform.eulerAngles += new Vector3(0, 90f, 0);
-        }
 
     }
 }

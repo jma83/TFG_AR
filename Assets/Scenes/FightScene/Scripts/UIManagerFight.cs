@@ -35,8 +35,19 @@ public class UIManagerFight : MonoBehaviour {
         UpdatePlayerHP();
 
         GameManager.Instance.CurrentPlayer.gameObject.GetComponent<PlayerFight>();
-        if (plyFight.GetHit())
-            StartCoroutine(UpdatePlayerScreen(true));
+        if (plyFight.GetDefend())
+        {
+            playerScreen.GetComponent<Image>().color =  new Color32(0, 100, 255, 45);
+            playerScreen.SetActive(true);
+            if (plyFight.GetHit())
+                StartCoroutine(UpdatePlayerScreen(true, new Color32(0, 40, 255, 60), true));
+        }
+        else
+        {
+            if (plyFight.GetHit())
+                StartCoroutine(UpdatePlayerScreen(true, new Color32(255, 0, 0, 60), false));
+        }
+
 
         if (weaponStatsText.text=="0")
         {
@@ -56,12 +67,17 @@ public class UIManagerFight : MonoBehaviour {
         }
     }
 
-    private IEnumerator UpdatePlayerScreen(bool b)
+    private IEnumerator UpdatePlayerScreen(bool b, Color32 c, bool defend)
     {
+        playerScreen.GetComponent<Image>().color = c;
 
         playerScreen.SetActive(b);
         yield return new WaitForSeconds(0.5f);
+
+        
         plyFight.SetHit(!b);
+        
+        if (!defend)
         playerScreen.SetActive(!b);
         yield return null;
     }

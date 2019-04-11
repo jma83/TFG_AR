@@ -8,6 +8,7 @@ public enum StateAI : int { Idle = 0 , Check = 1 , Move = 2 , Attack = 3 , Defen
 public class EnemyFight : FightEntity
 {
 
+    [SerializeField] private GameObject capsule; 
     private int numEnemies;
     private int maxHp;
     private bool checkAttacked;
@@ -18,40 +19,55 @@ public class EnemyFight : FightEntity
     private Vector3 lastAngularVelocity;
     private StateAI state;
     private int xp;
-    private float return_timer;
+    private bool return_flag;
+    Vector3 v;
+
 
 
     // Use this for initialization
     void Start()
     {
-        weapon = gameObject.GetComponent<Weapon>();
         //collide = gameObject.GetComponent<Collider>();
         //rb = gameObject.GetComponent<Rigidbody>();
         //rb.detectCollisions = false;
+
+        weapon = gameObject.GetComponent<Weapon>();
         numEnemies = GameObject.FindGameObjectsWithTag("enemy").Length;
         maxHp = 20;
         hp = maxHp;
         //StartCoroutine("Move");
         checkAttacked = false;
         xp = Random.Range(20, 40);
+        AI = true;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public bool UpdateBodyAttack()
     {
-        //transform.Translate(Vector3.forward * 3f * Time.deltaTime);
+        v = new Vector3(0, Random.Range(-1f, 5f), 0);
+        transform.position = Vector3.Lerp(this.gameObject.transform.position, v, Time.deltaTime);
+        if (Vector3.Distance(gameObject.transform.position, Vector3.zero) < 1.7)
+        {
+            // activeBodyAttack = false;
+            gameObject.transform.rotation = Quaternion.Euler(0, (gameObject.transform.rotation.eulerAngles.y), 0);
+            return false;
+        }
+
+        return true;
     }
 
 
-    /*
-    void FixedUpdate()
+    public void HeavyAttack()
     {
-        lastPosition = transform.position;
-        lastVelocity = rb.velocity;
-        lastAngularVelocity = rb.angularVelocity;
+        weapon.SetHeavyStrike(true);
+        Attack();
+        weapon.SetHeavyStrike(false);
     }
-    */
 
+    public void Heal(int h)
+    {
+        hp += h;
+    }
 
     public int getNumEnemies()
     {
@@ -64,9 +80,12 @@ public class EnemyFight : FightEntity
     }
     public override void DealDamage(int d)
     {
-        //decrease health
-        substractHP(d);
-        checkAttacked = true ;
+        if (!GetDefend())
+        {
+            //decrease health
+            substractHP(d);
+            SetAttacked(true);
+        }
     }
     public void addHP(int i)
     {
@@ -118,6 +137,24 @@ public class EnemyFight : FightEntity
         state = s;
     }
 
+    public override void SetDefend(bool b)
+    {
+        defend = b;
+        capsule.SetActive(b);
+    }
+
+    public void HideEnemy(bool b)
+    {
+        if (b)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = Resources.Load("Maps/FightScene/Materials/d17b_opacity.mat", typeof(Material)) as Material;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().material = Resources.Load("Maps/FightScene/Materials/d17b.mat", typeof(Material)) as Material;
+        }
+    }
+
     public StateAI GetStateAI()
     {
         return state;
@@ -125,18 +162,14 @@ public class EnemyFight : FightEntity
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "FightBox" && return_timer == 0)
+        if (col.gameObject.tag == "FightBox" && !return_flag)
         {
             Debug.Log("return_timer establecido!");
-            return_timer = 1f;
+            SetReturnCollision(true);
         }
 
         if (col.gameObject.tag == "Player")
         {
-            /*transform.position = lastPosition;
-            rb.velocity = lastVelocity;
-            rb.angularVelocity = lastAngularVelocity;
-            Physics.IgnoreCollision(collide, col);*/
             col.gameObject.GetComponent<PlayerFight>().DealDamage(3);
 
             if (col.gameObject.GetComponent<PlayerFight>().GetHP() <= 0)
@@ -147,15 +180,14 @@ public class EnemyFight : FightEntity
         }
     }
 
-    public void SetReturnTimer(float f)
+    public void SetReturnCollision(bool f) //tiempo para volver (rotacion 180)
     {
-        return_timer = f;
-        Debug.Log("return_timer: " + return_timer);
+        return_flag = f;
     }
 
-    public float GetReturnTimer()
+    public bool GetReturnCollision()
     {
-        return return_timer;
+        return return_flag;
     }
 
     public int GetXP()
