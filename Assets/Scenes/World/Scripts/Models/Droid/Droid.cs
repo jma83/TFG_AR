@@ -11,6 +11,7 @@ public class Droid : MapEntity {
     //[SerializeField] private float catchRate = 0.10f;
     [SerializeField] private int hp = 10;
     [SerializeField] private AudioClip enemySound;
+    private int type;
 
     private AudioSource audioSource;
 
@@ -71,6 +72,24 @@ public class Droid : MapEntity {
         }
     }
 
+    public void SetDroidType(int i)
+    {
+        type = i;
+        if (type == 0)
+        {
+            
+            gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("WorldScene/Maps/Materials/door_mtl1_diffcol", typeof(Material)) as Material;
+        }
+        else if (type == 1)
+        {
+            gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("WorldScene/Maps/Materials/bmq1", typeof(Material)) as Material;
+        }
+    }
+
+    public int GetDroidType()
+    {
+        return type;
+    }
 
     public void Destroy()
     {

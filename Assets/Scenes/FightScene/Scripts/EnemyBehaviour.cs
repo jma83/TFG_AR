@@ -21,23 +21,35 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         efm = EnemyFightManager.Instance;
         ef = gameObject.GetComponent<EnemyFight>();
+       
+        SetTimerOK();
+        StartStats();
+    }
+
+    public virtual void StartStats()
+    {
         defaultTime = 4f;
         speed = 3f;
         boostFactor = 2.5f;
         timer = 0;
         activeBoost = false;
         checkLimit = false;
-        SetTimerOK();
+
     }
 
-    private void Update()
+    public void Update()
     {
         if (timer > 0) timer = timer - Time.deltaTime;
 
         if (activeBodyAttack)
             activeBodyAttack = ef.UpdateBodyAttack();
+
+        UpdateStats();
     }
 
+    public virtual void UpdateStats()
+    {
+    }
 
     void SetTimerOK()
     {        
@@ -101,7 +113,7 @@ public class EnemyBehaviour : MonoBehaviour {
         }
 
     }
-    void Idle()
+    public void Idle()
     {
         ef.SetStateAI(StateAI.Idle);
         StartCoroutine("Wait");
@@ -136,12 +148,12 @@ public class EnemyBehaviour : MonoBehaviour {
         }
     }
 
-    void DistanceAttack()
+    public void DistanceAttack()
     {
         ef.Attack();
     }
 
-    void BodyAttack()
+    public void BodyAttack()
     {
         activeBodyAttack = true;
         activeBoost = true;
@@ -190,16 +202,20 @@ public class EnemyBehaviour : MonoBehaviour {
         Task.current.Fail();
     }
 
-    IEnumerator Wait()
+    public IEnumerator Wait()
     {
         yield return new WaitForSeconds(1.2f);
 
-        int i = Random.Range(0, 2); //Stop and random to change direction
+        int i = Random.Range(0, 3); //Stop and random to change direction
 
+        if (gameObject.transform.rotation.x > 30 || gameObject.transform.rotation.x < -30 || gameObject.transform.rotation.z > 30 || gameObject.transform.rotation.z < -30)
+        gameObject.transform.rotation = Quaternion.Euler(0, (gameObject.transform.rotation.eulerAngles.y), 0);
         if (i == 0)
             transform.eulerAngles += new Vector3(0, 180f, 0);
-        else
+        else if (i == 1)
             transform.eulerAngles += new Vector3(0, 90f, 0);
+        else if (i == 2)
+            transform.eulerAngles += new Vector3(0, -90f, 0);
 
     }
 }

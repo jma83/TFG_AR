@@ -131,12 +131,13 @@ public class GameManager : Singleton<GameManager>
                 dataPly.droidPosX = new float[dataPly.droidSize];
                 dataPly.droidPosY = new float[dataPly.droidSize];
                 dataPly.droidPosZ = new float[dataPly.droidSize];
-
+                dataPly.droidType = new int[dataPly.droidSize];
                 for (int h = 0; h < dataPly.droidSize; h++)
                 {
                     dataPly.droidPosX[h] = droidFactory.LiveDroids[h].transform.position.x;
                     dataPly.droidPosY[h] = droidFactory.LiveDroids[h].transform.position.y;
                     dataPly.droidPosZ[h] = droidFactory.LiveDroids[h].transform.position.z;
+                    dataPly.droidType[h] = droidFactory.LiveDroids[h].GetDroidType();
                 }
                 dataPly.droidCombatID = droidFactory.GetDroidIndex();
 
@@ -303,7 +304,7 @@ public class GameManager : Singleton<GameManager>
 
                 if (playerFight == null)
                 {
-                    if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(2))
+                    if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(20))
                     {
                         Debug.Log("dataPly.droidSize load: " + dataPly.droidSize);
                         //droidFactory.SetGameStarted();
@@ -313,6 +314,7 @@ public class GameManager : Singleton<GameManager>
                         for (int h = 0; h < dataPly.droidSize; h++)
                         {
                             droidFactory.LiveDroids[h].transform.position = new Vector3(dataPly.droidPosX[h], dataPly.droidPosY[h], dataPly.droidPosZ[h]);
+                            droidFactory.LiveDroids[h].SetDroidType(dataPly.droidType[h]);
                         }
                         Debug.Log("dataPly.combatWin load (borramos?): " + dataPly.combatWin);
                         if (dataPly.combatWin)
@@ -625,6 +627,7 @@ class PlayerData
     public float[] droidPosX;
     public float[] droidPosY;
     public float[] droidPosZ;
+    public int[] droidType;
     public int droidSize;
     public int droidCombatID;
     public bool combatWin;

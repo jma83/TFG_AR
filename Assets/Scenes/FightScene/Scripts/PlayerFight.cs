@@ -53,7 +53,13 @@ public class PlayerFight : FightEntity
 
     public void SetBadVisibility(bool b)
     {
+        if (!defend)
         badVisibility = b;
+    }
+
+    public bool GetBadVisibility()
+    {
+        return badVisibility;
     }
 
     public bool GetHit()

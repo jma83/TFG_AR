@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     private Rigidbody rb;
     BulletCollisionManager bt;
     private int attack;
+    private int damage;
     private int defense;
     private int speed;
     private int type;
@@ -23,6 +24,7 @@ public class Weapon : MonoBehaviour
     private float defaultTargetDefendTime;
     private float defaultTargetAttackTime;
     private AudioSource audioSource;
+    private bool heavy;
 
 
     private void Start()
@@ -30,6 +32,8 @@ public class Weapon : MonoBehaviour
         reloadDefendTime = targetDefendTime = targetAttackTime = 0.0f;
          
         defaultTargetDefendTime = 5f;
+        SetDefenseTimer();
+
         //default stats for weapon:
         if (attack==0)
             attack = 5;
@@ -88,18 +92,52 @@ public class Weapon : MonoBehaviour
         
     }
 
+    public void SetDefenseTimer()
+    {
+
+        if (defense != 5)
+        {
+            if (defense - 5 > 50) defaultTargetDefendTime = 10f;
+            else if (defense - 5 > 40) defaultTargetDefendTime = 8f;
+            else if (defense - 5 > 30) defaultTargetDefendTime = 7f;
+            else if (defense - 5 > 20) defaultTargetDefendTime = 6f;
+            else if (defense - 5 > 10) defaultTargetDefendTime = 5f;
+            else if (defense - 5 > 5) defaultTargetDefendTime = 4f;
+            else defaultTargetDefendTime = 3f;
+        }
+
+    }
+
+    public void SetSpeedTimer()
+    {
+        if (speed != 5)
+        {
+            if (speed - 5 > 50) targetAttackTime = 1f;
+            else if (speed - 5 > 40) targetAttackTime = 1.2f;
+            else if (speed - 5 > 30) targetAttackTime = 1.4f;
+            else if (speed - 5 > 20) targetAttackTime = 1.6f;
+            else if (speed - 5 > 10) targetAttackTime = 1.8f;
+            else if (speed - 5 > 5) targetAttackTime = 2f;
+            else targetAttackTime = 2.5f;
+        }
+    }
+
     public bool CreateBullet()
     {
         bullet = null;
         if (targetAttackTime < 1)
         {
-            //Debug.Log("CreateBullet: " + attack + ", " + defense + ", " + speed);
             bullet = Instantiate(Resources.Load("FightScene/bullet", typeof(GameObject)), gameObject.transform.position, gameObject.transform.rotation) as GameObject;
             bt = bullet.gameObject.GetComponent<BulletCollisionManager>();
-            //bt.gameObject.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
+
             bt.SetDamage(attack);
             bt.SetOwner(owner);
             rb = bullet.GetComponent<Rigidbody>();
+
+            if (heavy)
+                bt.gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol", typeof(Material)) as Material;
+
+
             if (GameObject.FindGameObjectsWithTag("camera").Length <= 0)
             {
                 print("Error. No cameras found");
@@ -111,19 +149,9 @@ public class Weapon : MonoBehaviour
                 bullet.transform.rotation = GameObject.FindGameObjectsWithTag("camera")[0].transform.rotation;
                 bullet.transform.position = GameObject.FindGameObjectsWithTag("camera")[0].transform.position;
             }
-
             targetAttackTime = 2.5f;
+            SetSpeedTimer();
 
-            if (speed != 5)
-            {
-                if (speed - 5 > 50) targetAttackTime = 1f;
-                else if (speed - 5 > 40) targetAttackTime = 1.2f;
-                else if (speed - 5 > 30) targetAttackTime = 1.4f;
-                else if (speed - 5 > 20) targetAttackTime = 1.6f;
-                else if (speed - 5 > 10) targetAttackTime = 1.8f;
-                else if (speed - 5 > 5) targetAttackTime = 2f;
-                else targetAttackTime = 2.5f;
-            }
             return true;
 
         }
@@ -141,11 +169,10 @@ public class Weapon : MonoBehaviour
 
     public bool ActivateShield(bool priorityAI)
     {
-        Debug.Log("holii");
         if (targetDefendTime <= 0 && reloadDefendTime <=0 || priorityAI)
         {
             targetDefendTime = defaultTargetDefendTime;
-            reloadDefendTime = defaultTargetDefendTime;
+            reloadDefendTime = 5;
             return true;
         }
         return false;
@@ -161,7 +188,7 @@ public class Weapon : MonoBehaviour
         {
             attack = attack / 2;
         }
-
+        heavy = b;
     }
 
     public void DecreaseWeaponDurability(int value)

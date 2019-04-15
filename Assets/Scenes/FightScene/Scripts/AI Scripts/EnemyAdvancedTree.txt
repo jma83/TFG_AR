@@ -43,4 +43,5 @@ tree("advancedAttack")
 
 tree("checkBullet")
 	sequence
+		CheckProtect
 		Protect

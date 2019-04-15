@@ -8,9 +8,9 @@ public enum StateAI : int { Idle = 0 , Check = 1 , Move = 2 , Attack = 3 , Defen
 public class EnemyFight : FightEntity
 {
 
-    [SerializeField] private GameObject capsule; 
+    [SerializeField] private GameObject capsule;
+    [SerializeField] private int type;
     private int numEnemies;
-    private int maxHp;
     private bool checkAttacked;
     private Rigidbody rb;
     //private Collider collide;
@@ -33,11 +33,30 @@ public class EnemyFight : FightEntity
 
         weapon = gameObject.GetComponent<Weapon>();
         numEnemies = GameObject.FindGameObjectsWithTag("enemy").Length;
-        maxHp = 20;
-        hp = maxHp;
-        //StartCoroutine("Move");
+        switch (type)
+        {
+            case 0:
+                SetHP(20);
+                xp = Random.Range(20, 60);
+
+                break;
+            case 1:
+                SetHP(40);
+                xp = Random.Range(50, 100);
+                weapon.SetWeaponStats(100, 3, 1, 6, 16, 16, gameObject.tag);
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol", typeof(Material)) as Material;
+
+                break;
+            case 2:
+                SetHP(60);
+                xp = Random.Range(80, 200);
+                weapon.SetWeaponStats(100, 3, 1, 8, 26, 26, gameObject.tag);
+
+                break;
+        }
+        
         checkAttacked = false;
-        xp = Random.Range(20, 40);
+        state = new StateAI();
         AI = true;
     }
 
@@ -145,13 +164,19 @@ public class EnemyFight : FightEntity
 
     public void HideEnemy(bool b)
     {
-        if (b)
+        if (type == 1)
         {
-            gameObject.GetComponent<MeshRenderer>().material = Resources.Load("Maps/FightScene/Materials/d17b_opacity.mat", typeof(Material)) as Material;
+            if (b)
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol_opacity", typeof(Material)) as Material;
+            else
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol", typeof(Material)) as Material;
         }
-        else
+        else if (type == 2)
         {
-            gameObject.GetComponent<MeshRenderer>().material = Resources.Load("Maps/FightScene/Materials/d17b.mat", typeof(Material)) as Material;
+            if (b)
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/BossMaterialOpacity", typeof(Material)) as Material;
+            else
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/BossMaterial", typeof(Material)) as Material;
         }
     }
 
@@ -183,6 +208,12 @@ public class EnemyFight : FightEntity
     public void SetReturnCollision(bool f) //tiempo para volver (rotacion 180)
     {
         return_flag = f;
+    }
+
+    public void SetHP(int h)
+    {
+        maxHp = h;
+        hp = maxHp;
     }
 
     public bool GetReturnCollision()

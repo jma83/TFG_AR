@@ -11,7 +11,7 @@ public class BulletCollisionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        damage = 5;
+        
     }
 
     // Update is called once per frame
@@ -23,6 +23,8 @@ public class BulletCollisionManager : MonoBehaviour
     //for this to work both need colliders, one must have rigid body (spaceship) the other must have is trigger checked.
     void OnTriggerEnter(Collider col)
     {
+        if (damage == 0)
+            damage = 5;
         if (col.gameObject.tag != "bullet")
         {
             

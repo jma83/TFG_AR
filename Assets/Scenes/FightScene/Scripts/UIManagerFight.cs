@@ -10,6 +10,7 @@ public class UIManagerFight : MonoBehaviour {
     [SerializeField] private GameObject reloadWeapon;
     [SerializeField] private GameObject reloadShield;
     [SerializeField] private GameObject playerScreen;
+    [SerializeField] private GameObject playerScreen2;
     [SerializeField] private Image weaponQualityIcon;
     [SerializeField] private Text weaponTypeText;
     [SerializeField] private Text weaponStatsText;
@@ -41,13 +42,26 @@ public class UIManagerFight : MonoBehaviour {
             playerScreen.SetActive(true);
             if (plyFight.GetHit())
                 StartCoroutine(UpdatePlayerScreen(true, new Color32(0, 40, 255, 60), true));
+
+            playerScreen2.SetActive(false);
+
         }
         else
         {
+            if (plyFight.GetBadVisibility())
+            {
+                playerScreen2.SetActive(true);
+            }
+            else
+            {
+                playerScreen2.SetActive(false);
+            }
+            playerScreen.SetActive(false);
             if (plyFight.GetHit())
                 StartCoroutine(UpdatePlayerScreen(true, new Color32(255, 0, 0, 60), false));
         }
 
+        
 
         if (weaponStatsText.text=="0")
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FightEntity : MonoBehaviour {
     protected Weapon weapon;
+    protected int maxHp;
     protected int hp;
     protected Vector3 forceVector;
     protected bool defend;
@@ -20,7 +21,6 @@ public class FightEntity : MonoBehaviour {
     public void Update () {
         if (defend)
         {
-            Debug.Log("defend: " + weapon.GetTargetDefendTime());
             if (weapon.GetTargetDefendTime() <= 0)
                 SetDefend(false);
         }
@@ -61,6 +61,11 @@ public class FightEntity : MonoBehaviour {
     public int GetHP()
     {
         return hp;
+    }
+
+    public int GetMaxHP()
+    {
+        return maxHp;
     }
 
     public virtual void SetDefend(bool b)

@@ -60,6 +60,7 @@ public class DroidFactory : Singleton<DroidFactory> {
         float y = player.transform.position.y+2;
 
         liveDroids.Add(Instantiate(availableDroids[index], new Vector3(x, y, z), Quaternion.identity));
+        liveDroids[liveDroids.Count - 1].SetDroidType(index);
     }
 
     private float GenerateRange()
