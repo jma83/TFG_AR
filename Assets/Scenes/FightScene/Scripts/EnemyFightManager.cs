@@ -14,16 +14,63 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private bool gameWin;
 
     // Use this for initialization
-    void Start () {        
+    void Start () {   
         enemyOrderList = new List<EnemyFight>();
         cont = 1;
         UpdateOrderList();
         gameOver = false;
         gameWin = false;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void InstantiateEnemies(int type)
+    {
+        EnemyFight[] ef = FindObjectsOfType<EnemyFight>();
+        Debug.Log("InstantiateEnemies: " + type);
+        if (type == 0)
+        {
+
+            for (int j=0;j< ef.Length; j++)
+            {
+                if (ef[j].gameObject.GetComponent<EnemyAdvancedBehaviour>() != null)
+                {
+                    Destroy(ef[j].gameObject);
+                }
+
+                if (ef[j].gameObject.GetComponent<EnemyBossBehaviour>() != null)
+                {
+                    Destroy(ef[j].gameObject);
+                }
+            }
+        }
+        else if (type == 1)
+        {
+            for (int j = 0; j < ef.Length; j++)
+            {
+                if (ef[j].gameObject.GetComponent<EnemyAdvancedBehaviour>() == null)
+                {
+                    Destroy(ef[j].gameObject);
+                }
+
+                if (ef[j].gameObject.GetComponent<EnemyBossBehaviour>() != null)
+                {
+                    Destroy(ef[j].gameObject);
+                }
+            }
+        }
+        else if (type == 2)
+        {
+            for (int j = 0; j < ef.Length; j++)
+            {
+                if (ef[j].gameObject.GetComponent<EnemyBossBehaviour>() == null)
+                {
+                    Destroy(ef[j].gameObject);
+                }
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if (timer > 0)
         {
             timer = timer - Time.deltaTime;

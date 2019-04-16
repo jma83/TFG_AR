@@ -15,7 +15,7 @@ public class FightSceneManager : ARGameSceneManager {
         Debug.Log(GameManager.Instance.CurrentPlayer.Lvl);
         Debug.Log(GameManager.Instance.CurrentPlayer.Hp);
     }
-	
+
 	// Update is called once per frame
 	void Update () {
     }

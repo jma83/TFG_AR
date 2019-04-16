@@ -48,13 +48,34 @@ public class DroidFactory : Singleton<DroidFactory> {
     {
         while (true)
         {
-            InstantiateDroid();
+            InstantiateDroid(-1);
             yield return new WaitForSeconds(waitTime);
         }
     }
-    private void InstantiateDroid()
+    private void InstantiateDroid(int j)
     {
-        int index = Random.Range(0,availableDroids.Length);
+        int index = j;
+        /*Debug.Log("(availableDroids.Length * 4): " + (availableDroids.Length * 4));
+        Debug.Log("(availableDroids.Length * 4) - 6: " + (availableDroids.Length * 4 - 6));
+        Debug.Log("(availableDroids.Length * 4) - 11: " + (availableDroids.Length * 4 - 11));*/
+        if (index == -1)
+        {
+
+            int fixedsize= availableDroids.Length * 4;
+            index = Random.Range(0, availableDroids.Length*4);
+            if (index < (fixedsize) && index >= (fixedsize - (fixedsize/2)))
+            {
+                index = 0;
+            }else if (index < (fixedsize - (fixedsize / 2)) && index >= (fixedsize - (fixedsize-1)))
+            {
+                index = 1;
+            }
+            else if (index == 0)
+            {
+                index = 2;
+            }
+        }
+
         float x = player.transform.position.x + GenerateRange();
         float z = player.transform.position.z + GenerateRange();
         float y = player.transform.position.y+2;
@@ -96,7 +117,7 @@ public class DroidFactory : Singleton<DroidFactory> {
         return selectedDroidIndex;
     }
 
-    public void SetGameStarted(int start)
+    public void SetGameStarted(int start,int[] types)
     {
         if (liveDroids.Count <= 0 && !gameStarted)
         {
@@ -105,7 +126,10 @@ public class DroidFactory : Singleton<DroidFactory> {
             startingDroids = start;
             for (int i = 0; i < startingDroids; i++)
             {
-                InstantiateDroid();
+                if (start!=-1)
+                InstantiateDroid(types[i]);
+                else
+                InstantiateDroid(-1);
             }
 
             //StartCoroutine(GenerateDroids());
@@ -124,7 +148,7 @@ public class DroidFactory : Singleton<DroidFactory> {
 
         for (int k = 0; k < startingDroids; k++)
         {
-            InstantiateDroid();
+            InstantiateDroid(-1);
         }
 
         //StartCoroutine(GenerateDroids());

@@ -6942,6 +6942,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 204525709}
     m_Modifications:
+    - target: {fileID: 114398761638782900, guid: 60f8f1600a3295644bfd298a9bae82c3,
+        type: 2}
+      propertyPath: availableDroids.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4574041212354540, guid: 60f8f1600a3295644bfd298a9bae82c3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6993,6 +6998,12 @@ Prefab:
       propertyPath: transtionAnim
       value: 
       objectReference: {fileID: 2124289680}
+    - target: {fileID: 114398761638782900, guid: 60f8f1600a3295644bfd298a9bae82c3,
+        type: 2}
+      propertyPath: availableDroids.Array.data[2]
+      value: 
+      objectReference: {fileID: 114257700864872122, guid: 4df0f46efde9fd241b862725da29de09,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60f8f1600a3295644bfd298a9bae82c3, type: 2}
   m_IsPrefabAsset: 0

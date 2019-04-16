@@ -11,7 +11,7 @@ public class Droid : MapEntity {
     //[SerializeField] private float catchRate = 0.10f;
     [SerializeField] private int hp = 10;
     [SerializeField] private AudioClip enemySound;
-    private int type;
+    [SerializeField]  private int type;
 
     private AudioSource audioSource;
 
@@ -84,6 +84,10 @@ public class Droid : MapEntity {
         {
             gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("WorldScene/Maps/Materials/bmq1", typeof(Material)) as Material;
         }
+        else
+        {
+            gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("FightScene/BossMaterial", typeof(Material)) as Material;
+        } 
     }
 
     public int GetDroidType()
