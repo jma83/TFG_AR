@@ -15,6 +15,8 @@ public class ExtendCaptureItem : Item {
         defaultTime = 50;
         icon = Resources.Load<Sprite>("Items/iconfinder_Spell_Scroll");
         type = (ARGameConstants.TypeObj)2;
+        description = "Item that allows to extend the range of the player, to reach certain items or objectives in the map. \n\n" +
+            "The capture range is represented by the blue circle below the player. It will become bigger during a certain time (it will appear in the list of active items).";
     }
      
 

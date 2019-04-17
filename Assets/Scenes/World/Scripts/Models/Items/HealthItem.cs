@@ -12,7 +12,8 @@ public class HealthItem : Item {
         type = (ARGameConstants.TypeObj)0;
         //rand = Random.Range(5, 30);
         icon = Resources.Load<Sprite>("Items/small-potion");
-
+        description = "Item that can be used to restore a small amount of energy for your Character. \n\n" +
+            "The energy is a main element during the game that allows you to fight and resolve puzzles, in order to level up";
     }
 
     public override void SetRand()

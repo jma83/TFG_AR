@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //[CreateAssetMenu(fileName = "New Item", menuName ="Inventory/Item")]
-public class Item : InventoryEntity{
+public class Item : InventoryEntity
+{
 
 
-    protected ARGameConstants.TypeObj type = (ARGameConstants.TypeObj) 5;    // 0 == health ; 1 == bighealth ; 2 == extend ; 3 == xpmultiplier ; 4 == durabilityUp
-    protected int rand=0;
+    protected ARGameConstants.TypeObj type = (ARGameConstants.TypeObj)5;    // 0 == health ; 1 == bighealth ; 2 == extend ; 3 == xpmultiplier ; 4 == durabilityUp
+    protected int rand = 0;
     public float timeStampAux;
     protected ItemsManager itemManager;
 
@@ -16,7 +17,7 @@ public class Item : InventoryEntity{
         itemManager = ItemsManager.Instance;
         Time.timeScale = 1.0f;
         if (id == 0 || id == -1)
-        id = itemManager.GetNewItemID();
+            id = itemManager.GetNewItemID();
 
     }
 
@@ -86,5 +87,29 @@ public class Item : InventoryEntity{
         return (int)type;
     }
 
-    
+    public string GetItemTypeName()
+    {
+        //health ; 1 == bighealth ; 2 == extend ; 3 == xpmultiplier ; 4 == durabilityUp
+        if (type == ARGameConstants.TypeObj.Health)
+        {
+            return "Player health (small)";
+        }
+        else if (type == ARGameConstants.TypeObj.BigHealth)
+        {
+            return "Player health (big)";
+        }
+        else if (type == ARGameConstants.TypeObj.ExtendCapture)
+        {
+            return "Extend Capture Range";
+        }
+        else if (type == ARGameConstants.TypeObj.XPMultiplier)
+        {
+            return "XP Multiplier";
+        }
+        else if (type == ARGameConstants.TypeObj.DurabilityUP)
+        {
+            return "Equipment Durability";
+        }
+        return null;
+    }
 }

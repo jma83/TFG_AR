@@ -141,7 +141,7 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
         //WindowAlert.Instance.SetActiveAlert(); ENEMIGOS DERROTADOS, pulsa OK para volver al mapa
         WindowAlert window = WindowAlert.Instance;
         window.CreateConfirmWindow("BIEN HECHO! ENEMIGOS DERROTADOS, pulsa OK para volver al mapa" + System.Environment.NewLine + "XP: " + total_xp + " Weapon durability: " +
-            GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
+            GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, null,FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
         window.SetActiveAlert();
     }
 
@@ -154,7 +154,7 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
             GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().DecreaseWeaponDurability(7);
             WindowAlert window = WindowAlert.Instance;
             window.CreateConfirmWindow("HAS SIDO DERROTADO, pulsa OK para volver al mapa " + System.Environment.NewLine + "Weapon durability: " +
-                GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
+                GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, null,FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
             window.SetActiveAlert();
         }
     }

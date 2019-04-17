@@ -57,7 +57,7 @@ public class InventorySlot : MonoBehaviour {
         icon.sprite = equipment.icon;
         icon.enabled = true;
         icon.gameObject.SetActive(icon.enabled);
-        powerIcon.sprite = Resources.Load<Sprite>(equipment.GetEquipmentQuality());
+        powerIcon.sprite = Resources.Load<Sprite>(equipment.GetEquipmentQualityRoute());
         powerIcon.enabled = true;
         powerIcon.gameObject.SetActive(powerIcon.enabled);
 
@@ -172,5 +172,17 @@ public class InventorySlot : MonoBehaviour {
             inv.RemoveEquip(equipment);
             equipment.DeleteObject();
         }
+    }
+
+    public void OnInfoButton(Inventory inv)
+    {
+        HideDeleteButton();
+        //ClearSlot();       
+        if (item != null)
+            inv.SetItemInfo(item.GetInstanceID());
+
+        if (equipment != null)   
+            inv.SetItemInfo(equipment.GetInstanceID());
+        
     }
 }

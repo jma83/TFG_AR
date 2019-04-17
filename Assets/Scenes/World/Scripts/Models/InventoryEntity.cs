@@ -10,6 +10,7 @@ public class InventoryEntity : MonoBehaviour {
     protected int id;
     public Sprite icon = null;
     protected bool isDefault = false;
+    protected string description;
 
 
     // Update is called once per frame
@@ -39,6 +40,16 @@ public class InventoryEntity : MonoBehaviour {
     public float GetTargetTime()
     {
         return targetTime;
+    }
+
+    public string GetDescription()
+    {    
+        return description;
+    }
+
+    public float GetDefaultTime()
+    {
+        return defaultTime;
     }
 
     public void DisableComponents()

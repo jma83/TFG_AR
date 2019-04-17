@@ -16,11 +16,14 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private AudioClip menuButtonSound;
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject slotContainer;
+    [SerializeField] private GameObject itemDetail;
     [SerializeField] private Toggle toggle;
     [SerializeField] private Toggle armas;
     [SerializeField] private Toggle objetos;
     private InventoryUI InvUI;
     private Inventory Inv;
+    private ItemDetail itemDt;
+
     //private int switchInventory = 0;
     private AudioSource audioSource;
     //private int menuSectionCont=3;
@@ -33,6 +36,10 @@ public class UIManager : MonoBehaviour {
         InvUI = slotContainer.GetComponent<InventoryUI>();
         InvUI.Start();
         inventory.SetActive(false);
+        itemDetail.SetActive(true);
+
+        itemDt = itemDetail.GetComponent<ItemDetail>();
+        itemDetail.SetActive(false);
 
 
     }
@@ -53,7 +60,7 @@ public class UIManager : MonoBehaviour {
         updateXP();
         updateHP();
         if (Inv.modified == true && InvUI!=null) InvUI.UpdateUI();
-        
+        if (Inv.info) toggleItemDetail(Inv.id_info);
     }
 
     public void updateLevel() {
@@ -103,6 +110,56 @@ public class UIManager : MonoBehaviour {
 
 
     }
+    public void toggleItemDetail(int id)
+    {
+        itemDetail.SetActive(!itemDetail.activeSelf);
+        toggleInventory();
+        //GameObject[] gameObj = GameObject.FindGameObjectsWithTag("item");
+        if (itemDetail.activeSelf)
+        {
+            if (!objetos.isOn)
+            {
+                Equipment[] e = FindObjectsOfType<Equipment>();
+                for (int k = 0; k < e.Length; k++)
+                {
+                    if (e[k].GetInstanceID() == id)
+                    {                        
+                        itemDt.SetEquipment(e[k]);
+                        break;
+                    }
+                }
+
+            }
+            else
+            {
+                Item[] i = FindObjectsOfType<Item>();
+                for (int k = 0; k < i.Length; k++)
+                {
+                    if (i[k].GetInstanceID() == id)
+                    {
+                        itemDt.SetItem(i[k]);
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        Inv.info = false;
+
+
+    }
+
+    public void toggleOptions()
+    {
+
+    }
+
+        public void toggleExitWindow()
+    {
+        WindowAlert.Instance.CreateSelectWindow("Do you want to quit the game?",true, GameManager.Instance.ExitGame,null);
+    }
+
     public void toggleCapture()
     {
         GameManager.Instance.CurrentPlayer.captureRangeObj.SetEntitiesCaptureRange(!toggle.isOn);

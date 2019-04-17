@@ -66,6 +66,12 @@ public class GameManager : Singleton<GameManager>
         get { FindPlayer(); return currentPlayer; }
     }
 
+    public void ExitGame()
+    {
+        Debug.Log("Hola y adios");
+        Application.Quit();
+    }
+
     private void FindPlayer()
     {
         if (currentPlayer == null)

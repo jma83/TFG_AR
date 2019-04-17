@@ -20,16 +20,17 @@ public class Equipment : InventoryEntity
     {
         itemManager = ItemsManager.Instance;
         player = GameManager.Instance.CurrentPlayer;
+        
         if (attack == 0 && defense == 0 && speed == 0 && durability == 0)
         {
             id = itemManager.GetNewEquipID();            
             SetDurability(100);
-            
+
             //Debug.Log("Inicializo arma");
         }
         else
         {
-
+            SetDescription();
             //Debug.Log("Else!!! No inicializamos los stats del arma: "+ id);
         }
     }
@@ -39,6 +40,8 @@ public class Equipment : InventoryEntity
         SetType();
         SetQuality();
         SetEquipmentStats();
+        SetDescription();
+
     }
 
     private void SetEquipmentStats()
@@ -224,6 +227,45 @@ public class Equipment : InventoryEntity
 
     }
 
+    public void SetDescription()
+    {
+        description = "This equipment, with a ";
+
+        if (quality == ARGameConstants.EquipmentQuality.Legend)
+        {
+            description += "Legendary quality, has extremely powerful stats, where the ";
+        }
+        else if (quality == ARGameConstants.EquipmentQuality.Epic)
+        {
+            description += "Epic quality, has a very powerful stats, where the ";
+        }
+        else if (quality == ARGameConstants.EquipmentQuality.Rare)
+        {
+            description += "Rare quality, has a powerful stats, where the";
+        }
+        else if (quality == ARGameConstants.EquipmentQuality.Basic)
+        {
+            description += "Basic quality, has a generic stats, where the ";
+        }
+
+        if (type == ARGameConstants.EquipmentType.Balanced)
+        {
+            description += "balance highlights. \n\n This means that the weapon allows defending and attacking in the same measure.";
+        }
+        else if (type == ARGameConstants.EquipmentType.Fast)
+        {
+            description += "speed highlights over the rest. \n\n This means that the weapon allows shooting faster in combat than most of the others (with the same quality).";
+        }
+        else if (type == ARGameConstants.EquipmentType.Defensive)
+        {
+            description += "defensive one highlights over the rest. \n\n This means that the weapon allows you to protect during more time in combat than others (with the same quality).";
+        }
+        else if (type == ARGameConstants.EquipmentType.Ofensive)
+        {
+            description += "ofensive one highlights over the rest. \n\n This means that the weapon allows you to deal more damage during more time in combat than the others (with the same quality), becoming really deadly.";
+        }
+    }
+
     public void AddDurability(int d)
     {
         if (durability + d > 100)
@@ -275,6 +317,27 @@ public class Equipment : InventoryEntity
     }
 
     public string GetEquipmentQuality()
+    {
+        if (quality == ARGameConstants.EquipmentQuality.Legend)
+        {
+            return "Legend";
+        }
+        else if (quality == ARGameConstants.EquipmentQuality.Epic)
+        {
+            return "Epic";
+        }
+        else if (quality == ARGameConstants.EquipmentQuality.Rare)
+        {
+            return "Rare";
+        }
+        else if (quality == ARGameConstants.EquipmentQuality.Basic)
+        {
+            return "Basic";
+        }
+        return null;
+    }
+
+    public string GetEquipmentQualityRoute()
     {
         if (quality == ARGameConstants.EquipmentQuality.Legend)
         {

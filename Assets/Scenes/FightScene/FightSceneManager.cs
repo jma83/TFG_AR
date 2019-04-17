@@ -35,12 +35,10 @@ public class FightSceneManager : ARGameSceneManager {
         ChangeScene(null, 0);
     }
 
-
     private IEnumerator LoadAnimation()
     {
         transtionAnim.SetTrigger("end");
-        yield return new WaitForSeconds(2.5f);
-        
+        yield return new WaitForSeconds(2.5f);        
 
     }
 }

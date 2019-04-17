@@ -12,7 +12,10 @@ public class DurabilityUP : Item {
         type = (ARGameConstants.TypeObj)4;
         //rand = Random.Range(5, 30);
         icon = Resources.Load<Sprite>("Items/durability-equip");
+        description = "Item that allows to restore a small amount of durability for your equipment in use. \n\n" +
+            "The durability represents the energy of the weapon. If it reaches 0%, it'll be destroyed. This item can prevent it. You have to equip that weapon in order to repair it.";
     }
+
 
     public override void SetRand()
     {

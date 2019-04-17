@@ -915,6 +915,7 @@
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\ItemDetail.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Equipment\Equipment.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\InventoryEntity.cs" />

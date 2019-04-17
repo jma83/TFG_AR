@@ -39,6 +39,7 @@ public class WorldSceneManager : ARGameSceneManager {
     {
         ChangeScene(null, 1);
     }
+
     private IEnumerator LoadAnimation(List<GameObject> list,int i)
     {
         transtionAnim.enabled = true;

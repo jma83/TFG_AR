@@ -17,6 +17,8 @@ public class XPMultiplierItem : Item {
         defaultTime = 7;
         multiplier = 2;
         type = (ARGameConstants.TypeObj)3;
+        description = "Item that allows to multiply experience earned by the player, in order to level up faster. \n\n" +
+            "This item will be active during a certain time (it will appear in the list of active items).";
     }
     
 

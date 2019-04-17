@@ -14,6 +14,8 @@ public class Inventory : Singleton <Inventory> {
     public delegate void OnEquipChanged();
     public OnEquipChanged onEquipChangedCallback;
     public bool modified = false;
+    public bool info = false;
+    public int id_info = 0;
 
 
     public bool AddItem(Item item)
@@ -195,6 +197,11 @@ public class Inventory : Singleton <Inventory> {
         equipment = e;
     }
 
+    public void SetItemInfo(int id)
+    {
+        id_info = id;
+        info = true;
+    }
     public void SetSpace(int s)
     {
         space = s;
