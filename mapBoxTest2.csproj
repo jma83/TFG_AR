@@ -931,6 +931,7 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Options.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />

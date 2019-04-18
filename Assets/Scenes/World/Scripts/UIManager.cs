@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject slotContainer;
     [SerializeField] private GameObject itemDetail;
+    [SerializeField] private GameObject options;
     [SerializeField] private Toggle toggle;
     [SerializeField] private Toggle armas;
     [SerializeField] private Toggle objetos;
@@ -152,7 +153,7 @@ public class UIManager : MonoBehaviour {
 
     public void toggleOptions()
     {
-
+        options.SetActive(!options.activeSelf);
     }
 
         public void toggleExitWindow()
