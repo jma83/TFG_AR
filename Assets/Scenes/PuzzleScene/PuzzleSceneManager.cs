@@ -9,6 +9,7 @@ public class PuzzleSceneManager : ARGameSceneManager {
     // Use this for initialization
     void Start () {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+        GameManager.Instance.InitializeScene();
     }
 	
 	// Update is called once per frame
@@ -18,7 +19,7 @@ public class PuzzleSceneManager : ARGameSceneManager {
 
     public override void ChangeScene(GameObject droid,int i)
     {
-
+        GameManager.Instance.Save();
         List<GameObject> list = new List<GameObject>();
         list.Add(droid);
         list = null;

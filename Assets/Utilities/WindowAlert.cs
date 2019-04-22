@@ -89,9 +89,9 @@ public class WindowAlert : Singleton<WindowAlert>
         return funcion;
     }
 
-    public void SetActiveAlert()
+    public void SetActiveAlert(bool b=true)
     {
-        alert.SetActive(true);
+        alert.SetActive(b);
     }
 
     void TaskOnClick1()
@@ -106,11 +106,16 @@ public class WindowAlert : Singleton<WindowAlert>
     }
     void TaskOnClick2()
     {
+
         if (funcion_param != null)
             funcion_param();
         if (funcion != null)
             funcion();
+        
+
+        funcion = null;
+        funcion_param = null;
         //disable alert and window alert
-        alert.SetActive(false);
+        
     }
 }

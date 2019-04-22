@@ -12,6 +12,7 @@ TagManager:
   - enemy
   - wall
   - FightBox
+  - alert
   layers:
   - Default
   - TransparentFX

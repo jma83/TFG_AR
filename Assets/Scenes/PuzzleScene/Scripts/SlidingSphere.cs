@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,4 +25,6 @@ public class SlidingSphere : MonoBehaviour {
         this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         this.transform.position = spawnPoint.transform.position;
     }
+
+    
 }

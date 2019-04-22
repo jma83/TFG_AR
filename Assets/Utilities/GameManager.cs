@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private Player currentPlayer;
     PlayerFight playerFight;
+    PuzzleManager playerPuzzle;
     private string playerFile = "/playerInfo.dat";
     private string inventoryFile = "/inventoryInfo.dat";
     private string itemManagerFile = "/itemManagerInfo.dat";
@@ -80,7 +81,8 @@ public class GameManager : Singleton<GameManager>
             if (currentPlayer == null)
             {
                 playerFight = FindObjectOfType<PlayerFight>();
-                currentPlayer= playerFight.gameObject.GetComponent<Player>();
+                playerPuzzle = FindObjectOfType<PuzzleManager>();
+                currentPlayer = playerFight.gameObject.GetComponent<Player>();
                 Debug.Log("playerFight");
             }
         }
@@ -102,7 +104,8 @@ public class GameManager : Singleton<GameManager>
             FindPlayer();
             //InitializeScene();
         }
-
+        playerFight = FindObjectOfType<PlayerFight>();
+        playerPuzzle = FindObjectOfType<PuzzleManager>();
         BinaryFormatter bf = new BinaryFormatter();
 
         //---------------------------------------------------------------
@@ -128,9 +131,9 @@ public class GameManager : Singleton<GameManager>
 
             dataPly.lastGameDate = System.DateTime.Now.ToString();
 
-            playerFight = FindObjectOfType<PlayerFight>();
+            
 
-            if (playerFight == null)
+            if (playerFight == null && droidFactory!= null && playerPuzzle == null)
             {
                 dataPly.droidSize = droidFactory.LiveDroids.Count;
                 Debug.Log("dataPly.droidSize save: " + dataPly.droidSize);
@@ -276,6 +279,8 @@ public class GameManager : Singleton<GameManager>
 
         if (File.Exists(Application.persistentDataPath + playerFile))
         {
+            playerFight = FindObjectOfType<PlayerFight>();
+            playerPuzzle = FindObjectOfType<PuzzleManager>();
             BinaryFormatter bf = new BinaryFormatter();
 
             //---------------------------------------------------------------
@@ -308,31 +313,34 @@ public class GameManager : Singleton<GameManager>
                 Vector3 v3 = new Vector3(dataPly.pos[0], dataPly.pos[1], dataPly.pos[2]);
                 currentPlayer.SetAuxRespawnPos(v3);
 
-                playerFight = FindObjectOfType<PlayerFight>();
+                
 
-                if (playerFight == null)
+                if (droidFactory != null && playerPuzzle == null)
                 {
-                    if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(20))
+                    if (playerFight == null)
                     {
-                        Debug.Log("dataPly.droidSize load: " + dataPly.droidSize);
-                        //droidFactory.SetGameStarted();
-                        /*if (droidFactory.LiveDroids.Count != dataPly.droidSize)
-                            droidFactory.SetStartingDroids(dataPly.droidSize);*/
-                        droidFactory.SetGameStarted(dataPly.droidSize, dataPly.droidType);
-                        for (int h = 0; h < dataPly.droidSize; h++)
+                        if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(20))
                         {
-                            droidFactory.LiveDroids[h].transform.position = new Vector3(dataPly.droidPosX[h], dataPly.droidPosY[h], dataPly.droidPosZ[h]);
-                            droidFactory.LiveDroids[h].SetDroidType(dataPly.droidType[h]);
+                            Debug.Log("dataPly.droidSize load: " + dataPly.droidSize);
+                            //droidFactory.SetGameStarted();
+                            /*if (droidFactory.LiveDroids.Count != dataPly.droidSize)
+                                droidFactory.SetStartingDroids(dataPly.droidSize);*/
+                            droidFactory.SetGameStarted(dataPly.droidSize, dataPly.droidType);
+                            for (int h = 0; h < dataPly.droidSize; h++)
+                            {
+                                droidFactory.LiveDroids[h].transform.position = new Vector3(dataPly.droidPosX[h], dataPly.droidPosY[h], dataPly.droidPosZ[h]);
+                                droidFactory.LiveDroids[h].SetDroidType(dataPly.droidType[h]);
+                            }
+                            Debug.Log("dataPly.combatWin load (borramos?): " + dataPly.combatWin);
+                            if (dataPly.combatWin)
+                                droidFactory.SetDefeated(dataPly.droidCombatID);
+                            dataPly.combatWin = false;
                         }
-                        Debug.Log("dataPly.combatWin load (borramos?): " + dataPly.combatWin);
-                        if (dataPly.combatWin)
-                            droidFactory.SetDefeated(dataPly.droidCombatID);
-                        dataPly.combatWin = false;
                     }
-                }
-                else
-                {
-                    EnemyFightManager.Instance.InstantiateEnemies(dataPly.droidSelectedType);
+                    else
+                    {
+                        EnemyFightManager.Instance.InstantiateEnemies(dataPly.droidSelectedType);
+                    }
                 }
             }
             else
@@ -474,8 +482,9 @@ public class GameManager : Singleton<GameManager>
         }
 
         playerFight = FindObjectOfType<PlayerFight>();
+        playerPuzzle = FindObjectOfType<PuzzleManager>();
 
-        if (playerFight == null)
+        if (playerFight == null && droidFactory != null && playerPuzzle == null)
         {
             droidFactory.SetGameStarted(-1,new int[1]);
         }
@@ -532,8 +541,6 @@ public class GameManager : Singleton<GameManager>
         if (dataInv != null)
         {
             Debug.Log("Intentamos cargar equipment en escena batalla");
-            if (playerFight == null)
-                playerFight = FindObjectOfType<PlayerFight>();
 
             if (playerFight != null)
             {
@@ -583,8 +590,6 @@ public class GameManager : Singleton<GameManager>
         if (dataInv != null)
         {
             Debug.Log("Intentamos establecer la durabilidad del equipment en escena batalla");
-            if (playerFight == null)
-                playerFight = FindObjectOfType<PlayerFight>();
 
             if (playerFight != null)
             {

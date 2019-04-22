@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\cameraPlane.cs" />
+    <Compile Include="Assets\FinishPointCollider.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -617,7 +618,9 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyAdvancedBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBehaviour.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBossBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFight.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyFightManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\FightEntity.cs" />
@@ -626,12 +629,15 @@
     <Compile Include="Assets\Scenes\FightScene\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\webCamScript.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\PuzzleSceneManager.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\PuzzleManager.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\Scripts\SlidingSphere.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\UIManagerPuzzle.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\DroidFactory.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\InventoryUI.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\ItemDetail.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Droid\Droid.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Equipment\Equipment.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\InventoryEntity.cs" />
@@ -647,6 +653,7 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Options.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
@@ -692,6 +699,7 @@
     <None Include="Assets\Lib\Vuforia\Shaders\DepthMask.shader" />
     <None Include="Assets\Lib\MapBoxSDK\Resources\Mapbox\MapboxConfiguration.txt" />
     <None Include="Assets\Lib\Vuforia\Databases\Emulator\VuforiaEmulator.xml" />
+    <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyAdvancedTree.txt" />
     <None Include="Assets\StreamingAssets\Vuforia\VuforiaMars_Images.xml" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\ARKitRemote\ARKITREMOTE.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Unity\Location\ExampleGpsTraces\LocationProviderUnity.txt" />
@@ -700,6 +708,7 @@
     <None Include="Assets\Lib\Vuforia\Shaders\ClippingMask.shader" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Examples\2_AstronautGame\AstronautGame\Astronaut\ProjectorLight.shader" />
     <None Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Materials\AREdgeDetectionBackground.shader" />
+    <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyBossTree.txt" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Examples\Common\Shaders\MobileARShadow.shader" />
     <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\PlayTag.commented.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\Examples\ARTabletop\Shaders\Clip_MapboxStyles.shader" />
