@@ -5,17 +5,13 @@ using UnityEngine;
 public class XPBonus : ItemPickup {
 
     private int bonus = 40;
-    [SerializeField] private float rotateSpeed = 50f;
-    [SerializeField] private float floatAmplitude = 1f;
-    [SerializeField] private float floatFrequency = 1f;
-
-    private Vector3 startPos;   
     Renderer rend;
+    MoveAndRotate m;
 
     void Start()
     {
-        startPos = transform.position;
         rend = GetComponent<Renderer>();
+        m = GetComponent<MoveAndRotate>();
         gameObject.name = "XpBonus";
     }
 
@@ -24,10 +20,7 @@ public class XPBonus : ItemPickup {
     {
         if (this.gameObject != null && this.transform != null && this.enabled)
         {
-            transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
-            Vector3 tempPos = startPos;
-            tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * floatFrequency) * floatAmplitude;
-            transform.position = tempPos;
+            //m.StartMovement();
         }
         else
         {

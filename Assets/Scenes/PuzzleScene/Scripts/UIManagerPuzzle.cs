@@ -15,7 +15,6 @@ public class UIManagerPuzzle : MonoBehaviour {
     // Use this for initialization
     void Start () {
         puzzleManager = PuzzleManager.Instance;
-
     }
 	
 	// Update is called once per frame
@@ -24,7 +23,8 @@ public class UIManagerPuzzle : MonoBehaviour {
     }
 
     public void ToggleAumentedReality()
-    {
+    {            
+
         if (ARToggle.isOn)
         {
             mazeGameObject.transform.position = new Vector3(0, 0, 0);
@@ -33,27 +33,28 @@ public class UIManagerPuzzle : MonoBehaviour {
             topPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             int size = mazeGameObject.GetComponentsInChildren<MeshRenderer>().Length;
+            int size2 = mazeGameObject.GetComponentsInChildren<Collider>().Length;
+
             Debug.Log("on: " + size);
-            for (int i = 0; i <= size; i++)
+            for (int i = 0; i < size; i++)
             {
-                mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
-                if (i != size)
+                if (i < size2)
+                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
                     mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = false;
             }
-        }
-        else
-        {
-            mazeGameObject.transform.position = new Vector3(0, 0, 15.7f);
+        }else{
+            mazeGameObject.transform.position = new Vector3(0, 0, 20f);
             mazeGameObject.transform.rotation = Quaternion.Euler(-90f, 0, 0);
             topPlane.transform.rotation = Quaternion.Euler(-90f, 0, 0);
             plane.GetComponent<MeshRenderer>().enabled = true;
 
             int size = mazeGameObject.GetComponentsInChildren<MeshRenderer>().Length;
+            int size2 = mazeGameObject.GetComponentsInChildren<Collider>().Length;
             Debug.Log("off: " + size);
-            for (int i = 0; i <= size; i++)
+            for (int i = 0; i < size; i++)
             {
+                if (i< size2)
                 mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
-                if (i!=size)
                 mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
             }
 

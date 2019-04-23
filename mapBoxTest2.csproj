@@ -342,7 +342,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\cameraPlane.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -898,6 +897,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\cameraPlane.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyAdvancedBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBossBehaviour.cs" />
@@ -909,7 +909,11 @@
     <Compile Include="Assets\Scenes\FightScene\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\webCamScript.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\PuzzleSceneManager.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\FinishPointCollider.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\PuzzleLevelSelector.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\PuzzleManager.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\Scripts\SlidingSphere.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\UIManagerPuzzle.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\DroidFactory.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Inventory\Inventory.cs" />
@@ -927,6 +931,7 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\HealthItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Item.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ItemsManager.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\MoveAndRotate.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\XPMultiplierItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
