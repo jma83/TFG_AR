@@ -23,6 +23,7 @@ public class Equipment : InventoryEntity
         
         if (attack == 0 && defense == 0 && speed == 0 && durability == 0)
         {
+            if (itemManager!=null)
             id = itemManager.GetNewEquipID();            
             SetDurability(100);
 
@@ -93,6 +94,8 @@ public class Equipment : InventoryEntity
     {
         int[] arr = new int[3];
 
+        if (player == null)
+            player = GameManager.Instance.CurrentPlayer;
         int lvlFactor = player.Lvl * 2;
 
         if (quality == ARGameConstants.EquipmentQuality.Legend)

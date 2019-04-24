@@ -24,11 +24,6 @@ public class PuzzleLevelSelector : Singleton<PuzzleLevelSelector> {
         if (level > 0 && !b)
             SetObjPosition();
 
-        if (start.transform.position.x != v1.x)
-        {
-            
-
-        }
     }
 
     public void CreateLevel()
@@ -80,7 +75,7 @@ public class PuzzleLevelSelector : Singleton<PuzzleLevelSelector> {
                 break;
             case 3:
                 v1 = new Vector3(0.43f, 0.073f, 0.1194f);
-                v2 = new Vector3(-0.42f, 0.08f, -0.448f);
+                v2 = new Vector3(-0.359f, 0.08f, -0.448f);
                 break;
         }
         sphere.transform.position = start.transform.position = v1;

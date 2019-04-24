@@ -10,17 +10,22 @@ public class PuzzleManager : Singleton<PuzzleManager> {
     private bool flag;
     private int xp;
     private int random_equip;
+    private bool AR;
+    Equipment eq;
 
 
     // Use this for initialization
     void Start () {
-        maxTime = 4;
+        maxTime = 40;
         time = maxTime;
         xp = Random.Range(20,50);
         mapNumber = Random.Range(0, 2);
         random_equip = Random.Range(0,10);
         flag = false;
-	}
+        eq = gameObject.GetComponent<Equipment>();
+        eq.SetRandomStats();
+        AR = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -43,24 +48,51 @@ public class PuzzleManager : Singleton<PuzzleManager> {
         }
     }
 
+    public void SetAR(bool b)
+    {
+        AR = b;
+    }
+
     public void Winner()
     {
-
-        if (random_equip == 5)
+        if (!flag)
         {
-            //add equipment 
+            flag = true;
+            int lvl = GameManager.Instance.CurrentPlayer.Lvl;
+            
+            if (AR)
+            {
+                if (random_equip <= 2)
+                    GameManager.Instance.AddNewEquipment(eq);
+                xp *= 2;
+            }
+            GameManager.Instance.CurrentPlayer.AddXp(xp);
+            if (lvl != GameManager.Instance.CurrentPlayer.Lvl)
+            {
+                lvl = GameManager.Instance.CurrentPlayer.Lvl;
+                WindowAlert.Instance.CreateConfirmWindow("LEVEEEEEL UP!\n Nivel " + lvl, true, PuzzleManager.Instance.Winner2);
+            }
+            else
+            {
+                Winner2();
+            }
         }
+    }
 
-        GameManager.Instance.CurrentPlayer.AddXp(xp);
-        GameManager.Instance.CurrentPlayer.substractHp(10);
-        if (random_equip == 5)
-            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:"+ xp +" XP AND A NEW EQUIPMENT! BUT, YOU LOST 10% OF YOUR ENERGY!, press OK to return the map.", true, null, PuzzleSceneManager.Instance.ChangeScene);
+    public void Winner2()
+    {
+        GameManager.Instance.CurrentPlayer.substractHp(5);
+        if (random_equip <= 2)
+            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp + " XP AND A NEW EQUIPMENT! BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
         else
-            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp + " XP. BUT, YOU LOST 10% OF YOUR ENERGY!, press OK to return the map.", true, null, PuzzleSceneManager.Instance.ChangeScene);
+            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp + " XP. BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
+        WindowAlert.Instance.SetActiveAlert();
+
     }
 
     public void GameOver()
     {
+        flag = true;
         GameManager.Instance.CurrentPlayer.substractHp(10);
         WindowAlert.Instance.CreateConfirmWindow("YOU LOSE! TIME IS OVER! YOU LOST 10% OF YOUR ENERGY, press OK to return the map.", true, null, PuzzleSceneManager.Instance.ChangeScene);
 

@@ -315,9 +315,9 @@ public class GameManager : Singleton<GameManager>
 
                 
 
-                if (droidFactory != null && playerPuzzle == null)
+                if (playerPuzzle == null)
                 {
-                    if (playerFight == null)
+                    if (playerFight == null && droidFactory != null)
                     {
                         if (System.DateTime.Now < DateTime.Parse(dataPly.lastGameDate).AddMinutes(20))
                         {
@@ -571,6 +571,69 @@ public class GameManager : Singleton<GameManager>
         return false;
     }
 
+    public bool AddNewEquipment(Equipment eq)
+    {
+        if (playerPuzzle != null) { 
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
+            if (file2.Length > 0)
+            {
+                dataInv = (InventoryData)bf.Deserialize(file2);
+                file2.Close();
+            }
+            else
+            {
+                file2.Close();
+                File.Delete(Application.persistentDataPath + inventoryFile);
+            }
+
+            if (dataInv != null)
+            {
+                file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
+                eq.SetDurability(100);
+                dataInv.equipmentsSize++;
+
+                int[] quality = new int[dataInv.equipmentsSize];
+                int[] type = new int[dataInv.equipmentsSize];
+                int[] attack = new int[dataInv.equipmentsSize];
+                int[] defense = new int[dataInv.equipmentsSize];
+                int[] speed = new int[dataInv.equipmentsSize];
+                int[] durability = new int[dataInv.equipmentsSize];
+                bool[] active = new bool[dataInv.equipmentsSize];
+                int[] id = new int[dataInv.equipmentsSize];
+
+                for (int i=0;i< dataInv.equipmentsSize;i++)
+                {
+                    if (i != dataInv.equipmentsSize-1)
+                    {
+                        quality[i] = dataInv.equipQuality[i];
+                        type[i] = dataInv.equipType[i];
+                        attack[i] = dataInv.equipAttack[i];
+                        defense[i] = dataInv.equipDefense[i];
+                        speed[i] = dataInv.equipSpeed[i];
+                        durability[i] = dataInv.equipDurability[i];
+                        active[i] = dataInv.equipActive[i];
+                        id[i] = dataInv.equipIDs[i];
+                    }
+                    else
+                    {
+                        dataInv.equipQuality[i] = (int)eq.GetEquipmentQualityNum();
+                        dataInv.equipType[i] = (int)eq.GetEquipmentTypeNum();
+                        dataInv.equipAttack[i] = eq.GetAttack();
+                        dataInv.equipDefense[i] = eq.GetDefense();
+                        dataInv.equipSpeed[i] = eq.GetSpeed();
+                        dataInv.equipDurability[i] = eq.GetDurability();
+                        dataInv.equipActive[i] = eq.GetActive();
+                        dataInv.equipIDs[i] = eq.GetID();
+                    }
+                }
+                bf.Serialize(file2, dataInv);
+                file2.Close();
+                return true;
+            }
+        }
+        return false;
+    }
     public bool DecreaseEquipDurability()
     {
         BinaryFormatter bf = new BinaryFormatter();

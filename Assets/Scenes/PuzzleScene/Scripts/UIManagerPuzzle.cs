@@ -34,15 +34,30 @@ public class UIManagerPuzzle : MonoBehaviour {
 
             int size = mazeGameObject.GetComponentsInChildren<MeshRenderer>().Length;
             int size2 = mazeGameObject.GetComponentsInChildren<Collider>().Length;
-
-            Debug.Log("on: " + size);
-            for (int i = 0; i < size; i++)
+            int aux;
+            if (size2 > size)
             {
-                if (i < size2)
-                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
-                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = false;
+                aux = size;
+                size = size2;
+                size2 = aux;
+                for (int i = 0; i < size; i++)
+                {
+                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
+                    if (i < size2)
+                        mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                }
             }
-        }else{
+            else
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    if (i < size2)
+                        mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
+                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                }
+            }
+        }
+        else{
             mazeGameObject.transform.position = new Vector3(0, 0, 20f);
             mazeGameObject.transform.rotation = Quaternion.Euler(-90f, 0, 0);
             topPlane.transform.rotation = Quaternion.Euler(-90f, 0, 0);
@@ -50,15 +65,33 @@ public class UIManagerPuzzle : MonoBehaviour {
 
             int size = mazeGameObject.GetComponentsInChildren<MeshRenderer>().Length;
             int size2 = mazeGameObject.GetComponentsInChildren<Collider>().Length;
-            Debug.Log("off: " + size);
-            for (int i = 0; i < size; i++)
+            int aux;
+            if (size2 > size)
             {
-                if (i< size2)
-                mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
-                mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                aux = size;
+                size = size2;
+                size2 = aux;
+                for (int i = 0; i < size; i++)
+                {
+                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
+                    if (i < size2)
+                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                }
             }
+            else
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    if (i < size2)
+                        mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
+                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                }
+            }
+            Debug.Log("off: " + size);
+            
 
         }
-
+        PuzzleManager.Instance.SetAR(ARToggle.isOn);
     }
+
 }

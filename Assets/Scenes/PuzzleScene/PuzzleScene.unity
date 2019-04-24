@@ -508,10 +508,10 @@ RectTransform:
   m_Father: {fileID: 1592751928}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 767.4, y: 432}
-  m_SizeDelta: {x: 277.9, y: 160.4}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -192.59998, y: -108}
+  m_SizeDelta: {x: 277.90002, y: 160.40002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &335262952
 MonoBehaviour:
@@ -572,73 +572,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300008, guid: 9e38304c9af88a742b926f6c3e83f4c5, type: 3}
---- !u!1 &396796069
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 396796071}
-  - component: {fileID: 396796072}
-  - component: {fileID: 396796073}
-  - component: {fileID: 396796070}
-  m_Layer: 0
-  m_Name: Loader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &396796070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396796069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 679fdf16bb5503e4885e22daee4f5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  captureRangeObj: {fileID: 0}
---- !u!4 &396796071
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396796069}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &396796072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396796069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4df669471297c4c48b15120ce9300c7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transtionAnim: {fileID: 0}
---- !u!114 &396796073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396796069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13f1e3e5688a7004f87c42b50ba1a36d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPlayer: {fileID: 0}
 --- !u!43 &483350647
 Mesh:
   m_ObjectHideFlags: 0
@@ -1825,6 +1758,9 @@ GameObject:
   - component: {fileID: 916396250}
   - component: {fileID: 916396251}
   - component: {fileID: 916396249}
+  - component: {fileID: 916396252}
+  - component: {fileID: 916396253}
+  - component: {fileID: 916396254}
   m_Layer: 0
   m_Name: PuzzleRules
   m_TagString: Untagged
@@ -1875,6 +1811,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d8753a290f0a846a64dfe715db1521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &916396252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916396248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679fdf16bb5503e4885e22daee4f5c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  captureRangeObj: {fileID: 0}
+--- !u!114 &916396253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916396248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df669471297c4c48b15120ce9300c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transtionAnim: {fileID: 0}
+--- !u!114 &916396254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916396248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fae7c224b397f749a5a0e545f3f020c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTime: 0
+  active: 0
+  icon: {fileID: 0}
 --- !u!1 &933458743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1932,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &962700775 stripped
 Transform:
@@ -2416,7 +2390,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 916396253}
         m_MethodName: playerTapped
         m_Mode: 2
         m_Arguments:
@@ -2590,7 +2564,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1291820137 stripped
 GameObject:
@@ -3027,6 +3001,7 @@ MonoBehaviour:
   mazeGameObject: {fileID: 679715818}
   plane: {fileID: 1270371142}
   topPlane: {fileID: 933458743}
+  alert: {fileID: 2075406139}
 --- !u!114 &1592751930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3093,9 +3068,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -744.7, y: -474}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 215.29999, y: 66}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1620693274
 MonoBehaviour:
@@ -3361,7 +3336,7 @@ GameObject:
   - component: {fileID: 1704678045}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

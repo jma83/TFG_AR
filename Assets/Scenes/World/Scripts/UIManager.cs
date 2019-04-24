@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour {
         options.SetActive(!options.activeSelf);
     }
 
-        public void toggleExitWindow()
+    public void toggleExitWindow()
     {
         WindowAlert.Instance.CreateSelectWindow("Do you want to quit the game?",true, GameManager.Instance.ExitGame,null);
     }
@@ -173,7 +173,6 @@ public class UIManager : MonoBehaviour {
         {
             objetos.GetComponentInChildren<Image>().enabled = true;
             armas.GetComponentInChildren<Image>().enabled = false;
-
 
         }
         else

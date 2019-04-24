@@ -55,9 +55,7 @@ public class EnemyBehaviour : MonoBehaviour {
     {        
         defaultTime = Random.Range(3f, 6f);
         timer = defaultTime;        
-    }
-
-    
+    }    
 
     [Task]
     public void CheckAttacked()

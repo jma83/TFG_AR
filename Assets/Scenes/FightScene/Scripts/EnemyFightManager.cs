@@ -136,12 +136,28 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private void Winner()
     {
         gameWin = true;
+        int lvl = GameManager.Instance.CurrentPlayer.Lvl;
         GameManager.Instance.CurrentPlayer.AddXp(total_xp);
+        if (lvl != GameManager.Instance.CurrentPlayer.Lvl)
+        {
+            lvl = GameManager.Instance.CurrentPlayer.Lvl;
+            WindowAlert.Instance.CreateConfirmWindow("SUBES DE NIVEL!\n Nivel " + lvl, true, EnemyFightManager.Instance.Winner2);
+
+        }
+        else
+        {
+            Winner2();
+        }
+
+    }
+
+    public void Winner2()
+    {
         GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().DecreaseWeaponDurability(7);
         //WindowAlert.Instance.SetActiveAlert(); ENEMIGOS DERROTADOS, pulsa OK para volver al mapa
         WindowAlert window = WindowAlert.Instance;
         window.CreateConfirmWindow("BIEN HECHO! ENEMIGOS DERROTADOS, pulsa OK para volver al mapa" + System.Environment.NewLine + "XP: " + total_xp + " Weapon durability: " +
-            GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, null,FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
+            GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, null, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
         window.SetActiveAlert();
     }
 

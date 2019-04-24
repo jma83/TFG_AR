@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WindowAlert : Singleton<WindowAlert>
 {
-    [SerializeField] GameObject alert;
+    [SerializeField] public GameObject alert;
     [SerializeField] Text infoText;
     [SerializeField] Button bt1;
     [SerializeField] Button bt2;
@@ -108,14 +108,22 @@ public class WindowAlert : Singleton<WindowAlert>
     {
 
         if (funcion_param != null)
+        {
             funcion_param();
-        if (funcion != null)
+        }
+        else if (funcion != null)
+        {
             funcion();
+        }
+        else
+        {
+            funcion = null;
+            funcion_param = null;
+            alert.SetActive(false);             //disable alert and window alert
+            
+        }
         
 
-        funcion = null;
-        funcion_param = null;
-        //disable alert and window alert
         
     }
 }
