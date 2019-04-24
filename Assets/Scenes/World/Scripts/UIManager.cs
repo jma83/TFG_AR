@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
 
     [SerializeField] private Text hpText;
     [SerializeField] private Image currentHPBar;
+    [SerializeField] private Image XPBar;
     [SerializeField] private Text xpText;
     [SerializeField] private Text levelText;
     [SerializeField] private GameObject menu;
@@ -72,7 +73,13 @@ public class UIManager : MonoBehaviour {
     public void updateXP()
     {
         if (GameManager.Instance.CurrentPlayer != null && xpText != null)
+        {
             xpText.text = GameManager.Instance.CurrentPlayer.Xp + " / " + GameManager.Instance.CurrentPlayer.RequiredXp;
+            float xp_percent = GameManager.Instance.CurrentPlayer.Xp * 100 / GameManager.Instance.CurrentPlayer.RequiredXp;
+            xp_percent = xp_percent / 100;
+            XPBar.transform.localScale = new Vector3(xp_percent, 0.7f, 1);
+
+        }
 
     }
     public void updateHP()
