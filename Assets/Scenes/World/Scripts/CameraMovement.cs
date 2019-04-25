@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private GameObject gm_obj;
+    [SerializeField] private Text cam_text;
     private Player player1;
     private bool parentPlayer = true;
     private Vector3 defaultCameraPos;
@@ -180,7 +181,7 @@ public class CameraMovement : MonoBehaviour
         if (parentPlayer)
         {
             transform.SetParent(gm_obj.transform);
-
+            cam_text.text = "FREE";
             parentPlayer = false;
         }
         else
@@ -188,7 +189,7 @@ public class CameraMovement : MonoBehaviour
 
             transform.SetParent(player1.gameObject.transform);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, defaultCameraRot, Time.deltaTime * zoomDampening);
-
+            cam_text.text = "FIXED";
             parentPlayer = true;
 
 

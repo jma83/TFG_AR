@@ -42,9 +42,9 @@ public class UIManagerPuzzle : MonoBehaviour {
                 size2 = aux;
                 for (int i = 0; i < size; i++)
                 {
-                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
+                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
                     if (i < size2)
-                        mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                        mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = false;
                 }
             }
             else
@@ -52,8 +52,8 @@ public class UIManagerPuzzle : MonoBehaviour {
                 for (int i = 0; i < size; i++)
                 {
                     if (i < size2)
-                        mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
-                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
+                        mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
+                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = false;
                 }
             }
         }
