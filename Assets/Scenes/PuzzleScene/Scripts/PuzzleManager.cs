@@ -98,6 +98,12 @@ public class PuzzleManager : Singleton<PuzzleManager> {
 
     }
 
+    public void SetTime(int t)
+    {
+
+       time = t;
+    }
+
     public int GetTime(){
 
         return (int)time;

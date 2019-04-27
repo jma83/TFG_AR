@@ -66,16 +66,16 @@ public class PuzzleLevelSelector : Singleton<PuzzleLevelSelector> {
         switch (level)
         {
             case 1:
-                v1 = new Vector3(-0.271f, 0.073f, 0.368f);
-                v2 = new Vector3(-0.094f, 0.08f, 0.409f);
+                v1 = new Vector3(-0.2689f, 0.073f, 0.383f);
+                v2 = new Vector3(-0.091f, 0.08f, 0.403f);
                 break;
             case 2:
-                v1 = new Vector3(0.132f, 0.073f, 0.22f);
-                v2 = new Vector3(-0.036f, 0.08f, 0.409f);
+                v1 = new Vector3(0.128f, 0.073f, 0.21f);
+                v2 = new Vector3(-0.032f, 0.08f, 0.403f);
                 break;
             case 3:
-                v1 = new Vector3(0.43f, 0.073f, 0.1194f);
-                v2 = new Vector3(-0.359f, 0.08f, -0.448f);
+                v1 = new Vector3(0.267f, 0.073f, 0.104f);
+                v2 = new Vector3(-0.266f, 0.08f, -0.343f);
                 break;
         }
         sphere.transform.position = start.transform.position = v1;

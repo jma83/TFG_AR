@@ -97,10 +97,11 @@ public class Options : MonoBehaviour {
              
                 break;
             case 3:
-                howToPlayText.text = "For the puzzle, you need a image target. Please, check out the \"Aumented reality\" section first.";
-                howToPlayText.text += "\n\nThis puzzle consists in a maze. The player must move a ball based in the gravity physics, to the reach a point before the time is over.";
-                howToPlayText.text += "\n\nOnce you have the target image, you should point your mobile camera to it.It will generate a maze with the ball, that is moving around this maze based on its physics.Rotate the image surface to move the ball as desired.";
-                howToPlayText.text += "\n\nIf you win you will get experience and randomly some equipment. But if you loose, your player energy will be decreased.";
+                howToPlayText.text = "For the puzzle you can use an image target. Please, check out the \"Aumented reality\" section first.";
+                howToPlayText.text += "\n\nThis puzzle consists in a maze. The player must move the ball based in the gravity physics, to the reach a point before the time is over.";
+                howToPlayText.text += "\n\nThe puzzle can be solved by using the aumented reality (based in the image target) or not (with the mobile accelerometer).";
+                howToPlayText.text += "\n\nIf you use the aumented reality, you should point your mobile camera to the image. Once the maze is generated, you shoul rotate the image surface to move the ball as desired. Otherwise, if the AR is disabled the puzzle will appear in the middle of the screen.";
+                howToPlayText.text += "\n\nIf you win you will get some XP. The AR has some extra rewards if you reach your goal. Wheter you loose or win your player energy will be decreased.";
                 break;
         }
     }

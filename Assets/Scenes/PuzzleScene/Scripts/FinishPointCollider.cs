@@ -20,7 +20,7 @@ public class FinishPointCollider : MonoBehaviour {
     {
         if (other.tag == "Player" && !check)
         {
-            GetComponentInChildren<MeshRenderer>().enabled = false;
+            Destroy(this);
             PuzzleManager.Instance.Winner();
             check = true;
         }

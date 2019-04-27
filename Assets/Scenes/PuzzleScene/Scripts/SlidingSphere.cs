@@ -15,7 +15,7 @@ public class SlidingSphere : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //text.text = "X:" + this.transform.position.x + "Y:" + this.transform.position.y + "Z:" + this.transform.position.z;
-        if (this.transform.position.y<plane.transform.position.y-10)
+        if (this.transform.position.y<plane.transform.position.y-10 || (Vector3.Distance(this.transform.position, plane.transform.position) > 22))
         {
             ResetPos();
         }

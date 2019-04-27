@@ -10,86 +10,146 @@ public class UIManagerPuzzle : MonoBehaviour {
     [SerializeField] GameObject mazeGameObject;
     [SerializeField] GameObject plane;
     [SerializeField] GameObject topPlane;
+    [SerializeField] GameObject parent2;
+    [SerializeField] GameObject camera1;
+    [SerializeField] GameObject light1;
+    [SerializeField] Text textdebug;
+    Vector3 dir;
+
     private PuzzleManager puzzleManager;
 
     // Use this for initialization
     void Start () {
         puzzleManager = PuzzleManager.Instance;
+        plane.GetComponent<MeshRenderer>().enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
         timerText.text = "Timer: " + puzzleManager.GetTime().ToString();
+        //textdebug.text = "x:" + GameObject.FindGameObjectWithTag("Player").transform.position.x + "\n y:" + GameObject.FindGameObjectWithTag("Player").transform.position.y + "\n z:" + GameObject.FindGameObjectWithTag("Player").transform.position.z;
+        if (puzzleManager.GetTime()<=10)
+            timerText.color = new Color32(242, 0, 0, 100);
+        if (!ARToggle.isOn && puzzleManager.GetTime() > 0)
+        {
+            dir = new Vector3(0, -0.5f, 0);
+
+            /*float angle = Input.acceleration.y * 180 / Mathf.PI;
+            textdebug.text = "x:" + Input.acceleration.x + "\n y:" + Input.acceleration.y + "\n z:" + Input.acceleration.z; //Input.gyro
+            parent2.transform.rotation = Quaternion.Euler(0, 0, angle);
+            //plane.transform.Rotate(0, 0, angle);
+            topPlane.transform.rotation = Quaternion.Euler(0, 0, angle);
+            camera1.transform.rotation = Quaternion.Euler(0, 0, angle);
+            light1.transform.rotation = Quaternion.Euler(0, 0, angle);*/
+
+            /*Vector3 tilt = Input.acceleration;
+
+            tilt = Quaternion.Euler(90, 0, 0) * tilt;
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().AddForce(tilt*2);*/
+            //textdebug.text = "x:" + Input.acceleration.x + "\n y:" + Input.acceleration.y + "\n z:" + Input.acceleration.z; //Input.gyro
+
+            dir.x = Input.acceleration.x ;
+            dir.z = Input.acceleration.y;
+
+            // clamp acceleration vector to unit sphere
+            if (dir.sqrMagnitude > 1)
+                dir.Normalize();
+
+            // Make it move 10 meters per second instead of 10 meters per frame...
+            dir *= Time.deltaTime;
+
+            // Move object
+            if (dir!=Vector3.zero)
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = (dir * 1000f);
+
+        }
+
     }
 
     public void ToggleAumentedReality()
-    {            
+    {
+        GameObject auxGO;
 
         if (ARToggle.isOn)
         {
-            mazeGameObject.transform.position = new Vector3(0, 0, 0);
-            mazeGameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            plane.GetComponent<MeshRenderer>().enabled = false;
-            topPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
+            //GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().useGravity = true;
 
-            int size = mazeGameObject.GetComponentsInChildren<MeshRenderer>().Length;
-            int size2 = mazeGameObject.GetComponentsInChildren<Collider>().Length;
-            int aux;
-            if (size2 > size)
+            camera1.transform.position = new Vector3(0, 0, 0);
+            camera1.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            plane.GetComponent<MeshRenderer>().enabled = false;
+
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("puzzleObject").Length; i++)
             {
-                aux = size;
-                size = size2;
-                size2 = aux;
-                for (int i = 0; i < size; i++)
-                {
-                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
-                    if (i < size2)
-                        mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = false;
-                }
+                auxGO = GameObject.FindGameObjectsWithTag("puzzleObject")[i];
+                auxGO.transform.SetParent(mazeGameObject.transform);
+                if (auxGO.GetComponent<MeshRenderer>() != null)
+                    auxGO.GetComponent<MeshRenderer>().enabled = false;
+                if (auxGO.GetComponent<Collider>() != null)
+                    auxGO.GetComponent<Collider>().enabled = false;
             }
-            else
+
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Finish").Length; i++)
             {
-                for (int i = 0; i < size; i++)
-                {
-                    if (i < size2)
-                        mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = false;
-                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = false;
-                }
+                auxGO = GameObject.FindGameObjectsWithTag("Finish")[i];
+                auxGO.transform.SetParent(mazeGameObject.transform);
+                if (auxGO.GetComponent<MeshRenderer>() != null)
+                    auxGO.GetComponent<MeshRenderer>().enabled = false;
+                if (auxGO.GetComponent<Collider>() != null)
+                    auxGO.GetComponent<Collider>().enabled = false;
+            }
+
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+            {
+                auxGO = GameObject.FindGameObjectsWithTag("Player")[i];
+                auxGO.transform.SetParent(mazeGameObject.transform);
+                if (auxGO.GetComponent<MeshRenderer>() != null)
+                    auxGO.GetComponent<MeshRenderer>().enabled = false;
+                if (auxGO.GetComponent<Collider>() != null)
+                    auxGO.GetComponent<Collider>().enabled = false;
             }
         }
         else{
-            mazeGameObject.transform.position = new Vector3(0, 0, 20f);
-            mazeGameObject.transform.rotation = Quaternion.Euler(-90f, 0, 0);
-            topPlane.transform.rotation = Quaternion.Euler(-90f, 0, 0);
-            plane.GetComponent<MeshRenderer>().enabled = true;
 
-            int size = mazeGameObject.GetComponentsInChildren<MeshRenderer>().Length;
-            int size2 = mazeGameObject.GetComponentsInChildren<Collider>().Length;
-            int aux;
-            if (size2 > size)
-            {
-                aux = size;
-                size = size2;
-                size2 = aux;
-                for (int i = 0; i < size; i++)
-                {
-                    mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
-                    if (i < size2)
-                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    if (i < size2)
-                        mazeGameObject.GetComponentsInChildren<Collider>()[i].enabled = true;
-                    mazeGameObject.GetComponentsInChildren<MeshRenderer>()[i].enabled = true;
-                }
-            }
-            Debug.Log("off: " + size);
+            puzzleManager.SetTime(puzzleManager.GetTime() / 2);
+            timerText.color = new Color32(242, 0, 0, 100);
+
+            camera1.transform.position = new Vector3(0, 20, 0);
+            camera1.transform.rotation = Quaternion.Euler(90, 0, 0);
+            plane.GetComponent<MeshRenderer>().enabled = true;
             
 
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("puzzleObject").Length; i++)
+            {
+                auxGO = GameObject.FindGameObjectsWithTag("puzzleObject")[i];
+                auxGO.transform.SetParent(parent2.transform);
+                if (auxGO.GetComponent<MeshRenderer>() != null)
+                    auxGO.GetComponent<MeshRenderer>().enabled = true;
+                if (auxGO.GetComponent<Collider>() != null)
+                    auxGO.GetComponent<Collider>().enabled = true;
+            }
+
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Finish").Length; i++)
+            {
+                auxGO = GameObject.FindGameObjectsWithTag("Finish")[i];
+                auxGO.transform.SetParent(parent2.transform);
+                if (auxGO.GetComponent<MeshRenderer>() != null)
+                    auxGO.GetComponent<MeshRenderer>().enabled = true;
+                if (auxGO.GetComponent<Collider>()!=null)
+                    auxGO.GetComponent<Collider>().enabled = true;
+            }
+
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+            {
+                auxGO = GameObject.FindGameObjectsWithTag("Player")[i];
+                auxGO.transform.SetParent(parent2.transform);
+                if (auxGO.GetComponent<MeshRenderer>() != null)
+                    auxGO.GetComponent<MeshRenderer>().enabled = true;
+                if (auxGO.GetComponent<Collider>() != null)
+                    auxGO.GetComponent<Collider>().enabled = true;
+            }
+            GameObject.FindGameObjectWithTag("Player").GetComponent<SlidingSphere>().ResetPos();
         }
         PuzzleManager.Instance.SetAR(ARToggle.isOn);
     }
