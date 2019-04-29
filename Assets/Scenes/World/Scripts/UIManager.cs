@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject menu;
     private Button[] menu_sections;
     [SerializeField] private AudioClip menuButtonSound;
+    [SerializeField] private AudioClip mainMenuButtonSound;
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject slotContainer;
     [SerializeField] private GameObject itemDetail;
@@ -95,21 +96,27 @@ public class UIManager : MonoBehaviour {
 
     public void MenuButtonClick(int a)
     {
-        
-        audioSource.PlayOneShot(menuButtonSound);
+
         if (a == 0)
+        {
             toggleMenu();
+        }
         else
+        {
+            audioSource.PlayOneShot(menuButtonSound);
             toggleInventory();
+        }
     }
 
     private void toggleMenu()
     {
+        if (!menu.activeSelf)
+        audioSource.PlayOneShot(mainMenuButtonSound);
         menu.SetActive(!menu.activeSelf);
     }
     private void toggleInventory()
     {
-        
+        audioSource.PlayOneShot(menuButtonSound);
         inventory.SetActive(!inventory.activeSelf);
         if (objetos.isOn)
             InvUI.SwitchUI(2);
@@ -120,6 +127,7 @@ public class UIManager : MonoBehaviour {
     }
     public void toggleItemDetail(int id)
     {
+        audioSource.PlayOneShot(menuButtonSound);
         itemDetail.SetActive(!itemDetail.activeSelf);
         toggleInventory();
         //GameObject[] gameObj = GameObject.FindGameObjectsWithTag("item");
@@ -160,11 +168,13 @@ public class UIManager : MonoBehaviour {
 
     public void toggleOptions()
     {
+        audioSource.PlayOneShot(menuButtonSound);
         options.SetActive(!options.activeSelf);
     }
 
     public void toggleExitWindow()
     {
+        audioSource.PlayOneShot(menuButtonSound);
         WindowAlert.Instance.CreateSelectWindow("Do you want to quit the game?",true, GameManager.Instance.ExitGame,null);
     }
 

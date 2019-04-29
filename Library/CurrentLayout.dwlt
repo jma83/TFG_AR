@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 883, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 11
+  controlID: 150
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -395,20 +395,20 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5a6f0000
-    m_LastClickedID: 28506
-    m_ExpandedIDs: 7aacfefff676ffff548affff58fbffff00000000d461000002660000e26e0000f66e0000bc7300003aad0000
+    m_SelectedIDs: 107d0100
+    m_LastClickedID: 97552
+    m_ExpandedIDs: 2279f7ffe05cfaffbc03fbff2c08fbff74fafdff84fafdffa017feff461efeffc840feffccfbffffdcfbffff000000007a4c00004c4d00001c51000002810000a0990000ea990000729a0000fe9b0000429c00008c9d00009c9d0000107d01009e7d0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: ARSection
-      m_OriginalName: ARSection
+      m_Name: fighter05(Clone)
+      m_OriginalName: fighter05(Clone)
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 27878
+      m_UserData: -369440
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 6}
     m_SearchString: 
   m_ExpandedScenes:
-  - World
+  - FightScene
   m_CurrenRootInstanceID: 0
   m_LockTracker:
     m_IsLocked: 0
@@ -447,14 +447,14 @@ MonoBehaviour:
     height: 562
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 3214.62731
+  lastFramingTime: 23263.2896786
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 938.67346, y: 455.50446, z: -117.58093}
+    m_Target: {x: 5.817932, y: 107.53021, z: 106.59601}
     speed: 2
-    m_Value: {x: 938.67346, y: 455.50446, z: -117.58093}
+    m_Value: {x: 5.817932, y: 107.53021, z: 106.59601}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -484,11 +484,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.22315946, y: 0.24235553, z: -0.05738626, w: 0.942428}
     speed: 2
-    m_Value: {x: -0.22315948, y: -0.24235554, z: 0.05738626, w: -0.94242805}
+    m_Value: {x: 0.22315946, y: 0.24235553, z: -0.05738626, w: 0.942428}
   m_Size:
-    m_Target: 612.9953
+    m_Target: 324.50723
     speed: 2
-    m_Value: 612.9953
+    m_Value: 324.50723
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -655,20 +655,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/GUI
+    - Assets/Resources/Audio/NewAudio
   m_ViewMode: 1
   m_StartGridSize: 69
   m_LastFolders:
-  - Assets/Resources/GUI
+  - Assets/Resources/Audio/NewAudio
   m_LastFoldersGridSize: 69
   m_LastProjectPath: D:\Usuarios\Javier\Documentos\Universidad\Unity projects\Git\mapBoxTest2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 122}
-    m_SelectedIDs: a4380000
-    m_LastClickedID: 14500
-    m_ExpandedIDs: 00000000ba320000c2320000e0320000e432000008330000a0330000023400009a340000c63400000c350000ae3500009a370000ba370000a43800000e39000062390000b23900005c3a0000283e00005e3e0000643e0000903e0000be3f0000104000008641000098410000304200009a420000cc420000d4420000e44200004a4500007a4500000e460000c4460000de460000f6460000be470000a6480000ac480000e64800000e4900004449000000ca9a3b
+    scrollPos: {x: 0, y: 90}
+    m_SelectedIDs: f65e0000
+    m_LastClickedID: 24310
+    m_ExpandedIDs: 00000000a8320000b0320000ce320000d2320000f63200008c330000ee33000086340000b0340000f63400009a35000086370000a837000092380000fc38000050390000a03900004a3a0000163e00004c3e0000523e00007e3e0000ac3f0000fe3f000074410000864100001e42000088420000aa420000ba420000c2420000d24200003845000068450000fc450000b2460000cc460000e4460000ae4700009a480000a0480000da4800000249000038490000f65e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -696,7 +696,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ba320000c2320000e0320000e432000008330000a0330000023400009a340000c63400000c350000ae3500009a370000ba370000a43800000e39000062390000b23900005c3a0000283e00005e3e0000643e0000903e0000be3f0000104000008641000098410000304200009a420000cc420000d4420000e44200004a4500007a4500000e460000c4460000de460000f6460000be470000a6480000ac480000e64800000e49000044490000
+    m_ExpandedIDs: 00000000a8320000b0320000ce320000d2320000f63200008c330000ee33000086340000b0340000f63400009a35000086370000a837000092380000fc38000050390000a03900004a3a0000163e00004c3e0000523e00007e3e0000ac3f0000fe3f000074410000864100001e42000088420000ba420000c2420000d24200003845000068450000fc450000b2460000cc460000e4460000ae4700009a480000a0480000da4800000249000038490000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

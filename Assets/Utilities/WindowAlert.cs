@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class WindowAlert : Singleton<WindowAlert>
 {
+    private AudioClip windowOn;
+    private AudioClip confirmSound;
+    private AudioClip cancelSound;
+    private AudioClip levelUP;
+    private AudioSource audioSource;
     [SerializeField] public GameObject alert;
     [SerializeField] Text infoText;
     [SerializeField] Button bt1;
@@ -17,16 +22,22 @@ public class WindowAlert : Singleton<WindowAlert>
     // Use this for initialization
     void Start()
     {
+        windowOn = Resources.Load<AudioClip>("Audio/NewAudio/openwindow");
+        confirmSound = Resources.Load<AudioClip>("Audio/NewAudio/confirm2");
+        cancelSound = Resources.Load<AudioClip>("Audio/NewAudio/cancel");
+        levelUP = Resources.Load<AudioClip>("Audio/NewAudio/level_up");
+        audioSource = GetComponent<AudioSource>();
         bt1.onClick.AddListener(TaskOnClick2);
         bt2.onClick.AddListener(TaskOnClick1);
         bt3.onClick.AddListener(TaskOnClick2);
 
     }
 
+
     public void CreateInfoWindow(string infoText1, bool active)
     {
+        audioSource.PlayOneShot(levelUP);
         alert.SetActive(active);
-
         bt1.enabled = false;
         bt1.gameObject.SetActive(bt1.enabled);
         bt2.enabled = false;
@@ -40,6 +51,7 @@ public class WindowAlert : Singleton<WindowAlert>
 
     public void CreateConfirmWindow(string confirmText, bool active, DelegateFunction f = null, DelegateFunctionParam f2 =null)
     {
+        audioSource.PlayOneShot(windowOn);
         alert.SetActive(active);
         bt1.enabled = false;
         bt1.gameObject.SetActive(bt1.enabled);
@@ -57,6 +69,7 @@ public class WindowAlert : Singleton<WindowAlert>
 
     public void CreateSelectWindow(string confirmText, bool active, DelegateFunction f = null, DelegateFunctionParam f2 = null)
     {
+        audioSource.PlayOneShot(windowOn);
         alert.SetActive(active);
         bt3.enabled = false;
         bt3.gameObject.SetActive(bt3.enabled);
@@ -100,13 +113,13 @@ public class WindowAlert : Singleton<WindowAlert>
             funcion_param();
         if (funcion != null)
             funcion();*/
-
+        audioSource.PlayOneShot(cancelSound);
         alert.SetActive(false);
 
     }
     void TaskOnClick2()
     {
-
+        audioSource.PlayOneShot(confirmSound);
         if (funcion_param != null)
         {
             funcion_param();
