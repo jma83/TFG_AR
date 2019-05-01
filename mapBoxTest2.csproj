@@ -895,6 +895,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
+    <Compile Include="Assets\ProfileDetail.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\cameraPlane.cs" />
@@ -945,6 +946,7 @@
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
     <Compile Include="Assets\Utilities\WindowAlert.cs" />
+    <Compile Include="Assets\WelcomeScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Vuforia\CylinderTargetTextures\VuforiaMars_Images\authoringinfo.xml" />

@@ -19,6 +19,8 @@ public class Player : MonoBehaviour {
     public CaptureRange captureRangeObj;
     private int xp_multiplier = 1;
     private Vector3 aux_RespawnPos;
+    private string user_name;
+    private float soundLevel = -1;
 
 
 
@@ -91,6 +93,25 @@ public class Player : MonoBehaviour {
             captureRange = 0.5f;
     }
 
+    public void SetUserName(string s)
+    {
+        user_name = s;
+    }
+
+    public void SetSoundLevel(float f,bool b=false)
+    {
+        soundLevel = f;
+        if (b)
+        {
+            AudioSource[] audio = FindObjectsOfType<AudioSource>();
+
+            for (int i = 0; i < audio.Length; i++)
+            {
+                audio[i].volume = f / 100;
+            }
+        }
+    }
+
     public void AddXp(int xp)
     {
         int value= Mathf.Max(0, xp); 
@@ -147,7 +168,6 @@ public class Player : MonoBehaviour {
         if (walk!=null)
         Walk();
 
-
         playerTimer();
         if (Vector3.Distance(transform.position, aux_RespawnPos) > 80)
             Debug.Log(Vector3.Distance(transform.position, aux_RespawnPos));
@@ -201,5 +221,15 @@ public class Player : MonoBehaviour {
     public Vector3 GetAuxRespawnPos()
     {
         return aux_RespawnPos;
+    }
+
+    public string GetUserName()
+    {
+        return user_name;
+    }
+
+    public float GetSoundLevel()
+    {
+        return soundLevel;
     }
 }

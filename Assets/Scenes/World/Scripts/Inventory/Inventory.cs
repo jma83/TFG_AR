@@ -7,7 +7,7 @@ public class Inventory : Singleton <Inventory> {
     private List<Item> items = new List<Item>();
     private List<Equipment> equipment = new List<Equipment>();
     private Equipment e_selected;
-    private int space = 26;
+    private int space = 27;
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -17,11 +17,25 @@ public class Inventory : Singleton <Inventory> {
     public bool info = false;
     public int id_info = 0;
 
+    private AudioSource audioSource;
+    private AudioClip selectEquip;
+    private AudioClip useObj;
+    private AudioClip addObj;
 
-    public bool AddItem(Item item)
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        selectEquip = Resources.Load<AudioClip>("Audio/NewAudio/select equipment");
+        useObj = Resources.Load<AudioClip>("Audio/NewAudio/select equipment2");
+        addObj = Resources.Load<AudioClip>("Audio/NewAudio/pickObj");
+    }
+
+    public bool AddItem(Item item, bool b = false)
     {
         if (space > items.Count)
         {
+            if (b)
+                audioSource.PlayOneShot(addObj);
 
             items.Add(item); 
             modified = true;
@@ -39,10 +53,13 @@ public class Inventory : Singleton <Inventory> {
         }
         return false;
     }
-    public bool AddEquipment(Equipment equip)
+    public bool AddEquipment(Equipment equip,bool b = false)
     {
         if (space > equipment.Count)
         {
+            if (b)
+                audioSource.PlayOneShot(addObj);
+
             equipment.Add(equip);
             modified = true;
 
@@ -90,7 +107,7 @@ public class Inventory : Singleton <Inventory> {
                 Debug.Log("Inventory = onEquipChangedCallback");
                 onEquipChangedCallback.Invoke();
             }
-
+            audioSource.PlayOneShot(selectEquip);
             return true;
         }
 

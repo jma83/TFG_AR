@@ -135,8 +135,10 @@ public class WindowAlert : Singleton<WindowAlert>
             alert.SetActive(false);             //disable alert and window alert
             
         }
-        
 
-        
+        if (alert.activeSelf==true) alert.SetActive(false);
+
+
+
     }
 }

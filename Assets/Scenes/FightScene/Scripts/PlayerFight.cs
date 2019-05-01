@@ -15,6 +15,13 @@ public class PlayerFight : FightEntity
     private bool hit;
     private bool badVisibility;
 
+    private AudioSource audioSource;
+    private AudioSource audioSource2;
+    private AudioClip damageSound;
+    private AudioClip shieldSound;
+    private AudioClip shieldHitSound;
+    private AudioClip visibleSound;
+    private AudioClip shieldActiveSound;
 
     // Use this for initialization
     public void Start () {
@@ -25,9 +32,16 @@ public class PlayerFight : FightEntity
         ply = GameManager.Instance.CurrentPlayer;
         hit = false;
         AI = false;
+        audioSource = GetComponents<AudioSource>()[1];
+        audioSource2 = GetComponents<AudioSource>()[2];
+        damageSound = Resources.Load<AudioClip>("Audio/NewAudio/explosion_02");
+        visibleSound = Resources.Load<AudioClip>("Audio/NewAudio/enemy-ability");
+        shieldSound = Resources.Load<AudioClip>("Audio/NewAudio/activate-shield");
+        shieldActiveSound = Resources.Load<AudioClip>("Audio/NewAudio/loop_ambient_01");
+        shieldHitSound = Resources.Load<AudioClip>("Audio/NewAudio/shield-hit");
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 
     public override void DealDamage(int d)
     {
@@ -35,7 +49,13 @@ public class PlayerFight : FightEntity
         if (!defend) { 
             ply.substractHp(d);
             hp = ply.Hp;
+            audioSource2.PlayOneShot(damageSound);
         }
+        else
+        {
+            audioSource.PlayOneShot(shieldHitSound);
+        }
+        
         //hud transition
         SetHit(true);
 
@@ -43,6 +63,16 @@ public class PlayerFight : FightEntity
 
     public override void SetDefend(bool b)
     {
+        if (b)
+        {
+            audioSource.PlayOneShot(shieldSound);
+            audioSource2.clip = shieldActiveSound;
+            audioSource2.Play();
+        }
+        else
+        {
+            audioSource2.Stop();
+        }
         defend = b;
     }
 
@@ -54,7 +84,11 @@ public class PlayerFight : FightEntity
     public void SetBadVisibility(bool b)
     {
         if (!defend)
-        badVisibility = b;
+        {
+            badVisibility = b;
+            audioSource.PlayOneShot(visibleSound);
+
+        }
     }
 
     public bool GetBadVisibility()

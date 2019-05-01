@@ -81,12 +81,12 @@ public class ItemPickup : MapEntity {
         if (item != null)
         {
             item.SetRand();
-            return Inventory.Instance.AddItem(item);
+            return Inventory.Instance.AddItem(item,true);
         }
         else if (equip != null)
         {
             equip.SetRandomStats();
-            return Inventory.Instance.AddEquipment(equip);
+            return Inventory.Instance.AddEquipment(equip,true);
         }
         
 

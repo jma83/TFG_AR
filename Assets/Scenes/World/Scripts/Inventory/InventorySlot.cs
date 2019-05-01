@@ -119,10 +119,7 @@ public class InventorySlot : MonoBehaviour {
     {
         if (item != null && deleteIcon.enabled==false && infoIcon.enabled == false)
         {
-            item.Use();
-            if (item != null) 
-            if (item.GetActive())
-            inv.RemoveItem(item);
+            WindowAlert.Instance.CreateSelectWindow("Confirm using this item?", true, this.UseItem2); 
         }else if (equipment != null && deleteIcon.enabled == false && infoIcon.enabled == false)
         {
             //equipment.Activate();
@@ -130,6 +127,14 @@ public class InventorySlot : MonoBehaviour {
             inv.SelectEquipment(equipment);
 
         }
+    }
+
+    public void UseItem2()
+    {
+        if (item != null)
+            item.Use();
+            if (item.GetActive() && item != null)
+                Inventory.Instance.RemoveItem(item);
     }
 
     public void EquipmentSelectedColor(bool b)
@@ -162,14 +167,19 @@ public class InventorySlot : MonoBehaviour {
 
     public void OnRemoveButton(Inventory inv)
     {
+        WindowAlert.Instance.CreateSelectWindow("Confirm removing this object?", true, this.OnRemoveButton2); 
+    }
+
+    public void OnRemoveButton2()
+    {
         HideDeleteButton();
         //ClearSlot();       
-        if (item!=null)
-            inv.RemoveItem(item);
+        if (item != null)
+            Inventory.Instance.RemoveItem(item);
 
         if (equipment != null)
         {
-            inv.RemoveEquip(equipment);
+            Inventory.Instance.RemoveEquip(equipment);
             equipment.DeleteObject();
         }
     }

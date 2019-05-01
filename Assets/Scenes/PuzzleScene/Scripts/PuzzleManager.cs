@@ -12,6 +12,9 @@ public class PuzzleManager : Singleton<PuzzleManager> {
     private int random_equip;
     private bool AR;
     Equipment eq;
+    private AudioSource audioSource;
+    private AudioClip loseSound;
+    private AudioClip winSound;
 
 
     // Use this for initialization
@@ -22,7 +25,12 @@ public class PuzzleManager : Singleton<PuzzleManager> {
         mapNumber = Random.Range(0, 2);
         random_equip = Random.Range(0,10);
         flag = false;
+
         eq = gameObject.GetComponent<Equipment>();
+        audioSource = GetComponent<AudioSource>();
+        loseSound = Resources.Load<AudioClip>("Audio/NewAudio/lose");
+        winSound = Resources.Load<AudioClip>("Audio/NewAudio/win");
+
         eq.SetRandomStats();
         AR = true;
     }
@@ -81,6 +89,7 @@ public class PuzzleManager : Singleton<PuzzleManager> {
 
     public void Winner2()
     {
+        audioSource.PlayOneShot(winSound);
         GameManager.Instance.CurrentPlayer.substractHp(5);
         if (random_equip <= 2)
             WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp + " XP AND A NEW EQUIPMENT! BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
@@ -93,6 +102,7 @@ public class PuzzleManager : Singleton<PuzzleManager> {
     public void GameOver()
     {
         flag = true;
+        audioSource.PlayOneShot(loseSound);
         GameManager.Instance.CurrentPlayer.substractHp(10);
         WindowAlert.Instance.CreateConfirmWindow("YOU LOSE! TIME IS OVER! YOU LOST 10% OF YOUR ENERGY, press OK to return the map.", true, null, PuzzleSceneManager.Instance.ChangeScene);
 

@@ -15,16 +15,12 @@ public class Droid : MapEntity {
 
     private AudioSource audioSource;
 
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        Assert.IsNotNull(audioSource);
-        Assert.IsNotNull(enemySound);
 
-    }
     private void Start()
     {
-        //DontDestroyOnLoad(this);
+        audioSource = GetComponent<AudioSource>();
+
+        enemySound = Resources.Load<AudioClip>("Audio/NewAudio/start_battle2");
     }
 
     public float SpawnRate
@@ -66,7 +62,7 @@ public class Droid : MapEntity {
                 }
                 else
                 {
-                    WindowAlert.Instance.CreateInfoWindow("Necesitas energia para luchar contra este Enemigo", true);
+                    WindowAlert.Instance.CreateConfirmWindow("Necesitas energia para luchar contra este Enemigo", true);
                 }
             }
         }

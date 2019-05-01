@@ -17,6 +17,8 @@ public class InventoryUI : MonoBehaviour
     private int checkSwitch;
     private bool checkSwitchDelete;
     private bool checkSwitchInfo;
+    
+
 
     public void Start()
     {

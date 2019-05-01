@@ -15,13 +15,12 @@ public class EnemyBehaviour : MonoBehaviour {
     protected bool checkLimit;
     protected bool checkCounter = false;
     protected float speed;
-    
+
 
     public void Start()
     {
         efm = EnemyFightManager.Instance;
         ef = gameObject.GetComponent<EnemyFight>();
-       
         SetTimerOK();
         StartStats();
     }
@@ -34,7 +33,6 @@ public class EnemyBehaviour : MonoBehaviour {
         timer = 0;
         activeBoost = false;
         checkLimit = false;
-
     }
 
     public void Update()
@@ -167,9 +165,13 @@ public class EnemyBehaviour : MonoBehaviour {
         int i = Random.Range(0, 2);
 
         if (i == 0)
+        {
             activeBoost = true;     // ActivateBoost
+        }
         else
+        {
             ef.Defend();    // ActivateShield
+        }
 
         Task.current.Succeed();
     }

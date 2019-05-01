@@ -48,7 +48,7 @@ public class BulletCollisionManager : MonoBehaviour
                 {
                     if (fe.GetHP() <= 0)
                     {
-                        Destroy(col.gameObject);
+                        Destroy(col.gameObject,0.5f);
                         EnemyFight ef = (EnemyFight)fe;
                         EnemyFightManager.Instance.AddTotalXP(ef.GetXP());
                         EnemyFightManager.Instance.CheckWin();

@@ -19,6 +19,9 @@ public class Options : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        if (soundSlider.value != GameManager.Instance.CurrentPlayer.GetSoundLevel() && GameManager.Instance.CurrentPlayer.GetSoundLevel() >= 0)
+            SetPlayerVolume(GameManager.Instance.CurrentPlayer.GetSoundLevel());
+
         soundLevel.text = soundSlider.value.ToString();
     }
 	
@@ -34,9 +37,20 @@ public class Options : MonoBehaviour {
 
         for (int i = 0; i < audio.Length; i++)
         {
-            audio[i].volume = soundSlider.value/100;
+            audio[i].volume = soundSlider.value / 100;
         }
     }
+
+    public void SavePlayerVolume()
+    {
+        GameManager.Instance.CurrentPlayer.SetSoundLevel(soundSlider.value);
+    }
+
+    public void SetPlayerVolume(float f)
+    {
+        soundSlider.value = f;
+    }
+
     public void ChangeSection(int i)
     {
         if (i == 1)

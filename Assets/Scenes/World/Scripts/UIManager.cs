@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
     [SerializeField] private Text hpText;
+    [SerializeField] private Text user_name;
     [SerializeField] private Image currentHPBar;
     [SerializeField] private Image XPBar;
     [SerializeField] private Text xpText;
@@ -20,12 +21,18 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject slotContainer;
     [SerializeField] private GameObject itemDetail;
     [SerializeField] private GameObject options;
+    [SerializeField] private GameObject profile;
     [SerializeField] private Toggle toggle;
     [SerializeField] private Toggle armas;
     [SerializeField] private Toggle objetos;
+
+    [SerializeField] GameObject healthBar;
+    [SerializeField] GameObject level;
+    [SerializeField] GameObject profileButton;
     private InventoryUI InvUI;
     private Inventory Inv;
     private ItemDetail itemDt;
+    private Player ply;
 
     //private int switchInventory = 0;
     private AudioSource audioSource;
@@ -40,10 +47,11 @@ public class UIManager : MonoBehaviour {
         InvUI.Start();
         inventory.SetActive(false);
         itemDetail.SetActive(true);
+        ply = GameManager.Instance.CurrentPlayer;
 
         itemDt = itemDetail.GetComponent<ItemDetail>();
         itemDetail.SetActive(false);
-
+        user_name.text = ply.GetUserName();
 
     }
 
@@ -64,19 +72,20 @@ public class UIManager : MonoBehaviour {
         updateHP();
         if (Inv.modified == true && InvUI!=null) InvUI.UpdateUI();
         if (Inv.info) toggleItemDetail(Inv.id_info);
+        if (user_name.text != ply.GetUserName()) user_name.text = ply.GetUserName();
     }
 
     public void updateLevel() {
-        if (GameManager.Instance.CurrentPlayer!=null && levelText!=null)
-        levelText.text = GameManager.Instance.CurrentPlayer.Lvl.ToString();
+        if (ply!=null && levelText!=null)
+        levelText.text = ply.Lvl.ToString();
     }
 
     public void updateXP()
     {
-        if (GameManager.Instance.CurrentPlayer != null && xpText != null)
+        if (ply != null && xpText != null)
         {
-            xpText.text = GameManager.Instance.CurrentPlayer.Xp + " / " + GameManager.Instance.CurrentPlayer.RequiredXp;
-            float xp_percent = GameManager.Instance.CurrentPlayer.Xp * 100 / GameManager.Instance.CurrentPlayer.RequiredXp;
+            xpText.text = ply.Xp + " / " + ply.RequiredXp;
+            float xp_percent = ply.Xp * 100 / ply.RequiredXp;
             xp_percent = xp_percent / 100;
             XPBar.transform.localScale = new Vector3(xp_percent, 0.7f, 1);
 
@@ -85,9 +94,9 @@ public class UIManager : MonoBehaviour {
     }
     public void updateHP()
     {
-        if (GameManager.Instance.CurrentPlayer != null && hpText != null && currentHPBar != null)
+        if (ply != null && hpText != null && currentHPBar != null)
         {
-            float hp_value = GameManager.Instance.CurrentPlayer.Hp;
+            float hp_value = ply.Hp;
             float f = hp_value / 100;
             hpText.text = "HP: " + hp_value.ToString() + "%";
             currentHPBar.transform.localScale = new Vector3(f, 1, 1);
@@ -166,10 +175,38 @@ public class UIManager : MonoBehaviour {
 
     }
 
+    public void toggleHowToPlayOptions()
+    {
+        options.SetActive(!options.activeSelf);
+        options.GetComponent<Options>().ChangeSection(2);
+    }
+
     public void toggleOptions()
     {
         audioSource.PlayOneShot(menuButtonSound);
         options.SetActive(!options.activeSelf);
+    }
+
+    public void toggleProfile()
+    {
+        audioSource.PlayOneShot(menuButtonSound);
+        if (!profile.activeSelf)
+        {
+
+            healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(155, -109.9f);
+            level.GetComponent<RectTransform>().anchoredPosition = new Vector3(181.2f, 491f);
+            profileButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(78.00001f, 504.4001f);
+
+        }
+        else
+        {
+            healthBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(103, -34);
+            level.GetComponent<RectTransform>().anchoredPosition = new Vector2(143.8f, 35.9f);
+            profileButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(40.6f, 49.3f);
+        }
+        
+
+        profile.SetActive(!profile.activeSelf);
     }
 
     public void toggleExitWindow()
@@ -180,7 +217,7 @@ public class UIManager : MonoBehaviour {
 
     public void toggleCapture()
     {
-        GameManager.Instance.CurrentPlayer.captureRangeObj.SetEntitiesCaptureRange(!toggle.isOn);
+        ply.captureRangeObj.SetEntitiesCaptureRange(!toggle.isOn);
 
     }
 

@@ -12,6 +12,7 @@ public class DroidFactory : Singleton<DroidFactory> {
     [SerializeField] private float minRange = 5.0f;
     [SerializeField] private float maxRange = 50.0f;
     private bool gameStarted = false;
+    private float fixed_time = 0f;
 
     private List<Droid> liveDroids = new List<Droid>();
     private Droid selectedDroid;
@@ -28,6 +29,15 @@ public class DroidFactory : Singleton<DroidFactory> {
     private void Awake () {
         Assert.IsNotNull(availableDroids);
         Assert.IsNotNull(player);
+    }
+
+    private void Update()
+    {
+        if (Time.realtimeSinceStartup > (120f + fixed_time) && FindObjectsOfType<Droid>().Length <= 0)
+        {
+            fixed_time = Time.realtimeSinceStartup;
+            ResetDroids();
+        }
     }
 
     public void SelectDroid(Droid d)

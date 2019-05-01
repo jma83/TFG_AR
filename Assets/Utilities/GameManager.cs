@@ -129,6 +129,8 @@ public class GameManager : Singleton<GameManager>
             dataPly.pos[1] = currentPlayer.GetAuxRespawnPos().y;
             dataPly.pos[2] = currentPlayer.GetAuxRespawnPos().z;
 
+            dataPly.volume = currentPlayer.GetSoundLevel();
+            dataPly.user_name = currentPlayer.GetUserName();
             dataPly.lastGameDate = System.DateTime.Now.ToString();
 
             
@@ -310,6 +312,12 @@ public class GameManager : Singleton<GameManager>
                 currentPlayer.MaxHp = dataPly.maxHp;
                 currentPlayer.CaptureRange = dataPly.captureRange;
                 currentPlayer.Xp_Multiplier = dataPly.xp_multiplier;
+                currentPlayer.SetSoundLevel(dataPly.volume,true);
+                if (dataPly.user_name!=null)
+                    currentPlayer.SetUserName(dataPly.user_name);
+                else
+                    FindObjectOfType<WelcomeScript>().ToggleWindowGroup();
+
                 Vector3 v3 = new Vector3(dataPly.pos[0], dataPly.pos[1], dataPly.pos[2]);
                 currentPlayer.SetAuxRespawnPos(v3);
 
@@ -479,6 +487,10 @@ public class GameManager : Singleton<GameManager>
             }
 
 
+        }
+        else
+        {
+            FindObjectOfType<WelcomeScript>().ToggleWindowGroup();
         }
 
         playerFight = FindObjectOfType<PlayerFight>();
@@ -702,6 +714,8 @@ class PlayerData
     public int maxHp;
     public float captureRange;
     public int xp_multiplier;
+    public string user_name;
+    public float volume;
     public float[] pos;
 
     public float[] droidPosX;

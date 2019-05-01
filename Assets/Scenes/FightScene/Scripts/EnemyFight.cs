@@ -21,7 +21,15 @@ public class EnemyFight : FightEntity
     private int xp;
     private bool return_flag;
     Vector3 v;
+    private bool checkBoost=false;
 
+    private AudioSource audioSource;
+    private AudioClip audioTurbo;
+    private AudioClip audioAbility;
+    private AudioClip audioEnemy;
+    private AudioClip audioDefeated;
+    private AudioClip audioHit;
+    private AudioClip audioStrongLaser;
 
 
     // Use this for initialization
@@ -58,17 +66,32 @@ public class EnemyFight : FightEntity
         checkAttacked = false;
         state = new StateAI();
         AI = true;
+
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioAbility = Resources.Load<AudioClip>("Audio/NewAudio/enemy-ability");
+        audioEnemy = Resources.Load<AudioClip>("Audio/NewAudio/enemy-sound");
+        audioDefeated = Resources.Load<AudioClip>("Audio/NewAudio/enemy-defeated");
+        audioHit = Resources.Load<AudioClip>("Audio/NewAudio/hit");
+        audioTurbo = Resources.Load<AudioClip>("Audio/NewAudio/dash");
+        audioStrongLaser = Resources.Load<AudioClip>("Audio/NewAudio/strong_laser");
+
     }
 
 
     public bool UpdateBodyAttack()
     {
+        if (!checkBoost)
+        {
+            audioSource.PlayOneShot(audioTurbo);
+            checkBoost = true;
+        }
         v = new Vector3(0, Random.Range(-1f, 5f), 0);
         transform.position = Vector3.Lerp(this.gameObject.transform.position, v, Time.deltaTime);
         if (Vector3.Distance(gameObject.transform.position, Vector3.zero) < 1.7)
         {
             // activeBodyAttack = false;
             gameObject.transform.rotation = Quaternion.Euler(0, (gameObject.transform.rotation.eulerAngles.y), 0);
+            checkBoost = false;
             return false;
         }
 
@@ -78,6 +101,7 @@ public class EnemyFight : FightEntity
 
     public void HeavyAttack()
     {
+        audioSource.PlayOneShot(audioStrongLaser);
         weapon.SetHeavyStrike(true);
         Attack();
         weapon.SetHeavyStrike(false);
@@ -85,7 +109,7 @@ public class EnemyFight : FightEntity
 
     public void Heal(int h)
     {
-        hp += h;
+        addHP(h);
     }
 
     public int getNumEnemies()
@@ -105,6 +129,10 @@ public class EnemyFight : FightEntity
             substractHP(d);
             SetAttacked(true);
         }
+        else
+        {
+            audioSource.PlayOneShot(audioAbility);
+        }
     }
     public void addHP(int i)
     {
@@ -117,6 +145,8 @@ public class EnemyFight : FightEntity
             if (i > 0)
                 hp += i;
         }
+
+        audioSource.PlayOneShot(audioEnemy);
     }
 
     public void substractHP(int i)
@@ -130,6 +160,9 @@ public class EnemyFight : FightEntity
             if (i > 0)
                 hp -= i;
         }
+
+        if (hp==0) audioSource.PlayOneShot(audioDefeated);
+        else audioSource.PlayOneShot(audioHit);
     }
 
     /*IEnumerator Move()
@@ -160,10 +193,14 @@ public class EnemyFight : FightEntity
     {
         defend = b;
         capsule.SetActive(b);
+        if (b)
+        audioSource.PlayOneShot(audioEnemy);
     }
 
     public void HideEnemy(bool b)
     {
+        if (b)
+        audioSource.PlayOneShot(audioEnemy);
         if (type == 1)
         {
             if (b)

@@ -45,7 +45,7 @@ public class Weapon : MonoBehaviour
             durability = -1;
 
 
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.GetComponents<AudioSource>()[0];
         audioSource.playOnAwake = false;
         audioSource.clip = Resources.Load("FightScene/laser") as AudioClip;
         owner = gameObject.tag;
@@ -160,7 +160,6 @@ public class Weapon : MonoBehaviour
     }
     public void Shoot(Vector3 force)
     {
-        audioSource = this.GetComponent<AudioSource>();
         audioSource.Play();
         rb.AddForce(force * (speed * 60));
 

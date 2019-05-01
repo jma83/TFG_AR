@@ -12,9 +12,16 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private int total_xp;
     private bool gameOver;
     private bool gameWin;
+    private AudioSource audioSource;
+    private AudioClip winSound;
+    private AudioClip loseSound;
 
     // Use this for initialization
-    void Start () {   
+    void Start () {
+        audioSource = GetComponent<AudioSource>();
+        loseSound = Resources.Load<AudioClip>("Audio/NewAudio/lose");
+        winSound = Resources.Load<AudioClip>("Audio/NewAudio/win");
+
         enemyOrderList = new List<EnemyFight>();
         cont = 1;
         UpdateOrderList();
@@ -136,6 +143,7 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private void Winner()
     {
         gameWin = true;
+        audioSource.PlayOneShot(winSound);
         int lvl = GameManager.Instance.CurrentPlayer.Lvl;
         GameManager.Instance.CurrentPlayer.AddXp(total_xp);
         if (lvl != GameManager.Instance.CurrentPlayer.Lvl)
@@ -166,6 +174,8 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
         if (gameOver == false)
         {
             gameOver = true;
+            audioSource.PlayOneShot(loseSound);
+
             enemies = GameObject.FindGameObjectsWithTag("enemy");
             GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().DecreaseWeaponDurability(7);
             WindowAlert window = WindowAlert.Instance;
