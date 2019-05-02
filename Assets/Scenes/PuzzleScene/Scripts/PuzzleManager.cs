@@ -78,11 +78,22 @@ public class PuzzleManager : Singleton<PuzzleManager> {
             if (lvl != GameManager.Instance.CurrentPlayer.Lvl)
             {
                 lvl = GameManager.Instance.CurrentPlayer.Lvl;
-                WindowAlert.Instance.CreateConfirmWindow("LEVEEEEEL UP!\n Nivel " + lvl, true, PuzzleManager.Instance.Winner2);
+                WindowAlert.Instance.SetNextWindow();
+                WindowAlert.Instance.SetWeaponInfo(Resources.Load<Sprite>(eq.GetEquipmentQualityRoute()), eq.GetTotalPower());
+                WindowAlert.Instance.CreateConfirmWindow("LEVEL UP! LEVEL: " + lvl + "\n You earn a new equipment!", true, PuzzleManager.Instance.Winner2);
             }
             else
             {
-                Winner2();
+                if (random_equip <= 2)
+                {
+                    WindowAlert.Instance.SetNextWindow();
+                    WindowAlert.Instance.SetWeaponInfo(Resources.Load<Sprite>(eq.GetEquipmentQualityRoute()), eq.GetTotalPower());
+                    WindowAlert.Instance.CreateConfirmWindow("You earn a new equipment!", true, PuzzleManager.Instance.Winner2);
+                }
+                else
+                {
+                    Winner2();
+                }
             }
         }
     }
@@ -92,9 +103,9 @@ public class PuzzleManager : Singleton<PuzzleManager> {
         audioSource.PlayOneShot(winSound);
         GameManager.Instance.CurrentPlayer.substractHp(5);
         if (random_equip <= 2)
-            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp + " XP AND A NEW EQUIPMENT! BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
+            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp*GameManager.Instance.CurrentPlayer.Xp_Multiplier + " XP AND A NEW EQUIPMENT! BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
         else
-            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp + " XP. BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
+            WindowAlert.Instance.CreateConfirmWindow("YOU WIN! YOU EARNED:" + xp* GameManager.Instance.CurrentPlayer.Xp_Multiplier + " XP. BUT, YOU LOST 5% OF YOUR ENERGY!, press OK to return the map.", false, null, PuzzleSceneManager.Instance.ChangeScene);
         WindowAlert.Instance.SetActiveAlert();
 
     }

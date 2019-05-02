@@ -101,7 +101,7 @@ public class Player : MonoBehaviour {
     public void SetSoundLevel(float f,bool b=false)
     {
         soundLevel = f;
-        if (b)
+        if (b && soundLevel >= 0)
         {
             AudioSource[] audio = FindObjectsOfType<AudioSource>();
 
@@ -145,8 +145,17 @@ public class Player : MonoBehaviour {
         requiredXp = levelBase * lvl;
         
         Debug.Log("InitLevelData XP: " + xp);
-        if (lvl != 1 && add)
-            WindowAlert.Instance.CreateInfoWindow("SUBES DE NIVEL!\n Nivel " + lvl,true);
+        if (lvl != 1 && add && FindObjectOfType<ItemsManager>()!=null)
+        {
+            GameObject gmObject = Instantiate(Resources.Load(ItemsManager.Instance.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
+            Equipment eq = gmObject.GetComponent<Equipment>();
+            eq.SetRandomStats();
+            eq.SetDurability(50);
+            Inventory.Instance.AddEquipment(eq);
+            eq.DisableComponents();
+            WindowAlert.Instance.SetWeaponInfo(Resources.Load<Sprite>(eq.GetEquipmentQualityRoute()), eq.GetTotalPower());
+            WindowAlert.Instance.CreateInfoWindow("LEVEL UP! LEVEL: " + lvl + "\n You earn a new equipment!", true);
+        }
     }
     public void addHp(int diff)
     {

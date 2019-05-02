@@ -35,6 +35,22 @@ public class ProfileDetail : MonoBehaviour {
 
 
         user_name.text = GameManager.Instance.CurrentPlayer.GetUserName();
+        int level = GameManager.Instance.CurrentPlayer.Lvl;
+        if (level % 5 != 0) {
+            int aux = 1;
+            int aux2 = 5;
+            while (level > aux2)
+            {
+                aux2 = aux * 5;
+                aux++;
+            }
+
+            boss_probability.text = "Boss probability: 8% (reach level " + aux2 + " for more).";
+        }
+        else
+        {
+            boss_probability.text = "Boss probability: 48% (max)";
+        }
         //boss_probability
     }
 }

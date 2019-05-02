@@ -78,11 +78,17 @@ public class DroidFactory : Singleton<DroidFactory> {
                 index = 0;
             }else if (index < (fixedsize - (fixedsize / 2)) && index >= (fixedsize - (fixedsize-1)))
             {
-                index = 1;
+                if (GameManager.Instance.CurrentPlayer.Lvl % 5 != 0)
+                    index = 1;
+                else
+                    index = 2;                   
             }
             else if (index == 0)
             {
-                index = 2;
+                if (GameManager.Instance.CurrentPlayer.Lvl % 5 != 0)
+                    index = 2;
+                else
+                    index = 1;
             }
         }
 

@@ -15,13 +15,18 @@ public class WindowAlert : Singleton<WindowAlert>
     [SerializeField] Button bt1;
     [SerializeField] Button bt2;
     [SerializeField] Button bt3;
-    public delegate void DelegateFunctionParam(GameObject gm=null,int j=0);
+    [SerializeField] Image weapon;
+    [SerializeField] Text weaponText;
+    public delegate void DelegateFunctionParam(GameObject gm = null, int j = 0);
     public delegate void DelegateFunction();
     public DelegateFunctionParam funcion_param;
     public DelegateFunction funcion;
+    public bool nextWindow = false;
     // Use this for initialization
     void Start()
     {
+        funcion = null;
+        funcion_param = null;
         windowOn = Resources.Load<AudioClip>("Audio/NewAudio/openwindow");
         confirmSound = Resources.Load<AudioClip>("Audio/NewAudio/confirm2");
         cancelSound = Resources.Load<AudioClip>("Audio/NewAudio/cancel");
@@ -45,11 +50,19 @@ public class WindowAlert : Singleton<WindowAlert>
         bt3.enabled = true;
         bt3.gameObject.SetActive(bt3.enabled);
 
-        infoText.text = infoText1;
+        if (weaponText.text == "")
+        {
+            infoText.text = infoText1;
+        }
+        else
+        {
+            infoText.text= weaponText.text;
+            weaponText.text = infoText1;
+        }
 
     }
 
-    public void CreateConfirmWindow(string confirmText, bool active, DelegateFunction f = null, DelegateFunctionParam f2 =null)
+    public void CreateConfirmWindow(string confirmText, bool active, DelegateFunction f = null, DelegateFunctionParam f2 = null)
     {
         audioSource.PlayOneShot(windowOn);
         alert.SetActive(active);
@@ -60,11 +73,18 @@ public class WindowAlert : Singleton<WindowAlert>
         bt3.enabled = true;
         bt3.gameObject.SetActive(bt3.enabled);
 
-        infoText.text = confirmText;
         funcion_param = f2;
         funcion = f;
 
-
+        if (weaponText.text == "")
+        {
+            infoText.text = confirmText;
+        }
+        else
+        {
+            infoText.text = weaponText.text;
+            weaponText.text = confirmText;
+        }
     }
 
     public void CreateSelectWindow(string confirmText, bool active, DelegateFunction f = null, DelegateFunctionParam f2 = null)
@@ -78,11 +98,18 @@ public class WindowAlert : Singleton<WindowAlert>
         bt2.enabled = true;
         bt2.gameObject.SetActive(bt2.enabled);
 
-        infoText.text = confirmText;
         funcion = f;
         funcion_param = f2;
 
-
+        if (weaponText.text == "")
+        {
+            infoText.text = confirmText;
+        }
+        else
+        {
+            infoText.text = weaponText.text;
+            weaponText.text = confirmText;
+        }
 
     }
 
@@ -90,6 +117,18 @@ public class WindowAlert : Singleton<WindowAlert>
     {
         funcion = f;
         funcion_param = f2;
+    }
+
+    public void SetNextWindow()
+    {
+        nextWindow = true;
+    }
+
+    public void SetWeaponInfo(Sprite im,int power)
+    {
+        weaponText.text = "Power: " + power;
+        weapon.gameObject.SetActive(true);
+        weapon.sprite = im;
     }
 
     public DelegateFunctionParam GetDelegateFunctionParam()
@@ -127,18 +166,27 @@ public class WindowAlert : Singleton<WindowAlert>
         else if (funcion != null)
         {
             funcion();
+
         }
         else
-        {
-            funcion = null;
-            funcion_param = null;
+        {           
             alert.SetActive(false);             //disable alert and window alert
             
         }
 
-        if (alert.activeSelf==true) alert.SetActive(false);
+        if (alert.activeSelf == true && !nextWindow)
+        {
+            funcion = null;
+            funcion_param = null;
+            alert.SetActive(false);
+            weaponText.text = "";
 
+        }
+        if (nextWindow)
+        infoText.text = "";
 
+        weapon.gameObject.SetActive(false);
+        nextWindow = false;
 
     }
 }

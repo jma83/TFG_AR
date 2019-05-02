@@ -15,6 +15,7 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
     private AudioSource audioSource;
     private AudioClip winSound;
     private AudioClip loseSound;
+    private Equipment eq;
 
     // Use this for initialization
     void Start () {
@@ -27,6 +28,10 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
         UpdateOrderList();
         gameOver = false;
         gameWin = false;
+
+        eq = gameObject.GetComponent<Equipment>();
+        eq.SetRandomStats();
+        eq.SetDurability(50);
     }
 
     public void InstantiateEnemies(int type)
@@ -149,7 +154,10 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
         if (lvl != GameManager.Instance.CurrentPlayer.Lvl)
         {
             lvl = GameManager.Instance.CurrentPlayer.Lvl;
-            WindowAlert.Instance.CreateConfirmWindow("SUBES DE NIVEL!\n Nivel " + lvl, true, EnemyFightManager.Instance.Winner2);
+            GameManager.Instance.AddNewEquipment(eq);
+            WindowAlert.Instance.SetNextWindow();
+            WindowAlert.Instance.SetWeaponInfo(Resources.Load<Sprite>(eq.GetEquipmentQualityRoute()), eq.GetTotalPower());
+            WindowAlert.Instance.CreateConfirmWindow("LEVEL UP! LEVEL: " + lvl + "\n You earn a new equipment!", true, EnemyFightManager.Instance.Winner2);
 
         }
         else
@@ -164,7 +172,7 @@ public class EnemyFightManager : Singleton<EnemyFightManager> {
         GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().DecreaseWeaponDurability(7);
         //WindowAlert.Instance.SetActiveAlert(); ENEMIGOS DERROTADOS, pulsa OK para volver al mapa
         WindowAlert window = WindowAlert.Instance;
-        window.CreateConfirmWindow("BIEN HECHO! ENEMIGOS DERROTADOS, pulsa OK para volver al mapa" + System.Environment.NewLine + "XP: " + total_xp + " Weapon durability: " +
+        window.CreateConfirmWindow("GOOD JOB! ENEMIES DEFEATED!, press OK to return the map" + System.Environment.NewLine + "EARNED XP: " + total_xp* GameManager.Instance.CurrentPlayer.Xp_Multiplier + System.Environment.NewLine + "Weapon durability: " +
             GameManager.Instance.CurrentPlayer.gameObject.GetComponent<Weapon>().GetWeaponDurability(), false, null, FightSceneManager.Instance.ChangeScene); //HAS SIDO DERROTADO, pulsa OK para volver al mapa
         window.SetActiveAlert();
     }

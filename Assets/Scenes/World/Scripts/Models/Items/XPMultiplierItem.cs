@@ -14,7 +14,7 @@ public class XPMultiplierItem : Item {
         name = "XPMultiplierItem";
         icon = Resources.Load<Sprite>("Items/double_xp2");
 
-        defaultTime = 7;
+        defaultTime = 30;
         multiplier = 2;
         type = (ARGameConstants.TypeObj)3;
         description = "Item that allows to multiply experience earned by the player, in order to level up faster. \n\n" +
