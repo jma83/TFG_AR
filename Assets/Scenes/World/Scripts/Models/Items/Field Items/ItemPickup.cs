@@ -7,9 +7,10 @@ using UnityEngine.EventSystems;
 
 public class ItemPickup : MapEntity {
 
-    /*[SerializeField] */private Item item;
-    [SerializeField] ARGameConstants.TypeObj type;
-    [SerializeField] Equipment equip;
+    private Item item;
+    private Equipment equip;
+
+    [SerializeField] ARGameConstants.TypeObj type; 
     [SerializeField] bool insertInventory; 
 
     // Use this for initialization

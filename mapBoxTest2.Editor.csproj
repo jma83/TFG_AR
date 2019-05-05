@@ -581,6 +581,8 @@
     <None Include="Assets\Lib\Vuforia\Shaders\Text3D.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VideoBackground.shader" />
+    <None Include="Assets\Prefabs\BOXOPHOBIC\Skybox Cubemap Extended\Shaders\Skybox Cubemap Extended.shader" />
+    <None Include="Assets\Prefabs\Workplace Tools\README.txt" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
     <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyAdvancedTree.txt" />
     <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyBossTree.txt" />

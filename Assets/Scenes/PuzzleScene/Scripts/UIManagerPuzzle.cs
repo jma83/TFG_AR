@@ -88,6 +88,8 @@ public class UIManagerPuzzle : MonoBehaviour {
                     auxGO.GetComponent<MeshRenderer>().enabled = false;
                 if (auxGO.GetComponent<Collider>() != null)
                     auxGO.GetComponent<Collider>().enabled = false;
+                if (auxGO.GetComponent<SkinnedMeshRenderer>() != null)
+                    auxGO.GetComponent<SkinnedMeshRenderer>().enabled = false;
             }
 
             for (int i = 0; i < GameObject.FindGameObjectsWithTag("Finish").Length; i++)
@@ -128,6 +130,8 @@ public class UIManagerPuzzle : MonoBehaviour {
                     auxGO.GetComponent<MeshRenderer>().enabled = true;
                 if (auxGO.GetComponent<Collider>() != null)
                     auxGO.GetComponent<Collider>().enabled = true;
+                if (auxGO.GetComponent<SkinnedMeshRenderer>() != null)
+                    auxGO.GetComponent<SkinnedMeshRenderer>().enabled = true;
             }
 
             for (int i = 0; i < GameObject.FindGameObjectsWithTag("Finish").Length; i++)
@@ -150,6 +154,7 @@ public class UIManagerPuzzle : MonoBehaviour {
                     auxGO.GetComponent<Collider>().enabled = true;
             }
             GameObject.FindGameObjectWithTag("Player").GetComponent<SlidingSphere>().ResetPos();
+
         }
         PuzzleManager.Instance.SetAR(ARToggle.isOn);
     }

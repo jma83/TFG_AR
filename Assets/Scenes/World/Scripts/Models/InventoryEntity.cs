@@ -55,7 +55,16 @@ public class InventoryEntity : MonoBehaviour {
     public void DisableComponents()
     {
         gameObject.GetComponent<ItemPickup>().enabled = false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        if (gameObject.GetComponent<MeshRenderer>() != null)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponentsInChildren<MeshRenderer>()[0].enabled = false;
+            gameObject.GetComponentsInChildren<MeshRenderer>()[1].enabled = false;
+            gameObject.GetComponentsInChildren<MeshRenderer>()[2].enabled = false;
+        }
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 

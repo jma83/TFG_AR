@@ -1,0 +1,372 @@
+fileFormatVersion: 2
+guid: df2bedf411c2bf64fa8189e15a97dbc8
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: BezierCircle.000
+    100002: BezierCircle.001
+    100004: BezierCircle.002
+    100006: BezierCircle.003
+    100008: BezierCircle.004
+    100010: BezierCircle.005
+    100012: BezierCircle.006
+    100014: BezierCircle.007
+    100016: BezierCircle.008
+    100018: BezierCurve
+    100020: Box010
+    100022: Box010.001
+    100024: cabeza
+    100026: Cylinder
+    100028: Cylinder.001
+    100030: Cylinder.003
+    100032: Icosphere
+    100034: Icosphere.001
+    100036: Icosphere.002
+    100038: Icosphere.003
+    100040: Icosphere.004
+    100042: Icosphere.005
+    100044: Icosphere.006
+    100046: Icosphere.007
+    100048: Icosphere.008
+    100050: Icosphere.009
+    100052: Icosphere.010
+    100054: Icosphere.011
+    100056: Loft004
+    100058: //RootNode
+    100060: Sphere
+    100062: Sphere.000
+    100064: Sphere.001
+    100066: Sphere.002
+    100068: Sphere.003
+    100070: Sphere.004
+    100072: Sphere.005
+    100074: Sphere.006
+    100076: Sphere.007
+    100078: Sphere.008
+    100080: Sphere.009
+    100082: Sphere.010
+    100084: Sphere.011
+    100086: Sphere.012
+    100088: Sphere.013
+    100090: Sphere.014
+    100092: Sphere010
+    400000: BezierCircle.000
+    400002: BezierCircle.001
+    400004: BezierCircle.002
+    400006: BezierCircle.003
+    400008: BezierCircle.004
+    400010: BezierCircle.005
+    400012: BezierCircle.006
+    400014: BezierCircle.007
+    400016: BezierCircle.008
+    400018: BezierCurve
+    400020: Box010
+    400022: Box010.001
+    400024: cabeza
+    400026: Cylinder
+    400028: Cylinder.001
+    400030: Cylinder.003
+    400032: Icosphere
+    400034: Icosphere.001
+    400036: Icosphere.002
+    400038: Icosphere.003
+    400040: Icosphere.004
+    400042: Icosphere.005
+    400044: Icosphere.006
+    400046: Icosphere.007
+    400048: Icosphere.008
+    400050: Icosphere.009
+    400052: Icosphere.010
+    400054: Icosphere.011
+    400056: Loft004
+    400058: //RootNode
+    400060: Sphere
+    400062: Sphere.000
+    400064: Sphere.001
+    400066: Sphere.002
+    400068: Sphere.003
+    400070: Sphere.004
+    400072: Sphere.005
+    400074: Sphere.006
+    400076: Sphere.007
+    400078: Sphere.008
+    400080: Sphere.009
+    400082: Sphere.010
+    400084: Sphere.011
+    400086: Sphere.012
+    400088: Sphere.013
+    400090: Sphere.014
+    400092: Sphere010
+    2100000: No Name
+    2300000: BezierCircle.000
+    2300002: BezierCircle.001
+    2300004: BezierCircle.002
+    2300006: BezierCircle.003
+    2300008: BezierCircle.004
+    2300010: BezierCircle.005
+    2300012: BezierCircle.006
+    2300014: BezierCircle.007
+    2300016: BezierCircle.008
+    2300018: BezierCurve
+    2300020: Box010
+    2300022: Box010.001
+    2300024: cabeza
+    2300026: Cylinder
+    2300028: Cylinder.001
+    2300030: Cylinder.003
+    2300032: Icosphere
+    2300034: Icosphere.001
+    2300036: Icosphere.002
+    2300038: Icosphere.003
+    2300040: Icosphere.004
+    2300042: Icosphere.005
+    2300044: Icosphere.006
+    2300046: Icosphere.007
+    2300048: Icosphere.008
+    2300050: Icosphere.009
+    2300052: Icosphere.010
+    2300054: Icosphere.011
+    2300056: Loft004
+    2300058: Sphere
+    2300060: Sphere.000
+    2300062: Sphere.001
+    2300064: Sphere.002
+    2300066: Sphere.003
+    2300068: Sphere.004
+    2300070: Sphere.005
+    2300072: Sphere.006
+    2300074: Sphere.007
+    2300076: Sphere.008
+    2300078: Sphere.009
+    2300080: Sphere.010
+    2300082: Sphere.011
+    2300084: Sphere.012
+    2300086: Sphere.013
+    2300088: Sphere.014
+    2300090: Sphere010
+    3300000: BezierCircle.000
+    3300002: BezierCircle.001
+    3300004: BezierCircle.002
+    3300006: BezierCircle.003
+    3300008: BezierCircle.004
+    3300010: BezierCircle.005
+    3300012: BezierCircle.006
+    3300014: BezierCircle.007
+    3300016: BezierCircle.008
+    3300018: BezierCurve
+    3300020: Box010
+    3300022: Box010.001
+    3300024: cabeza
+    3300026: Cylinder
+    3300028: Cylinder.001
+    3300030: Cylinder.003
+    3300032: Icosphere
+    3300034: Icosphere.001
+    3300036: Icosphere.002
+    3300038: Icosphere.003
+    3300040: Icosphere.004
+    3300042: Icosphere.005
+    3300044: Icosphere.006
+    3300046: Icosphere.007
+    3300048: Icosphere.008
+    3300050: Icosphere.009
+    3300052: Icosphere.010
+    3300054: Icosphere.011
+    3300056: Loft004
+    3300058: Sphere
+    3300060: Sphere.000
+    3300062: Sphere.001
+    3300064: Sphere.002
+    3300066: Sphere.003
+    3300068: Sphere.004
+    3300070: Sphere.005
+    3300072: Sphere.006
+    3300074: Sphere.007
+    3300076: Sphere.008
+    3300078: Sphere.009
+    3300080: Sphere.010
+    3300082: Sphere.011
+    3300084: Sphere.012
+    3300086: Sphere.013
+    3300088: Sphere.014
+    3300090: Sphere010
+    4300000: Sphere.014
+    4300002: Sphere.012
+    4300004: Icosphere.008
+    4300006: Icosphere.011
+    4300008: Icosphere.010
+    4300010: Icosphere.009
+    4300012: Icosphere.007
+    4300014: Icosphere.006
+    4300016: Sphere.013
+    4300018: Sphere.011
+    4300020: Box010.001
+    4300022: Sphere.010
+    4300024: Sphere.009
+    4300026: Cylinder.003
+    4300028: Sphere.008
+    4300030: Sphere.006
+    4300032: Sphere.007
+    4300034: Icosphere.005
+    4300036: Icosphere.004
+    4300038: Icosphere.003
+    4300040: Icosphere.002
+    4300042: Icosphere.001
+    4300044: Icosphere
+    4300046: Sphere
+    4300048: Sphere.001
+    4300050: Sphere.005
+    4300052: Sphere.004
+    4300054: Sphere.000
+    4300056: Sphere.002
+    4300058: Sphere.003
+    4300060: Cylinder.001
+    4300062: Cylinder
+    4300064: BezierCircle.003
+    4300066: BezierCurve
+    4300068: BezierCircle.004
+    4300070: BezierCircle.005
+    4300072: BezierCircle.000
+    4300074: BezierCircle.008
+    4300076: BezierCircle.007
+    4300078: BezierCircle.006
+    4300080: BezierCircle.002
+    4300082: BezierCircle.001
+    4300084: Loft004
+    4300086: Sphere010
+    4300088: cabeza
+    4300090: Box010
+    7400000: Box010.001|Box010|Take 001|BaseLayer
+    7400002: Box010.001|Box010|Take 001|BaseLayer.001
+    7400004: Box010.001|Box010|Take 001|BaseLayer.002
+    7400006: Box010.001|Box010|Take 001|BaseLayer.003
+    7400008: Box010.001|cabeza|Take 001|BaseLayer
+    7400010: Box010.001|cabeza|Take 001|BaseLayer.001
+    7400012: Box010.001|cuerpo_inferior|Take 001|BaseLayer
+    7400014: Box010.001|cuerpo_inferior|Take 001|BaseLayer.001
+    7400016: Box010.001|CylinderAction
+    7400018: Box010.001|Sphere010|Take 001|BaseLayer
+    7400020: Loft004|Box010|Take 001|BaseLayer
+    7400022: Loft004|Box010|Take 001|BaseLayer.001
+    7400024: Loft004|Box010|Take 001|BaseLayer.002
+    7400026: Loft004|Box010|Take 001|BaseLayer.003
+    7400028: Loft004|cabeza|Take 001|BaseLayer
+    7400030: Loft004|cabeza|Take 001|BaseLayer.001
+    7400032: Loft004|cuerpo_inferior|Take 001|BaseLayer
+    7400034: Loft004|cuerpo_inferior|Take 001|BaseLayer.001
+    7400036: Loft004|CylinderAction
+    7400038: Loft004|Sphere010|Take 001|BaseLayer
+    7400040: Sphere010|Box010|Take 001|BaseLayer
+    7400042: Sphere010|Box010|Take 001|BaseLayer.001
+    7400044: Sphere010|Box010|Take 001|BaseLayer.002
+    7400046: Sphere010|Box010|Take 001|BaseLayer.003
+    7400048: Sphere010|cabeza|Take 001|BaseLayer
+    7400050: Sphere010|cabeza|Take 001|BaseLayer.001
+    7400052: Sphere010|cuerpo_inferior|Take 001|BaseLayer
+    7400054: Sphere010|cuerpo_inferior|Take 001|BaseLayer.001
+    7400056: Sphere010|CylinderAction
+    7400058: Sphere010|Sphere010|Take 001|BaseLayer
+    7400060: cabeza|Box010|Take 001|BaseLayer
+    7400062: cabeza|Box010|Take 001|BaseLayer.001
+    7400064: cabeza|Box010|Take 001|BaseLayer.002
+    7400066: cabeza|Box010|Take 001|BaseLayer.003
+    7400068: cabeza|cabeza|Take 001|BaseLayer
+    7400070: cabeza|cabeza|Take 001|BaseLayer.001
+    7400072: cabeza|cuerpo_inferior|Take 001|BaseLayer
+    7400074: cabeza|cuerpo_inferior|Take 001|BaseLayer.001
+    7400076: cabeza|CylinderAction
+    7400078: cabeza|Sphere010|Take 001|BaseLayer
+    7400080: Box010|Box010|Take 001|BaseLayer
+    7400082: Box010|Box010|Take 001|BaseLayer.001
+    7400084: Box010|Box010|Take 001|BaseLayer.002
+    7400086: Box010|Box010|Take 001|BaseLayer.003
+    7400088: Box010|cabeza|Take 001|BaseLayer
+    7400090: Box010|cabeza|Take 001|BaseLayer.001
+    7400092: Box010|cuerpo_inferior|Take 001|BaseLayer
+    7400094: Box010|cuerpo_inferior|Take 001|BaseLayer.001
+    7400096: Box010|CylinderAction
+    7400098: Box010|Sphere010|Take 001|BaseLayer
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

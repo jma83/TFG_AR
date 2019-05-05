@@ -895,7 +895,6 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
-    <Compile Include="Assets\ProfileDetail.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\cameraPlane.cs" />
@@ -938,15 +937,17 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Options.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\ProfileDetail.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\WelcomeScript.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
+    <Compile Include="Assets\StartPuzzle.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />
     <Compile Include="Assets\Utilities\SceneChangeManager.cs" />
     <Compile Include="Assets\Utilities\Singleton.cs" />
     <Compile Include="Assets\Utilities\WindowAlert.cs" />
-    <Compile Include="Assets\WelcomeScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\Vuforia\CylinderTargetTextures\VuforiaMars_Images\authoringinfo.xml" />
@@ -1008,6 +1009,8 @@
     <None Include="Assets\Lib\Vuforia\Shaders\Text3D.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\VideoBackground.shader" />
+    <None Include="Assets\Prefabs\BOXOPHOBIC\Skybox Cubemap Extended\Shaders\Skybox Cubemap Extended.shader" />
+    <None Include="Assets\Prefabs\Workplace Tools\README.txt" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
     <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyAdvancedTree.txt" />
     <None Include="Assets\Scenes\FightScene\Scripts\AI Scripts\EnemyBossTree.txt" />
