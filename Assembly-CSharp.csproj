@@ -61,8 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\cameraPlane.cs" />
-    <Compile Include="Assets\FinishPointCollider.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -618,6 +616,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
+    <Compile Include="Assets\Scenes\FightScene\Scripts\cameraPlane.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyAdvancedBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\EnemyBossBehaviour.cs" />
@@ -629,6 +628,8 @@
     <Compile Include="Assets\Scenes\FightScene\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\webCamScript.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\PuzzleSceneManager.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\FinishPointCollider.cs" />
+    <Compile Include="Assets\Scenes\PuzzleScene\Scripts\PuzzleLevelSelector.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\Scripts\PuzzleManager.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\Scripts\SlidingSphere.cs" />
     <Compile Include="Assets\Scenes\PuzzleScene\Scripts\UIManagerPuzzle.cs" />
@@ -649,13 +650,17 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\HealthItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Item.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ItemsManager.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\MoveAndRotate.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\XPMultiplierItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Options.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\ProfileDetail.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\WelcomeScript.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
+    <Compile Include="Assets\StartPuzzle.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />
@@ -665,7 +670,6 @@
     <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Patroller.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Unity\Location\ExampleGpsTraces\LocationProviderAndroidNative.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\ColoredLines.shader" />
-    <None Include="Assets\StreamingAssets\Vuforia\VuforiaMaze.xml" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\MobileOcclusion.shader" />
     <None Include="Assets\Lib\PandaBehaviour\Examples\01_Move\Assets\Move.BT.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\CameraDiffuse.shader" />
@@ -689,6 +693,7 @@
     <None Include="Assets\Lib\MapBoxSDK\MapBox\README.txt" />
     <None Include="Assets\Lib\Vuforia\Shaders\OutlineOpaque.shader" />
     <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Hunter.BT.txt" />
+    <None Include="Assets\Prefabs\Workplace Tools\README.txt" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Examples\Common\Shaders\MobileOcclusion.shader" />
     <None Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\AI.BT.lib.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Core\Plugins\Android\UniAndroidPermission\AndroidManifest-uniRP.xml" />
@@ -717,10 +722,12 @@
     <None Include="Assets\Lib\MapBoxSDK\MapboxAR\Examples\ARTabletop\Shaders\Clip_MapBoxStylesPerRenderer.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARKitPlugin\Plugins\iOS\UnityARKit\Shaders\YUVShader.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\BrightTexture.shader" />
+    <None Include="Assets\Prefabs\BOXOPHOBIC\Skybox Cubemap Extended\Shaders\Skybox Cubemap Extended.shader" />
     <None Include="Assets\Lib\Vuforia\Shaders\DepthContour.shader" />
     <None Include="Assets\Lib\MapBoxSDK\UnityARInterface\Examples\Common\Shaders\MobileARShadow.shader" />
     <None Include="Assets\Lib\PandaBehaviour\Examples\02_PlayTag\Assets\PlayTag.BT.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\link.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\VuforiaMaze.xml" />
     <None Include="Assets\Resources\Mapbox\MapboxConfiguration.txt" />
     <None Include="Assets\Lib\MapBoxSDK\MapBox\Core\Plugins\link.xml" />
     <None Include="Assets\Lib\PandaBehaviour\ChangeLog.txt" />
