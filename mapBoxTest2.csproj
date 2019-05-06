@@ -895,6 +895,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
+    <Compile Include="Assets\MapboxItemPosition.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\cameraPlane.cs" />
@@ -926,12 +927,12 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\BigHealthItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\DurabilityUP.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ExtendCaptureItem.cs" />
-    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Field Items\ItemPickup.cs" />
-    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Field Items\POI XP Bonus\XPBonus.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\HealthItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\Item.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ItemPickup.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\ItemsManager.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\MoveAndRotate.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\Models\Items\XPBonus.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Items\XPMultiplierItem.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\MapEntity.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\CaptureRange.cs" />

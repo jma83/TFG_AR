@@ -8,7 +8,7 @@ public class BigHealthItem : HealthItem {
 
     public override void Start()
     {
-        icon = Resources.Load<Sprite>("Items/big-potion");
+        icon = Resources.Load<Sprite>("Items/Icons/big-potion");
         //rand = Random.Range(40, 60);
         type = (ARGameConstants.TypeObj)1;
         description = "Item that can be used to restore a great amount of energy for your Character. \n\n" +

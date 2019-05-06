@@ -6,11 +6,8 @@ using UnityEngine.UI;
 
 public class ItemsManager : Singleton<ItemsManager>
 {
-    private String equipmentPrefab = "Equipment/Sword";
-    private String healthPrefab = "Items/ManaPot";
-    //private String bigHealtPrefab = "Items/LifePot";
-    private String extendCapturePrefab = "Items/Shield";
-    private String xpMultiplierPrefab = "Items/Key";
+    private String equipmentPrefab = "Equipment/Weapon";
+
 
     public List<Item> items;
     [SerializeField] GameObject activeObjects;
@@ -179,22 +176,7 @@ public class ItemsManager : Singleton<ItemsManager>
     public String GetEquipmentPrefab(){
         return equipmentPrefab;
     }
-    public String GetHealthPrefab()
-    {
-        return healthPrefab;
-    }
-    public String GetBigHealtPrefab()
-    {
-        return xpMultiplierPrefab;
-    }
-    public String GetXpMultiplierPrefab()
-    {
-        return extendCapturePrefab;
-    }
-    public String GetExtendCapturePrefab()
-    {
-        return extendCapturePrefab;
-    }
+ 
 
 }
 

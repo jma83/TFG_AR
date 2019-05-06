@@ -511,23 +511,23 @@ public class GameManager : Singleton<GameManager>
         switch (i)
         {
             case 0:
-                gmObject = Instantiate(Resources.Load("Items/ManaPot", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/potionHP", typeof(GameObject))) as GameObject;
                 item = gmObject.GetComponent<HealthItem>();
                 break;
             case 1:
-                gmObject = Instantiate(Resources.Load("Items/LifePot", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/bigPotionHP", typeof(GameObject))) as GameObject;
                 item = gmObject.GetComponent<BigHealthItem>();
                 break;
             case 2:
-                gmObject = Instantiate(Resources.Load("Items/Shield", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/CaptureRangeUP", typeof(GameObject))) as GameObject;
                 item = gmObject.GetComponent<ExtendCaptureItem>();
                 break;
             case 3:
-                gmObject = Instantiate(Resources.Load("Items/Key", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/Key", typeof(GameObject))) as GameObject;
                 item = gmObject.GetComponent<XPMultiplierItem>();
                 break;
             case 4:
-                gmObject = Instantiate(Resources.Load("Items/DurabilityUP", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/DurabilityUP", typeof(GameObject))) as GameObject;
                 item = gmObject.GetComponent<DurabilityUP>();
                 break;
         }
