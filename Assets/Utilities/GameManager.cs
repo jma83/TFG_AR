@@ -182,6 +182,9 @@ public class GameManager : Singleton<GameManager>
                 dataInv.itemRand = new int[dataInv.space];
                 dataInv.itemActive = new bool[dataInv.space];
                 dataInv.itemType = new int[dataInv.space];
+                dataInv.itemPosX = new float[dataInv.space];
+                dataInv.itemPosY = new float[dataInv.space];
+                dataInv.itemPosZ = new float[dataInv.space];
             }
 
             for (int i = 0; i < dataInv.itemsSize; i++)
@@ -190,6 +193,9 @@ public class GameManager : Singleton<GameManager>
                 dataInv.itemRand[i] = inv.getItems()[i].GetRand();
                 dataInv.itemActive[i] = inv.getItems()[i].GetActive();
                 dataInv.itemType[i] = inv.getItems()[i].GetItemType();
+                dataInv.itemPosX[i] = inv.getItems()[i].transform.localPosition.x;
+                dataInv.itemPosY[i] = inv.getItems()[i].transform.localPosition.y;
+                dataInv.itemPosZ[i] = inv.getItems()[i].transform.localPosition.z;
             }
 
 
@@ -205,6 +211,9 @@ public class GameManager : Singleton<GameManager>
                 dataInv.equipSpeed = new int[dataInv.space];
                 dataInv.equipDurability = new int[dataInv.space];
                 dataInv.equipActive = new bool[dataInv.space];
+                dataInv.equipPosX = new float[dataInv.space];
+                dataInv.equipPosY = new float[dataInv.space];
+                dataInv.equipPosZ = new float[dataInv.space];
             }
             for (int i = 0; i < dataInv.equipmentsSize; i++)
             {
@@ -216,6 +225,9 @@ public class GameManager : Singleton<GameManager>
                 dataInv.equipSpeed[i] = inv.getEquipments()[i].GetSpeed();
                 dataInv.equipDurability[i] = inv.getEquipments()[i].GetDurability();
                 dataInv.equipActive[i] = inv.getEquipments()[i].GetActive();
+                dataInv.equipPosX[i] = inv.getEquipments()[i].transform.localPosition.x;
+                dataInv.equipPosY[i] = inv.getEquipments()[i].transform.localPosition.y;
+                dataInv.equipPosZ[i] = inv.getEquipments()[i].transform.localPosition.z;
             }
 
             //Debug.Log("ID SAVE inv.GetCurrentEquipmentID(): " + inv.GetCurrentEquipmentID());
@@ -249,6 +261,9 @@ public class GameManager : Singleton<GameManager>
                 dataItemsManager.itemActive = new bool[dataItemsManager.maxSizeActive];
                 dataItemsManager.itemType = new int[dataItemsManager.maxSizeActive];
                 dataItemsManager.itemTargetTime = new float[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemPosX = new float[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemPosY = new float[dataItemsManager.maxSizeActive];
+                dataItemsManager.itemPosZ = new float[dataItemsManager.maxSizeActive];
             }
 
             for (int i = 0; i < dataItemsManager.itemSize; i++)
@@ -258,6 +273,9 @@ public class GameManager : Singleton<GameManager>
                 dataItemsManager.itemActive[i] = itemsManager.GetItems()[i].GetActive();
                 dataItemsManager.itemType[i] = itemsManager.GetItems()[i].GetItemType();
                 dataItemsManager.itemTargetTime[i] = itemsManager.GetItems()[i].GetTargetTime();
+                dataItemsManager.itemPosX[i] = itemsManager.GetItems()[i].transform.localPosition.x;
+                dataItemsManager.itemPosY[i] = itemsManager.GetItems()[i].transform.localPosition.y;
+                dataItemsManager.itemPosZ[i] = itemsManager.GetItems()[i].transform.localPosition.z;
 
                 //Debug.Log("ID save: " + dataItemsManager.itemIDs[i]);
                 //Debug.Log("Active save: " + dataItemsManager.itemActive[i]);
@@ -386,7 +404,7 @@ public class GameManager : Singleton<GameManager>
 
                     for (int i = 0; i < dataItemsManager.itemSize; i++)
                     {
-                        item = CreateItemByType(dataItemsManager.itemType[i]);
+                        item = CreateItemByType(dataItemsManager.itemType[i], new Vector3(dataItemsManager.itemPosX[i], dataItemsManager.itemPosY[i], dataItemsManager.itemPosZ[i]));
 
                         //crear instancia de los ITEMS ACTIVOS
                         item.SetID(dataItemsManager.itemIDs[i]);
@@ -436,7 +454,7 @@ public class GameManager : Singleton<GameManager>
                     for (int i = 0; i < dataInv.itemsSize; i++)
                     {
                         //crear objeto instancia de los ITEMs
-                        item = CreateItemByType(dataInv.itemType[i]);
+                        item = CreateItemByType(dataInv.itemType[i], new Vector3(dataInv.itemPosX[i], dataInv.itemPosY[i], dataInv.itemPosZ[i]));
 
                         item.SetID(dataInv.itemIDs[i]);
                         item.SetRandNum(dataInv.itemRand[i]);
@@ -453,7 +471,7 @@ public class GameManager : Singleton<GameManager>
                     for (int i = 0; i < dataInv.equipmentsSize; i++)
                     {
                         //crear instancia de equipamiento
-                        gmObject = Instantiate(Resources.Load(itemsManager.GetEquipmentPrefab(), typeof(GameObject))) as GameObject;
+                        gmObject = Instantiate(Resources.Load(itemsManager.GetEquipmentPrefab(), typeof(GameObject)),new Vector3(dataInv.equipPosX[i], dataInv.equipPosY[i], dataInv.equipPosZ[i]),new Quaternion()) as GameObject;
                         equip = gmObject.GetComponent<Equipment>();
 
                         equip.SetID(dataInv.equipIDs[i]);
@@ -503,7 +521,7 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    public Item CreateItemByType(int i)
+    public Item CreateItemByType(int i,Vector3 vec)
     {
         GameObject gmObject = null;
         Item item = null;
@@ -511,23 +529,23 @@ public class GameManager : Singleton<GameManager>
         switch (i)
         {
             case 0:
-                gmObject = Instantiate(Resources.Load("Items/Models/potionHP", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/potionHP", typeof(GameObject)), vec, new Quaternion()) as GameObject;
                 item = gmObject.GetComponent<HealthItem>();
                 break;
             case 1:
-                gmObject = Instantiate(Resources.Load("Items/Models/bigPotionHP", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/bigPotionHP", typeof(GameObject)), vec, new Quaternion()) as GameObject;
                 item = gmObject.GetComponent<BigHealthItem>();
                 break;
             case 2:
-                gmObject = Instantiate(Resources.Load("Items/Models/CaptureRangeUP", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/CaptureRangeUP", typeof(GameObject)), vec, new Quaternion()) as GameObject;
                 item = gmObject.GetComponent<ExtendCaptureItem>();
                 break;
             case 3:
-                gmObject = Instantiate(Resources.Load("Items/Models/Key", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/Key", typeof(GameObject)), vec, new Quaternion()) as GameObject;
                 item = gmObject.GetComponent<XPMultiplierItem>();
                 break;
             case 4:
-                gmObject = Instantiate(Resources.Load("Items/Models/DurabilityUP", typeof(GameObject))) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/DurabilityUP", typeof(GameObject)), vec, new Quaternion()) as GameObject;
                 item = gmObject.GetComponent<DurabilityUP>();
                 break;
         }
@@ -736,6 +754,9 @@ class InventoryData
     public int[] itemRand;
     public bool[] itemActive;
     public int[] itemType;
+    public float[] itemPosX;
+    public float[] itemPosY;
+    public float[] itemPosZ;
     public int itemsSize;
 
     public int[] equipIDs;
@@ -746,6 +767,9 @@ class InventoryData
     public int[] equipSpeed;
     public int[] equipDurability;
     public bool[] equipActive;
+    public float[] equipPosX;
+    public float[] equipPosY;
+    public float[] equipPosZ;
     public int equipmentsSize;
 
     public int id_e_selected;
@@ -763,5 +787,8 @@ class ItemsManagerData
     public bool[] itemActive;
     public int[] itemType;
     public float[] itemTargetTime;
+    public float[] itemPosX;
+    public float[] itemPosY;
+    public float[] itemPosZ;
     public int itemSize;
 }

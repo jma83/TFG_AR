@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XPBonus : ItemPickup {
 
-    private int bonus = 40;
+    private int bonus = 10;
     Renderer rend;
     MoveAndRotate m;
 

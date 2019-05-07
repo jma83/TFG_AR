@@ -19,6 +19,9 @@ public class ItemsManager : Singleton<ItemsManager>
 
     // Use this for initialization
     void Start () {
+
+        CheckActiveItems();
+
         if (maxSizeActive != 3)
         {
             items = new List<Item>();
@@ -29,6 +32,11 @@ public class ItemsManager : Singleton<ItemsManager>
         if (activeObjects == null) activeObjects = GameObject.Find("/GUI/ActiveItems");
 
 
+    }
+
+    private void CheckActiveItems()
+    {
+         //FindObjectOfType
     }
 
     // Update is called once per frame

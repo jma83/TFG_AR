@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   _options:
-    prefab: {fileID: 0}
-    scaleDownWithWorld: 1
+    prefab: {fileID: 1258755615280940, guid: 3f7187f0923782d4286b2ec7844a032f, type: 2}
+    scaleDownWithWorld: 0

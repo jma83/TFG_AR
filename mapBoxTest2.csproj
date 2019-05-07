@@ -895,7 +895,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
-    <Compile Include="Assets\MapboxItemPosition.cs" />
+    <Compile Include="Assets\Resources\Items\MapboxItemPosition.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\cameraPlane.cs" />
@@ -939,10 +939,10 @@
     <Compile Include="Assets\Scenes\World\Scripts\Models\Player\Scripts\Player.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\Options.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\ProfileDetail.cs" />
+    <Compile Include="Assets\Scenes\World\Scripts\StartPuzzle.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scenes\World\Scripts\WelcomeScript.cs" />
     <Compile Include="Assets\Scenes\World\WorldSceneManager.cs" />
-    <Compile Include="Assets\StartPuzzle.cs" />
     <Compile Include="Assets\Utilities\ARGameConstants.cs" />
     <Compile Include="Assets\Utilities\ARGameSceneManager.cs" />
     <Compile Include="Assets\Utilities\GameManager.cs" />

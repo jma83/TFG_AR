@@ -1,4 +1,4 @@
-﻿namespace Mapbox.Examples
+namespace Mapbox.Examples
 {
 	using UnityEngine;
 
@@ -8,8 +8,9 @@
 
 		public void Start()
 		{
-			_camera = Camera.main;
-		}
+            
+			_camera = FindObjectOfType<Camera>(); //Camera.main;
+        }
 
 		void Update()
 		{
