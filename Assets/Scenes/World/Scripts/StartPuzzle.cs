@@ -11,16 +11,19 @@ public class StartPuzzle : MapEntity {
 	// Use this for initialization
 	void Start () {
         active = true;
+        player = GameManager.Instance.CurrentPlayer;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    public override void Update2 () {
 		if (Time.realtimeSinceStartup > 180)
         {
             active = true;
         }
-	}
+        CalculatePlayerDistance();
+
+    }
 
     private void OnMouseDown()
     {

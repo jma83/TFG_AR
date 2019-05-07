@@ -12,7 +12,11 @@
 		[SerializeField]
 		Image _background;
 
-		public void Set(Dictionary<string, object> props)
+        [SerializeField]
+        GameObject child;
+        Player player;
+
+        public void Set(Dictionary<string, object> props)
 		{
 			_text.text = "";
 
@@ -36,5 +40,20 @@
 			RectTransform backgroundRect = _background.GetComponent<RectTransform>();
 			LayoutRebuilder.ForceRebuildLayoutImmediate(backgroundRect);
 		}
-	}
+
+        private void Update()
+        {
+            if (player==null)
+            player = GameManager.Instance.CurrentPlayer;
+
+            if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 60)
+            {
+                child.SetActive(true);
+            }
+            else
+            {
+                child.SetActive(false);
+            }
+        }
+    }
 }
