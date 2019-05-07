@@ -20,8 +20,6 @@ public class ItemsManager : Singleton<ItemsManager>
     // Use this for initialization
     void Start () {
 
-        CheckActiveItems();
-
         if (maxSizeActive != 3)
         {
             items = new List<Item>();
@@ -31,13 +29,57 @@ public class ItemsManager : Singleton<ItemsManager>
         }
         if (activeObjects == null) activeObjects = GameObject.Find("/GUI/ActiveItems");
 
+        StartCoroutine(Wait(0.3f));
 
     }
 
-    private void CheckActiveItems()
+    IEnumerator Wait(float time)
     {
-         //FindObjectOfType
+        yield return new WaitForSeconds(time);
+        CheckPickedItems();
+
     }
+
+    private void CheckPickedItems()
+    {
+        List<Item> items = Inventory.Instance.getItems(); //FindObjectOfType
+        List<Equipment> equips = Inventory.Instance.getEquipments();
+
+        Item[] mapItems= FindObjectsOfType<Item>();
+        Item it;
+        Debug.Log("items.Count: " + mapItems.Length);
+        for (int i = 0; i < items.Count; i++)
+        {
+            it = items[i];
+            for (int j = 0; j < mapItems.Length; j++)
+            {
+                if (it.GetItemType() == mapItems[j].GetItemType() && mapItems[j].GetComponent<ItemPickup>().enabled == true && mapItems[j].transform.localPosition == it.transform.localPosition)
+                {
+                    mapItems[j].GetComponent<MeshRenderer>().enabled = false;
+                    mapItems[j].GetComponent<BoxCollider>().enabled = false;
+                    Debug.Log("FOUND items! j: " + j);
+                }
+            }
+        }
+
+        Equipment[] mapEquip = FindObjectsOfType<Equipment>();
+        Equipment eq;
+        Debug.Log("equip.Count: " + mapEquip.Length);
+        for (int i = 0; i < equips.Count; i++)
+        {
+            eq = equips[i];
+            for (int j = 0; j < mapEquip.Length; j++)
+            {
+                if (eq.GetEquipmentTypeNum() == mapEquip[j].GetEquipmentTypeNum() && mapEquip[j].GetComponent<ItemPickup>().enabled == true && mapEquip[j].transform.localPosition == eq.transform.localPosition)
+                {
+                    mapEquip[j].GetComponent<MeshRenderer>().enabled = false;
+                    mapEquip[j].GetComponent<BoxCollider>().enabled = false;
+                    Debug.Log("FOUND equip! j: " + j);
+                }
+            }
+        }
+    }
+
 
     // Update is called once per frame
     void Update () {

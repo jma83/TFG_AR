@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject itemDetail;
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject profile;
+    [SerializeField] private GameObject debug;
+    [SerializeField] private Toggle activeDebug; 
     [SerializeField] private Toggle toggle;
     [SerializeField] private Toggle armas;
     [SerializeField] private Toggle objetos;
@@ -219,6 +221,11 @@ public class UIManager : MonoBehaviour {
     {
         ply.captureRangeObj.SetEntitiesCaptureRange(!toggle.isOn);
 
+    }
+
+    public void toggleDebug()
+    {
+        debug.SetActive(!activeDebug.isOn);
     }
 
     public void InventorySectionClick(int b)

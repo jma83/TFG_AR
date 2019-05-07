@@ -11,6 +11,7 @@ public class InventoryEntity : MonoBehaviour {
     public Sprite icon = null;
     protected bool isDefault = false;
     protected string description;
+    public string respawnTime;
 
 
     // Update is called once per frame
