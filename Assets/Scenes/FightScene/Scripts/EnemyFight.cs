@@ -44,20 +44,20 @@ public class EnemyFight : FightEntity
         switch (type)
         {
             case 0:
-                SetHP(20);
+                SetHP(25 + (GameManager.Instance.CurrentPlayer.Lvl * 2));
                 xp = Random.Range(20, 60);
 
                 break;
             case 1:
-                SetHP(40);
+                SetHP(45 + (GameManager.Instance.CurrentPlayer.Lvl * 2));
                 xp = Random.Range(50, 100);
                 weapon.SetWeaponStats(100, 3, 1, 6, 16, 16, gameObject.tag);
                 gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol", typeof(Material)) as Material;
 
                 break;
             case 2:
-                SetHP(60);
-                xp = Random.Range(80, 200);
+                SetHP(70 + (GameManager.Instance.CurrentPlayer.Lvl * 2));
+                xp = Random.Range(100, 200);
                 weapon.SetWeaponStats(100, 3, 1, 8, 26, 26, gameObject.tag);
 
                 break;

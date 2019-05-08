@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject itemDetail;
     [SerializeField] private GameObject options;
     [SerializeField] private GameObject profile;
+    [SerializeField] private GameObject badges;
     [SerializeField] private GameObject debug;
     [SerializeField] private Toggle activeDebug; 
     [SerializeField] private Toggle toggle;
@@ -45,8 +46,10 @@ public class UIManager : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         Inv = Inventory.Instance;
         inventory.SetActive(true);
+        badges.SetActive(true);
         InvUI = slotContainer.GetComponent<InventoryUI>();
         InvUI.Start();
+        badges.SetActive(false);
         inventory.SetActive(false);
         itemDetail.SetActive(true);
         ply = GameManager.Instance.CurrentPlayer;
@@ -221,6 +224,11 @@ public class UIManager : MonoBehaviour {
     {
         ply.captureRangeObj.SetEntitiesCaptureRange(!toggle.isOn);
 
+    }
+
+    public void toggleBadges()
+    {
+        badges.SetActive(!badges.activeSelf);
     }
 
     public void toggleDebug()

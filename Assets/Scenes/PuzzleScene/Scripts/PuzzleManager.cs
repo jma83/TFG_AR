@@ -8,6 +8,7 @@ public class PuzzleManager : Singleton<PuzzleManager> {
     private float time;
     private int mapNumber;
     private bool flag;
+    private bool win=false;
     private int xp;
     private int random_equip;
     private bool AR;
@@ -65,27 +66,28 @@ public class PuzzleManager : Singleton<PuzzleManager> {
     {
         if (!flag)
         {
+            win = true;
             flag = true;
             int lvl = GameManager.Instance.CurrentPlayer.Lvl;
             
             if (AR)
-            {
-                if (random_equip <= 2)
-                    GameManager.Instance.AddNewEquipment(eq);
                 xp *= 2;
-            }
+
             GameManager.Instance.CurrentPlayer.AddXp(xp);
             if (lvl != GameManager.Instance.CurrentPlayer.Lvl)
             {
                 lvl = GameManager.Instance.CurrentPlayer.Lvl;
+
+                GameManager.Instance.AddNewEquipment(eq);
                 WindowAlert.Instance.SetNextWindow();
                 WindowAlert.Instance.SetWeaponInfo(Resources.Load<Sprite>(eq.GetEquipmentQualityRoute()), eq.GetTotalPower());
                 WindowAlert.Instance.CreateConfirmWindow("LEVEL UP! LEVEL: " + lvl + "\n You earn a new equipment!", true, PuzzleManager.Instance.Winner2);
             }
             else
             {
-                if (random_equip <= 2)
+                if (random_equip <= 2 && AR)
                 {
+                    GameManager.Instance.AddNewEquipment(eq);
                     WindowAlert.Instance.SetNextWindow();
                     WindowAlert.Instance.SetWeaponInfo(Resources.Load<Sprite>(eq.GetEquipmentQualityRoute()), eq.GetTotalPower());
                     WindowAlert.Instance.CreateConfirmWindow("You earn a new equipment!", true, PuzzleManager.Instance.Winner2);
@@ -128,5 +130,10 @@ public class PuzzleManager : Singleton<PuzzleManager> {
     public int GetTime(){
 
         return (int)time;
+    }
+
+    public bool GetWin()
+    {
+        return win;
     }
 }

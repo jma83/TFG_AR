@@ -74,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4389175105583690}
   - component: {fileID: 114593701727969676}
+  - component: {fileID: 114622908747872038}
   m_Layer: 0
   m_Name: POIMarkerHolder2
   m_TagString: Untagged
@@ -204,6 +205,18 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &114622908747872038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724856667213958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9bf4fe89a23dc418e2bcf8b0a6f3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txt: {fileID: 114515920219440012}
 --- !u!114 &114644982104152526
 MonoBehaviour:
   m_ObjectHideFlags: 1

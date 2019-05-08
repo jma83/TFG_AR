@@ -49,12 +49,17 @@ public class ItemPickup : MapEntity {
     public override void Update2()
     {
         CalculatePlayerDistance();
+        Update3();
+    }
+
+    public virtual void Update3()
+    {
 
     }
 
     private void OnMouseDown()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.currentSelectedGameObject == null && !EventSystem.current.IsPointerOverGameObject())
         {
 
             //Debug.Log("OnMouseDown");

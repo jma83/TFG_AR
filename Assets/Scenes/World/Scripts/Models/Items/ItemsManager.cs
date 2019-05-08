@@ -29,7 +29,7 @@ public class ItemsManager : Singleton<ItemsManager>
         }
         if (activeObjects == null) activeObjects = GameObject.Find("/GUI/ActiveItems");
 
-        StartCoroutine(Wait(0.3f));
+        StartCoroutine(Wait(2f));
 
     }
 

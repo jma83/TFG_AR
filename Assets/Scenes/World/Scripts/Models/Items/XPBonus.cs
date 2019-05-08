@@ -16,7 +16,7 @@ public class XPBonus : ItemPickup {
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update3()
     {
         if (this.gameObject != null && this.transform != null && this.enabled)
         {

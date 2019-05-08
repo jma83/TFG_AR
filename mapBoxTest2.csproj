@@ -342,6 +342,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Badges.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\ComputerVisionController.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\EdgeDetector.cs" />
     <Compile Include="Assets\Lib\MapBoxSDK\GoogleARCore\Examples\ComputerVision\Scripts\TextureReader.cs" />
@@ -895,6 +896,7 @@
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Lib\PandaBehaviour\Examples\03_Shooter\Assets\WaypointPath.cs" />
+    <Compile Include="Assets\LocationInfo.cs" />
     <Compile Include="Assets\Resources\Items\MapboxItemPosition.cs" />
     <Compile Include="Assets\Scenes\FightScene\FightSceneManager.cs" />
     <Compile Include="Assets\Scenes\FightScene\Scripts\BulletCollisionManager.cs" />

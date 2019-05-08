@@ -40,7 +40,7 @@ public class Droid : MapEntity {
 
     private void OnMouseDown()
     {        
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.currentSelectedGameObject == null && !EventSystem.current.IsPointerOverGameObject())
         {
             if (captureRange)
             {
