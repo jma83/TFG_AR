@@ -74,6 +74,18 @@ public class CaptureRange : MonoBehaviour {
                 }
             }
         }
+        else if (col.gameObject.tag == "puzzle")
+        {
+            MapEntity[] mapEntities = FindObjectsOfType<MapEntity>();
+
+            foreach (MapEntity i in mapEntities)
+            {
+                if (i.gameObject == col.gameObject)
+                {
+                    i.SetCaptureRange(true);
+                }
+            }
+        }
     }
 
     public void SetEntitiesCaptureRange(bool b)

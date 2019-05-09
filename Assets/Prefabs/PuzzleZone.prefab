@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114379207422127234}
   m_Layer: 0
   m_Name: PuzzleZone
-  m_TagString: item
+  m_TagString: puzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +199,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 2.24, y: 2.24, z: 2}
   m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!82 &82400272533405180
 AudioSource:
@@ -307,6 +307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1179e627237f4a048b7181384e15fe1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  check: 0
+  active: 0
+  time: 
 --- !u!114 &114634712457554952
 MonoBehaviour:
   m_ObjectHideFlags: 1

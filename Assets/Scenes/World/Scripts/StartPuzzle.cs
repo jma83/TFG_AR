@@ -12,23 +12,26 @@ public class StartPuzzle : MapEntity {
 
 	// Use this for initialization
 	void Start () {
-        active = true;
         selected = false;
         player = GameManager.Instance.CurrentPlayer;
-
+        active = true;
     }
 
     // Update is called once per frame
     public override void Update2 () {
         if (time != null && time != "")
-            if (System.DateTime.Now < System.DateTime.Parse(time).AddMinutes(1))
+        {
+            if (System.DateTime.Now >= System.DateTime.Parse(time).AddMinutes(2))
             {
                 active = true;  //debug
+                time = null;
                 Debug.Log("hpola");
             }
-        
-        //if (location_text == null && Time.realtimeSinceStartup > 2)
-            //FindLocationInfo();
+            else if (active!=false)
+            {
+                active = false;
+            }
+        }
 
         CalculatePlayerDistance();
 
@@ -42,7 +45,7 @@ public class StartPuzzle : MapEntity {
     {
         if (EventSystem.current.currentSelectedGameObject == null)
         {
-            if (captureRange && active)
+            if (captureRange && active && (time==null || time==""))
             {
                 if (GameManager.Instance.CurrentPlayer.Hp > 0)
                 {

@@ -283,12 +283,15 @@ public class GameManager : Singleton<GameManager>
                     }
                     else
                     {
-                        if (!locationInfo_array[i].GetPuzzle().GetActivePuzzle())
+                        if (!locationInfo_array[i].GetPuzzle().GetActivePuzzle() || (locationInfo_array[i].GetPuzzle().GetTime()!=null && locationInfo_array[i].GetPuzzle().GetTime() != ""))
                         {
-                            dataPuzzle.disabled_locations[cont] = locationInfo_array[i].GetPuzzle().GetLocationInfo();
-                            dataPuzzle.time[cont] = locationInfo_array[i].GetPuzzle().GetTime();
-
-                            cont++;
+                            if (dataPuzzle.disabled_locations.Length > cont)
+                            {
+                                dataPuzzle.disabled_locations[cont] = locationInfo_array[i].GetPuzzle().GetLocationInfo();
+                                dataPuzzle.time[cont] = locationInfo_array[i].GetPuzzle().GetTime();
+                                Debug.Log("dataPuzzle.disabled_locations: " + dataPuzzle.disabled_locations[cont]);
+                                cont++;
+                            }
                         }
                     }
                 }
@@ -544,6 +547,7 @@ public class GameManager : Singleton<GameManager>
                 sp = locationInfo_array[j].GetPuzzle();
                 if (sp.GetLocationInfo() == dataPuzzle.disabled_locations[i])
                 {
+                    Debug.Log("CheckDataPuzzle: " + sp.GetLocationInfo());
                     sp.SetTime(dataPuzzle.time[i]);
                     sp.SetActive(false);
                     break;
