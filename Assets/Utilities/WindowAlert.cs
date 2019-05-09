@@ -131,6 +131,14 @@ public class WindowAlert : Singleton<WindowAlert>
         weapon.sprite = im;
     }
 
+    public void ClearMessages()
+    {
+        funcion = null;
+        funcion_param = null;
+        weaponText.text = "";
+        infoText.text = "";
+    }
+
     public DelegateFunctionParam GetDelegateFunctionParam()
     {
         return funcion_param;

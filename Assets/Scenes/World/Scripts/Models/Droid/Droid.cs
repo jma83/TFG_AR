@@ -62,6 +62,7 @@ public class Droid : MapEntity {
                 }
                 else
                 {
+                    WindowAlert.Instance.ClearMessages();
                     WindowAlert.Instance.CreateConfirmWindow("Necesitas energia para luchar contra este Enemigo", true);
                 }
             }

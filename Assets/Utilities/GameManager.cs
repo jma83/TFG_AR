@@ -784,7 +784,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool AddNewEquipment(Equipment eq)
     {
-        if (playerPuzzle != null) { 
+        if (playerPuzzle != null || playerFight != null) { 
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file2 = File.Open(Application.persistentDataPath + inventoryFile, FileMode.Open);
             if (file2.Length > 0)
