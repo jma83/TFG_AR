@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114188372127722562}
   - component: {fileID: 65164675005494880}
   - component: {fileID: 114307816068112456}
+  - component: {fileID: 114823251538845326}
   m_Layer: 0
   m_Name: DurabilityUP
   m_TagString: item
@@ -286,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655e7be03d0bd374d9361c416793affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  check: 0
   type: 4
   insertInventory: 1
 --- !u!114 &114307816068112456
@@ -302,4 +304,16 @@ MonoBehaviour:
   targetTime: 0
   active: 0
   icon: {fileID: 0}
+  respawnTime: 
   timeStampAux: 0
+--- !u!114 &114823251538845326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807731712492584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec557356d42a6e4ba9ae01f385d32d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,11 +6,12 @@ public class XPBonus : ItemPickup {
 
     private int bonus = 10;
     Renderer rend;
+    bool checkRender = true;
     MoveAndRotate m;
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        rend = GetComponentInChildren<Renderer>();
         m = GetComponent<MoveAndRotate>();
         gameObject.name = "XpBonus";
     }
@@ -18,23 +19,24 @@ public class XPBonus : ItemPickup {
     // Update is called once per frame
     public override void Update3()
     {
-        if (this.gameObject != null && this.transform != null && this.enabled)
-        {
-            //m.StartMovement();
-        }
-        else
-        {
+        if (!checkRender) { 
             Destroy(this.gameObject);
         }
     }
 
     protected override void PickUPAction()
     {
-        if (captureRange && this.enabled==true && rend.enabled==true)
+        if (captureRange && this.enabled==true)
         {
             GameManager.Instance.CurrentPlayer.AddXp(bonus);
-            this.enabled = false;
-            rend.enabled = false;
+            MeshRenderer[] aux = gameObject.GetComponentsInChildren<MeshRenderer>();
+
+            for (int i = 0; i < aux.Length; i++)
+            {
+                aux[i].enabled = false;
+            }
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            checkRender = false;
         }
     }
 }

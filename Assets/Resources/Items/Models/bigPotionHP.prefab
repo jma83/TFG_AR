@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 65635451348127906}
   - component: {fileID: 114549223090379538}
   - component: {fileID: 114154969168523446}
-  - component: {fileID: 114232247040882282}
   m_Layer: 0
   m_Name: bigPotionHP
   m_TagString: item
@@ -209,18 +208,8 @@ MonoBehaviour:
   targetTime: 0
   active: 0
   icon: {fileID: 0}
+  respawnTime: 
   timeStampAux: 0
---- !u!114 &114232247040882282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1509808509161926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec557356d42a6e4ba9ae01f385d32d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114549223090379538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,5 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655e7be03d0bd374d9361c416793affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  check: 0
   type: 1
   insertInventory: 1

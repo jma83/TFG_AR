@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114627686244756156}
   - component: {fileID: 114434028652784598}
   - component: {fileID: 65153019298435614}
+  - component: {fileID: 114241487207522466}
   m_Layer: 0
   m_Name: potionHP
   m_TagString: item
@@ -98,6 +99,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.116732, y: 8.477748, z: 10.157212}
   m_Center: {x: 0.0000004768372, y: -7.217131e-14, z: 5.078606}
+--- !u!114 &114241487207522466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1049965920389154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fec557356d42a6e4ba9ae01f385d32d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114434028652784598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,6 +124,7 @@ MonoBehaviour:
   targetTime: 0
   active: 0
   icon: {fileID: 0}
+  respawnTime: 
   timeStampAux: 0
 --- !u!114 &114627686244756156
 MonoBehaviour:
@@ -124,5 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655e7be03d0bd374d9361c416793affd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  check: 0
   type: 0
   insertInventory: 1

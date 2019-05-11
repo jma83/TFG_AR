@@ -539,7 +539,7 @@ public class GameManager : Singleton<GameManager>
         LocationInfo[] locationInfo_array = FindObjectsOfType<LocationInfo>();
         StartPuzzle sp = null;
         int size = locationInfo_array.Length;
-
+        if (dataPuzzle!=null && dataPuzzle.disabled_locations!=null)
         for (int i = 0; i < dataPuzzle.disabled_locations.Length; i++)
         {
             for (int j = 0; j < locationInfo_array.Length; j++)
