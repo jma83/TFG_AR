@@ -53,12 +53,25 @@ public class ItemsManager : Singleton<ItemsManager>
             it = items[i];
             for (int j = 0; j < mapItems.Length; j++)
             {
-                if (it.GetItemType() == mapItems[j].GetItemType() && mapItems[j].GetComponent<ItemPickup>().enabled == true && mapItems[j].transform.localPosition == it.transform.localPosition)
+                if (it.GetItemType() == mapItems[j].GetItemType() && mapItems[j]!=it && mapItems[j].transform.localPosition.z == it.transform.localPosition.z && mapItems[j].transform.localPosition.x == it.transform.localPosition.x)
                 {
-                    mapItems[j].GetComponent<MeshRenderer>().enabled = false;
+                    if (mapItems[j].GetComponent<MeshRenderer>() != null)
+                    {
+                        mapItems[j].GetComponent<MeshRenderer>().enabled = false;
+                    }
+                    else
+                    {
+                        mapItems[j].GetComponentsInChildren<MeshRenderer>()[0].enabled = false;
+                        mapItems[j].GetComponentsInChildren<MeshRenderer>()[1].enabled = false;
+                        mapItems[j].GetComponentsInChildren<MeshRenderer>()[2].enabled = false;
+                    }
                     mapItems[j].GetComponent<BoxCollider>().enabled = false;
+                    mapItems[j].GetComponent<ItemPickup>().SetPicked();
+                    if (mapItems[j].GetComponentInChildren<ItemPickup>()!=null)
+                        mapItems[j].GetComponentInChildren<ItemPickup>().SetPicked();
                     Debug.Log("FOUND items! j: " + j);
                 }
+
             }
         }
 

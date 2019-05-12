@@ -722,7 +722,7 @@ public class GameManager : Singleton<GameManager>
                 item = gmObject.GetComponent<ExtendCaptureItem>();
                 break;
             case 3:
-                gmObject = Instantiate(Resources.Load("Items/Models/Key", typeof(GameObject)), vec, new Quaternion()) as GameObject;
+                gmObject = Instantiate(Resources.Load("Items/Models/2XP", typeof(GameObject)), vec, new Quaternion()) as GameObject;
                 item = gmObject.GetComponent<XPMultiplierItem>();
                 break;
             case 4:

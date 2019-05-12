@@ -18407,28 +18407,27 @@ MonoBehaviour:
           isActive: 1
           sublayerName: Untitled
           geometryType: 3
-          layerName: poi_label
+          layerName: place_label
           snapToTerrain: 1
           combineMeshes: 0
         lineGeometryOptions:
           Width: 1
         filterOptions:
-          _selectedLayerName: poi_label
+          _selectedLayerName: place_label
           filters:
-          - Key: localrank
-            KeyDescription: Number. Priority relative to nearby POIs. Useful for limiting
-              label density.
-            PropertyValue: 
-            Min: 1
-            Max: 2
-            filterOperator: 4
           - Key: maki
-            KeyDescription: The name of the Maki icon that should be used for the
-              POI
+            KeyDescription: Unavailable in Selected Layer.
             PropertyValue: park
             Min: 0
             Max: 0
             filterOperator: 0
+          - Key: localrank
+            KeyDescription: Number. Priority relative to nearby places. Useful for
+              limiting label density.
+            PropertyValue: 
+            Min: 1
+            Max: 4
+            filterOperator: 4
           combinerType: 1
         extrusionOptions:
           _selectedLayerName: landuse
@@ -18475,7 +18474,7 @@ MonoBehaviour:
         MeshModifiers: []
         GoModifiers:
         - {fileID: 11400000, guid: 62add68a79b576a4dae9546c2cbd1b8f, type: 2}
-        presetFeatureType: 3
+        presetFeatureType: 4
         _maskValue: 0
         selectedTypes: 
       locationPrefabList: []
@@ -32697,7 +32696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 106.1, y: -63.899994}
+  m_AnchoredPosition: {x: 106.09961, y: -63.899994}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070152358
@@ -39457,7 +39456,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -101.50488, y: 251.73401}
+  m_AnchoredPosition: {x: -101.50586, y: 251.73401}
   m_SizeDelta: {x: 51.699997, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1312180704
@@ -47231,7 +47230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -29.700195, y: 83.7}
+  m_AnchoredPosition: {x: -29.701172, y: 83.7}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1615430771
@@ -53799,7 +53798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -101.50488, y: 251.7341}
+  m_AnchoredPosition: {x: -101.50586, y: 251.7341}
   m_SizeDelta: {x: 51.699997, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1812168449
@@ -60339,7 +60338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 27.600037, y: 112.100006}
+  m_AnchoredPosition: {x: 27.59961, y: 112.100006}
   m_SizeDelta: {x: 52.699997, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2077361692
@@ -60884,7 +60883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -101.50488, y: 251.73386}
+  m_AnchoredPosition: {x: -101.50586, y: 251.73386}
   m_SizeDelta: {x: 51.699997, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2088095465

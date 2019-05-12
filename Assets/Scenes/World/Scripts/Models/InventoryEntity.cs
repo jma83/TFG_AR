@@ -67,6 +67,9 @@ public class InventoryEntity : MonoBehaviour {
             gameObject.GetComponentsInChildren<MeshRenderer>()[2].enabled = false;
         }
         gameObject.GetComponent<BoxCollider>().enabled = false;
+
+        if (gameObject.GetComponent<MapboxItemPosition>() != null) gameObject.GetComponent<MapboxItemPosition>().enabled = false;
+        if (gameObject.GetComponent<MoveAndRotate>() != null) gameObject.GetComponent<MoveAndRotate>().enabled = false;
     }
 
     public void DeleteObject()

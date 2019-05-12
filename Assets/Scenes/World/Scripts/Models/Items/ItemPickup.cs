@@ -11,7 +11,8 @@ public class ItemPickup : MapEntity {
     private Equipment equip;
 
     [SerializeField] ARGameConstants.TypeObj type; 
-    [SerializeField] bool insertInventory; 
+    [SerializeField] bool insertInventory;
+    [SerializeField] bool picked = false;
 
     // Use this for initialization
     void Start () {
@@ -48,6 +49,7 @@ public class ItemPickup : MapEntity {
 
     public override void Update2()
     {
+        if (!picked)    //si el objeto no habia sido recogido anteriormente, le aplicamos level of detail para que aparezca cuando el jugador se acerque
         CalculatePlayerDistance();
         Update3();
     }
@@ -59,7 +61,7 @@ public class ItemPickup : MapEntity {
 
     private void OnMouseDown()
     {
-        if (EventSystem.current.currentSelectedGameObject == null && !EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.currentSelectedGameObject == null && !EventSystem.current.IsPointerOverGameObject() && !IsPointerOverUIObject())
         {
 
             //Debug.Log("OnMouseDown");
@@ -109,4 +111,8 @@ public class ItemPickup : MapEntity {
         //Implemented in the children
     }
 
+    public void SetPicked()
+    {
+        picked = true;
+    }
 }

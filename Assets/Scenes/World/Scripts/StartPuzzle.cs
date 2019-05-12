@@ -43,7 +43,7 @@ public class StartPuzzle : MapEntity {
 
     private void OnMouseDown()
     {
-        if (EventSystem.current.currentSelectedGameObject == null)
+        if (EventSystem.current.currentSelectedGameObject == null && !EventSystem.current.IsPointerOverGameObject() && !IsPointerOverUIObject())
         {
             if (captureRange && active && (time==null || time==""))
             {
