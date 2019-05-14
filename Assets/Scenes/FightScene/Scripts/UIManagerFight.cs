@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManagerFight : MonoBehaviour {
 
+    [SerializeField] private Text enemiesText;
     [SerializeField] private Text hpText;
     [SerializeField] private Image currentHPBar;
     [SerializeField] private GameObject reloadWeapon;
@@ -17,6 +18,7 @@ public class UIManagerFight : MonoBehaviour {
     private string weaponQuality;    
     private Player ply;
     private PlayerFight plyFight;
+    private int numEnemies;
 
     // Use this for initialization
     void Start () {
@@ -27,7 +29,6 @@ public class UIManagerFight : MonoBehaviour {
         weaponQualityIcon.sprite = Resources.Load<Sprite>(weaponQuality);
         weaponStatsText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponStats().ToString();
         weaponTypeText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponType().ToString();
-
 
     }
 	
@@ -68,6 +69,8 @@ public class UIManagerFight : MonoBehaviour {
             weaponStatsText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponStats().ToString();
             weaponTypeText.text = ply.gameObject.GetComponent<Weapon>().GetWeaponType().ToString();
         }
+        if (numEnemies != FindObjectsOfType<EnemyFight>().Length)
+        UpdateNumEnemies();
     }
 
     public void UpdatePlayerHP()
@@ -79,6 +82,12 @@ public class UIManagerFight : MonoBehaviour {
             hpText.text = "HP: " + hp_value.ToString() + "%";
             currentHPBar.transform.localScale = new Vector3(f, 1, 1);
         }
+    }
+
+    public void UpdateNumEnemies()
+    {
+        numEnemies = FindObjectsOfType<EnemyFight>().Length;
+        enemiesText.text = "ENEMIES: " + numEnemies;
     }
 
     private IEnumerator UpdatePlayerScreen(bool b, Color32 c, bool defend)

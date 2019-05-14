@@ -52,7 +52,6 @@ public class BulletCollisionManager : MonoBehaviour
                         EnemyFight ef = (EnemyFight)fe;
                         EnemyFightManager.Instance.AddTotalXP(ef.GetXP());
                         EnemyFightManager.Instance.CheckWin();
-                        
                         explosion = Instantiate(Resources.Load("FightScene/FlareMobile", typeof(GameObject))) as GameObject;
 
                     }

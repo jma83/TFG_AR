@@ -77,11 +77,8 @@ public class Droid : MapEntity {
             
             gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("WorldScene/Maps/Materials/door_mtl1_diffcol", typeof(Material)) as Material;
         }
-        else if (type == 1)
-        {
-            gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("WorldScene/Maps/Materials/bmq1", typeof(Material)) as Material;
-        }
-        else
+        else if (type == 2)
+        
         {
             gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("FightScene/BossMaterial", typeof(Material)) as Material;
         } 

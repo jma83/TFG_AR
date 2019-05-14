@@ -52,7 +52,6 @@ public class EnemyFight : FightEntity
                 SetHP(45 + (GameManager.Instance.CurrentPlayer.Lvl * 2));
                 xp = Random.Range(50, 100);
                 weapon.SetWeaponStats(100, 3, 1, 6, 16, 16, gameObject.tag);
-                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol", typeof(Material)) as Material;
 
                 break;
             case 2:
@@ -204,9 +203,9 @@ public class EnemyFight : FightEntity
         if (type == 1)
         {
             if (b)
-                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol_opacity", typeof(Material)) as Material;
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/diffuse2_opacity", typeof(Material)) as Material;
             else
-                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/door_mtl1_diffcol", typeof(Material)) as Material;
+                gameObject.GetComponent<MeshRenderer>().material = Resources.Load("FightScene/diffuse2", typeof(Material)) as Material;
         }
         else if (type == 2)
         {
