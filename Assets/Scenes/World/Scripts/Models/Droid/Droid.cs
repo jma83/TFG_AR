@@ -72,12 +72,8 @@ public class Droid : MapEntity {
     public void SetDroidType(int i)
     {
         type = i;
-        if (type == 0)
-        {
-            
-            gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("WorldScene/Maps/Materials/door_mtl1_diffcol", typeof(Material)) as Material;
-        }
-        else if (type == 2)
+
+        if (type == 2)
         
         {
             gameObject.GetComponentInChildren<MeshRenderer>().material = Resources.Load("FightScene/BossMaterial", typeof(Material)) as Material;

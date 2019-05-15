@@ -107,10 +107,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 885, y: 492}
-  m_MaxSize: {x: 18006, y: 14042}
+  m_MinSize: {x: 887, y: 492}
+  m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 152
+  controlID: 65
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,8 +129,8 @@ MonoBehaviour:
     y: 0
     width: 302
     height: 947
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_MinSize: {x: 408, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 98
+  controlID: 142
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_MinSize: {x: 408, y: 221}
   m_MaxSize: {x: 8008, y: 4021}
   vertical: 0
-  controlID: 52
+  controlID: 143
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -395,23 +395,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 024f0000
-    m_LastClickedID: 0
-    m_ExpandedIDs: 3c67c5ff7478c8ff1e87c8ffa0bcc8ff3a12caff2c7fcaff0c98caffb09acaffb8a7cbff4400cdffe88acdff90b1cdff44cdcfff3cb1ffff56f2ffffdefbffff00000000c870000084270100022b01009e2c0100de3f02005a400200
+    m_SelectedIDs: 08590000
+    m_LastClickedID: 22792
+    m_ExpandedIDs: bed5ffffc0d5ffff6ce4ffff6ee4ffffe4fbffff000000002c550000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: droid1
-      m_OriginalName: droid1
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -4041686
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 6}
     m_SearchString: 
@@ -452,9 +452,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: -1.4749436, z: -0.07999992}
+    m_Target: {x: -0.27734375, y: -1.8945312, z: -0.9589844}
     speed: 2
-    m_Value: {x: 0, y: -1.4749436, z: -0.07999992}
+    m_Value: {x: -0.27734375, y: -1.8945312, z: -0.9589844}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -482,9 +482,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.43866822, y: 0.36452317, z: -0.20074521, w: -0.7965282}
+    m_Target: {x: -0.2890047, y: 0.21186921, z: -0.065733716, w: -0.9313036}
     speed: 2
-    m_Value: {x: -0.43865448, y: 0.36451176, z: -0.20073892, w: -0.79650325}
+    m_Value: {x: -0.2890047, y: 0.21186922, z: -0.065733716, w: -0.9313037}
   m_Size:
     m_Target: 12.500455
     speed: 2
@@ -689,20 +689,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes/World/Scripts/Models/Droid
+    - Assets/Resources/Equipment
   m_ViewMode: 1
   m_StartGridSize: 76
   m_LastFolders:
-  - Assets/Scenes/World/Scripts/Models/Droid
+  - Assets/Resources/Equipment
   m_LastFoldersGridSize: 76
   m_LastProjectPath: D:\Usuarios\Javier\Documentos\Universidad\Unity projects\Git\mapBoxTest2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 1669}
-    m_SelectedIDs: ce320000
-    m_LastClickedID: 13006
-    m_ExpandedIDs: 00000000c6320000ce320000f23200001c330000ce330000dc340000e634000036360000803600004e37000086370000583900007a390000943a0000083b0000623b0000c23b0000a43d0000423e00002e4400006a4400009c440000a2440000da44000040460000b24600006048000072480000144900008a490000b6490000c6490000ce490000ae4a0000864c00009c4c0000c24c0000804d00004c4e0000664e00007e4e0000644f000006500000425000007450000082500000c4500000f2500000fa5000003651000000ca9a3b
+    scrollPos: {x: 0, y: 1173}
+    m_SelectedIDs: 1c470000
+    m_LastClickedID: 18204
+    m_ExpandedIDs: 00000000aa320000b2320000d632000000330000b2330000c0340000cc3400001e36000068360000363700006e37000040390000623900007e3a0000f23a00004c3b0000ac3b00008e3d00002e3e0000f04300002c4400005e440000644400009c44000002460000744600002248000034480000dc48000054490000804900009049000098490000764a00004e4c0000644c00008a4c0000484d0000164e0000304e0000484e00002e4f0000d04f00000c5000003e5000004e5000009c500000ca500000d25000000e51000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -730,7 +730,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c6320000ce320000f23200001c330000ce330000dc340000e634000036360000803600004e37000086370000583900007a390000943a0000083b0000623b0000c23b0000a43d0000423e00002e4400006a4400009c440000a2440000da44000040460000b24600006048000072480000144900008a490000b6490000c6490000ce490000864c00009c4c0000c24c0000804d00004c4e0000664e00007e4e0000644f000006500000425000007450000082500000c4500000f2500000fa50000036510000
+    m_ExpandedIDs: 00000000aa320000b2320000d632000000330000b2330000c0340000cc3400001e36000068360000363700006e37000040390000623900007e3a0000f23a00004c3b0000ac3b00008e3d00002e3e0000f04300002c4400005e440000644400009c44000002460000744600002248000034480000dc48000054490000804900009049000098490000764a00004e4c0000644c00008a4c0000484d0000164e0000304e0000484e00002e4f0000d04f00000c5000003e5000004e5000009c500000ca500000d25000000e510000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -758,7 +758,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000063600008a2b0000c22c00000e5c000008380000003500003e390000503c0000c89200009e45000000000000a6450000be420000
+    m_ExpandedInstanceIDs: c6230000063600008a2b0000c22c00000e5c000008380000003500003e390000503c0000c89200009e45000000000000a6450000be42000092340000ce420000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewResizer:
-    m_CachedPref: -672
+    m_CachedPref: 423
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}

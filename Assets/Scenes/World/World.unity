@@ -15614,49 +15614,6 @@ Transform:
   m_Father: {fileID: 1577626245}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &542915469
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 7.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532667237846268, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
-  m_SourcePrefab: {fileID: 100100000, guid: 74840ed0bdf24524babfd097bd4f1379, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &543607438
 GameObject:
   m_ObjectHideFlags: 0
@@ -18253,13 +18210,6 @@ MonoBehaviour:
           - Key: maki
             KeyDescription: The name of the Maki icon that should be used for the
               POI
-            PropertyValue: prison
-            Min: 0
-            Max: 0
-            filterOperator: 0
-          - Key: maki
-            KeyDescription: The name of the Maki icon that should be used for the
-              POI
             PropertyValue: dentist
             Min: 0
             Max: 0
@@ -18448,7 +18398,7 @@ MonoBehaviour:
       - coreOptions:
           sourceId: 
           isActive: 1
-          sublayerName: Untitled
+          sublayerName: Main Parks
           geometryType: 3
           layerName: place_label
           snapToTerrain: 1
