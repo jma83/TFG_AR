@@ -33,7 +33,7 @@ public class DroidFactory : Singleton<DroidFactory> {
 
     private void Update()
     {
-        if (Time.realtimeSinceStartup > (120f + fixed_time) && FindObjectsOfType<Droid>().Length <= 0)
+        if (Time.realtimeSinceStartup > (600f + fixed_time) && FindObjectsOfType<Droid>().Length <= 0)
         {
             fixed_time = Time.realtimeSinceStartup;
             ResetDroids();

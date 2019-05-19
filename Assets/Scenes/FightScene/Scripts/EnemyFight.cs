@@ -56,7 +56,7 @@ public class EnemyFight : FightEntity
                 break;
             case 2:
                 SetHP(70 + (GameManager.Instance.CurrentPlayer.Lvl * 2));
-                xp = Random.Range(100, 200);
+                xp = Random.Range(150, 300);
                 weapon.SetWeaponStats(100, 3, 1, 8, 26, 26, gameObject.tag);
 
                 break;
