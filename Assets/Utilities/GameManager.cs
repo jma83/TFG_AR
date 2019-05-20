@@ -379,7 +379,7 @@ public class GameManager : Singleton<GameManager>
 
             dataInv.itemsSize = inv.getItems().Count;
             //Debug.Log("inventory item size save: " + dataInv.itemsSize);
-            dataInv.space = 26; // inv.getItems().Capacity
+            dataInv.space = 27; // inv.getItems().Capacity
             if (dataInv.itemIDs == null)
             {
                 dataInv.itemIDs = new int[dataInv.space];

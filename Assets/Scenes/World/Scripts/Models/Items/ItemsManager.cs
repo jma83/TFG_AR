@@ -69,7 +69,7 @@ public class ItemsManager : Singleton<ItemsManager>
                     mapItems[j].GetComponent<ItemPickup>().SetPicked();
                     if (mapItems[j].GetComponentInChildren<ItemPickup>()!=null)
                         mapItems[j].GetComponentInChildren<ItemPickup>().SetPicked();
-                    Debug.Log("FOUND items! j: " + j);
+                    //Debug.Log("FOUND items! j: " + j);
                 }
 
             }
@@ -87,7 +87,7 @@ public class ItemsManager : Singleton<ItemsManager>
                 {
                     mapEquip[j].GetComponent<MeshRenderer>().enabled = false;
                     mapEquip[j].GetComponent<BoxCollider>().enabled = false;
-                    Debug.Log("FOUND equip! j: " + j);
+                    //Debug.Log("FOUND equip! j: " + j);
                 }
             }
         }
