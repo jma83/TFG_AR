@@ -8,7 +8,7 @@ public class MoveAndRotate : MonoBehaviour {
     [SerializeField] private float floatAmplitude = 1f;
     [SerializeField] private float floatFrequency = 1f;
     private Vector3 startPos;
-
+    private bool check;
     private void Start()
     {
         startPos = transform.position;
@@ -16,6 +16,15 @@ public class MoveAndRotate : MonoBehaviour {
     }
     private void Update()
     {
+        check = false;
+        if (GetComponentInChildren<MeshRenderer>() != null)
+            if (GetComponentInChildren<MeshRenderer>().enabled == true)
+                check = true;
+        if (GetComponent<MeshRenderer>() != null)
+            if (GetComponent<MeshRenderer>().enabled == true)
+                check = true;
+
+        if (check)
         StartMovement();
     }
     public void StartMovement()

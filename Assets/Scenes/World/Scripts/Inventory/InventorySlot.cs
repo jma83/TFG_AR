@@ -119,6 +119,7 @@ public class InventorySlot : MonoBehaviour {
     {
         if (item != null && deleteIcon.enabled==false && infoIcon.enabled == false)
         {
+            WindowAlert.Instance.ClearMessages();
             WindowAlert.Instance.CreateSelectWindow("Confirm using this item?", true, this.UseItem2); 
         }else if (equipment != null && deleteIcon.enabled == false && infoIcon.enabled == false)
         {
@@ -167,6 +168,7 @@ public class InventorySlot : MonoBehaviour {
 
     public void OnRemoveButton(Inventory inv)
     {
+        WindowAlert.Instance.ClearMessages();
         WindowAlert.Instance.CreateSelectWindow("Confirm removing this object?", true, this.OnRemoveButton2); 
     }
 
