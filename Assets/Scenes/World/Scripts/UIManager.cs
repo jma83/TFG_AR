@@ -228,6 +228,7 @@ public class UIManager : MonoBehaviour {
 
     public void toggleBadges()
     {
+        audioSource.PlayOneShot(menuButtonSound);
         badges.SetActive(!badges.activeSelf);
     }
 

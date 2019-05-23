@@ -10,8 +10,14 @@ public class StartPuzzle : MapEntity {
     private bool selected;
     private string location_text=null;
 
-	// Use this for initialization
-	void Start () {
+    private AudioClip puzzleSound;
+    private AudioSource audioSource;
+
+    // Use this for initialization
+    void Start () {
+        audioSource = GetComponent<AudioSource>();
+        puzzleSound = Resources.Load<AudioClip>("Audio/NewAudio/start_battle2");
+
         selected = false;
         player = GameManager.Instance.CurrentPlayer;
         active = true;
@@ -55,10 +61,11 @@ public class StartPuzzle : MapEntity {
                     {
                         if (scenemanager1.gameObject.activeSelf)
                         {
-                            Debug.Log("location_text: " + location_text);
+                            //Debug.Log("location_text: " + location_text);
                             active = false;
                             selected = true;
                             time = System.DateTime.Now.ToString();
+                            audioSource.PlayOneShot(puzzleSound);
                             scenemanager1.ChangeScene(null, 2);
                         }
                     }
