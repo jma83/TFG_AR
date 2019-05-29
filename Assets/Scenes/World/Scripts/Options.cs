@@ -15,19 +15,27 @@ public class Options : MonoBehaviour {
     [SerializeField] private GameObject howToPlay;
     [SerializeField] private GameObject aumentedReality;
     [SerializeField] private GameObject mainOptions;
+    [SerializeField] private GameObject credits;
+    [SerializeField] private GameObject creditsTextBlock;
 
-
+    private Vector2 creditsTextBlock_position;
+    private Vector2 creditsTextBlock_position2;
     // Use this for initialization
     void Start () {
         if (soundSlider.value != GameManager.Instance.CurrentPlayer.GetSoundLevel() && GameManager.Instance.CurrentPlayer.GetSoundLevel() >= 0)
             SetPlayerVolume(GameManager.Instance.CurrentPlayer.GetSoundLevel());
 
         soundLevel.text = soundSlider.value.ToString();
+        creditsTextBlock_position = creditsTextBlock.GetComponent<RectTransform>().anchoredPosition;
+        creditsTextBlock_position2 = new Vector2(creditsTextBlock_position.x, creditsTextBlock_position.y + 4500);
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (credits.activeSelf)
+        {
+            creditsTextBlock.GetComponent<RectTransform>().anchoredPosition=Vector2.MoveTowards(creditsTextBlock.GetComponent<RectTransform>().anchoredPosition, creditsTextBlock_position2, Time.deltaTime*60);
+        }
     }
 
     public void UpdateVolume()
@@ -58,6 +66,7 @@ public class Options : MonoBehaviour {
             howToPlay.SetActive(false);
             aumentedReality.SetActive(true);
             mainOptions.SetActive(false);
+            credits.SetActive(false);
             ChangeTittle("Aumented Reality");
         }
         else if (i == 2)
@@ -65,20 +74,41 @@ public class Options : MonoBehaviour {
             howToPlay.SetActive(true);
             aumentedReality.SetActive(false);
             mainOptions.SetActive(false);
+            credits.SetActive(false);
             ChangeTittle("How to play");
+        } else if (i == 3)
+        {
+            howToPlay.SetActive(false);
+            aumentedReality.SetActive(false);
+            mainOptions.SetActive(false);
+            credits.SetActive(true);    //credits on
         }
         else
         {
             howToPlay.SetActive(false);
             aumentedReality.SetActive(false);
             mainOptions.SetActive(true);
+            credits.SetActive(false);
             ChangeTittle("Options");
         }
+
+        if (i!=3)
+            creditsTextBlock.GetComponent<RectTransform>().anchoredPosition = new Vector2(creditsTextBlock_position.x, creditsTextBlock_position.y);
+
     }
 
-    public void ClickLink()
+    public void ClickLink(GameObject go)
     {
-        Application.OpenURL("https://bit.ly/2V312A1");
+        if (go==null)
+        {
+            Application.OpenURL("https://bit.ly/2V312A1");
+        }
+        else{
+            Debug.Log("go.GetComponent<Text>().text: " + go.GetComponent<Text>().text);
+            Application.OpenURL(go.GetComponent<Text>().text);
+        }
+        
+        
     }
 
     public void CheckHowToPlay_Option()

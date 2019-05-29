@@ -14,6 +14,7 @@ TagManager:
   - FightBox
   - alert
   - puzzle
+  - link
   layers:
   - Default
   - TransparentFX
