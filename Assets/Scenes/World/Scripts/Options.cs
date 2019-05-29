@@ -27,7 +27,7 @@ public class Options : MonoBehaviour {
 
         soundLevel.text = soundSlider.value.ToString();
         creditsTextBlock_position = creditsTextBlock.GetComponent<RectTransform>().anchoredPosition;
-        creditsTextBlock_position2 = new Vector2(creditsTextBlock_position.x, creditsTextBlock_position.y + 4500);
+        creditsTextBlock_position2 = new Vector2(creditsTextBlock_position.x, creditsTextBlock_position.y + 4700);
     }
 	
 	// Update is called once per frame
